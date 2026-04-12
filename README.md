@@ -1,8 +1,8 @@
-# 🔳 BlackBOX MU-Plugin Core
+# 🔳 BlackBOX Bedrock
 
 > **"The Systems Interface for the Digital Sovereign."**
 
-BlackBOX is the foundational MU-plugin framework for the **w⁴ Protocol** and **YouMeOS** ecosystem. It provides a sleek, high-performance administrative interface, glassmorphism aesthetics, and native environment overrides for WordPress.
+BlackBOX Bedrock is the foundational MU-plugin framework for the **w⁴ Protocol** and **YouMeOS** ecosystem. It provides a sleek, high-performance administrative interface, glassmorphism aesthetics, and native environment overrides for WordPress.
 
 ## ✨ Features
 
@@ -22,11 +22,11 @@ Add the repository to your `composer.json`:
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/hallofthegods/blackbox"
+            "url": "https://github.com/hallofthegods/blackbox-bedrock"
         }
     ],
     "require": {
-        "hallofthegods/blackbox": "dev-master"
+        "hallofthegods/blackbox-bedrock": "dev-master"
     }
 }
 ```
