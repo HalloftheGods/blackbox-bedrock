@@ -1,0 +1,866 @@
+/* Classic WP Admin Core Overrides (Lists, Tables, Notices, Widgets) */
+
+/* Lists & Tables */
+.wp-list-table,
+table.widefat {
+	background: var(--rough-glass-bg) !important;
+	backdrop-filter: var(--rough-glass-filter) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	border-radius: 8px !important;
+	color: var(--text-main) !important;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+
+	& thead th,
+	& tbody td,
+	& tfoot th {
+		border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+		color: var(--text-main) !important;
+	}
+
+	& tr:last-child {
+
+		& td,
+		& th {
+			border-bottom: none !important;
+		}
+	}
+}
+
+.manage-column {
+	border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+	color: var(--text-main) !important;
+}
+
+.alternate,
+.striped>tbody> :nth-child(odd),
+ul.children li.alternate,
+ul.children li:nth-child(odd),
+.alternate:nth-child(odd) {
+	background-color: rgba(255, 255, 255, 0.02) !important;
+
+	&:hover {
+		background-color: rgba(98, 201, 255, 0.05) !important;
+	}
+}
+
+.striped>tbody>tr:hover {
+	background-color: rgba(98, 201, 255, 0.05) !important;
+}
+
+.tablenav .tablenav-pages,
+.widefat td,
+.widefat th {
+	color: var(--text-main) !important;
+}
+
+.subsubsub li a {
+	color: var(--text-main) !important;
+
+	&.current {
+		color: var(--accent) !important;
+		text-shadow: 0 0 10px rgba(98, 201, 255, 0.5) !important;
+	}
+}
+
+/* Page Headers & Add New Buttons */
+.wp-heading-inline {
+	color: var(--text-main) !important;
+	text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5) !important;
+}
+
+.page-title-action {
+	background: transparent !important;
+	border: 1px solid var(--accent) !important;
+	color: var(--accent) !important;
+	border-radius: 4px !important;
+	transition: all 0.2s ease !important;
+
+	&:hover {
+		background: rgba(98, 201, 255, 0.1) !important;
+		box-shadow: 0 0 15px rgba(98, 201, 255, 0.2) !important;
+		color: var(--accent) !important;
+	}
+}
+
+/* Native Notices & Plugin Notices */
+.notice,
+div.error,
+div.updated,
+.update-nag,
+.akismet-activate,
+.akismet-card,
+.akismet-alert,
+.woocommerce-message,
+.woocommerce-error,
+.woocommerce-info {
+	background: rgba(0, 0, 0, 0.6) !important;
+	backdrop-filter: var(--rough-glass-filter) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	color: var(--text-main) !important;
+	border-left: 4px solid var(--accent) !important;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+
+	& p,
+	& .notice-title,
+	&.notice-title,
+	& .akismet-activate__description {
+		color: var(--text-main) !important;
+	}
+}
+
+.akismet-activate {
+	border: none !important;
+	background: transparent !important;
+	box-shadow: none !important;
+}
+
+div.error, .woocommerce-error {
+	border-color: rgba(255, 92, 92, 0.2) !important;
+	border-left-color: #ff5c5c !important;
+}
+
+div.updated, .woocommerce-message, .woocommerce-info {
+	border-color: rgba(77, 250, 123, 0.2) !important;
+	border-left-color: #4dfa7b !important;
+}
+
+.update-nag {
+	border-color: rgba(217, 190, 111, 0.2) !important;
+	border-left-color: var(--gold) !important;
+}
+
+.notice-dismiss:before {
+	color: var(--text-main) !important;
+}
+
+/* Classic Buttons */
+.button,
+.button-secondary {
+	background: transparent !important;
+	border: 1px solid rgba(255, 255, 255, 0.2) !important;
+	color: var(--text-main) !important;
+	border-radius: 4px !important;
+	box-shadow: none !important;
+
+	&:hover {
+		background: rgba(255, 255, 255, 0.05) !important;
+		border-color: var(--accent) !important;
+		color: var(--accent) !important;
+	}
+}
+
+.button-primary {
+	background: transparent !important;
+	border: 1px solid var(--gold) !important;
+	color: var(--gold) !important;
+	text-shadow: none !important;
+	box-shadow: 0 0 10px rgba(217, 190, 111, 0.2) !important;
+
+	&:hover {
+		background: rgba(217, 190, 111, 0.1) !important;
+		color: var(--gold) !important;
+	}
+}
+
+/* Misc Classic Elements & Dashboard Widgets */
+#dashboard_primary .inside,
+#dashboard_activity .inside,
+#dashboard_right_now .inside,
+.activity-block,
+.community-events,
+.community-events-footer,
+.community-events-header,
+ul#activity-widget-comments li,
+ul#activity-widget-comments li.pingback,
+#activity-widget #the-comment-list tr,
+#dashboard-widgets p,
+#dashboard-widgets li,
+.type-post,
+ul.inline,
+.inline {
+	background: transparent !important;
+	background-color: transparent !important;
+}
+
+.community-events-footer,
+.community-events-header,
+.activity-block,
+ul#activity-widget-comments li {
+	border-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+.view-switch a.current:before {
+	color: var(--accent) !important;
+}
+
+/* Meta Boxes / Postboxes */
+#poststuff,
+#dashboard-widgets-wrap .postbox-container {
+	background: transparent !important;
+}
+
+.postbox {
+	background: var(--rough-glass-bg) !important;
+	backdrop-filter: var(--rough-glass-filter) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter) !important;
+	color: var(--text-main) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	border-left: 0 !important;
+	border-right: 0 !important;
+	border-bottom: 0 !important;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+
+	& .hndle,
+	& .postbox-header {
+		border-bottom: 1px solid var(--rough-glass-border) !important;
+		color: var(--text-main) !important;
+	}
+
+	& .postbox-header {
+		border: 0 !important;
+		padding: 1rem 0.25rem !important;
+	}
+}
+
+h2.hndle {
+	border-bottom: 1px solid var(--rough-glass-border) !important;
+	color: var(--text-main) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   HIGH PRIORITY — White panels that completely break the theme
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Admin Sidebar — Glass overlay, WP theme colors preserved */
+#adminmenuwrap,
+#adminmenuback {
+	background: rgba(13, 17, 23, 0.5) !important;
+	backdrop-filter: blur(20px) saturate(120%) !important;
+	-webkit-backdrop-filter: blur(20px) saturate(120%) !important;
+}
+
+#adminmenu,
+#adminmenu a.menu-top {
+	background: transparent !important;
+}
+
+.wp-submenu {
+	background: rgba(13, 17, 23, 0.5) !important;
+	backdrop-filter: blur(20px) saturate(120%) !important;
+	-webkit-backdrop-filter: blur(20px) saturate(120%) !important;
+}
+
+
+#adminmenu li.wp-menu-separator {
+	background: transparent !important;
+	border-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+#screen-meta {
+	background: transparent !important;
+	border: none !important;
+	box-shadow: none !important;
+}
+
+/* Screen Options Panel */
+#screen-options-wrap,
+#screen-options-link-wrap {
+	background: var(--rough-glass-bg) !important;
+	backdrop-filter: var(--rough-glass-filter) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	border-radius: 0 0 8px 8px !important;
+	color: var(--text-main) !important;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+}
+
+#screen-options-wrap label,
+#screen-options-wrap legend,
+#screen-options-wrap .screen-options label {
+	color: var(--text-main) !important;
+}
+
+/* Help / Contextual Help Panel */
+#contextual-help-wrap,
+#contextual-help-columns,
+#contextual-help-back {
+	background: rgba(13, 17, 23, 0.9) !important;
+	backdrop-filter: var(--rough-glass-filter) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter) !important;
+	border-color: var(--rough-glass-border) !important;
+	color: var(--text-main) !important;
+}
+
+.contextual-help-tabs,
+.contextual-help-tabs .active {
+	background: transparent !important;
+	border-color: var(--rough-glass-border) !important;
+}
+
+.contextual-help-tabs a,
+.contextual-help-tabs a:hover,
+.contextual-help-tabs .active a {
+	color: var(--text-main) !important;
+}
+
+.contextual-help-tabs .active {
+	border-left: 2px solid var(--accent) !important;
+}
+
+#contextual-help-wrap h1,
+#contextual-help-wrap h2,
+#contextual-help-wrap p,
+.help-tab-content p,
+.help-tab-content li {
+	color: var(--text-main) !important;
+}
+
+/* .card & .tool-box (Tools page) */
+.card,
+.tool-box {
+	background: var(--rough-glass-bg) !important;
+	backdrop-filter: var(--rough-glass-filter) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	border-radius: 8px !important;
+	color: var(--text-main) !important;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Site Health */
+.site-health-issues-wrapper,
+.health-check-body,
+.health-check-accordion,
+.health-check-accordion-heading,
+.health-check-accordion-panel,
+.privacy-settings-accordion,
+.site-health-view-more,
+.site-health-progress-wrapper,
+.wc-setup-content {
+	background: transparent !important;
+	border: none !important;
+	color: var(--text-main) !important;
+}
+
+.health-check-header,
+.privacy-settings-header {
+	background: transparent !important;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+.health-check-accordion-trigger {
+	background: var(--rough-glass-bg) !important;
+	backdrop-filter: var(--rough-glass-filter) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter) !important;
+	border: 1px solid rgba(255, 255, 255, 0.06) !important;
+	border-radius: 6px !important;
+	color: var(--text-main) !important;
+	margin-bottom: 4px !important;
+	padding: 12px 40px 12px 16px !important;
+	position: relative !important;
+}
+
+.health-check-accordion-trigger:hover {
+	background: rgba(98, 201, 255, 0.05) !important;
+	border-color: var(--rough-glass-border) !important;
+}
+
+.health-check-accordion-trigger .dashicons,
+.health-check-accordion-trigger .toggle-indicator,
+.health-check-accordion-trigger::after,
+.health-check-accordion-trigger::before {
+	color: var(--gold) !important;
+}
+
+.health-check-accordion-trigger .badge {
+	background: rgba(98, 201, 255, 0.12) !important;
+	border: 1px solid rgba(98, 201, 255, 0.25) !important;
+	color: var(--accent) !important;
+	border-radius: 99px !important;
+	padding: 2px 10px !important;
+	font-size: 0.65rem !important;
+	font-weight: 700 !important;
+	text-transform: uppercase !important;
+	letter-spacing: 0.5px !important;
+}
+
+.health-check-accordion-panel {
+	background: rgba(13, 17, 23, 0.6) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	border-top: none !important;
+	border-radius: 0 0 6px 6px !important;
+	padding: 16px !important;
+}
+
+.health-check-accordion-panel td,
+.health-check-accordion-panel th,
+.health-check-accordion-panel table {
+	background: transparent !important;
+	color: var(--text-main) !important;
+	border-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+.site-health-progress {
+	background: rgba(255, 255, 255, 0.1) !important;
+	border-radius: 99px !important;
+}
+
+.site-health-progress-count {
+	color: var(--text-main) !important;
+}
+
+.site-health-tab-title .site-health-tab-title-count {
+	background: rgba(98, 201, 255, 0.15) !important;
+	color: var(--accent) !important;
+}
+
+/* Media Modal */
+.media-modal,
+.media-modal-content,
+.media-frame-content,
+.media-frame-toolbar,
+.media-frame-title,
+.media-frame-menu,
+.media-frame-router,
+.media-sidebar,
+.attachment-details,
+.attachment-info,
+.media-toolbar {
+	background: rgba(13, 17, 23, 0.95) !important;
+	color: var(--text-main) !important;
+	border-color: var(--rough-glass-border) !important;
+}
+
+.media-modal {
+	backdrop-filter: var(--rough-glass-filter) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter) !important;
+	box-shadow: 0 16px 64px rgba(0, 0, 0, 0.6) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	border-radius: 8px !important;
+}
+
+.media-modal-backdrop {
+	background: rgba(0, 0, 0, 0.7) !important;
+}
+
+.media-frame-title h1,
+.media-sidebar h2,
+.media-sidebar h3,
+.attachment-details .setting span,
+.attachment-details .setting label,
+.attachment-info .filename,
+.attachment-info .file-size,
+.media-types-required-info,
+.media-frame-menu .media-menu-item {
+	color: var(--text-main) !important;
+}
+
+.media-frame-menu .media-menu-item {
+	background: transparent !important;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+.media-frame-menu .media-menu-item:hover,
+.media-frame-menu .active {
+	background: rgba(98, 201, 255, 0.1) !important;
+	color: var(--accent) !important;
+}
+
+.media-frame-router .media-router .media-menu-item {
+	background: transparent !important;
+	border-bottom: 2px solid transparent !important;
+	color: var(--text-main) !important;
+}
+
+.media-frame-router .media-router .media-menu-item.active,
+.media-frame-router .media-router .active {
+	border-bottom-color: var(--accent) !important;
+	color: var(--accent) !important;
+}
+
+.attachment-details .setting input[type="text"],
+.attachment-details .setting textarea,
+.media-toolbar .search {
+	background: rgba(0, 0, 0, 0.3) !important;
+	border: 1px solid rgba(255, 255, 255, 0.1) !important;
+	color: var(--text-main) !important;
+}
+
+.media-frame-toolbar .media-toolbar-primary .button-primary {
+	background: transparent !important;
+	border: 1px solid var(--gold) !important;
+	color: var(--gold) !important;
+}
+
+.attachments-browser .uploader-inline {
+	background: rgba(13, 17, 23, 0.6) !important;
+	border: 2px dashed var(--rough-glass-border) !important;
+	color: var(--text-main) !important;
+}
+
+/* WooCommerce Nav Tabs */
+.nav-tab-wrapper,
+.woocommerce .nav-tab-wrapper {
+	background: rgba(13, 17, 23, 0.6) !important;
+	border-bottom: 1px solid var(--rough-glass-border) !important;
+}
+
+.nav-tab {
+	background: transparent !important;
+	border: 1px solid transparent !important;
+	color: var(--text-main) !important;
+}
+
+.nav-tab:hover {
+	background: rgba(255, 255, 255, 0.05) !important;
+	color: var(--accent) !important;
+}
+
+.nav-tab-active,
+.nav-tab-active:hover {
+	background: rgba(98, 201, 255, 0.08) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	border-bottom: 2px solid var(--accent) !important;
+	color: var(--accent) !important;
+}
+
+/* WooCommerce Store Alerts */
+.woocommerce-store-alerts,
+.woocommerce-layout__header,
+.woocommerce-layout__header-wrapper {
+	background: rgba(13, 17, 23, 0.7) !important;
+	backdrop-filter: var(--rough-glass-filter) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	color: var(--text-main) !important;
+}
+
+/* Select2 Dropdowns */
+.select2-dropdown {
+	background: rgba(13, 17, 23, 0.95) !important;
+	backdrop-filter: var(--rough-glass-filter) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	border-radius: 4px !important;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
+}
+
+.select2-results__options {
+	background: transparent !important;
+}
+
+.select2-results__option {
+	color: var(--text-main) !important;
+	background: transparent !important;
+}
+
+.select2-results__option--highlighted,
+.select2-results__option[aria-selected="true"] {
+	background: rgba(98, 201, 255, 0.15) !important;
+	color: var(--accent) !important;
+}
+
+.select2-results__option[aria-selected="true"] {
+	background: rgba(217, 190, 111, 0.15) !important;
+	color: var(--gold) !important;
+}
+
+.select2-search--dropdown .select2-search__field {
+	background: rgba(0, 0, 0, 0.3) !important;
+	border: 1px solid rgba(255, 255, 255, 0.1) !important;
+	color: var(--text-main) !important;
+	border-radius: 4px !important;
+}
+
+.select2-container--default .select2-selection--single,
+.select2-container--default .select2-selection--multiple {
+	background: rgba(0, 0, 0, 0.3) !important;
+	border: 1px solid rgba(255, 255, 255, 0.1) !important;
+	color: var(--text-main) !important;
+	border-radius: 4px !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered,
+.select2-container--default .select2-selection--multiple .select2-selection__rendered {
+	color: var(--text-main) !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow b {
+	border-color: var(--text-main) transparent transparent transparent !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MEDIUM PRIORITY — Visible but less jarring
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Media Grid Tiles */
+.attachments-browser .attachment,
+.attachment .thumbnail,
+.attachment-preview {
+	background: rgba(13, 17, 23, 0.6) !important;
+	border-color: var(--rough-glass-border) !important;
+}
+
+.attachment.selected .thumbnail {
+	box-shadow: 0 0 0 2px var(--accent) !important;
+}
+
+.attachment .check {
+	background: var(--accent) !important;
+}
+
+/* Plugin Update Rows */
+.plugin-update-tr td,
+.plugin-update-tr .update-message {
+	background: rgba(217, 190, 111, 0.15) !important;
+	backdrop-filter: blur(10px);
+	border: 1px solid var(--gold) !important;
+	border-left: 4px solid var(--gold) !important;
+	margin: 5px 20px 15px 40px !important;
+	border-radius: 4px !important;
+	color: var(--text-main) !important;
+}
+
+.plugin-update-tr .update-message p {
+	color: var(--text-main) !important;
+	margin: 0.5rem 1rem !important;
+}
+
+.plugin-update-tr .update-message a {
+	color: var(--accent) !important;
+	font-weight: 600;
+}
+
+.plugin-update-tr .update-message::before {
+	color: var(--gold) !important;
+}
+
+/* Plugins Page Specifically */
+table.wp-list-table * {
+	background-color: transparent !important;
+}
+
+.plugins tr td,
+.plugins tr th,
+.plugins tbody tr td,
+.plugins tbody tr th {
+	background-color: rgba(0, 0, 0, 0.2) !important;
+	border-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+.plugins tr.active th.check-column,
+.plugins tr.active td,
+.plugins tr.active th,
+.plugins tbody tr.active td, 
+.plugins tbody tr.active th {
+	background-color: rgba(0, 0, 0, 0.45) !important;
+}
+
+.plugins tr.active th.check-column,
+.plugins tbody tr.active th.check-column {
+	border-left: 4px solid var(--accent) !important;
+}
+
+.plugins .plugin-title strong {
+	color: var(--accent) !important;
+	font-size: 1.1rem;
+	text-shadow: 0 0 10px rgba(98, 201, 255, 0.2);
+}
+
+.plugins .column-description, 
+.plugins .column-description p,
+.plugins .column-description div {
+	color: var(--text-main) !important;
+	opacity: 1 !important;
+}
+
+.plugins .plugin-version-author-uri,
+.plugins .plugin-version-author-uri a {
+	color: var(--text-main) !important;
+	opacity: 0.6 !important;
+}
+
+.plugins .row-actions span a {
+	color: var(--gold) !important;
+}
+
+.plugins .row-actions span.deactivate a {
+	color: #ff5c5c !important;
+}
+
+/* Form Tables */
+.form-table,
+.form-table th,
+.form-table td {
+	background: transparent !important;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+	color: var(--text-main) !important;
+}
+
+.form-table th {
+	font-weight: 600 !important;
+}
+
+/* Admin Bar Submenus */
+#wpadminbar .ab-sub-wrapper,
+#wpadminbar .ab-submenu {
+	background: rgba(13, 17, 23, 0.9) !important;
+	backdrop-filter: blur(15px) saturate(120%) !important;
+	-webkit-backdrop-filter: blur(15px) saturate(120%) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
+}
+
+#wpadminbar .ab-submenu .ab-item,
+#wpadminbar .ab-sub-wrapper .ab-item {
+	color: var(--text-main) !important;
+}
+
+#wpadminbar .ab-submenu .ab-item:hover,
+#wpadminbar .ab-sub-wrapper .ab-item:hover {
+	background: rgba(98, 201, 255, 0.1) !important;
+	color: var(--accent) !important;
+}
+
+/* WP Footer */
+#wpfooter {
+	background: transparent !important;
+	border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+#wpfooter p,
+#footer-thankyou,
+#footer-upgrade {
+	color: rgba(248, 248, 242, 0.4) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   LOW PRIORITY — Polish & edge cases
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Checkboxes & Radio Buttons */
+input[type="checkbox"],
+input[type="radio"] {
+	background: rgba(0, 0, 0, 0.4) !important;
+	border: 1px solid rgba(255, 255, 255, 0.2) !important;
+	box-shadow: none !important;
+}
+
+input[type="checkbox"]:checked,
+input[type="radio"]:checked {
+	background: var(--accent) !important;
+	border-color: var(--accent) !important;
+}
+
+input[type="checkbox"]:focus,
+input[type="radio"]:focus {
+	border-color: var(--accent) !important;
+	box-shadow: 0 0 0 1px var(--accent) !important;
+}
+
+/* WooCommerce Toggles */
+.woocommerce-input-toggle {
+	background: rgba(255, 255, 255, 0.1) !important;
+	border: 1px solid rgba(255, 255, 255, 0.2) !important;
+	border-radius: 12px !important;
+}
+
+.woocommerce-input-toggle--enabled {
+	background: rgba(98, 201, 255, 0.3) !important;
+	border-color: var(--accent) !important;
+}
+
+/* Color Picker */
+.wp-picker-container .wp-color-result {
+	border: 1px solid rgba(255, 255, 255, 0.2) !important;
+	border-radius: 4px !important;
+	box-shadow: none !important;
+}
+
+.wp-picker-container .wp-picker-holder,
+.iris-picker {
+	background: rgba(13, 17, 23, 0.95) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	border-radius: 4px !important;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* jQuery UI Datepicker */
+.ui-datepicker {
+	background: rgba(13, 17, 23, 0.95) !important;
+	backdrop-filter: var(--rough-glass-filter) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	border-radius: 8px !important;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
+	padding: 8px !important;
+}
+
+.ui-datepicker-header {
+	background: transparent !important;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+	color: var(--text-main) !important;
+}
+
+.ui-datepicker-title {
+	color: var(--text-main) !important;
+}
+
+.ui-datepicker-calendar th,
+.ui-datepicker-calendar td {
+	color: var(--text-main) !important;
+}
+
+.ui-datepicker-calendar td a {
+	color: var(--text-main) !important;
+	background: transparent !important;
+	border-radius: 4px !important;
+}
+
+.ui-datepicker-calendar td a:hover {
+	background: rgba(98, 201, 255, 0.15) !important;
+	color: var(--accent) !important;
+}
+
+.ui-datepicker-calendar .ui-datepicker-today a {
+	background: rgba(217, 190, 111, 0.15) !important;
+	color: var(--gold) !important;
+}
+
+.ui-datepicker-prev,
+.ui-datepicker-next {
+	color: var(--text-main) !important;
+	cursor: pointer !important;
+}
+
+/* Thickbox / Legacy Modals */
+#TB_window {
+	background: rgba(13, 17, 23, 0.95) !important;
+	backdrop-filter: var(--rough-glass-filter) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	border-radius: 8px !important;
+	box-shadow: 0 16px 64px rgba(0, 0, 0, 0.6) !important;
+	color: var(--text-main) !important;
+}
+
+#TB_overlay {
+	background: rgba(0, 0, 0, 0.7) !important;
+}
+
+#TB_ajaxContent {
+	background: transparent !important;
+	color: var(--text-main) !important;
+}
+
+#TB_title {
+	background: rgba(13, 17, 23, 0.8) !important;
+	border-bottom: 1px solid var(--rough-glass-border) !important;
+	color: var(--text-main) !important;
+}
+
+#TB_closeWindowButton {
+	color: var(--text-main) !important;
+}

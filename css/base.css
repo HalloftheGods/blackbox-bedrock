@@ -1,0 +1,96 @@
+:root {
+	--text-main: #f8f8f2;
+	--accent: #62c9ff;
+	--gold: #d9be6f;
+	--compass-bg: radial-gradient(farthest-corner circle at 0% 0%, #2271b1 0%, #1a1e22 100%);
+	--rough-glass-bg: linear-gradient(135deg, rgba(13, 17, 23, 0.6), rgba(13, 17, 23, 0.2));
+	--rough-glass-border: rgba(90, 105, 172, 0.301);
+	--rough-glass-filter: blur(20px) saturate(150%);
+	--wp-admin-theme-color: #d9be6f !important;
+	--wp-admin-theme-color-darker-10: #cfa856 !important;
+	--wp-admin-theme-color-darker-20: #b58d34 !important;
+	--wp-admin-border-color-focus: #d9be6f !important;
+}
+
+/* Core Canvas: YouMeOS Native Gradient Background */
+html,
+body {
+	background: var(--compass-bg) !important;
+	background-attachment: fixed !important;
+	background-size: cover !important;
+}
+
+#wpwrap,
+#wpbody,
+#wpbody-content,
+#wpcontent {
+	background: transparent !important;
+}
+
+/* Clean Scrollbars matching YouMeOS Style */
+::-webkit-scrollbar {
+	width: 6px;
+	height: 6px;
+}
+
+::-webkit-scrollbar-track {
+	background: rgba(0, 0, 0, 0.2);
+	border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+	background: rgba(98, 201, 255, 0.5);
+	border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: rgba(98, 201, 255, 0.8);
+}
+
+* {
+	scrollbar-width: thin;
+	scrollbar-color: rgba(98, 201, 255, 0.5) rgba(0, 0, 0, 0.2);
+}
+
+/* Typography, Icons and Labels */
+h1, h2, h3, h4, h5, h6,
+p, span, li, div {
+	color: var(--text-main) !important;
+}
+
+/* Base Inputs & Text Areas - Subtle Dark Transparency */
+input[type="text"],
+input[type="number"],
+input[type="search"],
+input[type="email"],
+input[type="url"],
+input[type="password"],
+select,
+textarea {
+	background: rgba(0, 0, 0, 0.3) !important;
+	color: var(--text-main) !important;
+	border: 1px solid rgba(255, 255, 255, 0.1) !important;
+	border-radius: 4px !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+	border-color: var(--accent) !important;
+	background: rgba(0, 0, 0, 0.5) !important;
+	box-shadow: 0 0 0 1px var(--accent) !important;
+}
+
+/* General Links */
+a,
+.wrap a {
+	color: var(--gold) !important;
+	transition: color 0.2s ease !important;
+}
+
+a:hover,
+.wrap a:hover,
+a:active,
+a:focus {
+	color: var(--accent) !important;
+}

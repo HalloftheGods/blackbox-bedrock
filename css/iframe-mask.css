@@ -1,0 +1,91 @@
+/* Compass Sub-App Iframe Mask */
+
+html.is-compass-iframe #adminmenumain,
+html.is-compass-iframe #wpadminbar,
+html.is-compass-iframe #wpfooter {
+	display: none !important;
+}
+
+html.is-compass-iframe #wpcontent,
+html.is-compass-iframe #wpbody-content {
+	margin-left: 0 !important;
+	padding-left: 0 !important;
+	padding-top: 0 !important;
+}
+
+html.is-compass-iframe.wp-toolbar {
+	padding-top: 0 !important;
+}
+
+html.is-compass-iframe .sui-wrap {
+	margin: 0 !important;
+	max-width: 100% !important;
+	padding: 24px !important;
+	box-sizing: border-box !important;
+}
+
+/* Make the iframe entirely transparent to let Compass UI show through */
+html.is-compass-iframe,
+html.is-compass-iframe body,
+html.is-compass-iframe #wpwrap,
+html.is-compass-iframe #wpbody,
+html.is-compass-iframe #wpcontent,
+html.is-compass-iframe #wpbody-content,
+html.is-compass-iframe #wpbody-content>.wrap {
+	background: transparent !important;
+	background-color: transparent !important;
+	background-image: none !important;
+	box-shadow: none !important;
+	color-scheme: none !important;
+}
+
+html.is-compass-iframe,
+html.is-compass-iframe body {
+	overflow-x: hidden !important;
+}
+
+html.is-compass-iframe .sui-wrap,
+html.is-compass-iframe .sui-wrap *:not(.sui-box) {
+	background: transparent !important;
+	background-color: transparent !important;
+	background-image: none !important;
+}
+
+html.is-compass-iframe .sui-wrap .sui-box {
+	background: rgba(13, 17, 23, 0.4) !important;
+	backdrop-filter: blur(10px) !important;
+	-webkit-backdrop-filter: blur(10px) !important;
+	border: 1px solid rgba(90, 105, 172, 0.3) !important;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2) !important;
+}
+
+html.is-compass-iframe .sui-header {
+	border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+html.is-compass-iframe #wpbody-content {
+	padding-bottom: 24px !important;
+	/* Keep bottom padding only for standard wp pages */
+}
+
+/* Gutenberg Editor: force transparency on skeleton and editor canvas */
+html.is-compass-iframe .interface-interface-skeleton__html-container,
+html.is-compass-iframe .interface-interface-skeleton,
+html.is-compass-iframe .interface-interface-skeleton__body,
+html.is-compass-iframe .interface-interface-skeleton__content,
+html.is-compass-iframe .edit-post-visual-editor,
+html.is-compass-iframe .edit-post-visual-editor__content-area,
+html.is-compass-iframe .editor-styles-wrapper,
+html.is-compass-iframe .block-editor__container,
+html.is-compass-iframe .block-editor-writing-flow,
+html.is-compass-iframe .is-root-container,
+html.is-compass-iframe .block-editor-block-list__layout {
+	background: transparent !important;
+	background-color: transparent !important;
+	color-scheme: none !important;
+}
+
+html.is-compass-iframe iframe[name="editor-canvas"] {
+	background: transparent !important;
+	color-scheme: none !important;
+}

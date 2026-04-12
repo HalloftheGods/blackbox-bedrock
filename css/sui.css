@@ -1,0 +1,363 @@
+/* SmartCrawl SUI Base Overrides */
+.sui-wrap,
+.sui-wrap p,
+.sui-wrap label,
+.sui-wrap h1,
+.sui-wrap h2,
+.sui-wrap h3,
+.sui-wrap h4,
+.sui-wrap .sui-description,
+.sui-wrap .sui-summary-large,
+.sui-wrap .sui-summary-sub,
+.sui-wrap .sui-accordion-item-title,
+.sui-wrap .sui-table,
+.sui-wrap .sui-table thead th,
+.sui-wrap .sui-table tbody td,
+.sui-wrap strong,
+.sui-wrap small {
+	color: var(--text-main) !important;
+}
+
+hr,
+.sui-box-header,
+.sui-box-footer,
+.sui-summary,
+.sui-summary-segment,
+.sui-accordion-item,
+.sui-accordion-item-header,
+.sui-accordion-item-body,
+.sui-table,
+.sui-table tr,
+.sui-table tr:nth-child(even),
+.sui-table tr:nth-child(odd),
+.sui-table thead th,
+.sui-table tbody td,
+.wds-accordion,
+.sui-accordion {
+	border-color: rgba(255, 255, 255, 0.05) !important;
+	background: transparent !important;
+	background-color: transparent !important;
+}
+
+.wds-accordion,
+.sui-accordion {
+	border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+/* SmartCrawl Readability Awesome Styles */
+.sui-summary.sui-rebranded {
+	background: rgba(255, 255, 255, 0.02) !important;
+	border: 1px solid rgba(255, 255, 255, 0.05) !important;
+	border-radius: 16px !important;
+	padding: 30px 40px !important;
+	margin: 30px auto !important;
+	max-width: 85% !important;
+	backdrop-filter: blur(10px) !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: space-between !important;
+}
+
+.sui-summary-large {
+	font-size: 5rem !important;
+	font-weight: 900 !important;
+	color: #50fa7b !important;
+	text-shadow: 0 0 25px rgba(80, 250, 123, 0.4) !important;
+	line-height: 1 !important;
+}
+
+.sui-summary-percent {
+	font-size: 1.2rem !important;
+	opacity: 0.5 !important;
+	vertical-align: bottom !important;
+	margin-left: 4px !important;
+}
+
+.sui-summary-sub {
+	text-transform: uppercase !important;
+	letter-spacing: 2px !important;
+	font-weight: 700 !important;
+	opacity: 0.7 !important;
+	font-size: 0.7rem !important;
+}
+
+/* SEO & Magic Meta Box Overrides */
+#wpseo_meta,
+#rank-math-metabox-wrapper,
+.wpseo-metabox-content,
+.wpseo-snippet,
+.wpseo-snippet-preview,
+.sui-wrap,
+.wds-seo-meta-box,
+#wpmudev-smartcrawl-metabox {
+	background: transparent !important;
+	background-color: transparent !important;
+}
+
+/* SUI Blankets & Google Preview */
+.sui-wrap [class*="card"],
+.sui-wrap [class*="notice"],
+.sui-wrap [class*="message"],
+.sui-wrap .sui-box-body {
+	background: transparent !important;
+	background-color: transparent !important;
+}
+
+/* SUI Separators and Input Fields - matching Card Style */
+.sui-wrap hr,
+.sui-wrap .sui-box-header,
+.sui-wrap .sui-box-footer,
+.sui-wrap .sui-accordion-item,
+.sui-wrap .sui-accordion-item-header {
+	border: none !important;
+	box-shadow: none !important;
+}
+
+.sui-wrap form input[type="text"],
+.sui-wrap form input[type="search"],
+.sui-wrap .sui-form-control,
+.sui-form-control,
+.sui-wrap input,
+.sui-wrap textarea,
+.sui-wrap select {
+	background: rgba(0, 0, 0, 0.3) !important;
+	border: 1px solid rgba(255, 255, 255, 0.1) !important;
+	border-radius: 4px !important;
+	color: #fff !important;
+}
+
+.sui-wrap .sui-notice,
+.sui-wrap .sui-message,
+.sui-wrap .sui-notification {
+	background: rgba(0, 0, 0, 0.6) !important;
+	color: var(--text-main) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	border-left: 4px solid var(--accent) !important;
+	padding: 16px 24px !important;
+	border-radius: 4px !important;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+}
+
+.sui-notice-icon,
+.sui-icon-info,
+.sui-notification__icon {
+	margin-right: 16px !important;
+}
+
+.sui-wrap .sui-notice.sui-notice-error,
+.sui-wrap .sui-message.sui-msg-error,
+.sui-wrap .sui-notification--error {
+	border-color: rgba(255, 92, 92, 0.2) !important;
+	border-left-color: #ff5c5c !important;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+}
+
+.sui-wrap .sui-notice.sui-notice-warning,
+.sui-wrap .sui-message.sui-msg-warning,
+.sui-wrap .sui-notification--warning {
+	border-color: rgba(217, 190, 111, 0.2) !important;
+	border-left-color: var(--gold) !important;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+}
+
+.sui-wrap .sui-notice.sui-notice-success,
+.sui-wrap .sui-message.sui-msg-success,
+.sui-wrap .sui-notification--success {
+	border-color: rgba(77, 250, 123, 0.2) !important;
+	border-left-color: #4dfa7b !important;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+}
+
+.sui-wrap .sui-notice.sui-notice-info,
+.sui-wrap .sui-message.sui-msg-info,
+.sui-wrap .sui-notification--info {
+	border-color: rgba(98, 201, 255, 0.2) !important;
+	border-left-color: var(--accent) !important;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+}
+
+.sui-notification__message,
+.sui-notification__content,
+.sui-notification p,
+.sui-notice__message,
+.sui-notice__content,
+.sui-notice p {
+	color: var(--text-main) !important;
+}
+
+/* Clear interior padding/borders on children of notices */
+.sui-notification__content,
+.sui-notice__content,
+.sui-message__content {
+	background: transparent !important;
+	border: none !important;
+	box-shadow: none !important;
+	padding-left: 0 !important;
+	margin-left: 0 !important;
+}
+
+.sui-floating-notices {
+	padding: 20px !important;
+	margin: 1rem .25rem !important;
+	display: none !important;
+}
+
+/* Google Preview / Search Preview Dark Mode */
+.sui-wrap .wds-preview-wrapper,
+.wpseo-snippet-preview,
+.sui-wrap div[class*="preview"],
+.sui-wrap .sui-border-frame {
+	background: rgba(0, 0, 0, 0.4) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	border-radius: 8px !important;
+	padding: 16px !important;
+}
+
+.sui-wrap .wds-seo-analysis-label,
+.sui-wrap .wds-label {
+	color: #fff !important;
+}
+
+/* Prevent recursive glass nesting on interior text nodes that share preview classes */
+.sui-wrap div[class*="preview"] [class*="preview"] {
+	background: transparent !important;
+	border: none !important;
+	padding: 0 !important;
+}
+
+.wds-preview-title,
+.wds-preview-title *,
+.wds-preview-title a,
+.wpseo-snippet-preview .title,
+.wpseo-snippet-preview .title * {
+	color: #8ab4f8 !important;
+	text-decoration: none !important;
+}
+
+.wds-preview-title a:hover,
+.wpseo-snippet-preview .title a:hover {
+	text-decoration: underline !important;
+}
+
+.wds-preview-url,
+.wds-preview-url *,
+.wpseo-snippet-preview .url,
+.wpseo-snippet-preview .url * {
+	color: #81c995 !important;
+}
+
+.wds-preview-desc,
+.wds-preview-desc *,
+.wpseo-snippet-preview .desc,
+.wpseo-snippet-preview .desc * {
+	color: #bdc1c6 !important;
+}
+
+/* Buttons */
+.sui-button,
+.sui-wrap button {
+	background: transparent !important;
+	border: 1px solid var(--gold) !important;
+	color: var(--gold) !important;
+}
+
+.sui-button:hover {
+	background: rgba(255, 255, 255, 0.05) !important;
+	color: var(--accent) !important;
+}
+
+/* WPMUDEV SUI Tab Reset */
+.sui-wrap .sui-sidenav .sui-vertical-tabs .sui-vtab {
+	border: none !important;
+	background: transparent !important;
+	color: var(--text-main) !important;
+}
+
+.sui-wrap .sui-sidenav .sui-vertical-tabs .sui-vtab.sui-active {
+	color: var(--accent) !important;
+	border-left: 2px solid var(--accent) !important;
+}
+
+/* SUI Tabs Override (Prevent button-bleed on tabs) */
+.sui-wrap .sui-tabs button,
+.sui-wrap [role="tab"],
+.sui-wrap .sui-tab-item {
+	border: none !important;
+	background: transparent !important;
+	color: #f8f8f2 !important;
+	box-shadow: none !important;
+}
+
+.sui-wrap .sui-tabs button.active,
+.sui-wrap .sui-tabs button.sui-active,
+.sui-wrap .sui-tabs button[aria-selected="true"],
+.sui-wrap [role="tab"][aria-selected="true"] {
+	color: var(--accent) !important;
+	border: none !important;
+	box-shadow: inset 0 -2px var(--accent) !important;
+	border-radius: 0 !important;
+}
+
+.sui-wrap .sui-tab-content.active,
+.sui-wrap .sui-tab-content {
+	border: none !important;
+	box-shadow: none !important;
+}
+
+.sui-wrap .sui-tab-content .wds-metabox-section:first-child {
+	padding-top: 0 !important;
+	border-bottom: 0 !important;
+}
+
+/* Fix alignment/styling for chips/badges */
+.sui-tag,
+.sui-badge,
+[class*="tag"],
+[class*="badge"] {
+	background: rgba(255, 255, 255, 0.1) !important;
+	border: 1px solid rgba(255, 255, 255, 0.1) !important;
+	color: var(--text-main) !important;
+	border-radius: 99px !important;
+	padding: 2px 8px !important;
+	font-size: 0.7rem !important;
+	font-weight: 700 !important;
+	vertical-align: middle !important;
+	margin-top: -2px !important;
+	margin-left: 6px !important;
+	line-height: normal !important;
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+}
+
+.wds-issues-invalid {
+	background: var(--rough-glass-bg) !important;
+	backdrop-filter: var(--rough-glass-filter) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	color: var(--text-main) !important;
+	padding: 10px !important;
+	border-radius: 8px !important;
+}
+
+/* WPMUDEV / Beehive Specific Dashboard Widget Overrides */
+#dashboard-widgets .sui-wrap,
+#dashboard-widgets .sui-tab,
+#dashboard-widgets .sui-tab *,
+#dashboard-widgets .sui-tab__panel,
+#dashboard-widgets .beehive-metric-grid,
+#dashboard-widgets .beehive-metric-card,
+#dashboard-widgets .sui-notice,
+#dashboard-widgets [class*="beehive-"] {
+	background: transparent !important;
+	background-color: transparent !important;
+	border-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+#dashboard-widgets .beehive-sui-text,
+#dashboard-widgets [class*="sui-text"],
+#dashboard-widgets [class*="sui-heading"],
+#dashboard-widgets .sui-notice p {
+	color: var(--text-main) !important;
+}
