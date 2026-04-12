@@ -1,18 +1,18 @@
 <?php
 /**
- * Compass MU Framework
+ * BlackBOX MU Framework
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-class Compass_MU_Core {
+class BlackBOX_MU_Core {
 	
 	public function __construct() {
 		add_filter( 'wp_theme_json_data_theme', [ $this, 'override_editor_theme_json' ] );
 		add_filter( 'block_editor_settings_all', [ $this, 'force_editor_css_settings' ], 9999, 2 );
-		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_compass_styles' ], 9999 );
-		add_action( 'admin_head', [ $this, 'enqueue_compass_styles' ], 9999 );
-		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_compass_styles' ], 9999 );
+		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_blackbox_styles' ], 9999 );
+		add_action( 'admin_head', [ $this, 'enqueue_blackbox_styles' ], 9999 );
+		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_blackbox_styles' ], 9999 );
 		add_action( 'admin_print_footer_scripts', [ $this, 'inject_canvas_script' ], 9999 );
 		add_action( 'admin_head', [ $this, 'inject_iframe_class' ], 1 );
 		
@@ -25,9 +25,9 @@ class Compass_MU_Core {
 	public function inject_iframe_class() {
 		$isIframe = isset( $_GET['compass_iframe'] ) && $_GET['compass_iframe'] === '1';
 		if ( $isIframe ) {
-			echo '<script>document.documentElement.classList.add("is-compass-iframe");</script>';
+			echo '<script>document.documentElement.classList.add("is-blackbox-iframe");</script>';
 		} else {
-			echo '<script>if (window.name === "compass-sub-app") { document.documentElement.classList.add("is-compass-iframe"); }</script>';
+			echo '<script>if (window.name === "blackbox-sub-app") { document.documentElement.classList.add("is-blackbox-iframe"); }</script>';
 		}
 	}
 
@@ -87,7 +87,7 @@ class Compass_MU_Core {
 		return $settings;
 	}
 
-	public function enqueue_compass_styles() {
+	public function enqueue_blackbox_styles() {
 
 		$base_css = file_get_contents( __DIR__ . '/css/base.css' );
 		$wp_admin_css = file_get_contents( __DIR__ . '/css/wp-admin.css' );
@@ -102,7 +102,7 @@ class Compass_MU_Core {
 			wp_add_inline_style( 'wp-block-library', $editor_css );
 			wp_add_inline_style( 'wp-edit-post', $editor_css );
 		} else {
-			echo '<style id="compass-mu-global-admin">' . $global_css . '</style>';
+			echo '<style id="blackbox-global-admin">' . $global_css . '</style>';
 		}
 	}
 
@@ -111,14 +111,14 @@ class Compass_MU_Core {
 		<script>
 		(function() {
 			// Do not inject the smoke canvas if we are inside a Compass sub-app iframe
-			if (window.name === "compass-sub-app") return;
+			if (window.name === "blackbox-sub-app") return;
 			
 			if (window !== window.top && window.location.search.includes('theme=transparent')) {
 				// We are in an iframe, and transparent!
 			}
-			if(document.getElementById('compass-smoke-canvas')) return;
+			if(document.getElementById('blackbox-smoke-canvas')) return;
 			const canvas = document.createElement('canvas');
-			canvas.id = 'compass-smoke-canvas';
+			canvas.id = 'blackbox-smoke-canvas';
 			canvas.style.position = 'fixed';
 			canvas.style.top = '0';
 			canvas.style.left = '0';
@@ -387,4 +387,4 @@ class Compass_MU_Core {
 	}
 }
 
-new Compass_MU_Core();
+new BlackBOX_MU_Core();
