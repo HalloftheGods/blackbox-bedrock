@@ -20,6 +20,17 @@ class BlackBOX_MU_Core {
 		add_filter( 'login_headerurl', [ $this, 'custom_login_headerurl' ] );
 		add_filter( 'login_headertext', [ $this, 'custom_login_headertext' ] );
 		add_action( 'login_footer', [ $this, 'inject_canvas_script' ], 9999 );
+
+		// Installation page support
+		add_action( 'admin_head-install.php', [ $this, 'enqueue_blackbox_styles' ], 9999 );
+		add_action( 'admin_print_scripts-install.php', [ $this, 'enqueue_blackbox_styles' ], 9999 );
+		add_action( 'admin_footer-install.php', [ $this, 'inject_canvas_script' ], 9999 );
+		
+		// General catch-all for screens that might be missed
+		if ( isset( $GLOBALS['pagenow'] ) && $GLOBALS['pagenow'] === 'install.php' ) {
+			add_action( 'admin_head', [ $this, 'enqueue_blackbox_styles' ], 9999 );
+			add_action( 'admin_footer', [ $this, 'inject_canvas_script' ], 9999 );
+		}
 	}
 
 	public function inject_iframe_class() {
@@ -103,6 +114,31 @@ class BlackBOX_MU_Core {
 			wp_add_inline_style( 'wp-edit-post', $editor_css );
 		} else {
 			echo '<style id="blackbox-global-admin">' . $global_css . '</style>';
+			
+			// Specific overrides for the install page
+			if ( strpos( $_SERVER['PHP_SELF'], 'install.php' ) !== false ) {
+				echo '<style id="blackbox-install-overrides">
+					body {
+						background: radial-gradient(farthest-corner circle at 0% 0%, #2271b1 0%, #1a1e22 100%) !important;
+						color: #f8f8f2 !important;
+					}
+					#install {
+						background: linear-gradient(135deg, rgba(13, 17, 23, 0.6), rgba(13, 17, 23, 0.2)) !important;
+						border: 1px solid rgba(90, 105, 172, 0.301) !important;
+						backdrop-filter: blur(20px) saturate(150%) !important;
+						border-radius: 12px !important;
+						padding: 40px !important;
+						margin-top: 50px !important;
+						box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8) !important;
+					}
+					.install-help, h1, h2, h3, label { color: #f8f8f2 !important; }
+					input[type=text], input[type=password], input[type=email], select {
+						background: rgba(255, 255, 255, 0.05) !important;
+						border: 1px solid rgba(255, 255, 255, 0.1) !important;
+						color: #fff !important;
+					}
+				</style>';
+			}
 		}
 	}
 
