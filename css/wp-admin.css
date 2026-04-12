@@ -63,7 +63,38 @@ ul.children li:nth-child(odd),
 	}
 }
 
+/* Password Strength Indicator */
+#pass-strength-result {
+	background-color: rgba(0, 0, 0, 0.3) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	color: var(--text-main) !important;
+	text-shadow: none !important;
+}
+
+#pass-strength-result.short,
+#pass-strength-result.bad {
+	background-color: rgba(255, 92, 92, 0.15) !important;
+	border-color: rgba(255, 92, 92, 0.4) !important;
+}
+
+#pass-strength-result.good {
+	background-color: rgba(98, 201, 255, 0.15) !important;
+	border-color: rgba(98, 201, 255, 0.4) !important;
+}
+
+#pass-strength-result.strong {
+	background-color: rgba(77, 250, 123, 0.15) !important;
+	border-color: rgba(77, 250, 123, 0.4) !important;
+}
+
 /* Page Headers & Add New Buttons */
+h1,
+h2 {
+	border-bottom: 1px solid var(--rough-glass-border) !important;
+	padding-bottom: 12px !important;
+	margin-bottom: 24px !important;
+}
+
 .wp-heading-inline {
 	color: var(--text-main) !important;
 	text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5) !important;
@@ -116,12 +147,15 @@ div.updated,
 	box-shadow: none !important;
 }
 
-div.error, .woocommerce-error {
+div.error,
+.woocommerce-error {
 	border-color: rgba(255, 92, 92, 0.2) !important;
 	border-left-color: #ff5c5c !important;
 }
 
-div.updated, .woocommerce-message, .woocommerce-info {
+div.updated,
+.woocommerce-message,
+.woocommerce-info {
 	border-color: rgba(77, 250, 123, 0.2) !important;
 	border-left-color: #4dfa7b !important;
 }
@@ -241,48 +275,8 @@ h2.hndle {
 	-webkit-backdrop-filter: blur(20px) saturate(120%) !important;
 }
 
-#adminmenu,
-#adminmenu a.menu-top {
-	background: transparent !important;
-}
-
-.wp-submenu {
-	background: rgba(13, 17, 23, 0.5) !important;
-	backdrop-filter: blur(20px) saturate(120%) !important;
-	-webkit-backdrop-filter: blur(20px) saturate(120%) !important;
-}
-
-
-#adminmenu li.wp-menu-separator {
-	background: transparent !important;
-	border-color: rgba(255, 255, 255, 0.06) !important;
-}
-
-#screen-meta {
-	background: transparent !important;
-	border: none !important;
-	box-shadow: none !important;
-}
-
-/* Screen Options Panel */
-#screen-options-wrap,
-#screen-options-link-wrap {
-	background: var(--rough-glass-bg) !important;
-	backdrop-filter: var(--rough-glass-filter) !important;
-	-webkit-backdrop-filter: var(--rough-glass-filter) !important;
-	border: 1px solid var(--rough-glass-border) !important;
-	border-radius: 0 0 8px 8px !important;
-	color: var(--text-main) !important;
-	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
-}
-
-#screen-options-wrap label,
-#screen-options-wrap legend,
-#screen-options-wrap .screen-options label {
-	color: var(--text-main) !important;
-}
-
 /* Help / Contextual Help Panel */
+
 #contextual-help-wrap,
 #contextual-help-columns,
 #contextual-help-back {
@@ -653,7 +647,7 @@ table.wp-list-table * {
 .plugins tr.active th.check-column,
 .plugins tr.active td,
 .plugins tr.active th,
-.plugins tbody tr.active td, 
+.plugins tbody tr.active td,
 .plugins tbody tr.active th {
 	background-color: rgba(0, 0, 0, 0.45) !important;
 }
@@ -669,7 +663,7 @@ table.wp-list-table * {
 	text-shadow: 0 0 10px rgba(98, 201, 255, 0.2);
 }
 
-.plugins .column-description, 
+.plugins .column-description,
 .plugins .column-description p,
 .plugins .column-description div {
 	color: var(--text-main) !important;

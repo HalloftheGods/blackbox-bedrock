@@ -1,0 +1,90 @@
+/* BlackBOX Installation Screen Card Style */
+
+:root {
+	--hog-gold: #d9be6f;
+	--hog-gold-hover: #e6cd82;
+	--hog-gold-dark: #c0a455;
+	--hog-text: #1a1a1a;
+	--compass-bg: radial-gradient(farthest-corner circle at 0% 0%, #2271b1 0%, #1a1e22 100%);
+	--rough-glass-bg: linear-gradient(135deg, rgba(13, 17, 23, 0.6), rgba(13, 17, 23, 0.2));
+	--rough-glass-border: rgba(90, 105, 172, 0.301);
+	--rough-glass-filter: blur(20px) saturate(150%);
+	--text-main: #f8f8f2;
+}
+
+/* Base Body: Full Page Gradient */
+html,
+body.wp-admin-install {
+	background: var(--compass-bg) !important;
+	background-attachment: fixed !important;
+	background-size: cover !important;
+	min-height: 100vh;
+	margin: 0;
+}
+
+/* Ensure the layout doesn't break on install pages */
+.wp-core-ui.wp-admin-install body {
+	display: block !important;
+}
+
+/* Spacing for Logo */
+#logo {
+	/* margin-top: 50px !important;
+	margin-bottom: 20px !important; */
+	z-index: 10;
+}
+
+/* The actual "Card" where the installation content lives */
+.wp-core-ui.wp-admin-install .card,
+.wp-core-ui.wp-admin-install #wp-install-container,
+.wp-core-ui.wp-admin-install form,
+.wp-core-ui.wp-admin-install .welcome-content {
+	background: var(--rough-glass-bg) !important;
+	backdrop-filter: var(--rough-glass-filter) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	border-radius: 12px !important;
+	box-shadow: 0 16px 64px rgba(0, 0, 0, 0.5) !important;
+	/* padding: 40px !important; */
+	max-width: 800px !important;
+	width: 90% !important;
+	/* margin: 20px auto !important; */
+}
+
+/* Form Styling inside Card */
+.wp-admin-install input[type="text"],
+.wp-admin-install input[type="password"],
+.wp-admin-install input[type="email"],
+.wp-admin-install input[type="url"],
+.wp-admin-install select {
+	background: rgba(0, 0, 0, 0.3) !important;
+	color: var(--text-main) !important;
+	border: 1px solid rgba(255, 255, 255, 0.1) !important;
+	border-radius: 4px !important;
+}
+
+.wp-admin-install h1,
+.wp-admin-install h2 {
+	color: var(--hog-gold) !important;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.wp-admin-install p,
+.wp-admin-install label,
+.wp-admin-install td,
+.wp-admin-install th {
+	color: var(--text-main) !important;
+}
+
+/* Submit Button */
+.wp-admin-install .button-primary {
+	background: var(--hog-gold) !important;
+	border-color: var(--hog-gold-dark) !important;
+	color: var(--hog-text) !important;
+	text-shadow: none !important;
+}
+
+.wp-admin-install .button-primary:hover {
+	background: var(--hog-gold-hover) !important;
+	border-color: var(--hog-gold-dark) !important;
+}

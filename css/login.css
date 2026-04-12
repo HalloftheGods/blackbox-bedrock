@@ -1,0 +1,124 @@
+/* BlackBOX Login Screen Overrides */
+
+:root {
+	--hog-gold: #d9be6f;
+	--hog-gold-hover: #e6cd82;
+	--hog-gold-dark: #c0a455;
+	--hog-text: #1a1a1a;
+	--compass-bg: radial-gradient(farthest-corner circle at 0% 0%, #2271b1 0%, #1a1e22 100%);
+	--rough-glass-bg: linear-gradient(135deg, rgba(13, 17, 23, 0.6), rgba(13, 17, 23, 0.2));
+	--rough-glass-border: rgba(90, 105, 172, 0.301);
+	--rough-glass-filter: blur(20px) saturate(150%);
+	--text-main: #f8f8f2;
+}
+
+/* Background Overlay */
+body.login {
+	background: var(--compass-bg) !important;
+	background-attachment: fixed !important;
+	background-size: cover !important;
+}
+
+/* Glass Options */
+.login #loginform, .login #registerform, .login #lostpasswordform {
+	background: var(--rough-glass-bg) !important;
+	backdrop-filter: var(--rough-glass-filter) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3) !important;
+	border-radius: 8px !important;
+	padding: 26px 24px 46px !important;
+}
+
+/* Message & Notice Blocks */
+.login .message, .login .success, .login #login_error {
+	background: var(--rough-glass-bg) !important;
+	backdrop-filter: var(--rough-glass-filter) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	border-left: 4px solid var(--hog-gold) !important;
+	box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3) !important;
+	border-radius: 8px !important;
+	color: var(--text-main) !important;
+}
+
+/* Typography */
+.login label, .login .privacy-policy-page-link > a {
+	color: var(--text-main) !important;
+}
+
+.login #nav, .login #backtoblog {
+	text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+}
+
+/* Inputs */
+.login input[type="text"],
+.login input[type="password"],
+.login input[type="email"] {
+	background: rgba(0, 0, 0, 0.3) !important;
+	color: var(--text-main) !important;
+	border: 1px solid rgba(255, 255, 255, 0.1) !important;
+	border-radius: 4px !important;
+	box-shadow: none !important;
+}
+
+/* Inputs and Focus States */
+.login input[type="text"]:focus,
+.login input[type="password"]:focus,
+.login input[type="checkbox"]:focus {
+	border-color: var(--hog-gold) !important;
+	box-shadow: 0 0 0 1px var(--hog-gold) !important;
+	background: rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Autofill Override */
+.login input:-webkit-autofill,
+.login input:-webkit-autofill:hover, 
+.login input:-webkit-autofill:focus, 
+.login input:-webkit-autofill:active {
+	transition: background-color 5000s ease-in-out 0s !important;
+	-webkit-text-fill-color: var(--text-main) !important;
+}
+
+/* Checkbox Mark */
+.login input[type="checkbox"] {
+	background: rgba(0, 0, 0, 0.3) !important;
+	border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.login input[type="checkbox"]:checked::before {
+	content: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2020%2020%27%3E%3Cpath%20d%3D%27M14.83%204.89l1.34.94-5.81%208.38H9.02L5.78%209.67l1.34-1.25%202.57%202.4z%27%20fill%3D%27%23d9be6f%27%2F%3E%3C%2Fsvg%3E") !important;
+}
+
+/* Submit Button */
+.wp-core-ui .button-primary {
+	background: var(--hog-gold) !important;
+	border-color: var(--hog-gold-dark) !important;
+	color: var(--hog-text) !important;
+	text-shadow: none !important;
+	box-shadow: 0 1px 0 var(--hog-gold-dark) !important;
+}
+
+.wp-core-ui .button-primary:hover,
+.wp-core-ui .button-primary:focus,
+.wp-core-ui .button-primary:active {
+	background: var(--hog-gold-hover) !important;
+	border-color: var(--hog-gold-dark) !important;
+	color: var(--hog-text) !important;
+}
+
+/* Links */
+.login #nav a, 
+.login #backtoblog a {
+	color: var(--text-main) !important;
+}
+
+.login #backtoblog a:hover,
+.login #nav a:hover,
+.login h1 a:hover {
+	color: var(--hog-gold) !important;
+}
+
+/* Password Eye Toggle */
+.login .wp-pwd button:hover span,
+.login .wp-pwd button:focus span {
+	color: var(--hog-gold) !important;
+}

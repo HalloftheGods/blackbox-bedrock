@@ -1,18 +1,20 @@
 {
-    "name": "hallofthegods/blackbox-bedrock",
-    "description": "Compass MU Framework Core - BlackBOX Edition",
-    "type": "wordpress-muplugin",
-    "license": "GPL-2.0-or-later",
-    "authors": [
-        {
-            "name": "Hall of the Gods, Inc.",
-            "homepage": "http://mycompassconsulting.com/"
-        }
-    ],
-    "require": {
-        "composer/installers": "^1.0 || ^2.0"
-    },
-    "autoload": {
-        "files": ["BlackBOX.php"]
+  "name": "hallofthegods/blackbox",
+  "description": "BlackBOX MU Bedrock - Genesis Edition",
+  "type": "wordpress-muplugin",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "Hall of the Gods, Inc.",
+      "homepage": "http://www.hallofthegods.com/"
     }
+  ],
+  "require": {
+    "composer/installers": "^1.0 || ^2.0"
+  },
+  "autoload": {
+    "files": [
+      "BlackBOX.php"
+    ]
+  }
 }

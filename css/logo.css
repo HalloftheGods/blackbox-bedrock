@@ -1,0 +1,61 @@
+:root {
+    --custom-logo-base64: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEtCAYAAACyIV3QAAAAxnpUWHRSYXcgcHJvZmlsZSB0eXBlIGV4aWYAAHjabVDbDcMgDPz3FB0BP8JjHNKkUjfo+D2wUyVRT+J82HAY0/55v+gxIGxkS6m55ZwAa9akQ9Tk6JM52eQJeYbia55kCymIiqheqNkjH/m4cETuUMvJqD6jsF4LzaKDejOKh3R0JBBbGLUwUvECh0H3b6Xcajl/Yd3TFdUXDdIyvX8m970VTG9bkFSRXVkTWDV7AzpWJu0Q5oyDCQeGZrDB0DvBQP7N6QB9AXYkWX0VkLkTAAABhGlDQ1BJQ0MgcHJvZmlsZQAAeJx9kb1Lw1AUxU/TilIqDlYQcchQneyiIo61CkWoEGqFVh1MXvoFTRqSFBdHwbXg4Mdi1cHFWVcHV0EQ/ADxDxAnRRcp8b6k0CLGGx75cd49h/fuA4RmlWlWKAFoum1mUkkxl18Ve18Roi+MAIZkZhlzkpSGb33dUx/VXZxn+ff9Wf1qwWJAQCROMMO0iTeIZzZtg/M+cZSVZZX4nHjCpAMSP3Jd8fiNc8llgWdGzWxmnjhKLJa6WOliVjY14mnimKrplC/kPFY5b3HWqnXWPie/YaSgryxzndYoUljEEiSIUFBHBVXYiNNfJ8VChvaTPv4R1y+RSyFXBYwcC6hBg+z6wd/g92yt4tSklxRJAj0vjvMxBvTuAq2G43wfO07rBAg+A1d6x19rArOfpDc6WuwIGNgGLq47mrIHXO4Aw0+GbMquFKQlFIvA+xk9Ux4YvAXCa97c2vs4fQCyNKv0DXBwCIyXKHvd59593XP7t6c9vx8Go3J7OXcjnQAADltpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+Cjx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IlhNUCBDb3JlIDQuNC4wLUV4aXYyIj4KIDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+CiAgPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIKICAgIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIgogICAgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIKICAgIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIKICAgIHhtbG5zOkdJTVA9Imh0dHA6Ly93d3cuZ2ltcC5vcmcveG1wLyIKICAgIHhtbG5zOnRpZmY9Imh0dHA6Ly9ucy5hZG9iZS5jb20vdGlmZi8xLjAvIgogICAgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIgogICB4bXBNTTpEb2N1bWVudElEPSJnaW1wOmRvY2lkOmdpbXA6ZmU2MTRkNTctYTJkMi00Y2FiLTk0NWYtZmMwODA1ZTZjZWM4IgogICB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOmI2OWIxZGYyLTBmNDEtNGRkMS05ODEyLTg1ODMwNDM0MjIwZiIKICAgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ4bXAuZGlkOjE4YzQ5ZTU1LWQyNGEtNDBkZS1iYjUyLTVhNDk1MGRjOGE3YiIKICAgZGM6Rm9ybWF0PSJpbWFnZS9wbmciCiAgIEdJTVA6QVBJPSIyLjAiCiAgIEdJTVA6UGxhdGZvcm09IkxpbnV4IgogICBHSU1QOlRpbWVTdGFtcD0iMTcxOTI2MTgwNjUwNDkwNiIKICAgR0lTUDpWZXJzaW9uPSIyLjEwLjM4IgogICB0aWZmOk9yaWVudGF0aW9uPSIxIgogICB4bXA6Q3JlYXRvclRvb2w9IkdJTVAiCiAgIHhtcDpNb2RpZnlEYXRlPSIyMDI0LTA2LTI0VDE2OjEwOjA2WiI+CiAgIDx4bXBNTTpIaXN0b3J5PgogICAgPHJkZjpTZXE+CiAgICAgPHJkZjpsaQogICAgICBzdEV2dDphY3Rpb249InNhdmVkIgogICAgICBzdEV2dDpjaGFuZ2VkPSIvIgogICAgICBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOmIxYmQ1MWU3LTFmOTItNGFlMy04MDkxLWFhNTFjNjljYmIxMCIKICAgICAgc3RFdnQ6c29mdHdhcmVBZ2VudD0iR2ltcCAyLjEwIChMaW51eCkiCiAgICAgIHN0RXZ0OndoZW49IjIwMjQtMDYtMjRUMTY6MTA6MDZaIi8+CiAgICA8L3JkZjpTZXE+CiAgIDwveG1wTU06SGlzdG9yeT4KICA8L3JkZjpEZXNjcmlwdGlvbj4KIDwvcmRmOlJERj4KPC94OnhtcG1ldGE+Cg==');
+}
+
+/* Universal #Logo Styling */
+#logo {
+    background-image: url('/wp-content/mu-plugins/blackbox-bedrock/images/hallofthegodsinc.png') !important;
+    background-size: contain !important;
+    background-position: center top !important;
+    background-repeat: no-repeat !important;
+    width: 120px !important;
+    height: 120px !important;
+    margin: -145px auto 25px !important;
+    padding: 0 !important;
+    border: none !important;
+    color: transparent !important;
+    overflow: visible !important;
+    text-indent: -9999px !important;
+    display: block !important;
+}
+
+#logo a {
+    background-image: none !important;
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+}
+
+/* Login #logo */
+.login h1 a {
+    background-image: url('/wp-content/mu-plugins/blackbox-bedrock/images/hallofthegodsinc.png') !important;
+    background-size: contain !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    width: 120px !important;
+    height: 120px !important;
+    margin: 0 auto !important;
+    display: block !important;
+    border: none !important;
+}
+
+/* Error Container #logo */
+#error-container #logo {
+    background-image: url('/wp-content/mu-plugins/blackbox-bedrock/hallofthegodsinc.png') !important;
+    background-size: contain !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    width: 100% !important;
+    height: 120px !important;
+    margin: 0 auto 30px !important;
+    display: block !important;
+    border: none !important;
+    background-color: transparent !important;
+}
+
+/* Hide WordPress Default Dashicons/Content */
+.login h1 a:before {
+    display: none !important;
+    content: none !important;
+}
