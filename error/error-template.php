@@ -3,6 +3,7 @@
  * BlackBOX Custom Error Template
  */
 $logo_css = file_exists( dirname( __DIR__ ) . '/css/logo.css' ) ? file_get_contents( dirname( __DIR__ ) . '/css/logo.css' ) : '';
+$smoke_js = file_exists( dirname( __DIR__ ) . '/js/smoke-canvas.js' ) ? file_get_contents( dirname( __DIR__ ) . '/js/smoke-canvas.js' ) : '';
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
@@ -20,10 +21,14 @@ $logo_css = file_exists( dirname( __DIR__ ) . '/css/logo.css' ) ? file_get_conte
             --rough-glass-filter: blur(20px) saturate(150%);
             --text-main: #f8f8f2;
         }
-        body {
+        html {
             background: var(--compass-bg) !important;
             background-attachment: fixed !important;
             background-size: cover !important;
+            min-height: 100vh;
+        }
+        body {
+            background: transparent !important;
             color: var(--text-main);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             display: flex;
@@ -40,13 +45,15 @@ $logo_css = file_exists( dirname( __DIR__ ) . '/css/logo.css' ) ? file_get_conte
             border: 1px solid var(--rough-glass-border);
             border-radius: 12px;
             padding: 40px;
-            max-width: 600px;
+            max-width: 460px;
             width: 90%;
             text-align: center;
             box-shadow: 0 16px 64px rgba(0, 0, 0, 0.5);
         }
         #error-container #logo {
             margin-bottom: 30px;
+            width: 120px !important;
+            height: 120px !important;
         }
         h1 {
             font-size: 24px;
@@ -58,6 +65,14 @@ $logo_css = file_exists( dirname( __DIR__ ) . '/css/logo.css' ) ? file_get_conte
             line-height: 1.6;
             margin-bottom: 20px;
         }
+        a {
+            color: var(--hog-gold);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        a:hover, a:focus {
+            color: #62c9ff;
+        }
     </style>
 </head>
 <body id="error-page">
@@ -68,5 +83,6 @@ $logo_css = file_exists( dirname( __DIR__ ) . '/css/logo.css' ) ? file_get_conte
             <?php echo $message; ?>
         </div>
     </div>
+    <script><?php echo $smoke_js; ?></script>
 </body>
 </html>
