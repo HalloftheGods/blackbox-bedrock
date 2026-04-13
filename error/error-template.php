@@ -44,7 +44,7 @@ $smoke_js = file_exists( dirname( __DIR__ ) . '/js/smoke-canvas.js' ) ? file_get
             -webkit-backdrop-filter: var(--rough-glass-filter);
             border: 1px solid var(--rough-glass-border);
             border-radius: 12px;
-            padding: 40px;
+            padding: 32px 32px 40px;
             max-width: 460px;
             width: 90%;
             text-align: center;
@@ -57,20 +57,27 @@ $smoke_js = file_exists( dirname( __DIR__ ) . '/js/smoke-canvas.js' ) ? file_get
             background-repeat: no-repeat !important;
             width: 100% !important;
             height: 120px !important;
-            margin: 0 auto 30px !important;
+            margin: 0 auto 20px !important;
             display: block !important;
             border: none !important;
             background-color: transparent !important;
         }
-        h1 {
-            font-size: 24px;
-            color: var(--hog-gold);
-            margin-bottom: 20px;
-        }
         .error-message {
             font-size: 16px;
             line-height: 1.6;
-            margin-bottom: 20px;
+        }
+        .error-message p:first-child {
+            font-size: 20px;
+            color: var(--hog-gold);
+            margin-bottom: 15px;
+            margin-top: 0;
+            font-weight: 500;
+        }
+        .error-message p {
+            margin-bottom: 15px;
+        }
+        .error-message p:last-child {
+            margin-bottom: 0;
         }
         a {
             color: var(--hog-gold);
@@ -85,7 +92,6 @@ $smoke_js = file_exists( dirname( __DIR__ ) . '/js/smoke-canvas.js' ) ? file_get
 <body id="error-page">
     <div id="error-container">
         <div id="logo"></div>
-        <h1><?php echo $title; ?></h1>
         <div class="error-message">
             <?php echo $message; ?>
         </div>
