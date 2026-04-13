@@ -51,6 +51,33 @@ body.wp-admin-install {
 	/* margin: 20px auto !important; */
 }
 
+/* Message & Notice Blocks */
+.wp-core-ui.wp-admin-install .error,
+.wp-core-ui.wp-admin-install .notice,
+.wp-core-ui.wp-admin-install .message,
+.wp-core-ui.wp-admin-install .success,
+.wp-admin-install #setup-error {
+	background: var(--rough-glass-bg) !important;
+	backdrop-filter: var(--rough-glass-filter) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	border-left: 4px solid var(--hog-gold) !important;
+	box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3) !important;
+	border-radius: 8px !important;
+	color: var(--text-main) !important;
+	padding: 12px 16px !important;
+	margin-bottom: 20px !important;
+}
+
+.wp-core-ui.wp-admin-install .error p,
+.wp-core-ui.wp-admin-install .notice p,
+.wp-core-ui.wp-admin-install .message p,
+.wp-core-ui.wp-admin-install .success p,
+.wp-admin-install #setup-error p {
+	color: var(--text-main) !important;
+	margin: 0 !important;
+}
+
 /* Form Styling inside Card */
 .wp-admin-install input[type="text"],
 .wp-admin-install input[type="password"],

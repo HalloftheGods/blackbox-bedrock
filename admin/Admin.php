@@ -63,9 +63,13 @@ class Admin {
 	}
 
 	public function inject_iframe_class() {
-		$isIframe = isset( $_GET['compass_iframe'] ) && $_GET['compass_iframe'] === '1';
-		if ( $isIframe || ( isset( $_SERVER['HTTP_SEC_FETCH_DEST'] ) && $_SERVER['HTTP_SEC_FETCH_DEST'] === 'iframe' ) ) {
-			echo '<script>document.documentElement.classList.add("is-blackbox-iframe");</script>';
+		$isIframe = (isset( $_GET['compass_iframe'] ) && $_GET['compass_iframe'] === '1') || 
+		            (isset( $_SERVER['HTTP_SEC_FETCH_DEST'] ) && $_SERVER['HTTP_SEC_FETCH_DEST'] === 'iframe');
+
+		if ( $isIframe ) {
+			echo '<script>document.documentElement.classList.add("is-blackbox-iframe", "is-compass-iframe");</script>';
+		} else {
+			echo '<script>if (window.name === "blackbox-sub-app" || window.name === "compass-sub-app") { document.documentElement.classList.add("is-blackbox-iframe", "is-compass-iframe"); }</script>';
 		}
 	}
 
