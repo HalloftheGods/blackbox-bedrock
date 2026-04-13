@@ -93,7 +93,16 @@ $smoke_js = file_exists( dirname( __DIR__ ) . '/assets/js/smoke-canvas.js' ) ? f
     <div id="error-container">
         <div id="logo"></div>
         <div class="error-message">
-            <?php echo $message; ?>
+            <?php 
+            if ( is_wp_error( $message ) ) {
+                $errors = $message->get_error_messages();
+                foreach ( $errors as $error ) {
+                    echo '<p>' . $error . '</p>';
+                }
+            } else {
+                echo $message; 
+            }
+            ?>
         </div>
     </div>
     <script><?php echo $smoke_js; ?></script>
