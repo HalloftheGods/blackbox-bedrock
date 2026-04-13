@@ -1,0 +1,45 @@
+name: Auto Version
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  get-version:
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    uses: HalloftheGods/.github/.github/workflows/calculate-version.yml@main
+    
+  update-plugin:
+    needs: get-version
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - name: Update Versions
+        env:
+          VERSION: ${{ needs.get-version.outputs.version_string }}
+        run: |
+          # Ensure we only have one 'v' prefix for tags, and no 'v' inside files
+          CLEAN_VERSION="${VERSION#v}"
+          
+          sed "s/Version: .*/Version: ${CLEAN_VERSION}/" BlackBOX.php > BlackBOX.php.tmp
+          mv BlackBOX.php.tmp BlackBOX.php
+          
+          sed "s/\"version\": \".*\"/\"version\": \"${CLEAN_VERSION}\"/" composer.json > composer.json.tmp
+          mv composer.json.tmp composer.json
+          
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          git add BlackBOX.php composer.json
+          git diff --staged --quiet || git commit -m "chore: bump version to v${CLEAN_VERSION} [skip ci]"
+          
+          git push origin main
+          git tag -f "v${CLEAN_VERSION}"
+          git push origin --tags -f
