@@ -2,14 +2,14 @@
 	--text-main: #f8f8f2;
 	--accent: #62c9ff;
 	--gold: #d9be6f;
-	--compass-bg: radial-gradient(farthest-corner circle at 0% 0%, #2271b1 0%, #1a1e22 100%);
+	--compass-bg: radial-gradient(farthest-corner circle at 0% 0%, var(--wp-theme-color, #2271b1) 0%, var(--wp-theme-base, #1a1e22) 100%);
 	--rough-glass-bg: linear-gradient(135deg, rgba(13, 17, 23, 0.6), rgba(13, 17, 23, 0.2));
 	--rough-glass-border: rgba(90, 105, 172, 0.301);
 	--rough-glass-filter: blur(20px) saturate(150%);
-	--wp-admin-theme-color: #d9be6f !important;
-	--wp-admin-theme-color-darker-10: #cfa856 !important;
-	--wp-admin-theme-color-darker-20: #b58d34 !important;
-	--wp-admin-border-color-focus: #d9be6f !important;
+	--wp-admin-theme-color: var(--wp-theme-color, #d9be6f) !important;
+	--wp-admin-theme-color-darker-10: var(--wp-theme-focus, #cfa856) !important;
+	--wp-admin-theme-color-darker-20: var(--wp-theme-base, #b58d34) !important;
+	--wp-admin-border-color-focus: var(--wp-theme-color, #d9be6f) !important;
 }
 
 /* Core Canvas: YouMeOS Native Gradient Background */
@@ -35,7 +35,37 @@ html #wpcontent {
 	background: transparent !important;
 }
 
-/* Clean Scrollbars matching YouMeOS Style */
+/* Better, solid track for root scrollbars to eliminate white gap */
+html::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+body::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+
+html::-webkit-scrollbar-track {
+	background: var(--wp-theme-base, #1a1e22) !important;
+	border-radius: 0 !important;
+}
+body::-webkit-scrollbar-track {
+	background: var(--wp-theme-base, #1a1e22) !important;
+	border-radius: 0 !important;
+}
+
+html::-webkit-scrollbar-thumb {
+	background: var(--wp-theme-color, #2271b1) !important;
+	border-radius: 4px !important;
+	border: 2px solid var(--wp-theme-base, #1a1e22) !important;
+}
+body::-webkit-scrollbar-thumb {
+	background: var(--wp-theme-color, #2271b1) !important;
+	border-radius: 4px !important;
+	border: 2px solid var(--wp-theme-base, #1a1e22) !important;
+}
+
+/* Base generic scrollbar for interior elements */
 ::-webkit-scrollbar {
 	width: 6px;
 	height: 6px;
@@ -47,17 +77,17 @@ html #wpcontent {
 }
 
 ::-webkit-scrollbar-thumb {
-	background: rgba(98, 201, 255, 0.5);
+	background: var(--wp-theme-color, rgba(98, 201, 255, 0.5));
 	border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-	background: rgba(98, 201, 255, 0.8);
+	background: var(--wp-theme-focus, rgba(98, 201, 255, 0.8));
 }
 
 * {
 	scrollbar-width: thin;
-	scrollbar-color: rgba(98, 201, 255, 0.5) rgba(0, 0, 0, 0.2);
+	scrollbar-color: var(--wp-theme-color, rgba(98, 201, 255, 0.5)) var(--wp-theme-base, rgba(0, 0, 0, 0.2));
 }
 
 /* Typography, Icons and Labels */
