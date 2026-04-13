@@ -1,0 +1,181 @@
+/* Plugins Page Specifically */
+table.wp-list-table * {
+	background-color: transparent !important;
+}
+
+.plugins tr td,
+.plugins tr th,
+.plugins tbody tr td,
+.plugins tbody tr th {
+	background-color: rgba(0, 0, 0, 0.2) !important;
+	border-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+.plugins tr.active th.check-column,
+.plugins tr.active td,
+.plugins tr.active th,
+.plugins tbody tr.active td,
+.plugins tbody tr.active th {
+	background-color: rgba(0, 0, 0, 0.45) !important;
+}
+
+.plugins tr.active th.check-column,
+.plugins tbody tr.active th.check-column {
+	border-left: 4px solid var(--accent) !important;
+}
+
+.plugins .plugin-title strong {
+	color: var(--accent) !important;
+	font-size: 1.1rem;
+	text-shadow: 0 0 10px rgba(98, 201, 255, 0.2);
+}
+
+.plugins .column-description,
+.plugins .column-description p,
+.plugins .column-description div {
+	color: var(--text-main) !important;
+	opacity: 1 !important;
+}
+
+.plugins .plugin-version-author-uri,
+.plugins .plugin-version-author-uri a {
+	color: var(--text-main) !important;
+	opacity: 0.6 !important;
+}
+
+.plugins .row-actions span a {
+	color: var(--gold) !important;
+}
+
+.plugins .row-actions span.deactivate a {
+	color: #ff5c5c !important;
+}
+
+/* Add Plugins (Install) Page */
+.wp-filter {
+	background: var(--rough-glass-bg) !important;
+	backdrop-filter: var(--rough-glass-filter) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	border-radius: 12px !important;
+	margin-bottom: 20px !important;
+}
+
+.wp-filter .filter-links li a {
+	color: var(--text-main) !important;
+	opacity: 0.7;
+	transition: all 0.3s ease;
+}
+
+.wp-filter .filter-links li a:hover,
+.wp-filter .filter-links li a.current {
+	color: var(--accent) !important;
+	opacity: 1;
+	border-bottom-color: var(--accent) !important;
+}
+
+.plugin-install .plugin-card {
+	background: var(--rough-glass-bg) !important;
+	backdrop-filter: var(--rough-glass-filter) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	border-radius: 12px !important;
+	color: var(--text-main) !important;
+	margin-bottom: 20px !important;
+	overflow: hidden;
+}
+
+.plugin-install .plugin-card .plugin-card-top,
+.plugin-install .plugin-card .plugin-card-bottom {
+	background: transparent !important;
+	border: none !important;
+}
+
+.plugin-install .plugin-card .plugin-card-bottom {
+	border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
+	background: rgba(0, 0, 0, 0.2) !important;
+}
+
+.plugin-install .plugin-card h3,
+.plugin-install .plugin-card h3 a {
+	color: var(--accent) !important;
+	text-shadow: 0 0 10px rgba(98, 201, 255, 0.2);
+}
+
+.plugin-install .plugin-card .desc,
+.plugin-install .plugin-card .desc p,
+.plugin-install .plugin-card .desc a {
+	color: var(--text-main) !important;
+	opacity: 0.9 !important;
+}
+
+.plugin-install .plugin-card .authors cite {
+	color: var(--gold) !important;
+	opacity: 0.8;
+}
+
+.plugin-install .plugin-card .column-updated,
+.plugin-install .plugin-card .column-downloaded,
+.plugin-install .plugin-card .column-rating {
+	color: var(--text-main) !important;
+	opacity: 0.7;
+}
+
+.plugin-install .plugin-card .compatibility-compatible {
+	color: #4dfa7b !important;
+}
+
+/* Remove glass from the container itself for install page so they don't double up */
+div.wp-list-table.plugin-install {
+	background: transparent !important;
+	border: none !important;
+	box-shadow: none !important;
+	backdrop-filter: none !important;
+	-webkit-backdrop-filter: none !important;
+}
+
+/* Fix the squished popular tags wrapper */
+.plugins-popular-tags-wrapper {
+	background: transparent !important;
+	border: none !important;
+	border-radius: 0 !important;
+	padding: 20px 0 !important;
+	display: block !important;
+}
+
+.plugins-popular-tags-wrapper h2 {
+	display: inline-block !important;
+	margin-right: 15px !important;
+	color: var(--accent) !important;
+}
+
+.plugins-popular-tags-wrapper p {
+	display: inline-block !important;
+	color: var(--text-main) !important;
+	margin-bottom: 20px !important;
+}
+
+.plugins-popular-tags-wrapper .popular-tags,
+.plugins-popular-tags-wrapper .tag-cloud {
+	display: flex !important;
+	flex-wrap: wrap !important;
+	gap: 12px !important;
+	margin-top: 15px !important;
+}
+
+.plugins-popular-tags-wrapper a {
+	background: rgba(0, 0, 0, 0.4) !important;
+	border: 1px solid rgba(255, 255, 255, 0.1) !important;
+	padding: 8px 18px !important;
+	border-radius: 20px !important;
+	color: var(--text-main) !important;
+	text-decoration: none !important;
+	transition: all 0.2s ease !important;
+	font-size: 13px !important;
+}
+
+.plugins-popular-tags-wrapper a:hover {
+	background: var(--accent) !important;
+	color: #000 !important;
+	border-color: var(--accent) !important;
+}

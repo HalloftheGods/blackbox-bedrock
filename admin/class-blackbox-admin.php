@@ -46,30 +46,24 @@ class Admin {
 			}
 		}
 
+		// Auto-load section-specific styles for code splitting
+		$sections_dir = dirname( __DIR__ ) . '/css/sections/';
+		if ( is_dir( $sections_dir ) ) {
+			foreach ( glob( $sections_dir . '*.css' ) as $file ) {
+				$global_css .= file_get_contents( $file );
+			}
+		}
+
 		if ( $return ) return $global_css;
 
 		if ( current_action() === 'enqueue_block_editor_assets' ) {
-			if ( $isIframe || $isInstalling ) {
-				$gutenberg_path = dirname( __DIR__ ) . '/css/gutenberg.css';
-				$gutenberg_css = file_exists( $gutenberg_path ) ? file_get_contents( $gutenberg_path ) : '';
-				$editor_css = $global_css . $gutenberg_css;
-				wp_add_inline_style( 'wp-block-library', $editor_css );
-				wp_add_inline_style( 'wp-edit-post', $editor_css );
-			}
+			$gutenberg_path = dirname( __DIR__ ) . '/css/gutenberg.css';
+			$gutenberg_css = file_exists( $gutenberg_path ) ? file_get_contents( $gutenberg_path ) : '';
+			$editor_css = $global_css . $gutenberg_css;
+			wp_add_inline_style( 'wp-block-library', $editor_css );
+			wp_add_inline_style( 'wp-edit-post', $editor_css );
 		} else {
-			if ( $isIframe || $isInstalling ) {
-				echo '<style id="blackbox-global-admin">' . $global_css . '</style>';
-			} else {
-				$js_css = str_replace( ['\\', '`', '$'], ['\\\\', '\`', '\$'], $global_css );
-				echo '<script>
-					if (window.name === "blackbox-sub-app" || window.name === "compass-sub-app") {
-						var style = document.createElement("style");
-						style.id = "blackbox-global-admin";
-						style.textContent = `'. $js_css .'`;
-						document.head.appendChild(style);
-					}
-				</script>';
-			}
+			echo '<style id="blackbox-global-admin">' . $global_css . '</style>';
 		}
 	}
 

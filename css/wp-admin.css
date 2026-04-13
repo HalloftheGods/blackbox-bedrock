@@ -631,58 +631,8 @@ h2.hndle {
 	color: var(--gold) !important;
 }
 
-/* Plugins Page Specifically */
-table.wp-list-table * {
-	background-color: transparent !important;
-}
+/* Plugins pages styling has been code-split to sections/plugins.css */
 
-.plugins tr td,
-.plugins tr th,
-.plugins tbody tr td,
-.plugins tbody tr th {
-	background-color: rgba(0, 0, 0, 0.2) !important;
-	border-color: rgba(255, 255, 255, 0.05) !important;
-}
-
-.plugins tr.active th.check-column,
-.plugins tr.active td,
-.plugins tr.active th,
-.plugins tbody tr.active td,
-.plugins tbody tr.active th {
-	background-color: rgba(0, 0, 0, 0.45) !important;
-}
-
-.plugins tr.active th.check-column,
-.plugins tbody tr.active th.check-column {
-	border-left: 4px solid var(--accent) !important;
-}
-
-.plugins .plugin-title strong {
-	color: var(--accent) !important;
-	font-size: 1.1rem;
-	text-shadow: 0 0 10px rgba(98, 201, 255, 0.2);
-}
-
-.plugins .column-description,
-.plugins .column-description p,
-.plugins .column-description div {
-	color: var(--text-main) !important;
-	opacity: 1 !important;
-}
-
-.plugins .plugin-version-author-uri,
-.plugins .plugin-version-author-uri a {
-	color: var(--text-main) !important;
-	opacity: 0.6 !important;
-}
-
-.plugins .row-actions span a {
-	color: var(--gold) !important;
-}
-
-.plugins .row-actions span.deactivate a {
-	color: #ff5c5c !important;
-}
 
 /* Form Tables */
 .form-table,
