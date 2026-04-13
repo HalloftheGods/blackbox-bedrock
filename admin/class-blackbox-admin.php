@@ -43,6 +43,10 @@ class Admin {
 		            (isset( $_SERVER['HTTP_SEC_FETCH_DEST'] ) && $_SERVER['HTTP_SEC_FETCH_DEST'] === 'iframe');
 		$isInstalling = defined( 'WP_INSTALLING' ) && WP_INSTALLING;
 
+		if ( ! $isIframe && ! $isInstalling && ! $return ) {
+			return;
+		}
+
 		$styles = [ 'logo.css', 'sui.css', 'base.css', 'wp-admin.css', 'iframe-mask.css' ];
 		if ( $isInstalling || $return ) {
 			array_unshift( $styles, 'install.css' );
