@@ -143,6 +143,15 @@ div.wp-list-table.plugin-install {
 	display: block !important;
 }
 
+/* Native WP Star Ratings */
+.plugin-install .plugin-card .star-rating .dashicons-star-filled,
+.plugin-install .plugin-card .star-rating .dashicons-star-half {
+	color: var(--gold) !important;
+}
+.plugin-install .plugin-card .star-rating .dashicons-star-empty {
+	color: rgba(255, 255, 255, 0.2) !important;
+}
+
 .plugins-popular-tags-wrapper h2 {
 	display: inline-block !important;
 	margin-right: 15px !important;

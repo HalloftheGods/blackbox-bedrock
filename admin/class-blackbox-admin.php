@@ -25,6 +25,16 @@ class Admin {
 	}
 
 	public function enqueue_styles( $return = false ) {
+		// Because WordPress hooks can pass string arguments...
+		if ( ! is_bool( $return ) ) {
+			$return = false;
+		}
+
+		// Do not apply blackbox styling to the plugin information popup standard WP iframe
+		if ( isset( $_GET['tab'] ) && $_GET['tab'] === 'plugin-information' ) {
+			return;
+		}
+
 		static $done = false;
 		if ( $done && ! $return && current_action() !== 'enqueue_block_editor_assets' ) return;
 		if ( ! $return ) $done = true;
@@ -32,6 +42,11 @@ class Admin {
 		$isIframe = (isset( $_GET['compass_iframe'] ) && $_GET['compass_iframe'] === '1') || 
 		            (isset( $_SERVER['HTTP_SEC_FETCH_DEST'] ) && $_SERVER['HTTP_SEC_FETCH_DEST'] === 'iframe');
 		$isInstalling = defined( 'WP_INSTALLING' ) && WP_INSTALLING;
+
+		// Bail if we are on a standard WP Admin page outside of an iframe
+		if ( ! $isIframe && ! $isInstalling && ! $return ) {
+			return;
+		}
 
 		$styles = [ 'logo.css', 'sui.css', 'base.css', 'wp-admin.css', 'iframe-mask.css' ];
 		if ( $isInstalling || $return ) {
@@ -84,6 +99,11 @@ class Admin {
 	}
 
 	public function inject_iframe_class() {
+		// Do not apply blackbox styling to the plugin information popup standard WP iframe
+		if ( isset( $_GET['tab'] ) && $_GET['tab'] === 'plugin-information' ) {
+			return;
+		}
+
 		$isIframe = (isset( $_GET['compass_iframe'] ) && $_GET['compass_iframe'] === '1') || 
 		            (isset( $_SERVER['HTTP_SEC_FETCH_DEST'] ) && $_SERVER['HTTP_SEC_FETCH_DEST'] === 'iframe');
 
