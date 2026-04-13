@@ -1,8 +1,9 @@
 <?php
 /**
- * BlackBOX MU Framework
- * 
- * Modular Core Bootstrapper
+ * Plugin Name: BlackBOX MU Framework
+ * Description: Modular Core Bootstrapper
+ * Version: 1.0.0
+ * Author: Hall of the Gods, Inc.
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit;
