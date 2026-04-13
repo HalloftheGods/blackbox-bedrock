@@ -2,8 +2,8 @@
 /**
  * BlackBOX Custom Error Template
  */
-$logo_css = file_exists( dirname( __DIR__ ) . '/css/logo.css' ) ? file_get_contents( dirname( __DIR__ ) . '/css/logo.css' ) : '';
-$smoke_js = file_exists( dirname( __DIR__ ) . '/js/smoke-canvas.js' ) ? file_get_contents( dirname( __DIR__ ) . '/js/smoke-canvas.js' ) : '';
+$logo_css = file_exists( dirname( __DIR__ ) . '/assets/css/logo.css' ) ? file_get_contents( dirname( __DIR__ ) . '/assets/css/logo.css' ) : '';
+$smoke_js = file_exists( dirname( __DIR__ ) . '/assets/js/smoke-canvas.js' ) ? file_get_contents( dirname( __DIR__ ) . '/assets/js/smoke-canvas.js' ) : '';
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>

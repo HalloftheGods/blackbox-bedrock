@@ -102,14 +102,14 @@ class Admin {
 
 		$global_css = '';
 		foreach ( array_unique($styles) as $style ) {
-			$path = dirname( __DIR__ ) . '/css/' . $style;
+			$path = dirname( __DIR__ ) . '/assets/css/' . $style;
 			if ( file_exists( $path ) ) {
 				$global_css .= file_get_contents( $path );
 			}
 		}
 
 		// Auto-load section-specific styles for code splitting
-		$sections_dir = dirname( __DIR__ ) . '/css/sections/';
+		$sections_dir = dirname( __DIR__ ) . '/assets/css/sections/';
 		if ( is_dir( $sections_dir ) ) {
 			foreach ( glob( $sections_dir . '*.css' ) as $file ) {
 				$global_css .= file_get_contents( $file );
@@ -119,7 +119,7 @@ class Admin {
 		if ( $return ) return $global_css;
 
 		if ( current_action() === 'enqueue_block_editor_assets' ) {
-			$gutenberg_path = dirname( __DIR__ ) . '/css/gutenberg.css';
+			$gutenberg_path = dirname( __DIR__ ) . '/assets/css/gutenberg.css';
 			$gutenberg_css = file_exists( $gutenberg_path ) ? file_get_contents( $gutenberg_path ) : '';
 			$editor_css = $global_css . $gutenberg_css;
 			wp_add_inline_style( 'wp-block-library', $editor_css );

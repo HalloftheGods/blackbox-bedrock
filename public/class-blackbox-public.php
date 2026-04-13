@@ -12,9 +12,9 @@ class BlackBOX_Public {
 
 	public function enqueue_login_styles() {
 		$plugin_dir = plugin_dir_path( dirname( __FILE__ ) );
-		$logo_css = file_get_contents( $plugin_dir . 'css/logo.css' );
-		$install_css = file_get_contents( $plugin_dir . 'css/install.css' );
-		$login_css = file_get_contents( $plugin_dir . 'css/login.css' );
+		$logo_css = file_get_contents( $plugin_dir . 'assets/css/logo.css' );
+		$install_css = file_get_contents( $plugin_dir . 'assets/css/install.css' );
+		$login_css = file_get_contents( $plugin_dir . 'assets/css/login.css' );
 		echo '<style id="blackbox-login-admin">' . $logo_css . $install_css . $login_css . '</style>';
 	}
 
