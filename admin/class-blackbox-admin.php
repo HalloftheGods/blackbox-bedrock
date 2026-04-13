@@ -1,33 +1,81 @@
 <?php
+namespace BlackBOX;
+
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-class BlackBOX_Admin {
-
+class Admin {
 	public function __construct() {
 		add_filter( 'wp_theme_json_data_theme', [ $this, 'override_editor_theme_json' ] );
 		add_filter( 'block_editor_settings_all', [ $this, 'force_editor_css_settings' ], 9999, 2 );
-		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_blackbox_styles' ], 9999 );
-		add_action( 'admin_head', [ $this, 'enqueue_blackbox_styles' ], 9999 );
-		add_action( 'admin_print_styles', [ $this, 'enqueue_blackbox_styles' ], 9999 );
+		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_styles' ], 9999 );
+		add_action( 'admin_head', [ $this, 'enqueue_styles' ], 9999 );
+		add_action( 'admin_print_styles', [ $this, 'enqueue_styles' ], 9999 );
 		add_filter( 'style_loader_tag', [ $this, 'inject_into_install_tag' ], 9999, 2 );
 		add_filter( 'script_loader_tag', [ $this, 'inject_into_install_scripts' ], 9999, 2 );
-		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_blackbox_styles' ], 9999 );
-		add_action( 'admin_print_footer_scripts', [ 'BlackBOX_Core', 'inject_canvas_script' ], 9999 );
+		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_styles' ], 9999 );
 		add_action( 'admin_head', [ $this, 'inject_iframe_class' ], 1 );
 
 		if ( defined( 'WP_INSTALLING' ) && WP_INSTALLING ) {
-			add_action( 'admin_print_styles', [ $this, 'enqueue_blackbox_styles' ], 9999 );
-			add_action( 'admin_head', [ $this, 'enqueue_blackbox_styles' ], 9999 );
+			// Force inject on install.php if footer hook doesn't fire early enough
+			add_action( 'admin_head', [ Core::class, 'inject_canvas_script' ], 9999 );
 			add_action( 'admin_head', function() {
 				echo '<script>document.addEventListener("DOMContentLoaded", function() { document.body.classList.add("body-glass"); });</script>';
 			}, 9999 );
 		}
 	}
 
+	public function enqueue_styles( $return = false ) {
+		static $done = false;
+		if ( $done && ! $return && current_action() !== 'enqueue_block_editor_assets' ) return;
+		if ( ! $return ) $done = true;
+
+		$isIframe = (isset( $_GET['compass_iframe'] ) && $_GET['compass_iframe'] === '1') || 
+		            (isset( $_SERVER['HTTP_SEC_FETCH_DEST'] ) && $_SERVER['HTTP_SEC_FETCH_DEST'] === 'iframe');
+		$isInstalling = defined( 'WP_INSTALLING' ) && WP_INSTALLING;
+
+		$styles = [ 'logo.css', 'sui.css', 'base.css', 'wp-admin.css', 'iframe-mask.css' ];
+		if ( $isInstalling || $return ) {
+			array_unshift( $styles, 'install.css' );
+		}
+
+		$global_css = '';
+		foreach ( array_unique($styles) as $style ) {
+			$path = dirname( __DIR__ ) . '/css/' . $style;
+			if ( file_exists( $path ) ) {
+				$global_css .= file_get_contents( $path );
+			}
+		}
+
+		if ( $return ) return $global_css;
+
+		if ( current_action() === 'enqueue_block_editor_assets' ) {
+			if ( $isIframe || $isInstalling ) {
+				$gutenberg_path = dirname( __DIR__ ) . '/css/gutenberg.css';
+				$gutenberg_css = file_exists( $gutenberg_path ) ? file_get_contents( $gutenberg_path ) : '';
+				$editor_css = $global_css . $gutenberg_css;
+				wp_add_inline_style( 'wp-block-library', $editor_css );
+				wp_add_inline_style( 'wp-edit-post', $editor_css );
+			}
+		} else {
+			if ( $isIframe || $isInstalling ) {
+				echo '<style id="blackbox-global-admin">' . $global_css . '</style>';
+			} else {
+				$js_css = str_replace( ['\\', '`', '$'], ['\\\\', '\`', '\$'], $global_css );
+				echo '<script>
+					if (window.name === "blackbox-sub-app" || window.name === "compass-sub-app") {
+						var style = document.createElement("style");
+						style.id = "blackbox-global-admin";
+						style.textContent = `'. $js_css .'`;
+						document.head.appendChild(style);
+					}
+				</script>';
+			}
+		}
+	}
+
 	public function inject_into_install_tag( $tag, $handle ) {
 		if ( $handle === 'install' ) {
-			$global_css = $this->enqueue_blackbox_styles( true );
-			$tag .= '<style id="blackbox-global-install">' . $global_css . '</style>';
+			$tag .= '<style id="blackbox-global-install">' . $this->enqueue_styles( true ) . '</style>';
 		}
 		return $tag;
 	}
@@ -35,18 +83,20 @@ class BlackBOX_Admin {
 	public function inject_into_install_scripts( $tag, $handle ) {
 		if ( $handle === 'language-chooser' ) {
 			ob_start();
-			BlackBOX_Core::inject_canvas_script();
+			Core::inject_canvas_script();
 			$tag .= ob_get_clean();
 		}
 		return $tag;
 	}
 
 	public function inject_iframe_class() {
-		$isIframe = isset( $_GET['compass_iframe'] ) && $_GET['compass_iframe'] === '1';
+		$isIframe = (isset( $_GET['compass_iframe'] ) && $_GET['compass_iframe'] === '1') || 
+		            (isset( $_SERVER['HTTP_SEC_FETCH_DEST'] ) && $_SERVER['HTTP_SEC_FETCH_DEST'] === 'iframe');
+
 		if ( $isIframe ) {
-			echo '<script>document.documentElement.classList.add("is-blackbox-iframe");</script>';
+			echo '<script>document.documentElement.classList.add("is-blackbox-iframe", "is-compass-iframe");</script>';
 		} else {
-			echo '<script>if (window.name === "blackbox-sub-app") { document.documentElement.classList.add("is-blackbox-iframe"); }</script>';
+			echo '<script>if (window.name === "blackbox-sub-app" || window.name === "compass-sub-app") { document.documentElement.classList.add("is-blackbox-iframe", "is-compass-iframe"); }</script>';
 		}
 	}
 
@@ -58,26 +108,16 @@ class BlackBOX_Admin {
 			}
 		}
 
-		$bg_canvas = 'transparent';
-		$text_main = '#f8f8f2';
-		
-		$new_data = array(
+		$new_data = [
 			'version' => 2,
-			'styles' => array(
-				'color' => array(
-					'background' => $bg_canvas,
-					'text'       => $text_main
-				),
-				'elements' => array(
-					'link' => array(
-						'color' => array( 'text' => '#62c9ff' )
-					),
-					'heading' => array(
-						'color' => array( 'text' => $text_main )
-					)
-				)
-			)
-		);
+			'styles' => [
+				'color' => [ 'background' => 'transparent', 'text' => '#f8f8f2' ],
+				'elements' => [
+					'link' => [ 'color' => [ 'text' => '#62c9ff' ] ],
+					'heading' => [ 'color' => [ 'text' => '#f8f8f2' ] ]
+				]
+			]
+		];
 		return $theme_json->update_with( $new_data );
 	}
 
@@ -100,34 +140,9 @@ class BlackBOX_Admin {
 		';
 
 		if ( ! isset( $settings['styles'] ) ) {
-			$settings['styles'] = array();
+			$settings['styles'] = [];
 		}
-		$settings['styles'][] = array( 'css' => $custom_css );
+		$settings['styles'][] = [ 'css' => $custom_css ];
 		return $settings;
-	}
-
-	public function enqueue_blackbox_styles( $return = false ) {
-		$plugin_dir = plugin_dir_path( dirname( __FILE__ ) );
-		$logo_css = file_get_contents( $plugin_dir . 'css/logo.css' );
-		$install_css = file_get_contents( $plugin_dir . 'css/install.css' );
-		$sui_css = file_get_contents( $plugin_dir . 'css/sui.css' );
-		$base_css = file_get_contents( $plugin_dir . 'css/base.css' );
-		$wp_admin_css = file_get_contents( $plugin_dir . 'css/wp-admin.css' );
-		$iframe_css = file_get_contents( $plugin_dir . 'css/iframe-mask.css' );
-		
-		$global_css = $logo_css . $install_css . $sui_css . $base_css . $wp_admin_css . $iframe_css;
-
-		if ( $return ) {
-			return $global_css;
-		}
-
-		if ( current_action() === 'enqueue_block_editor_assets' ) {
-			$gutenberg_css = file_get_contents( $plugin_dir . 'css/gutenberg.css' );
-			$editor_css = $global_css . $gutenberg_css;
-			wp_add_inline_style( 'wp-block-library', $editor_css );
-			wp_add_inline_style( 'wp-edit-post', $editor_css );
-		} else {
-			echo '<style id="blackbox-global-admin">' . $global_css . '</style>';
-		}
 	}
 }

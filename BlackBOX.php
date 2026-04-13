@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 require_once __DIR__ . '/includes/Core.php';
 
 // Load Modules
-require_once __DIR__ . '/admin/Admin.php';
+require_once __DIR__ . '/admin/class-blackbox-admin.php';
 require_once __DIR__ . '/public/PublicFace.php';
 require_once __DIR__ . '/error/Error.php';
 
