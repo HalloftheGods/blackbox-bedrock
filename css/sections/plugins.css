@@ -1,6 +1,21 @@
 /* Plugins Page Specifically */
-table.wp-list-table * {
+table.wp-list-table,
+table.wp-list-table *,
+table.updates-table,
+table.updates-table * {
 	background-color: transparent !important;
+}
+
+table.wp-list-table td,
+table.wp-list-table th,
+table.updates-table td,
+table.updates-table th,
+table.updates-table tr {
+	border-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+.plugins tr {
+	background: transparent !important;
 }
 
 .plugins tr td,
@@ -148,6 +163,7 @@ div.wp-list-table.plugin-install {
 .plugin-install .plugin-card .star-rating .dashicons-star-half {
 	color: var(--gold) !important;
 }
+
 .plugin-install .plugin-card .star-rating .dashicons-star-empty {
 	color: rgba(255, 255, 255, 0.2) !important;
 }
