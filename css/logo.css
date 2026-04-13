@@ -40,19 +40,7 @@
     border: none !important;
 }
 
-/* Error Container #logo */
-#error-container #logo {
-    background-image: var(--custom-logo-base64) !important;
-    background-size: contain !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-    width: 100% !important;
-    height: 120px !important;
-    margin: 0 auto 30px !important;
-    display: block !important;
-    border: none !important;
-    background-color: transparent !important;
-}
+
 
 /* Hide WordPress Default Dashicons/Content */
 .login h1 a:before {

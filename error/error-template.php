@@ -51,9 +51,16 @@ $smoke_js = file_exists( dirname( __DIR__ ) . '/js/smoke-canvas.js' ) ? file_get
             box-shadow: 0 16px 64px rgba(0, 0, 0, 0.5);
         }
         #error-container #logo {
-            margin-bottom: 30px;
-            width: 120px !important;
+            background-image: var(--custom-logo-base64) !important;
+            background-size: contain !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+            width: 100% !important;
             height: 120px !important;
+            margin: 0 auto 30px !important;
+            display: block !important;
+            border: none !important;
+            background-color: transparent !important;
         }
         h1 {
             font-size: 24px;
