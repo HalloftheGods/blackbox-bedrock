@@ -22,6 +22,10 @@ html {
 
 body {
 	background: transparent !important;
+}
+
+#wpwrap {
+	background: transparent !important;
 	background: var(--rough-glass-bg) !important;
 	backdrop-filter: var(--rough-glass-filter) !important;
 	-webkit-backdrop-filter: var(--rough-glass-filter) !important;
@@ -29,7 +33,6 @@ body {
 	box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3) !important;
 }
 
-#wpwrap,
 #wpbody,
 #wpbody-content,
 #wpcontent {
