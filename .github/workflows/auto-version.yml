@@ -28,18 +28,22 @@ jobs:
           # Ensure we only have one 'v' prefix for tags, and no 'v' inside files
           CLEAN_VERSION="${VERSION#v}"
           
-          sed "s/Version: .*/Version: ${CLEAN_VERSION}/" BlackBOX.php > BlackBOX.php.tmp
+          # Grab first 3 characters of commit hash for RC tag
+          RC_SUFFIX=$(git rev-parse HEAD | cut -c1-3)
+          RC_VERSION="${CLEAN_VERSION}-rc${RC_SUFFIX}"
+          
+          sed "s/Version: .*/Version: ${RC_VERSION}/" BlackBOX.php > BlackBOX.php.tmp
           mv BlackBOX.php.tmp BlackBOX.php
           
-          sed "s/\"version\": \".*\"/\"version\": \"${CLEAN_VERSION}\"/" composer.json > composer.json.tmp
+          sed "s/\"version\": \".*\"/\"version\": \"${RC_VERSION}\"/" composer.json > composer.json.tmp
           mv composer.json.tmp composer.json
           
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           
           git add BlackBOX.php composer.json
-          git diff --staged --quiet || git commit -m "chore: bump version to v${CLEAN_VERSION} [skip ci]"
+          git diff --staged --quiet || git commit -m "chore: bump version to v${RC_VERSION} [skip ci]"
           
           git push origin main
-          git tag -f "v${CLEAN_VERSION}"
+          git tag -f "v${RC_VERSION}"
           git push origin --tags -f

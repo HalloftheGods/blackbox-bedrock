@@ -7,7 +7,7 @@ class BlackBOX_Public {
 		add_action( 'login_enqueue_scripts', [ $this, 'enqueue_login_styles' ] );
 		add_filter( 'login_headerurl', [ $this, 'custom_login_headerurl' ] );
 		add_filter( 'login_headertext', [ $this, 'custom_login_headertext' ] );
-		add_action( 'login_footer', [ 'BlackBOX_Core', 'inject_canvas_script' ], 9999 );
+		add_action( 'login_footer', [ 'BlackBOX\Core', 'inject_canvas_script' ], 9999 );
 	}
 
 	public function enqueue_login_styles() {
