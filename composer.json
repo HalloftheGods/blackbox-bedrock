@@ -1,8 +1,9 @@
 {
   "name": "hallofthegods/blackbox-bedrock",
   "description": "BlackBOX MU Bedrock - Genesis Edition",
+  "version": "1.0.0",
   "type": "wordpress-muplugin",
-  "license": "GPL-2.0-or-later",
+  "license": "GPL-3.0-or-later",
   "authors": [
     {
       "name": "Hall of the Gods, Inc.",
