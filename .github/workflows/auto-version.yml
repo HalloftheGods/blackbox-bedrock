@@ -11,38 +11,6 @@ jobs:
     
   update-plugin:
     needs: get-version
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          ref: main
-
-      - name: Update Versions
-        env:
-          VERSION: ${{ needs.get-version.outputs.version_string }}
-        run: |
-          # Ensure we only have one 'v' prefix for tags, and no 'v' inside files
-          CLEAN_VERSION="${VERSION#v}"
-          
-          # Use CLEAN_VERSION which already contains the RC number from the generator
-          RC_VERSION="${CLEAN_VERSION}"
-          
-          sed "s/Version: .*/Version: ${RC_VERSION}/" BlackBOX.php > BlackBOX.php.tmp
-          mv BlackBOX.php.tmp BlackBOX.php
-          
-          sed "s/\"version\": \".*\"/\"version\": \"${RC_VERSION}\"/" composer.json > composer.json.tmp
-          mv composer.json.tmp composer.json
-          
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          
-          git add BlackBOX.php composer.json
-          git diff --staged --quiet || git commit -m "chore: bump version to v${RC_VERSION} [skip ci]"
-          
-          git push origin main
-          git tag -f "v${RC_VERSION}"
-          git push origin --tags -f
+    uses: HalloftheGods/.github/.github/workflows/wp-plugin-update.yml@main
+    with:
+      version_string: ${{ needs.get-version.outputs.version_string }}
