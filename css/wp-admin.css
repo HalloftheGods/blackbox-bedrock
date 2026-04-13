@@ -269,11 +269,14 @@ h2.hndle {
    ═══════════════════════════════════════════════════════════════ */
 
 /* Admin Sidebar — Glass overlay, WP theme colors preserved */
-#adminmenuwrap,
-#adminmenuback {
+#adminmenuwrap {
 	background: rgba(13, 17, 23, 0.5) !important;
 	backdrop-filter: blur(20px) saturate(120%) !important;
 	-webkit-backdrop-filter: blur(20px) saturate(120%) !important;
+}
+
+#adminmenuback {
+	background: rgba(13, 17, 23, 0.5) !important;
 }
 
 /* Help / Contextual Help Panel */
