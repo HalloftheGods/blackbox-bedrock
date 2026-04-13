@@ -22,6 +22,58 @@ class Admin {
 				echo '<script>document.addEventListener("DOMContentLoaded", function() { document.body.classList.add("body-glass"); });</script>';
 			}, 9999 );
 		}
+
+		add_action( 'admin_head', [ $this, 'output_theme_colors' ], 15 );
+	}
+
+	public function output_theme_colors() {
+		global $_wp_admin_css_colors;
+		$user_id = get_current_user_id();
+		$color_scheme = get_user_option( 'admin_color', $user_id );
+		
+		// Map of WordPress Core standard admin color palettes
+		$core_palettes = [
+			'fresh'     => ['#1d2327', '#2c3338', '#2271b1', '#72aee6'],
+			'light'     => ['#e5e5e5', '#999999', '#d64e07', '#04a4cc'],
+			'blue'      => ['#096484', '#4796b3', '#52accc', '#74B6CE'],
+			'midnight'  => ['#25282b', '#363b3f', '#69a8bb', '#e14d43'],
+			'spice'     => ['#46403c', '#59524c', '#c7a589', '#9ea476'],
+			'coffee'    => ['#46403c', '#59524c', '#c7a589', '#9ea476'], // spice fallback
+			'ocean'     => ['#627c83', '#738e96', '#9ebaa0', '#aa9d88'],
+			'sunrise'   => ['#b43c38', '#cf4944', '#dd823b', '#ccaf0b'],
+			'ectoplasm' => ['#413256', '#523f6d', '#a3b745', '#d46f15'],
+		];
+		
+		$colors = $core_palettes['fresh']; 
+		
+		if (isset($_wp_admin_css_colors[$color_scheme])) {
+			$colors = $_wp_admin_css_colors[$color_scheme]->colors;
+		} elseif (isset($core_palettes[$color_scheme])) {
+			$colors = $core_palettes[$color_scheme];
+		}
+
+		$c0 = $colors[0] ?? '#1d2327';
+		$c1 = $colors[1] ?? '#2c3338';
+		$c2 = $colors[2] ?? '#2271b1';
+		$c3 = $colors[3] ?? '#72aee6';
+
+		$active = $c2;
+		if ($color_scheme === 'light') {
+			$active = $c1;
+		}
+		
+		echo "<style id=\"blackbox-theme-colors\">
+			:root { 
+				--wp-theme-base: {$c0}; 
+				--wp-theme-focus: {$c1}; 
+				--wp-theme-color: {$c2}; 
+				--wp-theme-secondary: {$c3}; 
+				--wp-theme-active: {$active};
+			}
+			body {
+				--wp-active-scheme: {$color_scheme};
+			}
+		</style>";
 	}
 
 	public function enqueue_styles( $return = false ) {
