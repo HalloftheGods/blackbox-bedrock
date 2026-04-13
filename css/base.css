@@ -13,18 +13,22 @@
 }
 
 /* Core Canvas: YouMeOS Native Gradient Background */
-html {
+html.is-compass-iframe,
+html.wp-admin-install,
+html.login-action-login {
 	background: var(--compass-bg) !important;
 	background-attachment: fixed !important;
 	background-size: cover !important;
 	min-height: 100vh;
 }
 
-body {
+body.is-compass-iframe {
 	background: transparent !important;
 }
 
-#wpwrap {
+html.is-compass-iframe #wpwrap,
+html.wp-admin-install #wpwrap,
+html.login-action-login #wpwrap {
 	background: transparent !important;
 	background: var(--rough-glass-bg) !important;
 	backdrop-filter: var(--rough-glass-filter) !important;
@@ -33,9 +37,12 @@ body {
 	box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3) !important;
 }
 
-#wpbody,
-#wpbody-content,
-#wpcontent {
+html.is-compass-iframe #wpbody,
+html.is-compass-iframe #wpbody-content,
+html.is-compass-iframe #wpcontent,
+html.wp-admin-install #wpbody,
+html.wp-admin-install #wpbody-content,
+html.wp-admin-install #wpcontent {
 	background: transparent !important;
 }
 

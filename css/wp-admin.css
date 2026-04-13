@@ -231,6 +231,7 @@ ul#activity-widget-comments li {
 
 /* Meta Boxes / Postboxes */
 #poststuff,
+#dashboard-widgets-wrap,
 #dashboard-widgets-wrap .postbox-container {
 	background: transparent !important;
 }
