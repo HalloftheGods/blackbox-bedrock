@@ -13,10 +13,20 @@
 }
 
 /* Background Overlay */
-body.login {
+html {
 	background: var(--compass-bg) !important;
 	background-attachment: fixed !important;
 	background-size: cover !important;
+}
+
+body.login {
+	background: transparent !important;
+}
+
+/* Modal Sizing */
+body.login-action-logout #login {
+	width: 460px !important;
+	max-width: 95% !important;
 }
 
 /* Glass Options */
@@ -38,11 +48,23 @@ body.login {
 	box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3) !important;
 	border-radius: 8px !important;
 	color: var(--text-main) !important;
+	padding: 12px 24px !important;
 }
 
 /* Typography */
-.login label, .login .privacy-policy-page-link > a {
+.login label, .login .privacy-policy-page-link > a, .login p {
 	color: var(--text-main) !important;
+}
+
+.login a {
+	color: var(--hog-gold) !important;
+	text-decoration: none !important;
+	transition: all 0.2s ease !important;
+}
+
+.login a:hover,
+.login a:focus {
+	color: var(--accent, #62c9ff) !important;
 }
 
 .login #nav, .login #backtoblog {
