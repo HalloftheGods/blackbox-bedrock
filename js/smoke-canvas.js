@@ -1,13 +1,13 @@
 (function () {
   // Do not inject the smoke canvas if we are inside a Compass sub-app iframe
-  if (window.name === "blackbox-sub-app") return;
+  if (window.name === "blackbox-sub-app" || window.name === "compass-sub-app") return;
 
   if (window !== window.top && window.location.search.includes("theme=transparent")) {
     // We are in an iframe, and transparent!
   }
-  if (document.getElementById("blackbox-smoke-canvas")) return;
+  if (document.getElementById("blackbox-smoke-canvas") || document.getElementById("compass-smoke-canvas")) return;
   const canvas = document.createElement("canvas");
-  canvas.id = "blackbox-smoke-canvas";
+  canvas.id = "blackbox-smoke-canvas"; // Keep this as the primary, but check for both above
   canvas.style.position = "fixed";
   canvas.style.top = "0";
   canvas.style.left = "0";
@@ -115,7 +115,7 @@
 
   function initCanvas() {
     // Don't inject if visual editor wrapper isn't present
-    document.body.prepend(canvas);
+    document.documentElement.prepend(canvas);
     const ctx = canvas.getContext("2d");
 
     function resize() {
