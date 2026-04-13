@@ -44,7 +44,7 @@ Add the repository to your `composer.json`:
 ## 🛠️ Architecture
 
 - `BlackBOX.php`: Core logic and hook registration.
-- `css/`: System styles including base, sui, and environment-specific overrides.
+- `assets/css/`: System styles including base, sui, and environment-specific overrides.
 - `composer.json`: Package metadata and installation instructions.
 
 ---

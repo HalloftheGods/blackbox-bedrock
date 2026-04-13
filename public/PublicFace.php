@@ -12,8 +12,8 @@ class PublicFace {
 	}
 
 	public function enqueue_login_styles() {
-		$logo_path = dirname( __DIR__ ) . '/css/logo.css';
-		$login_path = dirname( __DIR__ ) . '/css/login.css';
+		$logo_path = dirname( __DIR__ ) . '/assets/css/logo.css';
+		$login_path = dirname( __DIR__ ) . '/assets/css/login.css';
 		
 		$logo_css = file_exists( $logo_path ) ? file_get_contents( $logo_path ) : '';
 		$login_css = file_exists( $login_path ) ? file_get_contents( $login_path ) : '';
