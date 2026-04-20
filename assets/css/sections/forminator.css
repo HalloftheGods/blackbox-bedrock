@@ -1,0 +1,124 @@
+/* ═══════════════════════════════════════════════════════
+   Forminator Dark Theme – BlackBOX Section Override
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Iframe: Remove padding so builder fills the u-window edge-to-edge ── */
+html.is-compass-iframe .sui-wrap[class*="wpmudev-forminator"] {
+	padding: 0 !important;
+	margin: 0 !important;
+}
+
+html.is-compass-iframe [class*="wpmudev-forminator"] .sui-header {
+	padding: 8px 20px !important;
+	margin: 0 !important;
+}
+
+/* ── Nuclear transparency: kill ALL white backgrounds inside the Forminator wrapper ── */
+[class*="wpmudev-forminator"],
+[class*="wpmudev-forminator"] > *,
+[class*="wpmudev-forminator"] .sui-box,
+[class*="wpmudev-forminator"] .sui-box-body,
+[class*="wpmudev-forminator"] .sui-box-header,
+[class*="wpmudev-forminator"] .sui-box-footer,
+[class*="wpmudev-forminator"] .sui-tabs-content,
+[class*="wpmudev-forminator"] .sui-form-field,
+#forminator-form-builder,
+#forminator-form-builder > * {
+	background: transparent !important;
+	background-color: transparent !important;
+}
+
+/* ── Right sidebar ("Customize Form") ── */
+[class*="wpmudev-forminator"] .sui-box .sui-tabs > div,
+[class*="wpmudev-forminator"] .sui-box .sui-side-tabs,
+[class*="wpmudev-forminator"] .sui-layout-sidebar,
+[class*="wpmudev-forminator"] [class*="sidebar"],
+[class*="wpmudev-forminator"] [class*="settings-col"],
+[class*="wpmudev-forminator"] [class*="panel-right"] {
+	background: transparent !important;
+	background-color: transparent !important;
+}
+
+/* ── Builder field cards ── */
+[class*="wpmudev-forminator"] .sui-builder-field {
+	background: rgba(255, 255, 255, 0.04) !important;
+	border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+[class*="wpmudev-forminator"] .sui-builder-field:hover {
+	background: rgba(255, 255, 255, 0.08) !important;
+	border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* ── Drop zones / empty states ── */
+[class*="wpmudev-forminator"] .sui-builder-field--placeholder,
+[class*="wpmudev-forminator"] [class*="empty-message"],
+[class*="wpmudev-forminator"] [class*="drop-area"] {
+	background: rgba(0, 0, 0, 0.1) !important;
+	border: 2px dashed rgba(255, 255, 255, 0.1) !important;
+}
+
+/* ── Dashed "Insert Fields" button ── */
+[class*="wpmudev-forminator"] .sui-button-dashed {
+	background: transparent !important;
+	border: 2px dashed var(--gold, #d9be6f) !important;
+	color: var(--gold, #d9be6f) !important;
+}
+
+[class*="wpmudev-forminator"] .sui-button-dashed:hover {
+	background: rgba(217, 190, 111, 0.1) !important;
+}
+
+/* ── Primary action buttons ── */
+[class*="wpmudev-forminator"] .sui-button-blue,
+[class*="wpmudev-forminator"] .sui-button-primary {
+	background: var(--gold, #d9be6f) !important;
+	border-color: var(--gold, #d9be6f) !important;
+	color: #1a1a2e !important;
+	font-weight: 700 !important;
+}
+
+[class*="wpmudev-forminator"] .sui-button-blue:hover,
+[class*="wpmudev-forminator"] .sui-button-primary:hover {
+	background: var(--accent, #62c9ff) !important;
+	border-color: var(--accent, #62c9ff) !important;
+}
+
+/* ── Ghost / secondary buttons ── */
+[class*="wpmudev-forminator"] .sui-button-ghost {
+	background: transparent !important;
+	border: 1px solid rgba(255, 255, 255, 0.2) !important;
+	color: var(--text-main, #f8f8f2) !important;
+}
+
+/* ── Toggles ── */
+[class*="wpmudev-forminator"] .sui-toggle .sui-toggle-slider {
+	background: rgba(255, 255, 255, 0.15) !important;
+}
+
+[class*="wpmudev-forminator"] .sui-toggle input:checked + .sui-toggle-slider {
+	background: var(--accent, #62c9ff) !important;
+}
+
+/* ── Draft / status badges ── */
+[class*="wpmudev-forminator"] .sui-tag {
+	background: rgba(217, 190, 111, 0.15) !important;
+	color: var(--gold, #d9be6f) !important;
+	border: 1px solid rgba(217, 190, 111, 0.3) !important;
+}
+
+/* ── Modals ── */
+[class*="wpmudev-forminator"] .sui-modal .sui-dialog .sui-box {
+	background: rgba(13, 17, 23, 0.95) !important;
+	backdrop-filter: blur(20px) saturate(150%) !important;
+	-webkit-backdrop-filter: blur(20px) saturate(150%) !important;
+	border: 1px solid var(--rough-glass-border, rgba(90, 105, 172, 0.3)) !important;
+}
+
+/* ── Accordion sections ── */
+[class*="wpmudev-forminator"] .sui-accordion-item,
+[class*="wpmudev-forminator"] .sui-accordion-item-header,
+[class*="wpmudev-forminator"] .sui-accordion-item-body {
+	background: transparent !important;
+	border-color: rgba(255, 255, 255, 0.06) !important;
+}

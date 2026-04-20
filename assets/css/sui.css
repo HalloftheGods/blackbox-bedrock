@@ -104,6 +104,15 @@ hr,
 	background-color: transparent !important;
 }
 
+.sui-wrap .sui-box,
+.sui-box {
+	background: var(--rough-glass-bg) !important;
+	backdrop-filter: var(--rough-glass-filter) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2) !important;
+}
+
 /* SUI Separators and Input Fields - matching Card Style */
 .sui-wrap hr,
 .sui-wrap .sui-box-header,
