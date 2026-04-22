@@ -15,7 +15,7 @@ html.is-compass-iframe [class*="wpmudev-forminator"] .sui-header {
 
 /* ── Nuclear transparency: kill ALL white backgrounds inside the Forminator wrapper ── */
 [class*="wpmudev-forminator"],
-[class*="wpmudev-forminator"] > *,
+[class*="wpmudev-forminator"]>*,
 [class*="wpmudev-forminator"] .sui-box,
 [class*="wpmudev-forminator"] .sui-box-body,
 [class*="wpmudev-forminator"] .sui-box-header,
@@ -23,13 +23,13 @@ html.is-compass-iframe [class*="wpmudev-forminator"] .sui-header {
 [class*="wpmudev-forminator"] .sui-tabs-content,
 [class*="wpmudev-forminator"] .sui-form-field,
 #forminator-form-builder,
-#forminator-form-builder > * {
+#forminator-form-builder>* {
 	background: transparent !important;
 	background-color: transparent !important;
 }
 
 /* ── Right sidebar ("Customize Form") ── */
-[class*="wpmudev-forminator"] .sui-box .sui-tabs > div,
+[class*="wpmudev-forminator"] .sui-box .sui-tabs>div,
 [class*="wpmudev-forminator"] .sui-box .sui-side-tabs,
 [class*="wpmudev-forminator"] .sui-layout-sidebar,
 [class*="wpmudev-forminator"] [class*="sidebar"],
@@ -96,7 +96,7 @@ html.is-compass-iframe [class*="wpmudev-forminator"] .sui-header {
 	background: rgba(255, 255, 255, 0.15) !important;
 }
 
-[class*="wpmudev-forminator"] .sui-toggle input:checked + .sui-toggle-slider {
+[class*="wpmudev-forminator"] .sui-toggle input:checked+.sui-toggle-slider {
 	background: var(--accent, #62c9ff) !important;
 }
 
@@ -109,10 +109,11 @@ html.is-compass-iframe [class*="wpmudev-forminator"] .sui-header {
 
 /* ── Modals ── */
 [class*="wpmudev-forminator"] .sui-modal .sui-dialog .sui-box {
-	background: rgba(13, 17, 23, 0.95) !important;
-	backdrop-filter: blur(20px) saturate(150%) !important;
-	-webkit-backdrop-filter: blur(20px) saturate(150%) !important;
+	background: rgba(13, 17, 23, 0.4) !important;
+	backdrop-filter: blur(40px) saturate(200%) !important;
+	-webkit-backdrop-filter: blur(40px) saturate(200%) !important;
 	border: 1px solid var(--rough-glass-border, rgba(90, 105, 172, 0.3)) !important;
+	box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37) !important;
 }
 
 /* ── Accordion sections ── */
@@ -121,4 +122,26 @@ html.is-compass-iframe [class*="wpmudev-forminator"] .sui-header {
 [class*="wpmudev-forminator"] .sui-accordion-item-body {
 	background: transparent !important;
 	border-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+/* ── Status Bar Alignment ── */
+html.is-compass-iframe [class*="wpmudev-forminator"] .forminator-builder-status,
+[class*="wpmudev-forminator"] .forminator-builder-status,
+.sui-box-sticky.sui-is-sticky {
+	top: unset !important;
+}
+
+/* ── Specific Button Overrides ── */
+[class*="wpmudev-forminator"] .sui-wrap .sui-button.sui-button-blue.forminator-open-insert-fields,
+[class*="wpmudev-forminator"] #forminator-form-builder .sui-button.sui-button-blue.forminator-open-insert-fields {
+	background: var(--gold, #d9be6f) !important;
+	border-color: var(--gold, #d9be6f) !important;
+	color: #1a1a2e !important;
+	font-weight: 700 !important;
+}
+
+[class*="wpmudev-forminator"] .sui-wrap .sui-button.sui-button-blue.forminator-open-insert-fields:hover,
+[class*="wpmudev-forminator"] #forminator-form-builder .sui-button.sui-button-blue.forminator-open-insert-fields:hover {
+	background: var(--accent, #62c9ff) !important;
+	border-color: var(--accent, #62c9ff) !important;
 }
