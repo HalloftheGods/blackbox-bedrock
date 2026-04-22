@@ -4,6 +4,9 @@
 
   if (window !== window.top && window.location.search.includes("theme=transparent")) {
     // We are in an iframe, and transparent!
+    document.documentElement.style.setProperty("background", "transparent", "important");
+    document.body.style.setProperty("background", "transparent", "important");
+    document.documentElement.style.setProperty("color-scheme", "none", "important");
   }
   if (document.getElementById("blackbox-smoke-canvas") || document.getElementById("compass-smoke-canvas")) return;
   const canvas = document.createElement("canvas");
