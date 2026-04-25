@@ -2,7 +2,7 @@
 /**
  * Plugin Name: BlackBOX MU Framework
  * Description: Modular Core Bootstrapper
- * Version:           26.4.25
+ * Version:           26.4.25.492
  * Author: Hall of the Gods, Inc.
  */
 
