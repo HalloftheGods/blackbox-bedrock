@@ -141,7 +141,7 @@ iframe[name="editor-canvas"] {
 	border-left: 0 !important;
 	border-right: 0 !important;
 	border-bottom: 0 !important;
-	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+	box-shadow: 0 4px 5px rgba(0, 0, 0, 0.4) !important;
 }
 
 
