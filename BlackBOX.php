@@ -1,9 +1,12 @@
 <?php
 /**
- * Plugin Name: BlackBOX MU Framework
- * Description: Modular Core Bootstrapper
- * Version:           26.4.26.243
+ * Plugin Name: BlackBOX Bedrock
+ * Description: The modular bedrock foundation for the My Compass/YouMeOS Experience Engine.
+ * Version: 26.4.26.243
  * Author: Hall of the Gods, Inc.
+ * Author URI: https://www.hallofthegods.com/
+ * Plugin URI: https://github.com/HalloftheGods/blackbox-bedrock
+ * Update URI: https://github.com/HalloftheGods/blackbox-bedrock
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit;
