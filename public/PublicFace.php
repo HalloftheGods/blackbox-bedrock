@@ -18,6 +18,10 @@ class PublicFace {
 		$logo_css = file_exists( $logo_path ) ? file_get_contents( $logo_path ) : '';
 		$login_css = file_exists( $login_path ) ? file_get_contents( $login_path ) : '';
 		
+		$assets_url = defined('WPMU_PLUGIN_URL') ? WPMU_PLUGIN_URL . '/blackbox-bedrock/assets' : content_url('mu-plugins/blackbox-bedrock/assets');
+		$logo_css = str_replace( '../images/', $assets_url . '/images/', $logo_css );
+		$login_css = str_replace( '../images/', $assets_url . '/images/', $login_css );
+		
 		echo '<style id="blackbox-login-admin">' . $logo_css . $login_css . '</style>';
 	}
 

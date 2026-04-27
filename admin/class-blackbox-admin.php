@@ -14,6 +14,7 @@ class Admin {
 		add_filter( 'script_loader_tag', [ $this, 'inject_into_install_scripts' ], 9999, 2 );
 		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_styles' ], 9999 );
 		add_action( 'admin_head', [ $this, 'inject_iframe_class' ], 1 );
+		add_action( 'admin_footer', [ Core::class, 'inject_canvas_script' ], 9999 );
 
 		if ( defined( 'WP_INSTALLING' ) && WP_INSTALLING ) {
 			// Force inject on install.php if footer hook doesn't fire early enough
