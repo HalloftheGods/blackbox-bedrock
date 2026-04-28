@@ -1,7 +1,7 @@
 {
   "name": "hallofthegods/blackbox-bedrock",
   "description": "BlackBOX MU Bedrock - Genesis Edition",
-  "version": "26.4.27.632",
+  "version": "26.4.28",
   "type": "wordpress-muplugin",
   "license": "GPL-3.0-or-later",
   "authors": [
