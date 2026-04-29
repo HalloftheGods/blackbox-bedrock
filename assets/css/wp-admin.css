@@ -892,3 +892,208 @@ input[type="radio"]:focus {
 	align-self: flex-end;
 	background: transparent;
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   Classic Editor (TinyMCE + Quicktags) — Cosmetic dark mode only
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Outer wrapper */
+.wp-editor-wrap {
+	background: var(--rough-glass-bg) !important;
+	backdrop-filter: var(--rough-glass-filter) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	border-radius: 8px !important;
+	color: var(--text-main) !important;
+	box-shadow: 0 4px 5px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Media buttons row + editor container */
+.wp-editor-tools {
+	background: transparent !important;
+	border-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+.wp-editor-container {
+	background: transparent !important;
+	border-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Visual / Code tab buttons */
+.wp-switch-editor {
+	background: rgba(255, 255, 255, 0.04) !important;
+	border-color: rgba(255, 255, 255, 0.08) !important;
+	color: var(--text-main) !important;
+}
+
+.wp-switch-editor:hover {
+	background: rgba(255, 255, 255, 0.08) !important;
+	color: var(--accent) !important;
+}
+
+/* TinyMCE toolbar panels */
+.mce-panel {
+	background-color: transparent !important;
+}
+
+.mce-toolbar-grp {
+	background-color: transparent !important;
+	border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* TinyMCE buttons */
+.mce-btn {
+	background-color: transparent !important;
+}
+
+.mce-btn:hover,
+.mce-btn:focus {
+	background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.mce-btn.mce-active {
+	background-color: rgba(98, 201, 255, 0.12) !important;
+}
+
+/* TinyMCE icons + text */
+.mce-ico {
+	color: var(--text-main) !important;
+}
+
+.mce-btn:hover .mce-ico,
+.mce-btn.mce-active .mce-ico {
+	color: var(--accent) !important;
+}
+
+.mce-btn .mce-txt {
+	color: var(--text-main) !important;
+}
+
+/* TinyMCE dropdown menus */
+.mce-menu {
+	background: rgba(13, 17, 23, 0.95) !important;
+	backdrop-filter: var(--rough-glass-filter) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6) !important;
+}
+
+.mce-menu-item .mce-text {
+	color: var(--text-main) !important;
+}
+
+.mce-menu-item:hover,
+.mce-menu-item.mce-selected {
+	background: rgba(98, 201, 255, 0.15) !important;
+}
+
+.mce-menu-item:hover .mce-text,
+.mce-menu-item.mce-selected .mce-text {
+	color: var(--accent) !important;
+}
+
+/* TinyMCE modal windows (link insert, etc.) */
+.mce-window {
+	background: rgba(13, 17, 23, 0.95) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6) !important;
+}
+
+.mce-window .mce-title {
+	color: var(--text-main) !important;
+}
+
+.mce-window .mce-textbox {
+	background: rgba(0, 0, 0, 0.3) !important;
+	border: 1px solid rgba(255, 255, 255, 0.1) !important;
+	color: var(--text-main) !important;
+}
+
+.mce-window .mce-label {
+	color: var(--text-main) !important;
+}
+
+/* TinyMCE tooltips */
+.mce-tooltip .mce-tooltip-inner {
+	background: rgba(0, 0, 0, 0.85) !important;
+	color: var(--text-main) !important;
+}
+
+/* TinyMCE status bar */
+.mce-statusbar {
+	background-color: transparent !important;
+	border-top-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+.mce-path .mce-path-item {
+	color: rgba(248, 248, 242, 0.5) !important;
+}
+
+/* Code view textarea */
+.wp-editor-area {
+	background: rgba(0, 0, 0, 0.2) !important;
+	color: var(--text-main) !important;
+}
+
+/* Quicktags toolbar (Code mode) */
+.quicktags-toolbar {
+	background: rgba(0, 0, 0, 0.2) !important;
+	border-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+.quicktags-toolbar input[type="button"] {
+	background: transparent !important;
+	border: 1px solid rgba(255, 255, 255, 0.1) !important;
+	color: var(--text-main) !important;
+}
+
+.quicktags-toolbar input[type="button"]:hover {
+	background: rgba(98, 201, 255, 0.1) !important;
+	border-color: var(--accent) !important;
+	color: var(--accent) !important;
+}
+
+/* Word count footer */
+#post-status-info {
+	background: transparent !important;
+	border-top-color: rgba(255, 255, 255, 0.05) !important;
+	color: var(--text-main) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Custom Fields / Meta Box inner tables
+   ═══════════════════════════════════════════════════════════════ */
+
+#postcustomstuff table,
+#postcustomstuff thead th {
+	background: transparent !important;
+	background-color: transparent !important;
+	border-color: rgba(255, 255, 255, 0.1) !important;
+	color: var(--text-main) !important;
+}
+
+#postcustomstuff table {
+	border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+#postcustomstuff tr,
+#postcustomstuff td,
+#postcustomstuff th {
+	border-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+#postcustomstuff input[type="text"],
+#postcustomstuff textarea,
+#postcustomstuff select {
+	background: rgba(0, 0, 0, 0.3) !important;
+	border: 1px solid rgba(255, 255, 255, 0.1) !important;
+	color: var(--text-main) !important;
+	border-radius: 4px !important;
+}
+
+#postcustomstuff input[type="text"]:focus,
+#postcustomstuff textarea:focus,
+#postcustomstuff select:focus {
+	border-color: var(--accent) !important;
+	box-shadow: 0 0 0 1px var(--accent) !important;
+}

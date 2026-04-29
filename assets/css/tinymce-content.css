@@ -1,0 +1,24 @@
+/* TinyMCE iframe content dark mode — loaded via mce_css filter */
+html {
+	background: transparent !important;
+}
+
+body#tinymce {
+	background: transparent !important;
+	background-color: transparent !important;
+	color: #f8f8f2 !important;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+body#tinymce a {
+	color: #62c9ff !important;
+}
+
+body#tinymce h1,
+body#tinymce h2,
+body#tinymce h3,
+body#tinymce h4,
+body#tinymce h5,
+body#tinymce h6 {
+	color: #f8f8f2 !important;
+}
