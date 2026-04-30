@@ -304,13 +304,13 @@ h2.hndle {
 
 /* Admin Sidebar — Glass overlay, WP theme colors preserved */
 #adminmenuwrap {
-	background: rgba(13, 17, 23, 0.5) !important;
-	backdrop-filter: blur(20px) saturate(120%) !important;
-	-webkit-backdrop-filter: blur(20px) saturate(120%) !important;
+	background: transparent !important;
 }
 
 #adminmenuback {
 	background: rgba(13, 17, 23, 0.5) !important;
+	backdrop-filter: blur(20px) saturate(120%) !important;
+	-webkit-backdrop-filter: blur(20px) saturate(120%) !important;
 }
 
 #adminmenu .wp-submenu,
@@ -323,6 +323,13 @@ h2.hndle {
 	-webkit-backdrop-filter: blur(24px) saturate(150%) !important;
 	border: 1px solid rgba(98, 201, 255, 0.1) !important;
 	box-shadow: 4px 4px 24px rgba(0, 0, 0, 0.6) !important;
+	margin-left: -1px !important;
+}
+
+/* Submenu arrow pointer (classic WP admin) */
+ul#adminmenu a.wp-has-current-submenu:after, 
+ul#adminmenu > li.current > a.current:after {
+	border-right-color: rgba(14, 33, 56, 0.95) !important;
 }
 
 /* Help / Contextual Help Panel */
