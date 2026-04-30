@@ -51,7 +51,7 @@ $smoke_js = file_exists( dirname( __DIR__ ) . '/assets/js/smoke-canvas.js' ) ? f
             box-shadow: 0 16px 64px rgba(0, 0, 0, 0.5);
         }
         #error-container #logo {
-            background-image: var(--custom-logo-base64) !important;
+            background-image: url('<?php echo content_url( "mu-plugins/blackbox-bedrock/assets/images/hallofthegodsinc.png" ); ?>') !important;
             background-size: contain !important;
             background-position: center !important;
             background-repeat: no-repeat !important;
