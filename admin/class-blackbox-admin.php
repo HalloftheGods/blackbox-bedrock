@@ -58,14 +58,6 @@ class Admin {
 			[ $this, 'settings_page_display' ]
 		);
 
-		add_submenu_page(
-			'w4-protocol',
-			'My Compass',
-			'My Compass',
-			'manage_options',
-			'w4-my-compass',
-			[ $this, 'render_placeholder_page' ]
-		);
 
 		add_submenu_page(
 			'w4-protocol',
@@ -208,7 +200,7 @@ class Admin {
 				if ( $is_xophz ) {
 					$route_map = [
 						'quests' => 'questbook',
-						'post-digger' => 'newsroom'
+						'alphabet-soup' => 'newsroom'
 					];
 					$route_slug = $route_map[$slug] ?? $slug;
 					
