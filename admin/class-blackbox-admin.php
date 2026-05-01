@@ -561,24 +561,53 @@ class Admin {
 		if ( empty( get_option( 'blackbox_bedrock_wp_admin_menu_2030', '1' ) ) ) return;
 		?>
 		<style>
-			#adminmenu li.blackbox-group-header.bb-open,
-			#adminmenu li.bb-open-item {
+			.bb-group-panel {
+				overflow: hidden;
+				max-height: 0;
+				transition: max-height 0.3s ease;
+				border-right: 2px solid rgba(98, 201, 255, 0.4);
+				box-sizing: border-box;
+			}
+			.bb-group-panel li {
 				background: rgba(0, 0, 0, 0.15) !important;
 			}
-			#adminmenu li.blackbox-group-header.bb-open {
-				border-top: 1px solid rgba(98, 201, 255, 0.4) !important;
-				box-shadow: inset 0 8px 10px -8px rgba(0,0,0,0.5) !important;
-			}
-			#adminmenu li.bb-last-item {
-				border-bottom: 1px solid rgba(98, 201, 255, 0.4) !important;
+			.bb-group-panel li:last-child {
+				border-bottom: 2px solid rgba(98, 201, 255, 0.4) !important;
 				box-shadow: inset 0 -8px 10px -8px rgba(0,0,0,0.5) !important;
 				margin-bottom: 12px !important;
+			}
+			#adminmenu li.blackbox-group-header {
+				transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease !important;
+				box-sizing: border-box !important;
+			}
+			#adminmenu li.blackbox-group-header > a .wp-menu-name,
+			#adminmenu li.blackbox-group-header > a .wp-menu-image::before {
+				transition: color 0.25s ease, text-shadow 0.25s ease !important;
+			}
+			#adminmenu li.blackbox-group-header .bb-arrow {
+				transition: transform 0.2s ease, opacity 0.2s ease !important;
+			}
+			#adminmenu li.blackbox-group-header.bb-open {
+				background: rgba(0, 0, 0, 0.15) !important;
+			}
+			#adminmenu li.blackbox-group-header .wp-menu-name {
+				text-align: right;
+				padding-right: 25px !important;
+			}
+			#adminmenu li.blackbox-group-header.bb-open {
+				border-top: 2px solid rgba(98, 201, 255, 0.4) !important;
+				box-shadow: inset 0 8px 10px -8px rgba(0,0,0,0.5) !important;
+			}
+			#adminmenu li.blackbox-group-header.bb-open > a .wp-menu-name,
+			#adminmenu li.blackbox-group-header.bb-open > a .wp-menu-image::before {
+				color: #62c9ff !important;
+				text-shadow: 0 0 8px rgba(98, 201, 255, 0.4);
 			}
 			body:not(.folded) #adminmenu li.blackbox-group-header.has-acronym .wp-menu-image {
 				transition: opacity 0.25s ease, transform 0.25s ease !important;
 			}
 			body:not(.folded) #adminmenu li.blackbox-group-header.has-acronym .wp-menu-name {
-				transition: padding-left 0.25s ease !important;
+				transition: padding-left 0.25s ease, color 0.25s ease, text-shadow 0.25s ease !important;
 			}
 			body:not(.folded) #adminmenu li.blackbox-group-header.has-acronym:hover .wp-menu-image {
 				opacity: 0 !important;
@@ -622,7 +651,7 @@ class Admin {
 						<div class="wp-menu-name" style="position:relative;">
 							<span class="bb-short-name" style="display:inline-block; transition:opacity 0.25s ease;">${shortName}</span>
 							<span class="bb-expanded-name" style="position:absolute; right:25px; max-width:120px; text-align:right; top:50%; transform:translateY(-50%) translateX(10px); opacity:0; transition:all 0.25s ease; font-size: 11px; white-space: normal; line-height: 1.2; color: #62c9ff; pointer-events: none;">${fullName}</span>
-							<span class="bb-arrow" style="position:absolute; right:10px; top:50%; transform:translateY(-50%); opacity:0.5; font-size:10px;">▼</span>
+							<span class="bb-arrow" style="position:absolute; right:10px; top:50%; transform:translateY(-50%); opacity:0.5; font-size:14px; font-weight:bold;">+</span>
 						</div>
 					</a>
 				`;
@@ -882,102 +911,87 @@ class Admin {
 				}
 			}
 
+			// Wrap each group's items in a panel container
+			const allGroups = ["os", "cms", "dam", "crm", "gamification", "ma", "commerce", "itsm", "system", "3rd"];
+			const panels = {};
+
+			allGroups.forEach(gn => {
+				const groupItems = Array.from(adminMenu.querySelectorAll(`li[data-bb-group="${gn}"]`));
+				if (groupItems.length === 0) return;
+
+				const wrapper = document.createElement("div");
+				wrapper.className = "bb-group-panel";
+				wrapper.dataset.bbPanel = gn;
+
+				adminMenu.insertBefore(wrapper, groupItems[0]);
+				groupItems.forEach(li => wrapper.appendChild(li));
+
+				panels[gn] = wrapper;
+			});
+
 			// Accordion interaction logic
-			function toggleGroup(groupName, immediate = false) {
+			function toggleGroup(groupName, immediate) {
 				const groupEl = document.getElementById(`blackbox-group-${groupName}`);
 				if (!groupEl) return;
-				
+
 				const isOpening = !groupEl.classList.contains("bb-open");
-				const groups = ["os", "cms", "dam", "crm", "gamification", "ma", "commerce", "itsm", "system", "3rd"];
-				
-				// Close all visually
-				groups.forEach(gn => {
+
+				allGroups.forEach(gn => {
 					const header = document.getElementById(`blackbox-group-${gn}`);
 					if (!header) return;
 					header.classList.remove("bb-open", "wp-has-current-submenu");
 					header.classList.add("wp-not-current-submenu");
 					const arrow = header.querySelector(".bb-arrow");
-					if (arrow) arrow.innerText = "▼";
-				});
-				
-				// Animate hiding
-				const itemsToHide = adminMenu.querySelectorAll(groups.map(g => `li[data-bb-group="${g}"]:not([data-bb-group="${groupName}"])`).join(', '));
-				if (window.jQuery && !immediate) {
-					jQuery(itemsToHide).stop(true, true).slideUp(250, function() {
-						this.classList.remove("bb-open-item", "bb-first-item", "bb-last-item");
-					});
-				} else {
-					itemsToHide.forEach(li => {
-						li.style.display = "none";
-						li.classList.remove("bb-open-item", "bb-first-item", "bb-last-item");
-					});
-				}
+					if (arrow) arrow.innerText = "+";
 
-				// Open target
+					const panel = panels[gn];
+					if (!panel) return;
+					if (immediate) {
+						panel.style.transition = "none";
+						panel.style.maxHeight = "0";
+						panel.offsetHeight;
+						panel.style.transition = "";
+					} else {
+						panel.style.maxHeight = "0";
+					}
+				});
+
 				if (isOpening) {
 					groupEl.classList.add("bb-open", "wp-has-current-submenu");
 					groupEl.classList.remove("wp-not-current-submenu");
 					const arrow = groupEl.querySelector(".bb-arrow");
-					if (arrow) arrow.innerText = "▲";
-					const targetItems = Array.from(adminMenu.querySelectorAll(`li[data-bb-group="${groupName}"]`));
-					
-					targetItems.forEach((li, idx) => {
-						li.classList.add("bb-open-item");
-						if (idx === 0) li.classList.add("bb-first-item");
-						if (idx === targetItems.length - 1) li.classList.add("bb-last-item");
-					});
+					if (arrow) arrow.innerText = "-";
 
-					if (window.jQuery && !immediate) {
-						jQuery(targetItems).stop(true, true).slideDown(250);
-					} else {
-						targetItems.forEach(li => li.style.display = "block");
-					}
-				} else {
-					// If closing the active one, hide its children
-					const targetItems = Array.from(adminMenu.querySelectorAll(`li[data-bb-group="${groupName}"]`));
-					if (window.jQuery && !immediate) {
-						jQuery(targetItems).stop(true, true).slideUp(250, function() {
-							this.classList.remove("bb-open-item", "bb-first-item", "bb-last-item");
-						});
-					} else {
-						targetItems.forEach(li => {
-							li.style.display = "none";
-							li.classList.remove("bb-open-item", "bb-first-item", "bb-last-item");
-						});
+					const panel = panels[groupName];
+					if (panel) {
+						if (immediate) {
+							panel.style.transition = "none";
+							panel.style.maxHeight = panel.scrollHeight + "px";
+							panel.offsetHeight;
+							panel.style.transition = "";
+						} else {
+							panel.style.maxHeight = panel.scrollHeight + "px";
+						}
 					}
 				}
 			}
 
-			osHeader.addEventListener("click", (e) => { e.preventDefault(); toggleGroup("os"); });
-			cmsHeader.addEventListener("click", (e) => { e.preventDefault(); toggleGroup("cms"); });
-			damHeader.addEventListener("click", (e) => { e.preventDefault(); toggleGroup("dam"); });
-			crmHeader.addEventListener("click", (e) => { e.preventDefault(); toggleGroup("crm"); });
-			maHeader.addEventListener("click", (e) => { e.preventDefault(); toggleGroup("ma"); });
-			commerceHeader.addEventListener("click", (e) => { e.preventDefault(); toggleGroup("commerce"); });
-			itsmHeader.addEventListener("click", (e) => { e.preventDefault(); toggleGroup("itsm"); });
-			gamificationHeader.addEventListener("click", (e) => { e.preventDefault(); toggleGroup("gamification"); });
-			systemHeader.addEventListener("click", (e) => { e.preventDefault(); toggleGroup("system"); });
-			extensionsHeader.addEventListener("click", (e) => { e.preventDefault(); toggleGroup("3rd"); });
+			allGroups.forEach(gn => {
+				const header = document.getElementById(`blackbox-group-${gn}`);
+				if (header) header.addEventListener("click", (e) => { e.preventDefault(); toggleGroup(gn); });
+			});
 
 			// Auto-open group of current item
 			const currentItem = adminMenu.querySelector(".wp-has-current-submenu:not(.blackbox-group-header), .current:not(.blackbox-group-header)");
-			let activeGroup = "cms"; // default fallback
-			
+			let activeGroup = "cms";
+
 			if (currentItem && currentItem.dataset && currentItem.dataset.bbGroup) {
-				if (currentItem.dataset.bbGroup !== "top") {
-					activeGroup = currentItem.dataset.bbGroup;
-				} else {
-					activeGroup = null;
-				}
+				const isTopLevel = currentItem.dataset.bbGroup === "top";
+				activeGroup = isTopLevel ? null : currentItem.dataset.bbGroup;
 			}
-			
+
 			if (activeGroup) {
 				toggleGroup(activeGroup, true);
-			} else {
-				const groups = ["os", "cms", "crm", "ma", "commerce", "itsm", "gamification", "system", "3rd"];
-				adminMenu.querySelectorAll(groups.map(g => `li[data-bb-group="${g}"]`).join(', ')).forEach(li => {
-					li.style.display = "none";
-				});
 			}
 
 			// Reveal the menu after grouping is complete to prevent CLS
