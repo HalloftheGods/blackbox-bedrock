@@ -568,7 +568,7 @@ class Admin {
 				box-sizing: border-box;
 			}
 			li.blackbox-group-header.bb-open + .bb-group-panel {
-				box-shadow: inset -2px 0 0 0 var(--wp-theme-secondary, #72aee6), inset 0 -2px 0 0 var(--wp-theme-secondary, #72aee6) !important;
+				box-shadow: inset -2px 0 0 0 var(--wp-theme-secondary, #72aee6), inset 0 -2px 0 0 var(--wp-theme-secondary, #72aee6), inset 0 -8px 10px -8px rgba(0,0,0,0.5) !important;
 			}
 			.bb-group-panel li {
 				background: rgba(0, 0, 0, 0.15) !important;
@@ -584,9 +584,19 @@ class Admin {
 				border-bottom: 2px solid transparent !important;
 				cursor: pointer;
 			}
+			#adminmenu li.blackbox-group-header:hover,
+			#adminmenu li.blackbox-group-header:hover > a,
+			#adminmenu li.blackbox-group-header:focus,
+			#adminmenu li.blackbox-group-header:focus > a,
+			#adminmenu li.blackbox-group-header:active > a,
+			#adminmenu li.blackbox-group-header > a:focus,
+			#adminmenu li.blackbox-group-header > a:active {
+				background: transparent !important;
+			}
 			#adminmenu li.blackbox-group-header:hover {
 				border-top-color: var(--wp-theme-secondary, #72aee6) !important;
 				border-bottom-color: var(--wp-theme-secondary, #72aee6) !important;
+				box-shadow: inset 0 8px 10px -8px rgba(0,0,0,0.5), inset 0 -8px 10px -8px rgba(0,0,0,0.5) !important;
 			}
 			#adminmenu li.blackbox-group-header > a .wp-menu-name,
 			#adminmenu li.blackbox-group-header > a .wp-menu-image::before {
@@ -594,9 +604,6 @@ class Admin {
 			}
 			#adminmenu li.blackbox-group-header .bb-arrow {
 				transition: transform 0.2s ease, opacity 0.2s ease !important;
-			}
-			#adminmenu li.blackbox-group-header.bb-open {
-				background: rgba(0, 0, 0, 0.15) !important;
 			}
 			#adminmenu li.blackbox-group-header .wp-menu-name {
 				text-align: right;
@@ -609,8 +616,7 @@ class Admin {
 			}
 			#adminmenu li.blackbox-group-header.bb-open > a .wp-menu-name,
 			#adminmenu li.blackbox-group-header.bb-open > a .wp-menu-image::before {
-				color: var(--wp-theme-secondary, #72aee6) !important;
-				text-shadow: 0 0 8px var(--wp-theme-secondary, #72aee6);
+				color: #fff !important;
 			}
 			body:not(.folded) #adminmenu li.blackbox-group-header.has-acronym .wp-menu-image {
 				transition: opacity 0.25s ease, transform 0.25s ease !important;
@@ -659,7 +665,7 @@ class Admin {
 						<div class="wp-menu-image dashicons-before ${dashicon}"></div>
 						<div class="wp-menu-name" style="position:relative;">
 							<span class="bb-short-name" style="display:inline-block; transition:opacity 0.25s ease;">${shortName}</span>
-							<span class="bb-expanded-name" style="position:absolute; right:25px; max-width:120px; text-align:right; top:50%; transform:translateY(-50%) translateX(10px); opacity:0; transition:all 0.25s ease; font-size: 11px; white-space: normal; line-height: 1.2; color: var(--wp-theme-secondary, #72aee6); pointer-events: none;">${fullName}</span>
+							<span class="bb-expanded-name" style="position:absolute; right:25px; max-width:120px; text-align:right; top:50%; transform:translateY(-50%) translateX(10px); opacity:0; transition:all 0.25s ease; font-size: 11px; white-space: normal; line-height: 1.2; color: #fff; pointer-events: none;">${fullName}</span>
 							<span class="bb-arrow" style="position:absolute; right:10px; top:50%; transform:translateY(-50%); opacity:0.5; font-size:14px; font-weight:bold;">+</span>
 						</div>
 					</a>
@@ -678,7 +684,7 @@ class Admin {
 						<div class="wp-menu-image" style="background-image:url('${img_url}'); background-size:16px; background-position:center; background-repeat:no-repeat;"></div>
 						<div class="wp-menu-name" style="position:relative;">
 							<span class="bb-short-name" style="display:inline-block; transition:opacity 0.25s ease;">${shortName}</span>
-							<span class="bb-expanded-name" style="position:absolute; right:25px; max-width:120px; text-align:right; top:50%; transform:translateY(-50%) translateX(10px); opacity:0; transition:all 0.25s ease; font-size: 11px; white-space: normal; line-height: 1.2; color: var(--wp-theme-secondary, #72aee6); pointer-events: none;">${fullName}</span>
+							<span class="bb-expanded-name" style="position:absolute; right:25px; max-width:120px; text-align:right; top:50%; transform:translateY(-50%) translateX(10px); opacity:0; transition:all 0.25s ease; font-size: 11px; white-space: normal; line-height: 1.2; color: #fff; pointer-events: none;">${fullName}</span>
 							<span class="bb-arrow" style="position:absolute; right:10px; top:50%; transform:translateY(-50%); opacity:0.5; font-size:10px;">▼</span>
 						</div>
 					</a>
@@ -1103,9 +1109,6 @@ class Admin {
 	}
 
 	public function output_theme_colors() {
-		if ( ! empty( get_option( 'xophz_compass_disable_mu_styles' ) ) ) {
-			return;
-		}
 
 		global $_wp_admin_css_colors;
 		$user_id = get_current_user_id();
