@@ -46,7 +46,7 @@ class Admin {
 			'w4-protocol',
 			[ $this, 'settings_page_display' ],
 			$icon_url,
-			1 // Position 1 places it directly below My Compass (0) and above Dashboard (2)
+			-2 // Position -2 places it at the very top
 		);
 
 		add_submenu_page(
@@ -58,19 +58,6 @@ class Admin {
 			[ $this, 'settings_page_display' ]
 		);
 
-
-		add_submenu_page(
-			'w4-protocol',
-			'YouMeOS',
-			'YouMeOS',
-			'manage_options',
-			'w4-youmeos',
-			[ $this, 'render_placeholder_page' ]
-		);
-	}
-
-	public function render_placeholder_page() {
-		echo '<div class="wrap"><h1>' . esc_html( get_admin_page_title() ) . '</h1><p>Placeholder configuration page.</p></div>';
 	}
 
 	public function register_blackbox_menu() {
