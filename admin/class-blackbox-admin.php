@@ -22,6 +22,7 @@ class Admin {
 		add_filter( 'script_loader_tag', [ $this, 'inject_into_install_scripts' ], 9999, 2 );
 		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_styles' ], 9999 );
 		add_action( 'admin_head', [ $this, 'inject_iframe_class' ], 1 );
+		add_action( 'admin_head', [ $this, 'prevent_menu_cls' ], 1 );
 		add_filter( 'mce_css', [ $this, 'add_classic_editor_dark_css' ] );
 		add_action( 'admin_footer', [ Core::class, 'inject_canvas_script' ], 9999 );
 		add_action( 'wp_ajax_blackbox_toggle_plugin', [ $this, 'ajax_toggle_plugin' ] );
@@ -38,21 +39,34 @@ class Admin {
 		add_action( 'admin_head', [ $this, 'output_theme_colors' ], 15 );
 	}
 
+	public function prevent_menu_cls() {
+		if ( empty( get_option( 'blackbox_bedrock_wp_admin_menu_2030', '1' ) ) ) return;
+		?>
+		<style id="blackbox-menu-cls-prevention">
+			/* Prevent CLS during JS menu grouping */
+			#adminmenu { opacity: 0; transition: opacity 0.25s ease-in-out; }
+			body.blackbox-menu-grouped #adminmenu { opacity: 1; }
+		</style>
+		<?php
+	}
+
 	public function register_w4_protocol_menu() {
+		$icon_url = plugins_url( 'assets/images/webwork.png', dirname( __DIR__ ) . '/BlackBOX.php' );
+		
 		add_menu_page(
-			'Operations Suite',
-			'Operations Suite',
+			'w⁴ Protocol',
+			'w⁴ Protocol',
 			'manage_options',
 			'w4-protocol',
 			[ $this, 'settings_page_display' ],
-			'dashicons-admin-generic',
+			$icon_url,
 			-2 // Position -2 places it at the very top
 		);
 
 		add_submenu_page(
 			'w4-protocol',
-			'w⁴ Protocol',
-			'w⁴ Protocol',
+			'BlackBOX Bedrock',
+			'BlackBOX Bedrock',
 			'manage_options',
 			'w4-protocol',
 			[ $this, 'settings_page_display' ]
@@ -61,8 +75,22 @@ class Admin {
 	}
 
 	public function register_blackbox_menu() {
+		$icon_url = plugins_url( 'assets/images/obsidian.png', dirname( __DIR__ ) . '/BlackBOX.php' );
+		
+		add_menu_page(
+			'BlackBOX',
+			'BlackBOX',
+			'manage_options',
+			'blackbox-plugins',
+			[ $this, 'render_blackbox_page' ],
+			$icon_url,
+			-1 // Position -1 places it at the absolute top
+		);
+
+		// We must explicitly register a submenu with the identical slug.
+		// Otherwise, WordPress will auto-hijack the parent menu link to point to the first WPMUDEV plugin.
 		add_submenu_page(
-			'w4-protocol',
+			'blackbox-plugins',
 			'Operations Matrix',
 			'Operations Matrix',
 			'manage_options',
@@ -630,7 +658,7 @@ class Admin {
 			const gamificationHeader = createHeader("blackbox-group-gamification", "LXP", "Learning Experience Platform", "dashicons-awards");
 			const systemHeader = createHeader("blackbox-group-system", "Web Platform", "WP Platform", "dashicons-wordpress");
 			const damHeader = createHeader("blackbox-group-dam", "DAM", "Digital Asset Management", "dashicons-format-image");
-			const osHeader = createHeader("blackbox-group-os", "OS", "Operations Suite", "dashicons-admin-generic");
+			const osHeader = createHeader("blackbox-group-os", "OS", "Operating Systems", "dashicons-desktop");
 			const extensionsHeader = createHeader("blackbox-group-3rd", "Extensions", "Extensions", "dashicons-admin-plugins");
 
 			// Categorize items
@@ -670,7 +698,26 @@ class Admin {
 				let lowerHref = href.toLowerCase();
 				let lowerId = li.id ? li.id.toLowerCase() : "";
 				
-				if (osSlugs.some(slug => lowerHref.includes(slug) || lowerId.includes(slug))) {
+				if (li.id === "toplevel_page_blackbox-plugins") {
+					li.dataset.bbGroup = "os";
+					lastGroup = "os";
+					// Convert from top-level branding to sub-item styling
+					let nameDiv = li.querySelector(".wp-menu-name");
+					if (nameDiv) nameDiv.innerText = "Operations Suite";
+					
+					let iconDiv = li.querySelector(".wp-menu-image");
+					if (iconDiv) {
+						iconDiv.classList.remove("dashicons-before", "dashicons-grid-view");
+						iconDiv.style.backgroundImage = `url('${bbIconUrl}')`;
+						iconDiv.style.backgroundSize = '18px';
+						iconDiv.style.backgroundPosition = 'center';
+						iconDiv.style.backgroundRepeat = 'no-repeat';
+					}
+					// Hide the native submenu wrapper since we renamed the parent
+					let sub = li.querySelector(".wp-submenu");
+					if (sub) sub.style.display = "none";
+					li.classList.remove("wp-has-submenu");
+				} else if (osSlugs.some(slug => lowerHref.includes(slug) || lowerId.includes(slug))) {
 					li.dataset.bbGroup = "os";
 					lastGroup = "os";
 				} else if ((li.id && cmsIds.includes(li.id)) || cmsSlugs.some(slug => lowerHref.includes(slug) || lowerId.includes(slug))) {
@@ -836,7 +883,7 @@ class Admin {
 			}
 
 			// Accordion interaction logic
-			function toggleGroup(groupName) {
+			function toggleGroup(groupName, immediate = false) {
 				const groupEl = document.getElementById(`blackbox-group-${groupName}`);
 				if (!groupEl) return;
 				
@@ -855,7 +902,7 @@ class Admin {
 				
 				// Animate hiding
 				const itemsToHide = adminMenu.querySelectorAll(groups.map(g => `li[data-bb-group="${g}"]:not([data-bb-group="${groupName}"])`).join(', '));
-				if (window.jQuery) {
+				if (window.jQuery && !immediate) {
 					jQuery(itemsToHide).stop(true, true).slideUp(250, function() {
 						this.classList.remove("bb-open-item", "bb-first-item", "bb-last-item");
 					});
@@ -880,7 +927,7 @@ class Admin {
 						if (idx === targetItems.length - 1) li.classList.add("bb-last-item");
 					});
 
-					if (window.jQuery) {
+					if (window.jQuery && !immediate) {
 						jQuery(targetItems).stop(true, true).slideDown(250);
 					} else {
 						targetItems.forEach(li => li.style.display = "block");
@@ -888,7 +935,7 @@ class Admin {
 				} else {
 					// If closing the active one, hide its children
 					const targetItems = Array.from(adminMenu.querySelectorAll(`li[data-bb-group="${groupName}"]`));
-					if (window.jQuery) {
+					if (window.jQuery && !immediate) {
 						jQuery(targetItems).stop(true, true).slideUp(250, function() {
 							this.classList.remove("bb-open-item", "bb-first-item", "bb-last-item");
 						});
@@ -925,13 +972,16 @@ class Admin {
 			}
 			
 			if (activeGroup) {
-				toggleGroup(activeGroup);
+				toggleGroup(activeGroup, true);
 			} else {
 				const groups = ["os", "cms", "crm", "ma", "commerce", "itsm", "gamification", "system", "3rd"];
 				adminMenu.querySelectorAll(groups.map(g => `li[data-bb-group="${g}"]`).join(', ')).forEach(li => {
 					li.style.display = "none";
 				});
 			}
+
+			// Reveal the menu after grouping is complete to prevent CLS
+			document.body.classList.add("blackbox-menu-grouped");
 		});
 		</script>
 		<?php
