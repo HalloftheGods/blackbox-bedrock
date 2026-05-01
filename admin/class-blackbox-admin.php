@@ -39,15 +39,13 @@ class Admin {
 	}
 
 	public function register_w4_protocol_menu() {
-		$icon_url = plugins_url( 'assets/images/obsidian.png', dirname( __DIR__ ) . '/BlackBOX.php' );
-		
 		add_menu_page(
 			'Operations Suite',
 			'Operations Suite',
 			'manage_options',
 			'w4-protocol',
 			[ $this, 'settings_page_display' ],
-			$icon_url,
+			'dashicons-admin-generic',
 			-2 // Position -2 places it at the very top
 		);
 
@@ -632,7 +630,7 @@ class Admin {
 			const gamificationHeader = createHeader("blackbox-group-gamification", "LXP", "Learning Experience Platform", "dashicons-awards");
 			const systemHeader = createHeader("blackbox-group-system", "Web Platform", "WP Platform", "dashicons-wordpress");
 			const damHeader = createHeader("blackbox-group-dam", "DAM", "Digital Asset Management", "dashicons-format-image");
-			const osHeader = createImgHeader("blackbox-group-os", "Operations Suite", "Operations Suite", bbIconUrl);
+			const osHeader = createHeader("blackbox-group-os", "OS", "Operations Suite", "dashicons-admin-generic");
 			const extensionsHeader = createHeader("blackbox-group-3rd", "Extensions", "Extensions", "dashicons-admin-plugins");
 
 			// Categorize items
