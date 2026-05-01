@@ -39,11 +39,11 @@ class Admin {
 	}
 
 	public function register_w4_protocol_menu() {
-		$icon_url = plugins_url( 'assets/images/webwork.png', dirname( __DIR__ ) . '/BlackBOX.php' );
+		$icon_url = plugins_url( 'assets/images/obsidian.png', dirname( __DIR__ ) . '/BlackBOX.php' );
 		
 		add_menu_page(
-			'w⁴ Protocol',
-			'w⁴ Protocol',
+			'Operations Suite',
+			'Operations Suite',
 			'manage_options',
 			'w4-protocol',
 			[ $this, 'settings_page_display' ],
@@ -53,8 +53,8 @@ class Admin {
 
 		add_submenu_page(
 			'w4-protocol',
-			'BlackBOX Bedrock',
-			'BlackBOX Bedrock',
+			'w⁴ Protocol',
+			'w⁴ Protocol',
 			'manage_options',
 			'w4-protocol',
 			[ $this, 'settings_page_display' ]
@@ -63,22 +63,8 @@ class Admin {
 	}
 
 	public function register_blackbox_menu() {
-		$icon_url = plugins_url( 'assets/images/obsidian.png', dirname( __DIR__ ) . '/BlackBOX.php' );
-		
-		add_menu_page(
-			'BlackBOX',
-			'BlackBOX',
-			'manage_options',
-			'blackbox-plugins',
-			[ $this, 'render_blackbox_page' ],
-			$icon_url,
-			-1 // Position -1 places it at the absolute top
-		);
-
-		// We must explicitly register a submenu with the identical slug.
-		// Otherwise, WordPress will auto-hijack the parent menu link to point to the first WPMUDEV plugin.
 		add_submenu_page(
-			'blackbox-plugins',
+			'w4-protocol',
 			'Operations Matrix',
 			'Operations Matrix',
 			'manage_options',
@@ -646,7 +632,7 @@ class Admin {
 			const gamificationHeader = createHeader("blackbox-group-gamification", "LXP", "Learning Experience Platform", "dashicons-awards");
 			const systemHeader = createHeader("blackbox-group-system", "Web Platform", "WP Platform", "dashicons-wordpress");
 			const damHeader = createHeader("blackbox-group-dam", "DAM", "Digital Asset Management", "dashicons-format-image");
-			const osHeader = createHeader("blackbox-group-os", "OS", "Operating Systems", "dashicons-desktop");
+			const osHeader = createImgHeader("blackbox-group-os", "Operations Suite", "Operations Suite", bbIconUrl);
 			const extensionsHeader = createHeader("blackbox-group-3rd", "Extensions", "Extensions", "dashicons-admin-plugins");
 
 			// Categorize items
@@ -686,26 +672,7 @@ class Admin {
 				let lowerHref = href.toLowerCase();
 				let lowerId = li.id ? li.id.toLowerCase() : "";
 				
-				if (li.id === "toplevel_page_blackbox-plugins") {
-					li.dataset.bbGroup = "os";
-					lastGroup = "os";
-					// Convert from top-level branding to sub-item styling
-					let nameDiv = li.querySelector(".wp-menu-name");
-					if (nameDiv) nameDiv.innerText = "Operations Suite";
-					
-					let iconDiv = li.querySelector(".wp-menu-image");
-					if (iconDiv) {
-						iconDiv.classList.remove("dashicons-before", "dashicons-grid-view");
-						iconDiv.style.backgroundImage = `url('${bbIconUrl}')`;
-						iconDiv.style.backgroundSize = '18px';
-						iconDiv.style.backgroundPosition = 'center';
-						iconDiv.style.backgroundRepeat = 'no-repeat';
-					}
-					// Hide the native submenu wrapper since we renamed the parent
-					let sub = li.querySelector(".wp-submenu");
-					if (sub) sub.style.display = "none";
-					li.classList.remove("wp-has-submenu");
-				} else if (osSlugs.some(slug => lowerHref.includes(slug) || lowerId.includes(slug))) {
+				if (osSlugs.some(slug => lowerHref.includes(slug) || lowerId.includes(slug))) {
 					li.dataset.bbGroup = "os";
 					lastGroup = "os";
 				} else if ((li.id && cmsIds.includes(li.id)) || cmsSlugs.some(slug => lowerHref.includes(slug) || lowerId.includes(slug))) {
