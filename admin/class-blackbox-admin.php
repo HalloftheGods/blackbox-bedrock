@@ -6,6 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 class Admin {
 	private static $grouped_wpmudev_icons = [];
 	private static $grouped_wpmudev_names = [];
+	private static $grouped_slugs = [];
 
 	public function __construct() {
 		add_action( 'admin_menu', [ $this, 'register_w4_protocol_menu' ] );
@@ -24,6 +25,7 @@ class Admin {
 		add_filter( 'mce_css', [ $this, 'add_classic_editor_dark_css' ] );
 		add_action( 'admin_footer', [ Core::class, 'inject_canvas_script' ], 9999 );
 		add_action( 'wp_ajax_blackbox_toggle_plugin', [ $this, 'ajax_toggle_plugin' ] );
+		add_action( 'admin_footer', [ $this, 'output_accordion_js' ], 9999 );
 
 		if ( defined( 'WP_INSTALLING' ) && WP_INSTALLING ) {
 			// Force inject on install.php if footer hook doesn't fire early enough
@@ -398,7 +400,7 @@ class Admin {
 			<div class="blackbox-header">
 				<img src="<?php echo esc_url( plugins_url( 'assets/images/obsidian.png', dirname( __DIR__ ) . '/BlackBOX.php' ) ); ?>" alt="BlackBOX">
 				<div>
-					<h1>BlackBOX Operations Matrix</h1>
+					<h1>BlackBOX Operations Suite</h1>
 					<p style="margin:0; color:rgba(255,255,255,0.6); font-size:1.1rem;">Centralized visualization of all primary engine and infrastructure plugins.</p>
 				</div>
 			</div>
@@ -506,7 +508,7 @@ class Admin {
 	}
 
 	public function group_wpmudev_plugins() {
-		global $menu, $submenu;
+		global $menu;
 
 		$wpmudev_slugs = [
 			'wpmudev',
@@ -530,34 +532,444 @@ class Admin {
 				$slug = $item[2];
 				
 				if ( in_array( $slug, $wpmudev_slugs, true ) ) {
-					// Strip tags to remove notification badges for the sidebar menu title
 					$title = wp_strip_all_tags( $item[0] );
 					self::$grouped_wpmudev_names[ $slug ] = $title;
 					
-					// Store the customized icon registered by the plugin (if it's a URL or base64 data)
 					if ( isset( $item[6] ) && ! empty( $item[6] ) ) {
-						// Filter out dashicons classes, keeping only true image URLs/data URIs
 						if ( strpos( $item[6], 'http' ) === 0 || strpos( $item[6], 'data:image' ) === 0 || strpos( $item[6], '/' ) === 0 ) {
 							self::$grouped_wpmudev_icons[ $slug ] = $item[6];
 						}
 					}
-
-					// Move to BlackBOX submenu
-					$submenu['blackbox-plugins'][] = [
-						$title,
-						$item[1],
-						$slug,
-						$item[3] ?? $title
-					];
-
-					// Remove from main menu
-					unset( $menu[$key] );
-
-					// Note: We leave the submenus in $submenu[$slug] intact so that if the user 
-					// navigates directly to a sub-page, WordPress still recognizes it as a valid page callback.
 				}
 			}
 		}
+	}
+
+	public function output_accordion_js() {
+		if ( empty( get_option( 'blackbox_bedrock_wp_admin_menu_2030', '1' ) ) ) return;
+		?>
+		<style>
+			#adminmenu li.blackbox-group-header.bb-open,
+			#adminmenu li.bb-open-item {
+				background: rgba(0, 0, 0, 0.15) !important;
+			}
+			#adminmenu li.blackbox-group-header.bb-open {
+				border-top: 1px solid rgba(98, 201, 255, 0.4) !important;
+				box-shadow: inset 0 8px 10px -8px rgba(0,0,0,0.5) !important;
+			}
+			#adminmenu li.bb-last-item {
+				border-bottom: 1px solid rgba(98, 201, 255, 0.4) !important;
+				box-shadow: inset 0 -8px 10px -8px rgba(0,0,0,0.5) !important;
+				margin-bottom: 12px !important;
+			}
+			body:not(.folded) #adminmenu li.blackbox-group-header.has-acronym .wp-menu-image {
+				transition: opacity 0.25s ease, transform 0.25s ease !important;
+			}
+			body:not(.folded) #adminmenu li.blackbox-group-header.has-acronym .wp-menu-name {
+				transition: padding-left 0.25s ease !important;
+			}
+			body:not(.folded) #adminmenu li.blackbox-group-header.has-acronym:hover .wp-menu-image {
+				opacity: 0 !important;
+				transform: scale(0.8) !important;
+			}
+			body:not(.folded) #adminmenu li.blackbox-group-header.has-acronym:hover .wp-menu-name {
+				padding-left: 14px !important;
+			}
+			body:not(.folded) #adminmenu li.blackbox-group-header.has-acronym:hover .bb-short-name {
+				opacity: 0 !important;
+			}
+			body:not(.folded) #adminmenu li.blackbox-group-header.has-acronym:hover .bb-expanded-name {
+				opacity: 1 !important;
+				transform: translateY(-50%) translateX(0) !important;
+			}
+		</style>
+		<script>
+		document.addEventListener("DOMContentLoaded", function() {
+			const adminMenu = document.getElementById("adminmenu");
+			if (!adminMenu) return;
+
+			// Define core WP identifiers
+			// Core WP identifiers
+			// Core WP identifiers
+			// Core WP identifiers
+			const wpContentIds = ["menu-comments", "menu-media", "menu-pages", "menu-posts"];
+			const wpCoreIds = [
+				"menu-dashboard", 
+				"menu-appearance", "menu-plugins", "menu-users", "menu-tools", "menu-settings"
+			];
+
+			function createHeader(id, shortName, fullName, dashicon) {
+				const li = document.createElement("li");
+				const hasAcronym = shortName !== fullName ? " has-acronym" : "";
+				li.className = "wp-not-current-submenu menu-top menu-top-last blackbox-group-header" + hasAcronym;
+				li.id = id;
+				li.innerHTML = `
+					<a href="#" class="wp-has-submenu wp-not-current-submenu menu-top" aria-haspopup="true">
+						<div class="wp-menu-arrow"><div></div></div>
+						<div class="wp-menu-image dashicons-before ${dashicon}"></div>
+						<div class="wp-menu-name" style="position:relative;">
+							<span class="bb-short-name" style="display:inline-block; transition:opacity 0.25s ease;">${shortName}</span>
+							<span class="bb-expanded-name" style="position:absolute; right:25px; max-width:120px; text-align:right; top:50%; transform:translateY(-50%) translateX(10px); opacity:0; transition:all 0.25s ease; font-size: 11px; white-space: normal; line-height: 1.2; color: #62c9ff; pointer-events: none;">${fullName}</span>
+							<span class="bb-arrow" style="position:absolute; right:10px; top:50%; transform:translateY(-50%); opacity:0.5; font-size:10px;">▼</span>
+						</div>
+					</a>
+				`;
+				return li;
+			}
+
+			function createImgHeader(id, shortName, fullName, img_url) {
+				const li = document.createElement("li");
+				const hasAcronym = shortName !== fullName ? " has-acronym" : "";
+				li.className = "wp-not-current-submenu menu-top menu-top-last blackbox-group-header" + hasAcronym;
+				li.id = id;
+				li.innerHTML = `
+					<a href="#" class="wp-has-submenu wp-not-current-submenu menu-top" aria-haspopup="true">
+						<div class="wp-menu-arrow"><div></div></div>
+						<div class="wp-menu-image" style="background-image:url('${img_url}'); background-size:16px; background-position:center; background-repeat:no-repeat;"></div>
+						<div class="wp-menu-name" style="position:relative;">
+							<span class="bb-short-name" style="display:inline-block; transition:opacity 0.25s ease;">${shortName}</span>
+							<span class="bb-expanded-name" style="position:absolute; right:25px; max-width:120px; text-align:right; top:50%; transform:translateY(-50%) translateX(10px); opacity:0; transition:all 0.25s ease; font-size: 11px; white-space: normal; line-height: 1.2; color: #62c9ff; pointer-events: none;">${fullName}</span>
+							<span class="bb-arrow" style="position:absolute; right:10px; top:50%; transform:translateY(-50%); opacity:0.5; font-size:10px;">▼</span>
+						</div>
+					</a>
+				`;
+				return li;
+			}
+
+			const bbIconUrl = "<?php echo plugins_url('assets/images/obsidian.png', dirname(__DIR__) . '/BlackBOX.php'); ?>";
+			
+			const cmsHeader = createHeader("blackbox-group-cms", "CMS", "Content Management System", "dashicons-portfolio");
+			const crmHeader = createHeader("blackbox-group-crm", "CRM", "Customer Relationship Management", "dashicons-groups");
+			const maHeader = createHeader("blackbox-group-ma", "MA", "Marketing Automation", "dashicons-megaphone");
+			const commerceHeader = createHeader("blackbox-group-commerce", "POS", "Point of Sale", "dashicons-cart");
+			const itsmHeader = createHeader("blackbox-group-itsm", "ITSM", "IT Service Management", "dashicons-sos");
+			const gamificationHeader = createHeader("blackbox-group-gamification", "LXP", "Learning Experience Platform", "dashicons-awards");
+			const systemHeader = createHeader("blackbox-group-system", "Web Platform", "WP Platform", "dashicons-wordpress");
+			const damHeader = createHeader("blackbox-group-dam", "DAM", "Digital Asset Management", "dashicons-format-image");
+			const osHeader = createHeader("blackbox-group-os", "OS", "Operating Systems", "dashicons-desktop");
+			const extensionsHeader = createHeader("blackbox-group-3rd", "Extensions", "Extensions", "dashicons-admin-plugins");
+
+			// Categorize items
+			const items = Array.from(adminMenu.querySelectorAll("li.menu-top"));
+			let lastGroup = "top";
+			
+			const wpmudevSlugs = Object.keys(<?php echo json_encode(self::$grouped_wpmudev_names); ?>);
+			
+			const cmsIds = ["menu-posts", "menu-pages"];
+			const cmsSlugs = ["enchiridion", "fusion", "portfolio", "faq", "properties", "elastic", "layerslider"];
+			
+			const damIds = ["menu-media", "menu-appearance"];
+			const damSlugs = ["smush"];
+			
+			const crmIds = ["menu-users", "menu-comments"];
+			const crmSlugs = ["questbook", "forminator"];
+			
+			const maSlugs = ["hustle", "lead-magnet", "pixie-dust", "gale-boomerang", "beehive", "wds_wizard"];
+			
+			const commerceSlugs = ["woocommerce", "wc-admin", "wc-payments", "woocommerce-payments", "payment", "pay", "product", "shop_order", "shop_coupon", "bazaar", "treasure-trove"];
+			
+			const itsmSlugs = ["bugnet", "compass_bug", "midnight_ticket", "magic-cape", "compass_cloak_hint", "wphb", "snapshot", "shipper", "blc_dash"];
+			
+			const gamificationSlugs = ["xp_action", "achievement", "ability", "accessory", "radio_station", "compass_xp", "cafeteria_topic"];
+			
+			const systemIds = ["menu-dashboard", "menu-plugins", "menu-tools", "menu-settings"];
+			const systemSlugs = ["wpmudev-updates", "wpmudev", "wpmudev-videos"];
+
+			// Core Launchpads (OS Group)
+			const osSlugs = ["w4-protocol", "toplevel_page_w4-protocol", "xophz-compass", "toplevel_page_xophz-compass", "youmeos", "toplevel_page_youmeos", "branding", "wp-defender"];
+			
+			items.forEach(li => {
+				if (li.classList.contains("blackbox-group-header") || li.id === "collapse-menu") return;
+				
+				let link = li.querySelector("a");
+				let href = link ? link.getAttribute("href") : "";
+				let lowerHref = href.toLowerCase();
+				let lowerId = li.id ? li.id.toLowerCase() : "";
+				
+				if (li.id === "toplevel_page_blackbox-plugins") {
+					li.dataset.bbGroup = "os";
+					lastGroup = "os";
+					// Convert from top-level branding to sub-item styling
+					let nameDiv = li.querySelector(".wp-menu-name");
+					if (nameDiv) nameDiv.innerText = "Operations Suite";
+					
+					let iconDiv = li.querySelector(".wp-menu-image");
+					if (iconDiv) {
+						iconDiv.classList.remove("dashicons-before", "dashicons-grid-view");
+						iconDiv.style.backgroundImage = `url('${bbIconUrl}')`;
+						iconDiv.style.backgroundSize = '18px';
+						iconDiv.style.backgroundPosition = 'center';
+						iconDiv.style.backgroundRepeat = 'no-repeat';
+					}
+					// Hide the native submenu wrapper since we renamed the parent
+					let sub = li.querySelector(".wp-submenu");
+					if (sub) sub.style.display = "none";
+					li.classList.remove("wp-has-submenu");
+				} else if (osSlugs.some(slug => lowerHref.includes(slug) || lowerId.includes(slug))) {
+					li.dataset.bbGroup = "os";
+					lastGroup = "os";
+				} else if ((li.id && cmsIds.includes(li.id)) || cmsSlugs.some(slug => lowerHref.includes(slug) || lowerId.includes(slug))) {
+					li.dataset.bbGroup = "cms";
+					lastGroup = "cms";
+				} else if ((li.id && damIds.includes(li.id)) || damSlugs.some(slug => lowerHref.includes(slug) || lowerId.includes(slug))) {
+					li.dataset.bbGroup = "dam";
+					lastGroup = "dam";
+				} else if ((li.id && crmIds.includes(li.id)) || crmSlugs.some(slug => lowerHref.includes(slug) || lowerId.includes(slug))) {
+					li.dataset.bbGroup = "crm";
+					lastGroup = "crm";
+				} else if (maSlugs.some(slug => lowerHref.includes(slug) || lowerId.includes(slug))) {
+					li.dataset.bbGroup = "ma";
+					lastGroup = "ma";
+				} else if (commerceSlugs.some(slug => lowerHref.includes(slug) || lowerId.includes(slug))) {
+					li.dataset.bbGroup = "commerce";
+					lastGroup = "commerce";
+				} else if (itsmSlugs.some(slug => lowerHref.includes(slug) || lowerId.includes(slug))) {
+					li.dataset.bbGroup = "itsm";
+					lastGroup = "itsm";
+				} else if (gamificationSlugs.some(slug => lowerHref.includes(slug) || lowerId.includes(slug))) {
+					li.dataset.bbGroup = "gamification";
+					lastGroup = "gamification";
+				} else if ((li.id && systemIds.includes(li.id)) || systemSlugs.some(slug => lowerHref.includes(slug) || lowerId.includes(slug))) {
+					li.dataset.bbGroup = "system";
+					lastGroup = "system";
+				} else if (li.classList.contains("wp-menu-separator")) {
+					if (["separator1", "separator2", "separator-last"].includes(li.id)) {
+						li.dataset.bbGroup = "system";
+					} else {
+						li.dataset.bbGroup = lastGroup !== "os" ? lastGroup : "3rd";
+					}
+					li.style.display = ""; // Ensure it's visible
+				} else {
+					li.dataset.bbGroup = "3rd";
+					lastGroup = "3rd";
+				}
+			});
+
+			// Re-insert grouped items into DOM so they flow naturally
+			const collapseMenu = document.getElementById("collapse-menu");
+			
+			// OS Group
+			let osItems = items.filter(li => li.dataset.bbGroup === "os");
+			if (osItems.length > 0) {
+				adminMenu.insertBefore(osHeader, collapseMenu);
+				osItems.sort((a, b) => {
+					if (a.id === "toplevel_page_blackbox-plugins") return -1;
+					if (b.id === "toplevel_page_blackbox-plugins") return 1;
+					return 0; // maintain relative DOM order for the rest
+				});
+				osItems.forEach(li => adminMenu.insertBefore(li, collapseMenu));
+			}
+
+			// CMS
+			let cmsItems = items.filter(li => li.dataset.bbGroup === "cms");
+			if (cmsItems.length > 0) {
+				adminMenu.insertBefore(cmsHeader, collapseMenu);
+				const cmsOrder = [
+					li => li.id === "menu-pages",
+					li => li.id === "menu-posts"
+				];
+				cmsItems.sort((a, b) => {
+					let aIdx = cmsOrder.findIndex(fn => fn(a));
+					let bIdx = cmsOrder.findIndex(fn => fn(b));
+					if (aIdx === -1) aIdx = 99;
+					if (bIdx === -1) bIdx = 99;
+					
+					if (aIdx === 99 && bIdx === 99) {
+						let aName = a.querySelector(".wp-menu-name") ? a.querySelector(".wp-menu-name").textContent.trim() : "";
+						let bName = b.querySelector(".wp-menu-name") ? b.querySelector(".wp-menu-name").textContent.trim() : "";
+						return aName.localeCompare(bName);
+					}
+					
+					return aIdx - bIdx;
+				});
+				cmsItems.forEach(li => adminMenu.insertBefore(li, collapseMenu));
+			}
+
+			// DAM
+			let damItems = items.filter(li => li.dataset.bbGroup === "dam");
+			if (damItems.length > 0) {
+				adminMenu.insertBefore(damHeader, collapseMenu);
+				const damOrder = [
+					li => li.id === "menu-appearance",
+					li => li.id === "menu-media",
+					li => li.querySelector("a") && li.querySelector("a").getAttribute("href") && li.querySelector("a").getAttribute("href").includes("smush")
+				];
+				damItems.sort((a, b) => {
+					let aIdx = damOrder.findIndex(fn => fn(a));
+					let bIdx = damOrder.findIndex(fn => fn(b));
+					if (aIdx === -1) aIdx = 99;
+					if (bIdx === -1) bIdx = 99;
+					return aIdx - bIdx;
+				});
+				damItems.forEach(li => adminMenu.insertBefore(li, collapseMenu));
+			}
+
+			// CRM
+			let crmItems = items.filter(li => li.dataset.bbGroup === "crm");
+			if (crmItems.length > 0) {
+				adminMenu.insertBefore(crmHeader, collapseMenu);
+				crmItems.forEach(li => adminMenu.insertBefore(li, collapseMenu));
+			}
+
+			// LXP (Gamification)
+			let gamificationItems = items.filter(li => li.dataset.bbGroup === "gamification");
+			if (gamificationItems.length > 0) {
+				adminMenu.insertBefore(gamificationHeader, collapseMenu);
+				gamificationItems.forEach(li => adminMenu.insertBefore(li, collapseMenu));
+			}
+
+			// MA
+			let maItems = items.filter(li => li.dataset.bbGroup === "ma");
+			if (maItems.length > 0) {
+				adminMenu.insertBefore(maHeader, collapseMenu);
+				maItems.forEach(li => adminMenu.insertBefore(li, collapseMenu));
+			}
+
+			// POS (Commerce)
+			let commerceItems = items.filter(li => li.dataset.bbGroup === "commerce");
+			if (commerceItems.length > 0) {
+				adminMenu.insertBefore(commerceHeader, collapseMenu);
+				commerceItems.forEach(li => adminMenu.insertBefore(li, collapseMenu));
+			}
+
+			// ITSM
+			let itsmItems = items.filter(li => li.dataset.bbGroup === "itsm");
+			if (itsmItems.length > 0) {
+				adminMenu.insertBefore(itsmHeader, collapseMenu);
+				itsmItems.forEach(li => adminMenu.insertBefore(li, collapseMenu));
+			}
+
+			// WP Platform (System)
+			let systemItems = items.filter(li => li.dataset.bbGroup === "system");
+			if (systemItems.length > 0) {
+				adminMenu.insertBefore(systemHeader, collapseMenu);
+				systemItems.forEach(li => adminMenu.insertBefore(li, collapseMenu));
+			}
+
+			// Extensions (3rd Party)
+			let thirdItems = items.filter(li => li.dataset.bbGroup === "3rd");
+			if (thirdItems.length > 0) {
+				adminMenu.insertBefore(extensionsHeader, collapseMenu);
+				thirdItems.forEach(li => adminMenu.insertBefore(li, collapseMenu));
+			}
+
+			// Apply custom WPMUDEV icons to their respective menus
+			const customIcons = <?php echo json_encode(self::$grouped_wpmudev_icons); ?>;
+			for (const [slug, icon] of Object.entries(customIcons)) {
+				const link = adminMenu.querySelector(`a[href*="page=${slug}"]`);
+				if (link && link.parentElement && link.parentElement.dataset.bbGroup !== "top") {
+					const iconDiv = link.parentElement.querySelector('.wp-menu-image');
+					if (iconDiv) {
+						iconDiv.style.backgroundImage = `url('${icon}')`;
+						iconDiv.style.backgroundSize = '16px';
+						iconDiv.style.backgroundPosition = 'center';
+						iconDiv.style.backgroundRepeat = 'no-repeat';
+						iconDiv.classList.remove('dashicons-before');
+						iconDiv.innerHTML = '';
+					}
+				}
+			}
+
+			// Accordion interaction logic
+			function toggleGroup(groupName) {
+				const groupEl = document.getElementById(`blackbox-group-${groupName}`);
+				if (!groupEl) return;
+				
+				const isOpening = !groupEl.classList.contains("bb-open");
+				const groups = ["os", "cms", "dam", "crm", "gamification", "ma", "commerce", "itsm", "system", "3rd"];
+				
+				// Close all visually
+				groups.forEach(gn => {
+					const header = document.getElementById(`blackbox-group-${gn}`);
+					if (!header) return;
+					header.classList.remove("bb-open", "wp-has-current-submenu");
+					header.classList.add("wp-not-current-submenu");
+					const arrow = header.querySelector(".bb-arrow");
+					if (arrow) arrow.innerText = "▼";
+				});
+				
+				// Animate hiding
+				const itemsToHide = adminMenu.querySelectorAll(groups.map(g => `li[data-bb-group="${g}"]:not([data-bb-group="${groupName}"])`).join(', '));
+				if (window.jQuery) {
+					jQuery(itemsToHide).stop(true, true).slideUp(250, function() {
+						this.classList.remove("bb-open-item", "bb-first-item", "bb-last-item");
+					});
+				} else {
+					itemsToHide.forEach(li => {
+						li.style.display = "none";
+						li.classList.remove("bb-open-item", "bb-first-item", "bb-last-item");
+					});
+				}
+
+				// Open target
+				if (isOpening) {
+					groupEl.classList.add("bb-open", "wp-has-current-submenu");
+					groupEl.classList.remove("wp-not-current-submenu");
+					const arrow = groupEl.querySelector(".bb-arrow");
+					if (arrow) arrow.innerText = "▲";
+					const targetItems = Array.from(adminMenu.querySelectorAll(`li[data-bb-group="${groupName}"]`));
+					
+					targetItems.forEach((li, idx) => {
+						li.classList.add("bb-open-item");
+						if (idx === 0) li.classList.add("bb-first-item");
+						if (idx === targetItems.length - 1) li.classList.add("bb-last-item");
+					});
+
+					if (window.jQuery) {
+						jQuery(targetItems).stop(true, true).slideDown(250);
+					} else {
+						targetItems.forEach(li => li.style.display = "block");
+					}
+				} else {
+					// If closing the active one, hide its children
+					const targetItems = Array.from(adminMenu.querySelectorAll(`li[data-bb-group="${groupName}"]`));
+					if (window.jQuery) {
+						jQuery(targetItems).stop(true, true).slideUp(250, function() {
+							this.classList.remove("bb-open-item", "bb-first-item", "bb-last-item");
+						});
+					} else {
+						targetItems.forEach(li => {
+							li.style.display = "none";
+							li.classList.remove("bb-open-item", "bb-first-item", "bb-last-item");
+						});
+					}
+				}
+			}
+
+			osHeader.addEventListener("click", (e) => { e.preventDefault(); toggleGroup("os"); });
+			cmsHeader.addEventListener("click", (e) => { e.preventDefault(); toggleGroup("cms"); });
+			damHeader.addEventListener("click", (e) => { e.preventDefault(); toggleGroup("dam"); });
+			crmHeader.addEventListener("click", (e) => { e.preventDefault(); toggleGroup("crm"); });
+			maHeader.addEventListener("click", (e) => { e.preventDefault(); toggleGroup("ma"); });
+			commerceHeader.addEventListener("click", (e) => { e.preventDefault(); toggleGroup("commerce"); });
+			itsmHeader.addEventListener("click", (e) => { e.preventDefault(); toggleGroup("itsm"); });
+			gamificationHeader.addEventListener("click", (e) => { e.preventDefault(); toggleGroup("gamification"); });
+			systemHeader.addEventListener("click", (e) => { e.preventDefault(); toggleGroup("system"); });
+			extensionsHeader.addEventListener("click", (e) => { e.preventDefault(); toggleGroup("3rd"); });
+
+			// Auto-open group of current item
+			const currentItem = adminMenu.querySelector(".wp-has-current-submenu:not(.blackbox-group-header), .current:not(.blackbox-group-header)");
+			let activeGroup = "cms"; // default fallback
+			
+			if (currentItem && currentItem.dataset && currentItem.dataset.bbGroup) {
+				if (currentItem.dataset.bbGroup !== "top") {
+					activeGroup = currentItem.dataset.bbGroup;
+				} else {
+					activeGroup = null;
+				}
+			}
+			
+			if (activeGroup) {
+				toggleGroup(activeGroup);
+			} else {
+				const groups = ["os", "cms", "crm", "ma", "commerce", "itsm", "gamification", "system", "3rd"];
+				adminMenu.querySelectorAll(groups.map(g => `li[data-bb-group="${g}"]`).join(', ')).forEach(li => {
+					li.style.display = "none";
+				});
+			}
+		});
+		</script>
+		<?php
 	}
 
 	public function ajax_toggle_plugin() {
@@ -617,6 +1029,7 @@ class Admin {
 
 	public function register_settings() {
 		register_setting( 'xophz_compass_options_group', 'xophz_compass_disable_mu_styles' );
+		register_setting( 'xophz_compass_options_group', 'blackbox_bedrock_wp_admin_menu_2030' );
 
 		add_settings_section(
 			'xophz_compass_general_section',
@@ -633,6 +1046,18 @@ class Admin {
 			function() {
 				$val = get_option( 'xophz_compass_disable_mu_styles', '0' );
 				echo '<label><input type="checkbox" name="xophz_compass_disable_mu_styles" value="1" ' . checked( 1, $val, false ) . ' /> Check to bypass the glassmorphic rendering and restore the standard WordPress admin interface.</label>';
+			},
+			'xophz_compass_settings',
+			'xophz_compass_general_section'
+		);
+
+		add_settings_field(
+			'blackbox_bedrock_wp_admin_menu_2030',
+			'WP Admin Menu 2030',
+			function() {
+				$val = get_option( 'blackbox_bedrock_wp_admin_menu_2030', '1' );
+				echo '<input type="hidden" name="blackbox_bedrock_wp_admin_menu_2030" value="0" />';
+				echo '<label><input type="checkbox" name="blackbox_bedrock_wp_admin_menu_2030" value="1" ' . checked( 1, $val, false ) . ' /> Enable the modernized accordion grouping for the WordPress admin menu.</label>';
 			},
 			'xophz_compass_settings',
 			'xophz_compass_general_section'
