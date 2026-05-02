@@ -940,7 +940,7 @@ class Admin {
 						<div class="bb-plus-icon bb-arrow" style="order: 1;">+</div>
 						<div class="wp-menu-name" style="position:relative; flex-grow: 1; order: 2;">
 							<span class="bb-short-name" style="display:inline-block; transition:opacity 0.25s ease;">${shortName}</span>
-							<span class="bb-expanded-name" style="position:absolute; left:0; right:0; width:100%; text-align:center; top:50%; transform:translateY(-50%) translateX(5px); opacity:0; transition:all 0.25s ease; font-size: 11px; white-space: normal; line-height: 1.15; color: inherit; pointer-events: none;">${fullName}</span>
+							<span class="bb-expanded-name" style="position:absolute; left:-15px; width:calc(100% + 30px); text-align:center; top:50%; transform:translateY(-50%) translateX(5px); opacity:0; transition:all 0.25s ease; font-size: 11px; white-space: normal; line-height: 1.1; color: inherit; pointer-events: none;">${fullName}</span>
 						</div>
 					</a>
 				`;
@@ -958,7 +958,7 @@ class Admin {
 						<div class="bb-plus-icon bb-arrow" style="order: 1;">+</div>
 						<div class="wp-menu-name" style="position:relative; flex-grow: 1; order: 2;">
 							<span class="bb-short-name" style="display:inline-block; transition:opacity 0.25s ease;">${shortName}</span>
-							<span class="bb-expanded-name" style="position:absolute; left:0; right:0; width:100%; text-align:center; top:50%; transform:translateY(-50%) translateX(5px); opacity:0; transition:all 0.25s ease; font-size: 11px; white-space: normal; line-height: 1.15; color: inherit; pointer-events: none;">${fullName}</span>
+							<span class="bb-expanded-name" style="position:absolute; left:-15px; width:calc(100% + 30px); text-align:center; top:50%; transform:translateY(-50%) translateX(5px); opacity:0; transition:all 0.25s ease; font-size: 11px; white-space: normal; line-height: 1.1; color: inherit; pointer-events: none;">${fullName}</span>
 						</div>
 					</a>
 				`;
