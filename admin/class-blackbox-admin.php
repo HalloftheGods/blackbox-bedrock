@@ -866,8 +866,9 @@ class Admin {
 				transition: transform 0.2s ease, opacity 0.2s ease !important;
 			}
 			#adminmenu li.blackbox-group-header .wp-menu-name {
-				text-align: right;
-				padding-right: 25px !important;
+				padding: 8px 0 !important;
+				margin: 0 !important;
+				text-align: left !important;
 			}
 			#adminmenu li.blackbox-group-header.bb-open {
 				border-top: 2px solid var(--wp-theme-secondary, #72aee6) !important;
@@ -898,16 +899,31 @@ class Admin {
 				opacity: 1 !important;
 				transform: translateY(-50%) translateX(0) !important;
 			}
+			body:not(.folded) #adminmenu li.blackbox-group-header > a {
+				display: flex !important;
+				align-items: center;
+				padding: 0 !important;
+			}
+			body:not(.folded) #adminmenu li.blackbox-group-header .wp-menu-image {
+				float: none !important;
+			}
+			body.folded #adminmenu li.blackbox-group-header .bb-plus-icon {
+				display: none !important;
+			}
+			#adminmenu li.blackbox-group-header .bb-plus-icon {
+				width: 36px;
+				text-align: center;
+				font-size: 14px;
+				font-weight: bold;
+				color: rgba(255,255,255,0.5);
+				flex-shrink: 0;
+			}
 		</style>
 		<script>
 		document.addEventListener("DOMContentLoaded", function() {
 			const adminMenu = document.getElementById("adminmenu");
 			if (!adminMenu) return;
 
-			// Define core WP identifiers
-			// Core WP identifiers
-			// Core WP identifiers
-			// Core WP identifiers
 			const wpContentIds = ["menu-comments", "menu-media", "menu-pages", "menu-posts"];
 			const wpCoreIds = [
 				"menu-appearance", "menu-plugins", "menu-users", "menu-tools", "menu-settings"
@@ -920,12 +936,11 @@ class Admin {
 				li.id = id;
 				li.innerHTML = `
 					<a href="#" class="wp-has-submenu wp-not-current-submenu menu-top" aria-haspopup="true">
-						<div class="wp-menu-arrow"><div></div></div>
-						<div class="wp-menu-image dashicons-before ${dashicon}"></div>
-						<div class="wp-menu-name" style="position:relative;">
+						<div class="wp-menu-image dashicons-before ${dashicon}" style="order: 3;"></div>
+						<div class="bb-plus-icon bb-arrow" style="order: 1;">+</div>
+						<div class="wp-menu-name" style="position:relative; flex-grow: 1; order: 2;">
 							<span class="bb-short-name" style="display:inline-block; transition:opacity 0.25s ease;">${shortName}</span>
-							<span class="bb-expanded-name" style="position:absolute; left:7%; right:12%; text-align:center; top:50%; transform:translateY(-50%) translateX(10px); opacity:0; transition:all 0.25s ease; font-size: 11px; white-space: normal; line-height: 1.2; color: inherit; pointer-events: none; max-width: 80%">${fullName}</span>
-							<span class="bb-arrow" style="position:absolute; right:10px; top:50%; transform:translateY(-50%); opacity:0.5; font-size:14px; font-weight:bold;">+</span>
+							<span class="bb-expanded-name" style="position:absolute; left:0; right:0; width:100%; text-align:center; top:50%; transform:translateY(-50%) translateX(5px); opacity:0; transition:all 0.25s ease; font-size: 11px; white-space: normal; line-height: 1.15; color: inherit; pointer-events: none;">${fullName}</span>
 						</div>
 					</a>
 				`;
@@ -939,12 +954,11 @@ class Admin {
 				li.id = id;
 				li.innerHTML = `
 					<a href="#" class="wp-has-submenu wp-not-current-submenu menu-top" aria-haspopup="true">
-						<div class="wp-menu-arrow"><div></div></div>
-						<div class="wp-menu-image" style="background-image:url('${img_url}'); background-size:16px; background-position:center; background-repeat:no-repeat;"></div>
-						<div class="wp-menu-name" style="position:relative;">
+						<div class="wp-menu-image" style="background-image:url('${img_url}'); background-size:16px; background-position:center; background-repeat:no-repeat; order: 3;"></div>
+						<div class="bb-plus-icon bb-arrow" style="order: 1;">+</div>
+						<div class="wp-menu-name" style="position:relative; flex-grow: 1; order: 2;">
 							<span class="bb-short-name" style="display:inline-block; transition:opacity 0.25s ease;">${shortName}</span>
-							<span class="bb-expanded-name" style="position:absolute; left:5%; right:5%; text-align:center; top:50%; transform:translateY(-50%) translateX(10px); opacity:0; transition:all 0.25s ease; font-size: 11px; white-space: normal; line-height: 1.2; color: inherit; pointer-events: none;">${fullName}</span>
-							<span class="bb-arrow" style="position:absolute; right:10px; top:50%; transform:translateY(-50%); opacity:0.5; font-size:10px;">▼</span>
+							<span class="bb-expanded-name" style="position:absolute; left:0; right:0; width:100%; text-align:center; top:50%; transform:translateY(-50%) translateX(5px); opacity:0; transition:all 0.25s ease; font-size: 11px; white-space: normal; line-height: 1.15; color: inherit; pointer-events: none;">${fullName}</span>
 						</div>
 					</a>
 				`;
@@ -1352,7 +1366,10 @@ class Admin {
 
 					const group = targetLi.dataset.bbGroup;
 					if (group) {
-						toggleGroup(group, true);
+						const groupEl = document.getElementById(`blackbox-group-${group}`);
+						if (groupEl && !groupEl.classList.contains("bb-open")) {
+							toggleGroup(group, true);
+						}
 					}
 				}
 			}
