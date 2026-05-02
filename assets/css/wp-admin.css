@@ -318,10 +318,10 @@ h2.hndle {
 #adminmenu .wp-has-current-submenu .wp-submenu.sub-open,
 #adminmenu .wp-has-current-submenu.opensub .wp-submenu,
 #adminmenu a.wp-has-current-submenu:focus+.wp-submenu {
-	background: rgba(14, 33, 56, 0.95) !important;
+	background: var(--wp-theme-base, rgba(14, 33, 56, 0.95)) !important;
 	backdrop-filter: blur(24px) saturate(150%) !important;
 	-webkit-backdrop-filter: blur(24px) saturate(150%) !important;
-	border: 1px solid rgba(98, 201, 255, 0.1) !important;
+	border: 1px solid rgba(255, 255, 255, 0.1) !important;
 	box-shadow: 4px 4px 24px rgba(0, 0, 0, 0.6) !important;
 	margin-left: -1px !important;
 }
@@ -329,7 +329,7 @@ h2.hndle {
 /* Submenu arrow pointer (classic WP admin) */
 ul#adminmenu a.wp-has-current-submenu:after, 
 ul#adminmenu > li.current > a.current:after {
-	border-right-color: rgba(14, 33, 56, 0.95) !important;
+	border-right-color: var(--wp-theme-base, rgba(14, 33, 56, 0.95)) !important;
 }
 
 /* Help / Contextual Help Panel */

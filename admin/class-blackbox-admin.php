@@ -65,8 +65,8 @@ class Admin {
 
 		add_submenu_page(
 			'w4-protocol',
-			'BlackBOX Bedrock',
-			'BlackBOX Bedrock',
+			'Platform Upgrades',
+			'Platform Upgrades',
 			'manage_options',
 			'w4-protocol',
 			[ $this, 'settings_page_display' ]
@@ -561,6 +561,10 @@ class Admin {
 		if ( empty( get_option( 'blackbox_bedrock_wp_admin_menu_2030', '1' ) ) ) return;
 		?>
 		<style>
+			#adminmenu {
+				margin-top: 0 !important;
+				padding-top: 0 !important;
+			}
 			.bb-group-panel {
 				overflow: hidden;
 				max-height: 0;
@@ -578,6 +582,10 @@ class Admin {
 				padding: 0 !important;
 				background: transparent !important;
 				box-shadow: inset 0 8px 10px -8px rgba(0,0,0,0.5), inset 0 -8px 10px -8px rgba(0,0,0,0.5) !important;
+			}
+			.bb-group-panel .wp-submenu li,
+			.bb-group-panel .wp-submenu a {
+				background: transparent !important;
 			}
 			#adminmenu li.blackbox-group-header {
 				transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease !important;
@@ -653,7 +661,6 @@ class Admin {
 			// Core WP identifiers
 			const wpContentIds = ["menu-comments", "menu-media", "menu-pages", "menu-posts"];
 			const wpCoreIds = [
-				"menu-dashboard", 
 				"menu-appearance", "menu-plugins", "menu-users", "menu-tools", "menu-settings"
 			];
 
@@ -668,7 +675,7 @@ class Admin {
 						<div class="wp-menu-image dashicons-before ${dashicon}"></div>
 						<div class="wp-menu-name" style="position:relative;">
 							<span class="bb-short-name" style="display:inline-block; transition:opacity 0.25s ease;">${shortName}</span>
-							<span class="bb-expanded-name" style="position:absolute; right:25px; max-width:120px; text-align:right; top:50%; transform:translateY(-50%) translateX(10px); opacity:0; transition:all 0.25s ease; font-size: 11px; white-space: normal; line-height: 1.2; color: inherit; pointer-events: none;">${fullName}</span>
+							<span class="bb-expanded-name" style="position:absolute; left:7%; right:12%; text-align:center; top:50%; transform:translateY(-50%) translateX(10px); opacity:0; transition:all 0.25s ease; font-size: 11px; white-space: normal; line-height: 1.2; color: inherit; pointer-events: none; max-width: 80%">${fullName}</span>
 							<span class="bb-arrow" style="position:absolute; right:10px; top:50%; transform:translateY(-50%); opacity:0.5; font-size:14px; font-weight:bold;">+</span>
 						</div>
 					</a>
@@ -687,7 +694,7 @@ class Admin {
 						<div class="wp-menu-image" style="background-image:url('${img_url}'); background-size:16px; background-position:center; background-repeat:no-repeat;"></div>
 						<div class="wp-menu-name" style="position:relative;">
 							<span class="bb-short-name" style="display:inline-block; transition:opacity 0.25s ease;">${shortName}</span>
-							<span class="bb-expanded-name" style="position:absolute; right:25px; max-width:120px; text-align:right; top:50%; transform:translateY(-50%) translateX(10px); opacity:0; transition:all 0.25s ease; font-size: 11px; white-space: normal; line-height: 1.2; color: inherit; pointer-events: none;">${fullName}</span>
+							<span class="bb-expanded-name" style="position:absolute; left:5%; right:5%; text-align:center; top:50%; transform:translateY(-50%) translateX(10px); opacity:0; transition:all 0.25s ease; font-size: 11px; white-space: normal; line-height: 1.2; color: inherit; pointer-events: none;">${fullName}</span>
 							<span class="bb-arrow" style="position:absolute; right:10px; top:50%; transform:translateY(-50%); opacity:0.5; font-size:10px;">▼</span>
 						</div>
 					</a>
@@ -703,12 +710,13 @@ class Admin {
 			const commerceHeader = createHeader("blackbox-group-commerce", "POS", "Point of Sale", "dashicons-cart");
 			const itsmHeader = createHeader("blackbox-group-itsm", "ITSM", "IT Service Management", "dashicons-sos");
 			const gamificationHeader = createHeader("blackbox-group-gamification", "LXP", "Learning Experience Platform", "dashicons-awards");
-			const systemHeader = createHeader("blackbox-group-system", "Web Platform", "WP Platform", "dashicons-wordpress");
+			const systemHeader = createHeader("blackbox-group-system", "The Hood", "WP Platform", "dashicons-wordpress");
 			const damHeader = createHeader("blackbox-group-dam", "DAM", "Digital Asset Management", "dashicons-format-image");
 			const osHeader = createHeader("blackbox-group-os", "OS", "Operating Systems", "dashicons-desktop");
 			const extensionsHeader = createHeader("blackbox-group-3rd", "Extensions", "Extensions", "dashicons-admin-plugins");
 
 			// Categorize items
+			adminMenu.querySelectorAll(".wp-menu-separator").forEach(sep => sep.style.display = "none");
 			const items = Array.from(adminMenu.querySelectorAll("li.menu-top"));
 			let lastGroup = "top";
 			
@@ -727,18 +735,18 @@ class Admin {
 			
 			const commerceSlugs = ["woocommerce", "wc-admin", "wc-payments", "woocommerce-payments", "payment", "pay", "product", "shop_order", "shop_coupon", "bazaar", "treasure-trove"];
 			
-			const itsmSlugs = ["bugnet", "compass_bug", "midnight_ticket", "magic-cape", "compass_cloak_hint", "wphb", "snapshot", "shipper", "blc_dash"];
+			const itsmSlugs = ["bugnet", "compass_bug", "midnight_ticket", "magic-cape", "compass_cloak_hint", "wphb", "snapshot", "shipper", "blc_dash", "wpmudev-videos"];
 			
 			const gamificationSlugs = ["xp_action", "achievement", "ability", "accessory", "radio_station", "compass_xp", "cafeteria_topic"];
 			
-			const systemIds = ["menu-dashboard", "menu-plugins", "menu-tools", "menu-settings"];
-			const systemSlugs = ["wpmudev-updates", "wpmudev", "wpmudev-videos"];
+			const systemIds = ["menu-plugins", "menu-tools", "menu-settings"];
+			const systemSlugs = ["wpmudev-updates", "wpmudev"];
 
 			// Core Launchpads (OS Group)
 			const osSlugs = ["w4-protocol", "toplevel_page_w4-protocol", "xophz-compass", "toplevel_page_xophz-compass", "youmeos", "toplevel_page_youmeos", "branding", "wp-defender"];
 			
 			items.forEach(li => {
-				if (li.classList.contains("blackbox-group-header") || li.id === "collapse-menu") return;
+				if (li.classList.contains("blackbox-group-header") || li.id === "collapse-menu" || li.id === "menu-dashboard") return;
 				
 				let link = li.querySelector("a");
 				let href = link ? link.getAttribute("href") : "";
@@ -792,12 +800,7 @@ class Admin {
 					li.dataset.bbGroup = "system";
 					lastGroup = "system";
 				} else if (li.classList.contains("wp-menu-separator")) {
-					if (["separator1", "separator2", "separator-last"].includes(li.id)) {
-						li.dataset.bbGroup = "system";
-					} else {
-						li.dataset.bbGroup = lastGroup !== "os" ? lastGroup : "3rd";
-					}
-					li.style.display = ""; // Ensure it's visible
+					li.style.display = "none";
 				} else {
 					li.dataset.bbGroup = "3rd";
 					lastGroup = "3rd";
@@ -1080,19 +1083,19 @@ class Admin {
 
 		add_settings_section(
 			'xophz_compass_general_section',
-			'w⁴ Protocol Configuration',
-			function() {
-				echo '<p>Manage w⁴ Protocol overrides and core visual matrix toggles.</p>';
-			},
+			'',
+			function() {},
 			'xophz_compass_settings'
 		);
 
 		add_settings_field(
 			'xophz_compass_disable_mu_styles',
-			'Disable UI Matrix',
+			'2030 Lifestream Interface',
 			function() {
 				$val = get_option( 'xophz_compass_disable_mu_styles', '0' );
-				echo '<label><input type="checkbox" name="xophz_compass_disable_mu_styles" value="1" ' . checked( 1, $val, false ) . ' /> Check to bypass the glassmorphic rendering and restore the standard WordPress admin interface.</label>';
+				$isEnabled = empty( $val );
+				echo '<input type="hidden" name="xophz_compass_disable_mu_styles" value="1" />';
+				echo '<label><input type="checkbox" name="xophz_compass_disable_mu_styles" value="0" ' . checked( true, $isEnabled, false ) . ' /> Apply Lifestream styling across all WP Admin pages.</label>';
 			},
 			'xophz_compass_settings',
 			'xophz_compass_general_section'
@@ -1100,11 +1103,11 @@ class Admin {
 
 		add_settings_field(
 			'blackbox_bedrock_wp_admin_menu_2030',
-			'WP Admin Menu 2030',
+			'2030 BlackBOX Menu',
 			function() {
 				$val = get_option( 'blackbox_bedrock_wp_admin_menu_2030', '1' );
 				echo '<input type="hidden" name="blackbox_bedrock_wp_admin_menu_2030" value="0" />';
-				echo '<label><input type="checkbox" name="blackbox_bedrock_wp_admin_menu_2030" value="1" ' . checked( 1, $val, false ) . ' /> Enable the modernized accordion grouping for the WordPress admin menu.</label>';
+				echo '<label><input type="checkbox" name="blackbox_bedrock_wp_admin_menu_2030" value="1" ' . checked( 1, $val, false ) . ' /> Enable menu accordion grouping.</label>';
 			},
 			'xophz_compass_settings',
 			'xophz_compass_general_section'
@@ -1162,7 +1165,7 @@ class Admin {
 		</style>";
 
 		echo '<script>
-		(function() {
+		document.addEventListener("DOMContentLoaded", function() {
 			var palettes = {
 				fresh:     ["#1d2327","#2c3338","#2271b1","#72aee6"],
 				light:     ["#e5e5e5","#999999","#d64e07","#04a4cc"],
@@ -1173,17 +1176,19 @@ class Admin {
 				ocean:     ["#627c83","#738e96","#9ebaa0","#aa9d88"],
 				sunrise:   ["#b43c38","#cf4944","#dd823b","#ccaf0b"]
 			};
-			document.addEventListener("change", function(e) {
-				if (e.target.name !== "admin_color") return;
-				var c = palettes[e.target.value] || palettes.fresh;
-				var r = document.documentElement.style;
-				r.setProperty("--wp-theme-base", c[0]);
-				r.setProperty("--wp-theme-focus", c[1]);
-				r.setProperty("--wp-theme-color", c[2]);
-				r.setProperty("--wp-theme-secondary", c[3]);
-				r.setProperty("--wp-theme-active", e.target.value === "light" ? c[1] : c[2]);
+			var radios = document.querySelectorAll("input[name=admin_color]");
+			radios.forEach(function(radio) {
+				radio.addEventListener("click", function() {
+					var c = palettes[this.value] || palettes.fresh;
+					var r = document.documentElement.style;
+					r.setProperty("--wp-theme-base", c[0]);
+					r.setProperty("--wp-theme-focus", c[1]);
+					r.setProperty("--wp-theme-color", c[2]);
+					r.setProperty("--wp-theme-secondary", c[3]);
+					r.setProperty("--wp-theme-active", this.value === "light" ? c[1] : c[2]);
+				});
 			});
-		})();
+		});
 		</script>';
 	}
 
