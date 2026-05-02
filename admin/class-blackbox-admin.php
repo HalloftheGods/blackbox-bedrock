@@ -8,6 +8,50 @@ class Admin {
 	private static $grouped_wpmudev_names = [];
 	private static $grouped_slugs = [];
 
+	private static $valuations = [
+		'beehive-analytics'              => [1188, 'Mixpanel Pro', 'Equivalent value based on enterprise analytics platforms offering custom event tracking and reporting.'],
+		'broken-link-checker'            => [1188, 'Ahrefs Lite', 'Comparable to entry-level SEO auditing tools for automated link monitoring.'],
+		'forminator'                     => [1188, 'Typeform Pro', 'Equivalent to premium form builders with conditional logic, payments, and API integrations.'],
+		'hustle'                         => [588,  'OptinMonster', 'Valued against leading lead generation and popup management software.'],
+		'shipper'                        => [348,  'BlogVault Migrate', 'Comparable to professional site migration and staging services.'],
+		'snapshot-backups'               => [300,  'VaultPress', 'Value based on managed daily cloud backup and restore solutions.'],
+		'ultimate-branding'              => [228,  'White Label CMS', 'Equivalent to premium white-labeling add-ons for agencies.'],
+		'wp-defender'                    => [2388, 'Sucuri Platform', 'Comparable to enterprise-grade web application firewalls and malware scanners.'],
+		'wp-hummingbird'                 => [588,  'WP Rocket + CDN', 'Valued against top-tier caching plugins bundled with premium CDN services.'],
+		'wp-smush-pro'                   => [1068, 'Cloudinary Pro', 'Equivalent to professional image optimization and delivery networks.'],
+		'wpmu-dev-seo'                   => [1548, 'SEMrush Pro', 'Comparable to comprehensive on-page SEO analysis and auditing suites.'],
+		'wpmudev-updates'                => [300,  'ManageWP Business', 'Value based on centralized multi-site management dashboards.'],
+		'wpmudev-videos'                 => [360,  'LinkedIn Learning', 'Equivalent to premium video training library subscriptions.'],
+		'xophz-compass'                  => [3600, 'Salesforce Platform', 'The core framework provides foundational CRM and application architecture comparable to enterprise PaaS.'],
+		'xophz-compass-alphabet-soup'    => [2388, 'Contentful CMS', 'A headless-ready content management engine valued against mid-market CMS platforms.'],
+		'xophz-compass-bazaar'           => [2388, 'Shopify Pro', 'Advanced eCommerce foresight and shop management equivalent to premium store platforms.'],
+		'xophz-compass-bomb-bag'         => [1188, 'Mailchimp Pro', 'A full-featured email marketing and automated drip sequence engine.'],
+		'xophz-compass-bugnet'           => [1500, 'Jira Service Mgmt', 'A comprehensive issue tracking and beta management system.'],
+		'xophz-compass-enchanted-mirror' => [948,  'Hotjar Plus', 'Audience comparison and behavioral analytics equivalent to premium insight tools.'],
+		'xophz-compass-enchiridion'      => [1200, 'Confluence Team', 'Knowledge base and documentation engine comparable to enterprise wikis.'],
+		'xophz-compass-event-horizon'    => [6000, 'Custom Portal SaaS', 'A complete WebGL desktop environment and application portal.'],
+		'xophz-compass-gale-boomerang'   => [2100, 'Pendo / Mixpanel', 'Advanced traffic, server load, and visitor resonance analytics engine.'],
+		'xophz-compass-golden-keys'      => [2760, 'Auth0 Pro', 'Identity and access management engine with secure keyword-based routing.'],
+		'xophz-compass-lead-magnet'      => [960,  'HubSpot Starter', 'Lead generation and inbound marketing capture engine.'],
+		'xophz-compass-lit-lamp'         => [588,  'StatusPage Pro', 'System health monitoring and transparent status reporting.'],
+		'xophz-compass-magic-cloak'      => [600,  'MemberPress Pro', 'Content restriction, membership tiers, and access control.'],
+		'xophz-compass-magic-formula'    => [708,  'Elementor Pro', 'Advanced visual shortcode generation and AI form conjuring.'],
+		'xophz-compass-magic-wand'       => [480,  'Yoast SEO Premium', 'Automated SEO enhancement and metadata optimization engine.'],
+		'xophz-compass-midnight-nerd'    => [1800, 'Zendesk Suite', 'ITSM support ticket and helpdesk management system.'],
+		'xophz-compass-mirror-shield'    => [468,  'Cloudflare WAF', 'Security engine reflecting attacks and protecting site access.'],
+		'xophz-compass-moving-castle'    => [468,  'WP Migrate Pro', 'Cross-site data migration and database syncing architecture.'],
+		'xophz-compass-pegasus-boots'    => [840,  'NitroPack Pro', 'Extreme performance optimization and speed enhancement engine.'],
+		'xophz-compass-phantom-zone'     => [600,  'WP Stagecoach', 'Error page management and staging environment isolation.'],
+		'xophz-compass-pixie-dust'       => [588,  'Mailtrack Pro', 'Invisible email open tracking and correspondence telemetry.'],
+		'xophz-compass-quests'           => [5400, 'HubSpot CRM Pro', 'A fully-featured Customer Relationship Management system with comm-links.'],
+		'xophz-compass-silver-arrow'     => [948,  'VWO / Optimizely', 'A/B split testing engine for optimizing conversion rates.'],
+		'xophz-compass-thors-hammer'     => [468,  'WP-CLI Pro Tools', 'Advanced developer tools and systemic command execution.'],
+		'xophz-compass-titans-mitt'      => [468,  'WP All Import Pro', 'Heavy-duty data import and object management engine.'],
+		'xophz-compass-treasure-map'     => [1188, 'Databox Pro', 'Executive dashboarding and KPI visualization engine.'],
+		'xophz-compass-treasure-trove'   => [1188, 'WooCommerce Ext.', 'Advanced eCommerce enhancements and payment gateways.'],
+		'xophz-compass-xp'               => [708,  'GamiPress Pro', 'Comprehensive gamification, achievements, and user reward system.'],
+	];
+
 	public function __construct() {
 		add_action( 'admin_menu', [ $this, 'register_w4_protocol_menu' ] );
 		add_action( 'admin_menu', [ $this, 'register_blackbox_menu' ] );
@@ -214,6 +258,11 @@ class Admin {
 					$go_url = admin_url( 'admin.php?page=' . $menu_slug );
 				}
 
+				$val = self::$valuations[ $folder ] ?? null;
+				$annual_value = $val ? $val[0] : 0;
+				$replaces_saas = $val ? $val[1] : '';
+				$rationale = $val ? ($val[2] ?? '') : '';
+
 				$display_plugins[] = [
 					'name' => $name,
 					'desc' => $data['Description'],
@@ -223,15 +272,25 @@ class Admin {
 					'icon' => $icon,
 					'type' => $is_xophz ? 'Compass Engine' : 'Infrastructure',
 					'path' => $path,
-					'go_url' => $go_url
+					'go_url' => $go_url,
+					'value' => $annual_value,
+					'replaces' => $replaces_saas,
+					'rationale' => $rationale
 				];
 			}
 		}
 
-		// Sort purely by name alphabetically as requested
 		usort( $display_plugins, function($a, $b) {
 			return strcasecmp( $a['name'], $b['name'] );
 		});
+
+		$total_value = array_sum( array_column( $display_plugins, 'value' ) );
+		$active_value = array_sum( array_map(
+			function($p) { return $p['active'] ? $p['value'] : 0; },
+			$display_plugins
+		));
+		$active_count = count( array_filter( $display_plugins, function($p) { return $p['active']; } ) );
+		$total_count = count( $display_plugins );
 
 		?>
 		<style>
@@ -267,13 +326,12 @@ class Admin {
 				-webkit-backdrop-filter: var(--rough-glass-filter, blur(20px));
 				border: 1px solid var(--rough-glass-border, rgba(255,255,255,0.05));
 				border-radius: 12px;
-				padding: 24px;
+				padding: 24px 24px 52px;
 				display: flex;
 				flex-direction: column;
 				box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 				transition: all 0.3s ease;
 				position: relative;
-				overflow: hidden;
 			}
 			.blackbox-card:hover {
 				transform: translateY(-5px);
@@ -285,6 +343,7 @@ class Admin {
 				position: absolute;
 				top: 0; left: 0; right: 0; height: 4px;
 				background: rgba(255,255,255,0.1);
+				border-radius: 12px 12px 0 0;
 			}
 			.blackbox-card.is-active::before {
 				background: var(--accent, #62c9ff);
@@ -406,14 +465,130 @@ class Admin {
 				box-shadow: 0 4px 15px rgba(255, 107, 107, 0.2);
 				transform: translateY(-1px);
 			}
+			.blackbox-card-ribbon {
+				--r: .35em;
+				--ribbon-color: rgba(98, 201, 255, 0.85);
+				position: absolute;
+				bottom: 0;
+				inset-inline: calc(-1 * var(--r));
+				text-align: center;
+				line-height: 1.6;
+				padding: calc(2 * var(--r)) .5em 6px;
+				border-radius: var(--r);
+				--_g: 0 / var(--r) calc(2 * var(--r)) no-repeat;
+				background:
+					radial-gradient(100% 50% at right, rgba(0,0,0,0.3) 98%, transparent 101%) 0 var(--_g),
+					radial-gradient(100% 50% at left, rgba(0,0,0,0.3) 98%, transparent 101%) 100% var(--_g),
+					conic-gradient(at var(--r) calc(2 * var(--r)), transparent 25%, var(--ribbon-color) 0)
+					0 0 / calc(100% - var(--r)) 100%;
+				z-index: 2;
+				cursor: help;
+			}
+			.blackbox-card.is-infrastructure .blackbox-card-ribbon {
+				--ribbon-color: rgba(217, 190, 111, 0.85);
+			}
+			.blackbox-card-ribbon-value {
+				font-size: 0.85rem;
+				font-weight: 800;
+				color: rgba(13, 17, 23, 0.95);
+				letter-spacing: 0.5px;
+			}
+			.blackbox-card-ribbon-label {
+				font-size: 0.65rem;
+				font-weight: 700;
+				color: rgba(13, 17, 23, 0.75);
+				letter-spacing: 0.3px;
+				text-transform: uppercase;
+			}
+			.blackbox-ribbon-tooltip {
+				position: absolute;
+				bottom: 100%;
+				left: 50%;
+				transform: translateX(-50%) translateY(10px);
+				width: 260px;
+				background: rgba(13, 17, 23, 0.95);
+				backdrop-filter: blur(10px);
+				border: 1px solid rgba(255,255,255,0.15);
+				border-radius: 8px;
+				padding: 12px;
+				color: rgba(255,255,255,0.9);
+				font-size: 0.8rem;
+				line-height: 1.4;
+				text-align: center;
+				box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+				opacity: 0;
+				visibility: hidden;
+				transition: all 0.2s ease;
+				pointer-events: none;
+			}
+			.blackbox-ribbon-tooltip::after {
+				content: '';
+				position: absolute;
+				top: 100%;
+				left: 50%;
+				transform: translateX(-50%);
+				border-width: 6px;
+				border-style: solid;
+				border-color: rgba(13, 17, 23, 0.95) transparent transparent transparent;
+			}
+			.blackbox-card-ribbon:hover .blackbox-ribbon-tooltip {
+				opacity: 1;
+				visibility: visible;
+				transform: translateX(-50%) translateY(-8px);
+			}
+			.blackbox-portfolio {
+				display: flex;
+				gap: 32px;
+				margin-top: 16px;
+				flex-wrap: wrap;
+			}
+			.blackbox-stat {
+				display: flex;
+				flex-direction: column;
+				gap: 2px;
+			}
+			.blackbox-stat-value {
+				font-size: 1.5rem;
+				font-weight: 700;
+				color: var(--accent, #62c9ff);
+				line-height: 1;
+			}
+			.blackbox-stat-value.gold {
+				color: var(--gold, #d9be6f);
+			}
+			.blackbox-stat-label {
+				font-size: 0.7rem;
+				text-transform: uppercase;
+				letter-spacing: 1px;
+				color: rgba(255,255,255,0.4);
+			}
 		</style>
 
 		<div class="wrap blackbox-dashboard">
 			<div class="blackbox-header">
 				<img src="<?php echo esc_url( plugins_url( 'assets/images/obsidian.png', dirname( __DIR__ ) . '/BlackBOX.php' ) ); ?>" alt="BlackBOX">
-				<div>
-					<h1>BlackBOX Operations Suite</h1>
-					<p style="margin:0; color:rgba(255,255,255,0.6); font-size:1.1rem;">Centralized visualization of all primary engine and infrastructure plugins.</p>
+				<div style="flex:1;">
+					<h1>The BlackBOX Operations Suite</h1>
+					<p style="margin:0; color:rgba(255,255,255,0.6); font-size:1.1rem;">
+						What's in your BlackBOX?</p>
+					<div class="blackbox-portfolio">
+						<div class="blackbox-stat">
+							<span class="blackbox-stat-value"><?php echo $total_count; ?></span>
+							<span class="blackbox-stat-label">Engines</span>
+						</div>
+						<div class="blackbox-stat">
+							<span class="blackbox-stat-value"><?php echo $active_count; ?></span>
+							<span class="blackbox-stat-label">Active</span>
+						</div>
+						<div class="blackbox-stat">
+							<span class="blackbox-stat-value gold">$<?php echo number_format( $active_value ); ?></span>
+							<span class="blackbox-stat-label">Active Value / yr</span>
+						</div>
+						<div class="blackbox-stat">
+							<span class="blackbox-stat-value">$<?php echo number_format( $total_value ); ?></span>
+							<span class="blackbox-stat-label">Portfolio Value / yr</span>
+						</div>
+					</div>
 				</div>
 			</div>
 
@@ -449,6 +624,19 @@ class Admin {
 								<?php endif; ?>
 							</div>
 						</div>
+						<?php if ( ! empty( $plugin['value'] ) ) : ?>
+						<div class="blackbox-card-ribbon">
+							<span class="blackbox-card-ribbon-value">≈ $<?php echo number_format( $plugin['value'] ); ?>/yr</span>
+							<?php if ( ! empty( $plugin['replaces'] ) ) : ?>
+								<span class="blackbox-card-ribbon-label"> · Market Eqv: <?php echo esc_html( $plugin['replaces'] ); ?></span>
+							<?php endif; ?>
+							<?php if ( ! empty( $plugin['rationale'] ) ) : ?>
+								<div class="blackbox-ribbon-tooltip">
+									<?php echo esc_html( $plugin['rationale'] ); ?>
+								</div>
+							<?php endif; ?>
+						</div>
+						<?php endif; ?>
 					</div>
 				<?php endforeach; ?>
 			</div>
@@ -555,6 +743,67 @@ class Admin {
 				}
 			}
 		}
+	}
+
+	public function build_compass_group_map() {
+		if ( ! function_exists( 'get_plugins' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/plugin.php';
+		}
+
+		$plugins = get_plugins();
+		$map = [];
+
+		$route_remap = [
+			'quests'        => 'questbook',
+			'alphabet-soup' => 'newsroom',
+		];
+
+		$group_to_panel = [
+			'CMS'  => 'cms',
+			'CRM'  => 'crm',
+			'MA'   => 'ma',
+			'POS'  => 'commerce',
+			'BI'   => 'bi',
+			'LXP'  => 'gamification',
+			'ITSM' => 'itsm',
+			'OS'   => 'os',
+		];
+
+		foreach ( $plugins as $path => $data ) {
+			$text_domain = $data['TextDomain'] ?? '';
+			$is_compass_plugin = strpos( $text_domain, 'xophz-compass-' ) === 0;
+			if ( ! $is_compass_plugin ) continue;
+
+			$slug = str_replace( 'xophz-compass-', '', $text_domain );
+
+			$group = ! empty( $data['Group'] ) ? trim( $data['Group'] ) : '';
+
+			if ( empty( $group ) ) {
+				$plugin_file = WP_PLUGIN_DIR . '/' . $path;
+				if ( file_exists( $plugin_file ) ) {
+					$headers = get_file_data( $plugin_file, [ 'Group' => 'Group' ] );
+					$group = ! empty( $headers['Group'] ) ? trim( $headers['Group'] ) : '';
+				}
+			}
+
+			if ( empty( $group ) ) continue;
+
+			$panel = $group_to_panel[ $group ] ?? strtolower( $group );
+			$route_slug = $route_remap[ $slug ] ?? $slug;
+			
+			if ( $slug === 'magic-formula' ) {
+				$icon = plugins_url( 'xophz-compass/assets/magic-formula.svg' );
+			} else {
+				$icon = plugins_url( $text_domain . '/icon.svg' );
+			}
+
+			$map[ $route_slug ] = [
+				'panel' => $panel,
+				'icon'  => $icon,
+			];
+		}
+
+		return $map;
 	}
 
 	public function output_accordion_js() {
@@ -714,6 +963,7 @@ class Admin {
 			const damHeader = createHeader("blackbox-group-dam", "DAM", "Digital Asset Management", "dashicons-format-image");
 			const osHeader = createHeader("blackbox-group-os", "OS", "Operating Systems", "dashicons-desktop");
 			const extensionsHeader = createHeader("blackbox-group-3rd", "Extensions", "Extensions", "dashicons-admin-plugins");
+			const biHeader = createHeader("blackbox-group-bi", "BI", "Business Intelligence", "dashicons-chart-area");
 
 			// Categorize items
 			adminMenu.querySelectorAll(".wp-menu-separator").forEach(sep => sep.style.display = "none");
@@ -894,6 +1144,13 @@ class Admin {
 				commerceItems.forEach(li => adminMenu.insertBefore(li, collapseMenu));
 			}
 
+			// BI (Business Intelligence)
+			let biItems = items.filter(li => li.dataset.bbGroup === "bi");
+			if (biItems.length > 0) {
+				adminMenu.insertBefore(biHeader, collapseMenu);
+				biItems.forEach(li => adminMenu.insertBefore(li, collapseMenu));
+			}
+
 			// ITSM
 			let itsmItems = items.filter(li => li.dataset.bbGroup === "itsm");
 			if (itsmItems.length > 0) {
@@ -915,6 +1172,57 @@ class Admin {
 				thirdItems.forEach(li => adminMenu.insertBefore(li, collapseMenu));
 			}
 
+			// Redistribute Compass submenu items into sidebar groups
+			const compassGroupMap = <?php echo json_encode( $this->build_compass_group_map() ); ?>;
+			const compassMenu = document.getElementById("toplevel_page_xophz-compass");
+			if (compassMenu) {
+				const compassIcon = compassMenu.querySelector(".wp-menu-image");
+				const compassIconSrc = compassIcon ? (compassIcon.querySelector("img") ? compassIcon.querySelector("img").src : "") : "";
+				const subItems = Array.from(compassMenu.querySelectorAll(".wp-submenu li"));
+
+				subItems.forEach((li, idx) => {
+					if (idx < 2) return;
+
+					const link = li.querySelector("a");
+					if (!link) return;
+
+					const href = link.getAttribute("href") || "";
+					const routeMatch = href.match(/#\/([a-z0-9-]+)/);
+					if (!routeMatch) return;
+
+					const routeSlug = routeMatch[1];
+					const mapData = compassGroupMap[routeSlug];
+					if (!mapData) return;
+
+					const panelGroup = mapData.panel;
+					const pluginIconSrc = mapData.icon;
+
+					const newLi = document.createElement("li");
+					newLi.className = "wp-not-current-submenu menu-top menu-icon-generic";
+					newLi.dataset.bbGroup = panelGroup;
+					newLi.dataset.compassRoute = routeSlug;
+
+					const iconMarkup = pluginIconSrc
+						? `<div class="wp-menu-image"><img src="${pluginIconSrc}" alt="" style="width: 22px; height: 22px; max-width: none !important; padding: 0 !important; opacity: 1 !important; filter: none !important; object-fit: contain; margin-top: 6px; margin-left: 7px;" /></div>`
+						: (compassIconSrc 
+							? `<div class="wp-menu-image"><img src="${compassIconSrc}" alt="" /></div>`
+							: `<div class="wp-menu-image dashicons-before dashicons-marker"></div>`);
+
+					newLi.innerHTML = `<a href="${href}" class="wp-not-current-submenu menu-top"><div class="wp-menu-arrow"><div></div></div>${iconMarkup}<div class="wp-menu-name">${link.textContent.trim()}</div></a>`;
+
+					const targetHeader = adminMenu.querySelector(`[id*="blackbox-group-${panelGroup}"]`);
+					if (targetHeader) {
+						let insertPoint = targetHeader.nextElementSibling;
+						while (insertPoint && insertPoint.dataset && insertPoint.dataset.bbGroup === panelGroup) {
+							insertPoint = insertPoint.nextElementSibling;
+						}
+						adminMenu.insertBefore(newLi, insertPoint);
+					}
+
+					li.style.display = "none";
+				});
+			}
+
 			// Apply custom WPMUDEV icons to their respective menus
 			const customIcons = <?php echo json_encode(self::$grouped_wpmudev_icons); ?>;
 			for (const [slug, icon] of Object.entries(customIcons)) {
@@ -933,7 +1241,7 @@ class Admin {
 			}
 
 			// Wrap each group's items in a panel container
-			const allGroups = ["os", "cms", "dam", "crm", "gamification", "ma", "commerce", "itsm", "system", "3rd"];
+			const allGroups = ["os", "cms", "dam", "crm", "gamification", "ma", "commerce", "bi", "itsm", "system", "3rd"];
 			const panels = {};
 
 			allGroups.forEach(gn => {
@@ -1014,6 +1322,57 @@ class Admin {
 			if (activeGroup) {
 				toggleGroup(activeGroup, true);
 			}
+
+			function updateActiveCompassMenu() {
+				const hash = window.location.hash;
+				const routeMatch = hash.match(/#\/([a-z0-9-]+)/);
+				if (!routeMatch) return;
+
+				const routeSlug = routeMatch[1];
+				const mapData = compassGroupMap[routeSlug];
+				if (!mapData) return;
+
+				adminMenu.querySelectorAll(".wp-has-current-submenu, .current, .wp-menu-open").forEach(el => {
+					if (!el.classList.contains("blackbox-group-header")) {
+						el.classList.remove("wp-has-current-submenu", "current", "wp-menu-open");
+						el.classList.add("wp-not-current-submenu");
+					}
+				});
+
+				const targetLi = adminMenu.querySelector(`li[data-compass-route="${routeSlug}"]`);
+				if (targetLi) {
+					targetLi.classList.remove("wp-not-current-submenu");
+					targetLi.classList.add("wp-has-current-submenu", "wp-menu-open", "current");
+					
+					const a = targetLi.querySelector("a");
+					if (a) {
+						a.classList.remove("wp-not-current-submenu");
+						a.classList.add("wp-has-current-submenu", "wp-menu-open", "current");
+					}
+
+					const group = targetLi.dataset.bbGroup;
+					if (group) {
+						toggleGroup(group, true);
+					}
+				}
+			}
+
+			updateActiveCompassMenu();
+			window.addEventListener("hashchange", updateActiveCompassMenu);
+
+			// Vue 3's WebHashHistory uses pushState/replaceState under the hood, so hashchange doesn't fire.
+			// We intercept these to keep the BlackBOX menu in sync with the Vue SPA routing.
+			const originalPushState = history.pushState;
+			history.pushState = function() {
+				originalPushState.apply(this, arguments);
+				updateActiveCompassMenu();
+			};
+
+			const originalReplaceState = history.replaceState;
+			history.replaceState = function() {
+				originalReplaceState.apply(this, arguments);
+				updateActiveCompassMenu();
+			};
 
 			// Reveal the menu after grouping is complete to prevent CLS
 			document.body.classList.add("blackbox-menu-grouped");
