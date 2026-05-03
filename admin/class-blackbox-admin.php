@@ -1666,6 +1666,11 @@ class Admin {
 			return $theme_json;
 		}
 
+		global $pagenow;
+		if ( $pagenow === 'customize.php' || ( function_exists( 'is_customize_preview' ) && is_customize_preview() ) ) {
+			return $theme_json;
+		}
+
 		if ( function_exists( 'get_current_screen' ) ) {
 			$screen = get_current_screen();
 			if ( ! $screen || ! $screen->is_block_editor() ) {
@@ -1688,6 +1693,11 @@ class Admin {
 
 	public function force_editor_css_settings( $settings, $context ) {
 		if ( ! empty( get_option( 'xophz_compass_disable_mu_styles' ) ) ) {
+			return $settings;
+		}
+
+		global $pagenow;
+		if ( $pagenow === 'customize.php' || ( function_exists( 'is_customize_preview' ) && is_customize_preview() ) ) {
 			return $settings;
 		}
 
