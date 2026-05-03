@@ -1583,6 +1583,11 @@ class Admin {
 			return $return ? '' : null;
 		}
 
+		global $pagenow;
+		if ( $pagenow === 'customize.php' || ( function_exists( 'is_customize_preview' ) && is_customize_preview() ) ) {
+			return $return ? '' : null;
+		}
+
 		static $done = false;
 		if ( $done && ! $return && current_action() !== 'enqueue_block_editor_assets' ) return;
 		if ( ! $return ) $done = true;
@@ -1648,6 +1653,11 @@ class Admin {
 		}
 
 		if ( ! empty( get_option( 'xophz_compass_disable_mu_styles' ) ) ) {
+			return;
+		}
+
+		global $pagenow;
+		if ( $pagenow === 'customize.php' || ( function_exists( 'is_customize_preview' ) && is_customize_preview() ) ) {
 			return;
 		}
 
