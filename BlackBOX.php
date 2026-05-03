@@ -12,7 +12,7 @@
  * 
  * Plugin Name: BlackBOX Bedrock
  * Description: The modular bedrock foundation for the My Compass/YouMeOS Experience Engine.
- * Version:           26.5.3.1097
+ * Version:           26.5.3.1099
  * Author:      Hall of the Gods, Inc.
  * Author URI:  https://www.hallofthegods.com/
  * Plugin URI:  https://github.com/HalloftheGods/blackbox-bedrock
