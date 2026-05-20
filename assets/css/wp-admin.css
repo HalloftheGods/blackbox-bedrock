@@ -887,6 +887,26 @@ input[type="radio"]:focus {
 	-webkit-backdrop-filter: blur(5px) !important;
 }
 
+.welcome-panel {
+	background: rgba(13, 17, 23, 0.7) !important;
+	backdrop-filter: var(--rough-glass-filter) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	border-radius: 8px !important;
+	color: var(--text-main) !important;
+}
+
+.welcome-panel h2,
+.welcome-panel h3,
+.welcome-panel p,
+.welcome-panel .welcome-panel-column-content {
+	color: var(--text-main) !important;
+}
+
+.welcome-panel .welcome-panel-column {
+	background: transparent !important;
+}
+
 .welcome-panel .welcome-panel-column-container {
 	box-sizing: border-box;
 	width: 100%;
@@ -897,7 +917,7 @@ input[type="radio"]:focus {
 	grid-template-columns: repeat(3, 1fr);
 	gap: 32px;
 	align-self: flex-end;
-	background: transparent;
+	background: transparent !important;
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -1103,4 +1123,32 @@ input[type="radio"]:focus {
 #postcustomstuff select:focus {
 	border-color: var(--accent) !important;
 	box-shadow: 0 0 0 1px var(--accent) !important;
+}
+
+/* Screen Options Dropdown */
+#screen-meta {
+	background: rgba(13, 17, 23, 0.95) !important;
+	backdrop-filter: var(--rough-glass-filter) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	border-top: none !important;
+	border-radius: 0 0 8px 8px !important;
+	color: var(--text-main) !important;
+	box-shadow: 0 16px 32px rgba(0, 0, 0, 0.5) !important;
+}
+
+#screen-meta p,
+#screen-meta h5,
+#screen-meta label,
+#screen-meta legend {
+	color: var(--text-main) !important;
+}
+
+#screen-meta-links .show-settings {
+	background: rgba(13, 17, 23, 0.7) !important;
+	backdrop-filter: var(--rough-glass-filter) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	border-top: none !important;
+	color: var(--text-main) !important;
 }

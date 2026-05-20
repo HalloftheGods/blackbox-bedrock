@@ -197,23 +197,18 @@ class Admin {
 				$is_active = in_array( $path, $active_plugins, true ) || is_plugin_active_for_network( $path );
 				
 				$icon = '';
-				if ( $is_xophz ) {
-					// Check for specific custom images first
-					if ( $folder === 'xophz-compass-magic-formula' ) {
-						$icon = plugins_url( 'xophz-compass/assets/magic-formula.svg' );
-					} else {
-						$icon_path = WP_PLUGIN_DIR . '/' . $folder . '/icon.svg';
-						if ( file_exists( $icon_path ) ) {
-							$icon = plugins_url( $folder . '/icon.svg' );
-						}
+				// Check for specific custom images first
+				if ( $folder === 'xophz-compass-magic-formula' ) {
+					$icon = plugins_url( 'xophz-compass/assets/magic-formula.svg' );
+				} else {
+					$icon_path = WP_PLUGIN_DIR . '/' . $folder . '/icon.svg';
+					if ( file_exists( $icon_path ) ) {
+						$icon = plugins_url( $folder . '/icon.svg' );
 					}
 				}
 				
 				if ( empty($icon) && $is_wpmudev ) {
-					$menu_slug = $folder_to_slug[ $folder ] ?? $folder;
-					if ( isset( self::$grouped_wpmudev_icons[ $menu_slug ] ) ) {
-						$icon = self::$grouped_wpmudev_icons[ $menu_slug ];
-					}
+					$icon = plugins_url( 'wpmudev-updates/assets/images/wpmudev.png' );
 				}
 				
 				if ( empty($icon) ) {
@@ -358,13 +353,33 @@ class Admin {
 				margin-bottom: 16px;
 			}
 			.blackbox-card-icon {
-				width: 48px;
-				height: 48px;
-				border-radius: 10px;
+				width: 64px;
+				height: 64px;
 				object-fit: contain;
-				background: rgba(0, 0, 0, 0.3);
-				padding: 8px;
-				border: 1px solid rgba(255,255,255,0.05);
+			}
+			.blackbox-card-bg-icon {
+				position: absolute;
+				bottom: -15px;
+				right: -15px;
+				width: 140px;
+				height: 140px;
+				opacity: 0.05;
+				pointer-events: none;
+				z-index: 0;
+				object-fit: contain;
+				transform: rotate(-15deg);
+				transition: all 0.3s ease;
+				filter: grayscale(100%);
+			}
+			.blackbox-card.is-active .blackbox-card-bg-icon {
+				opacity: 0.15;
+				filter: none;
+			}
+			.blackbox-card-header,
+			.blackbox-card-desc,
+			.blackbox-card-footer {
+				position: relative;
+				z-index: 1;
 			}
 			.blackbox-card-title-area h2 {
 				margin: 0 0 4px 0 !important;
@@ -599,6 +614,7 @@ class Admin {
 					$type_class = $plugin['type'] === 'Infrastructure' ? 'is-infrastructure' : 'is-compass';
 				?>
 					<div class="blackbox-card <?php echo $plugin['active'] ? 'is-active' : ''; ?> <?php echo $type_class; ?>">
+						<img src="<?php echo esc_url( $plugin['icon'] ); ?>" class="blackbox-card-bg-icon" alt="">
 						<div class="blackbox-card-header">
 							<img src="<?php echo esc_url( $plugin['icon'] ); ?>" class="blackbox-card-icon" alt="Icon">
 							<div class="blackbox-card-title-area">
