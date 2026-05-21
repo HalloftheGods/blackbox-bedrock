@@ -1,5 +1,20 @@
 /* Classic WP Admin Core Overrides (Lists, Tables, Notices, Widgets) */
 
+/* ==========================================================================
+   UNIVERSAL BACKGROUND STRIPPER
+   Forces the glass UI to shine through by stripping native/plugin backgrounds
+   while preserving media, inputs, buttons, and our custom styled cards.
+   ========================================================================== */
+#wpcontent *:not(
+	img, picture, video, canvas, svg, iframe, 
+	input, select, textarea, button, 
+	.button, .button-primary, .button-secondary, .components-button, 
+	.postbox, .components-card, .components-surface, 
+	.notice, div.error, div.updated, .update-nag, .akismet-card
+) {
+	background-color: transparent !important;
+}
+
 /* Lists & Tables */
 .wp-list-table,
 table.widefat {
@@ -579,12 +594,196 @@ ul#adminmenu > li.current > a.current:after {
 
 /* WooCommerce Store Alerts */
 .woocommerce-store-alerts,
+#wc-admin-app .woocommerce-layout__header,
+#wc-admin-app .woocommerce-layout__header-wrapper,
 .woocommerce-layout__header,
-.woocommerce-layout__header-wrapper {
-	background: rgba(13, 17, 23, 0.7) !important;
+.woocommerce-layout__header-wrapper,
+.woocommerce-layout__activity-panel {
+	background: transparent !important;
+	background-color: transparent !important;
+	border: none !important;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+	color: var(--text-main) !important;
+	box-shadow: none !important;
+}
+
+#wc-admin-app .woocommerce-layout__header-heading {
+	color: var(--text-main) !important;
+}
+
+.woocommerce-layout__header-back-button svg {
+	fill: var(--text-main) !important;
+}
+
+.woocommerce-layout__activity-panel-tab {
+	background: transparent !important;
+	border: none !important;
+	color: var(--text-main) !important;
+}
+
+.woocommerce-layout__activity-panel-tab:hover {
+	color: var(--accent) !important;
+}
+
+/* WooCommerce Order Edit Pages */
+.woocommerce_order_items_wrapper,
+.wc-order-data-row,
+table.woocommerce_order_items,
+table.woocommerce_order_items thead th,
+table.woocommerce_order_items tbody th,
+table.woocommerce_order_items tbody td,
+table.woocommerce_order_items tfoot th,
+table.woocommerce_order_items tfoot td,
+.wc-order-totals,
+.wc-order-totals tbody td,
+.wc-order-totals tbody th {
+	background: transparent !important;
+	color: var(--text-main) !important;
+	border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.woocommerce_order_items_wrapper {
+	background: var(--rough-glass-bg) !important;
 	backdrop-filter: var(--rough-glass-filter) !important;
 	-webkit-backdrop-filter: var(--rough-glass-filter) !important;
 	border: 1px solid var(--rough-glass-border) !important;
+	border-radius: 8px !important;
+	box-shadow: 0 4px 5px rgba(0, 0, 0, 0.4) !important;
+}
+
+.woocommerce_order_items .view table.display_meta {
+	background: transparent !important;
+}
+
+.woocommerce_order_items .view table.display_meta th,
+.woocommerce_order_items .view table.display_meta td {
+	color: var(--text-main) !important;
+}
+
+.wc-order-totals-items {
+	background: transparent !important;
+}
+
+#woocommerce-order-items .inside {
+	background: transparent !important;
+}
+
+/* WooCommerce React Settings / Payments UI */
+.components-surface,
+.components-card,
+.woocommerce-list__item,
+.woocommerce-task-list__item,
+.woocommerce-experimental-list,
+.woocommerce-experimental-list__item,
+.settings-payment-gateways__header,
+.settings-payment-gateways__list,
+.woocommerce-incentive-banner,
+.woocommerce-inbox-message__wrapper {
+	background: var(--rough-glass-bg) !important;
+	backdrop-filter: var(--rough-glass-filter) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter) !important;
+	border-color: var(--rough-glass-border) !important;
+	color: var(--text-main) !important;
+}
+
+.components-text,
+.woocommerce-list__item-title,
+.woocommerce-list__item-content,
+.woocommerce-task-list__item-title,
+.woocommerce-task__estimated-time,
+.settings-payment-gateways__header-title,
+.components-card__body,
+.woocommerce-incentive-banner__copy,
+.woocommerce-incentive-banner__terms,
+.woocommerce-incentive-banner__actions,
+.woocommerce-task-progress-header__title,
+.woocommerce-task-progress-header__contents p,
+.woocommerce-task-header__contents h1,
+.woocommerce-task-header__contents p,
+.woocommerce-inbox-message__title,
+.woocommerce-inbox-message__text,
+.woocommerce-inbox-message__date,
+.woocommerce-stats-overview__install-jetpack-promo h2,
+.woocommerce-stats-overview__install-jetpack-promo p {
+	color: var(--text-main) !important;
+}
+
+.woocommerce-list__item-inner,
+.woocommerce-inbox-message__actions,
+.woocommerce-stats-overview__install-jetpack-promo,
+.woocommerce-summary__item {
+	background: transparent !important;
+	border-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+.woocommerce-list__item:hover,
+.woocommerce-task-list__item:hover,
+.woocommerce-experimental-list__item:hover,
+.woocommerce-summary__item:hover {
+	background: rgba(98, 201, 255, 0.05) !important;
+}
+
+.woocommerce-experimental-list__item.is-active,
+.woocommerce-task-list__item.is-active {
+	background: rgba(98, 201, 255, 0.1) !important;
+}
+
+.woocommerce-status-badge,
+.woocommerce-pill,
+.woocommerce-official-extension-badge,
+.woocommerce-badge {
+	background: rgba(98, 201, 255, 0.15) !important;
+	border: 1px solid rgba(98, 201, 255, 0.3) !important;
+	color: var(--accent) !important;
+}
+
+.components-country-select-control__button,
+.components-tab-panel__tabs-item {
+	background: transparent !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	color: var(--text-main) !important;
+}
+
+.components-tab-panel__tabs-item {
+	border: none !important;
+	border-bottom: 2px solid transparent !important;
+}
+
+.components-tab-panel__tabs-item.is-active {
+	color: var(--accent) !important;
+	border-bottom-color: var(--accent) !important;
+}
+
+.woocommerce-task-dashboard__container,
+.woocommerce-homescreen,
+.woocommerce-inbox-message {
+	background: transparent !important;
+}
+
+/* WooCommerce Setup Wizard / Onboarding Page */
+body.woocommerce-setup,
+.woocommerce-setup,
+#wc-admin-app,
+.woocommerce-admin-onboarding,
+.woocommerce-admin-onboarding-wrapper,
+.woocommerce-profile-wizard__layout,
+.woocommerce-profile-wizard__step,
+.woocommerce-profile-wizard__step-header,
+.woocommerce-setup-content {
+	background: transparent !important;
+	color: var(--text-main) !important;
+}
+
+.woocommerce-profile-wizard__heading,
+.woocommerce-profile-wizard__subheading,
+.woocommerce-admin-onboarding__heading,
+.woocommerce-admin-onboarding__description,
+#wc-admin-app h1,
+#wc-admin-app h2,
+#wc-admin-app p,
+.woocommerce-setup h1,
+.woocommerce-setup h2,
+.woocommerce-setup p {
 	color: var(--text-main) !important;
 }
 
@@ -1151,4 +1350,56 @@ input[type="radio"]:focus {
 	border: 1px solid var(--rough-glass-border) !important;
 	border-top: none !important;
 	color: var(--text-main) !important;
+}
+
+/* General Forms and WooCommerce Settings Fixes */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="tel"],
+input[type="url"],
+select,
+textarea {
+	background: rgba(0, 0, 0, 0.3) !important;
+	border: 1px solid rgba(255, 255, 255, 0.1) !important;
+	color: var(--text-main) !important;
+	border-radius: 4px !important;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="url"]:focus,
+select:focus,
+textarea:focus {
+	border-color: var(--accent) !important;
+	box-shadow: 0 0 0 1px var(--accent) !important;
+	outline: none !important;
+}
+
+/* Remove WooCommerce white background forcing */
+.woocommerce table.form-table,
+.woocommerce-page table.form-table,
+.woocommerce form,
+.woocommerce-page form,
+.woocommerce .wc-settings-sub-title,
+.woocommerce-page .wc-settings-sub-title,
+#wc-admin-app .woocommerce-layout,
+.woocommerce-layout__header,
+.woocommerce-layout__activity-panel {
+	background: transparent !important;
+}
+
+/* Make sure form descriptions are readable */
+.woocommerce span.description, 
+.woocommerce-page span.description,
+.woocommerce p.description,
+.woocommerce-page p.description,
+.form-table p {
+	color: rgba(255, 255, 255, 0.6) !important;
 }
