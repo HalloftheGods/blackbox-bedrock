@@ -989,7 +989,7 @@ class Admin {
 			const commerceHeader = createHeader("blackbox-group-commerce", "POS", "Point of Sale", "dashicons-cart");
 			const itsmHeader = createHeader("blackbox-group-itsm", "ITSM", "IT Service Management", "dashicons-sos");
 			const gamificationHeader = createHeader("blackbox-group-gamification", "LXP", "Learning Experience Platform", "dashicons-awards");
-			const systemHeader = createHeader("blackbox-group-system", "The Hood", "WP Platform", "dashicons-wordpress");
+			const systemHeader = createHeader("blackbox-group-system", "WordPress", "WP Platform", "dashicons-wordpress");
 			const damHeader = createHeader("blackbox-group-dam", "DAM", "Digital Asset Management", "dashicons-format-image");
 			const osHeader = createHeader("blackbox-group-os", "OS", "Operating Systems", "dashicons-desktop");
 			const extensionsHeader = createHeader("blackbox-group-3rd", "Extensions", "Extensions", "dashicons-admin-plugins");
