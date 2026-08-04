@@ -21,6 +21,19 @@ html {
 
 body.login {
 	background: transparent !important;
+	display: flex !important;
+	flex-direction: column !important;
+	justify-content: center !important;
+	align-items: center !important;
+	min-height: 100vh !important;
+	margin: 0 !important;
+	padding: 24px 0 !important;
+	box-sizing: border-box !important;
+}
+
+.login #login {
+	padding: 0 !important;
+	margin: 0 auto !important;
 }
 
 /* Modal Sizing */
@@ -69,6 +82,7 @@ body.login-action-logout #login {
 
 .login #nav, .login #backtoblog {
 	text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+	text-align: center !important;
 }
 
 /* Inputs */
@@ -110,21 +124,36 @@ body.login-action-logout #login {
 	content: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2020%2020%27%3E%3Cpath%20d%3D%27M14.83%204.89l1.34.94-5.81%208.38H9.02L5.78%209.67l1.34-1.25%202.57%202.4z%27%20fill%3D%27%23d9be6f%27%2F%3E%3C%2Fsvg%3E") !important;
 }
 
-/* Submit Button */
+/* Submit Button - Glassmorphic */
 .wp-core-ui .button-primary {
-	background: var(--hog-gold) !important;
-	border-color: var(--hog-gold-dark) !important;
-	color: var(--hog-text) !important;
-	text-shadow: none !important;
-	box-shadow: 0 1px 0 var(--hog-gold-dark) !important;
+	background: linear-gradient(135deg, rgba(217, 190, 111, 0.35), rgba(192, 164, 85, 0.2)) !important;
+	backdrop-filter: blur(12px) saturate(180%) !important;
+	-webkit-backdrop-filter: blur(12px) saturate(180%) !important;
+	border: 1px solid rgba(217, 190, 111, 0.5) !important;
+	border-top: 1px solid rgba(255, 255, 255, 0.4) !important;
+	color: #ffffff !important;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6) !important;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+	border-radius: 6px !important;
+	font-weight: 600 !important;
+	letter-spacing: 0.5px !important;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 .wp-core-ui .button-primary:hover,
-.wp-core-ui .button-primary:focus,
+.wp-core-ui .button-primary:focus {
+	background: linear-gradient(135deg, rgba(217, 190, 111, 0.55), rgba(192, 164, 85, 0.35)) !important;
+	border-color: rgba(217, 190, 111, 0.8) !important;
+	border-top-color: rgba(255, 255, 255, 0.6) !important;
+	color: #ffffff !important;
+	box-shadow: 0 6px 20px rgba(217, 190, 111, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+	transform: translateY(-1px) !important;
+}
+
 .wp-core-ui .button-primary:active {
-	background: var(--hog-gold-hover) !important;
-	border-color: var(--hog-gold-dark) !important;
-	color: var(--hog-text) !important;
+	background: linear-gradient(135deg, rgba(217, 190, 111, 0.4), rgba(192, 164, 85, 0.25)) !important;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), inset 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+	transform: translateY(0) !important;
 }
 
 /* Links */

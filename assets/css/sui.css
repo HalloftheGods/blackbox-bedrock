@@ -322,8 +322,8 @@ hr,
 /* Fix alignment/styling for chips/badges */
 .sui-tag,
 .sui-badge,
-[class*="tag"],
-[class*="badge"] {
+.sui-wrap [class*="tag"],
+.sui-wrap [class*="badge"] {
 	background: rgba(255, 255, 255, 0.1) !important;
 	border: 1px solid rgba(255, 255, 255, 0.1) !important;
 	color: var(--text-main) !important;
