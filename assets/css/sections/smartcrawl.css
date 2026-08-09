@@ -1,0 +1,99 @@
+/* ═══════════════════════════════════════════════════════
+   SmartCrawl & WDS Sidebar Dark Theme – BlackBOX Override
+   ═══════════════════════════════════════════════════════ */
+
+/* ── SmartCrawl Sidebar Accordion & Containers ── */
+.wds-sidebar-accordion,
+.wds-sidebar-accordion *,
+.wds-sidebar-accordion__item,
+.wds-sidebar-accordion__toggle,
+.wds-sidebar-tabpanel,
+[class*="wds-sidebar"] {
+	background: transparent !important;
+	background-color: transparent !important;
+	color: var(--text-main, #f8f8f2) !important;
+}
+
+.wds-sidebar-accordion {
+	background: rgba(0, 0, 0, 0.25) !important;
+	border: 1px solid rgba(255, 255, 255, 0.08) !important;
+	border-radius: 8px !important;
+	overflow: hidden;
+	margin-bottom: 16px !important;
+}
+
+.wds-sidebar-accordion__item {
+	background: rgba(0, 0, 0, 0.2) !important;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+.wds-sidebar-accordion__item:last-child {
+	border-bottom: none !important;
+}
+
+.wds-sidebar-accordion__toggle {
+	background: rgba(255, 255, 255, 0.02) !important;
+	color: var(--text-main, #f8f8f2) !important;
+	border: none !important;
+	box-shadow: none !important;
+	transition: all 0.2s ease !important;
+	padding: 12px 16px !important;
+	width: 100% !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: space-between !important;
+	cursor: pointer !important;
+}
+
+.wds-sidebar-accordion__toggle:hover,
+.wds-sidebar-accordion__toggle:focus {
+	background: rgba(255, 255, 255, 0.06) !important;
+	color: var(--accent, #62c9ff) !important;
+}
+
+.wds-sidebar-accordion__toggle[aria-expanded="true"] {
+	background: rgba(98, 201, 255, 0.08) !important;
+	border-left: 3px solid var(--accent, #62c9ff) !important;
+	color: var(--accent, #62c9ff) !important;
+}
+
+.wds-sidebar-accordion__label {
+	color: var(--text-main, #f8f8f2) !important;
+	font-weight: 600 !important;
+}
+
+.wds-sidebar-accordion__toggle:hover .wds-sidebar-accordion__label {
+	color: var(--accent, #62c9ff) !important;
+}
+
+.wds-sidebar-accordion__chevron,
+.wds-sidebar-accordion__more {
+	color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.wds-sidebar-accordion__toggle:hover .wds-sidebar-accordion__chevron,
+.wds-sidebar-accordion__toggle:hover .wds-sidebar-accordion__more {
+	color: var(--accent, #62c9ff) !important;
+}
+
+/* ── Status badges & issues ── */
+.wds-issues {
+	background: rgba(255, 255, 255, 0.1) !important;
+	color: var(--text-main, #f8f8f2) !important;
+	border-radius: 12px !important;
+}
+
+.wds-issues-success {
+	color: #4dfa7b !important;
+}
+
+/* ── SmartCrawl SUI / WDS Panels & Modals ── */
+[class*="wds-"] .sui-box,
+[class*="wds-"] .sui-box-header,
+[class*="wds-"] .sui-box-body,
+[class*="wds-"] .sui-box-footer {
+	background: transparent !important;
+	background-color: transparent !important;
+	border-color: rgba(255, 255, 255, 0.08) !important;
+	color: var(--text-main, #f8f8f2) !important;
+}
