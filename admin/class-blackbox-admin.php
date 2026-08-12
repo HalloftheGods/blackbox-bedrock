@@ -71,6 +71,7 @@ class Admin {
 		add_action( 'admin_footer', [ Core::class, 'inject_canvas_script' ], 9999 );
 		add_action( 'wp_ajax_blackbox_toggle_plugin', [ $this, 'ajax_toggle_plugin' ] );
 		add_action( 'admin_footer', [ $this, 'output_accordion_js' ], 9999 );
+		add_action( 'admin_footer', [ $this, 'output_modal_footer_overrides' ], 999999 );
 
 		if ( defined( 'WP_INSTALLING' ) && WP_INSTALLING ) {
 			// Force inject on install.php if footer hook doesn't fire early enough
@@ -1762,5 +1763,135 @@ class Admin {
 		}
 		$mce_css .= $css_url;
 		return $mce_css;
+	}
+
+	public function output_modal_footer_overrides() {
+		?>
+		<style id="blackbox-modal-footer-override">
+			/* Strip ALL outer wrappers of borders, backgrounds, and shadows to fix double-box */
+			.sui-modal,
+			.sui-modal.sui-active,
+			.sui-dialog,
+			.sui-modal-content,
+			.sui-modal-slide,
+			.sui-modal-slide.sui-active,
+			.hustle-modal,
+			.forminator-modal {
+				border: none !important;
+				background: transparent !important;
+				background-color: transparent !important;
+				box-shadow: none !important;
+				backdrop-filter: none !important;
+				-webkit-backdrop-filter: none !important;
+			}
+
+			/* Fixed Viewport Dark Mask for Backdrop Overlay (only target the outermost wrapper) */
+			.sui-modal,
+			.sui-dialog,
+			.hustle-modal,
+			.forminator-modal {
+				position: fixed !important;
+				inset: 0 !important;
+				top: 0 !important;
+				left: 0 !important;
+				width: 100vw !important;
+				height: 100vh !important;
+				background: rgba(5, 8, 14, 0.95) !important;
+				backdrop-filter: blur(28px) saturate(200%) !important;
+				-webkit-backdrop-filter: blur(28px) saturate(200%) !important;
+				z-index: 999999 !important;
+			}
+
+			/* Single Inner Box Container - Solid dark slate */
+			.sui-modal .sui-box,
+			.sui-dialog .sui-box,
+			.hustle-modal .sui-box,
+			.forminator-modal .sui-box {
+				background: #0d121d !important;
+				border: 1px solid rgba(98, 201, 255, 0.35) !important;
+				border-radius: 16px !important;
+				box-shadow: 0 24px 80px rgba(0, 0, 0, 0.95), 0 0 40px rgba(98, 201, 255, 0.15) !important;
+				overflow: hidden !important;
+				margin: auto !important;
+				z-index: 1000000 !important;
+			}
+
+			/* Remove White Circular Blob / Pseudoelements in Modal Headers */
+			.sui-box-header::before,
+			.sui-box-header::after,
+			.sui-box-banner::before,
+			.sui-box-banner::after,
+			.sui-box-header-image::before,
+			.sui-box-header-image::after,
+			.sui-modal-slide .sui-box-header::before,
+			.sui-modal-slide .sui-box-header::after,
+			.sui-modal-slide .sui-box-header.sui-flatten::before,
+			.sui-modal-slide .sui-box-header.sui-flatten::after {
+				display: none !important;
+				content: none !important;
+				background: none !important;
+				background-image: none !important;
+			}
+
+			.sui-box-header,
+			.sui-box-banner,
+			.sui-box-header-image,
+			.sui-modal .sui-box-header {
+				background: transparent !important;
+				background-image: none !important;
+				box-shadow: none !important;
+			}
+
+			/* Fix Radio Button Description Text Overlap */
+			.sui-radio {
+				display: flex !important;
+				flex-wrap: wrap !important;
+				align-items: center !important;
+				margin-bottom: 16px !important;
+			}
+
+			.sui-radio .sui-description {
+				display: block !important;
+				width: 100% !important;
+				margin-left: 28px !important;
+				margin-top: 4px !important;
+				color: rgba(248, 248, 242, 0.75) !important;
+				position: static !important;
+				line-height: 1.4 !important;
+			}
+
+			.sui-radio .sui-radio-label {
+				color: #ffffff !important;
+				font-weight: 600 !important;
+			}
+
+			/* Ghost / Outlined Gold CTA Buttons (Base) */
+			.sui-button,
+			.sui-button-ghost,
+			.sui-wrap .sui-button-ghost,
+			.sui-modal .sui-button-ghost {
+				background: rgba(217, 190, 111, 0.08) !important;
+				border: 1px solid var(--gold, #d9be6f) !important;
+				color: var(--gold, #d9be6f) !important;
+				font-weight: 700 !important;
+			}
+
+			/* Solid Gold Primary CTA Buttons (Override Base) */
+			.sui-button.sui-button-primary,
+			.sui-button.sui-button-blue,
+			.sui-wrap .sui-button.sui-button-primary,
+			.sui-wrap .sui-button.sui-button-blue,
+			.sui-modal .sui-button.sui-button-primary,
+			.sui-modal .sui-button.sui-button-blue {
+				background: var(--gold, #d9be6f) !important;
+				background-color: var(--gold, #d9be6f) !important;
+				border-color: var(--gold, #d9be6f) !important;
+				color: #0d1117 !important;
+				font-weight: 700 !important;
+				text-transform: uppercase !important;
+				letter-spacing: 0.5px !important;
+			}
+		</style>
+		<?php
 	}
 }

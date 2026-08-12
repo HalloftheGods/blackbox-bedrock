@@ -317,16 +317,17 @@ iframe[name="editor-canvas"] {
 .components-button {
 	background: transparent !important;
 	background-color: transparent !important;
-	color: var(--text-main) !important;
+	color: #ffffff !important;
 	border: none !important;
 	box-shadow: none !important;
 }
 
 .components-button svg,
 .block-editor-block-icon svg,
-.components-icon svg {
-	fill: var(--text-main) !important;
-	color: var(--text-main) !important;
+.components-icon svg,
+.editor-post-publish-panel svg {
+	fill: #ffffff !important;
+	color: #ffffff !important;
 }
 
 .components-button:not(:disabled):hover {

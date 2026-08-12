@@ -1,0 +1,123 @@
+/* ═══════════════════════════════════════════════════════
+   Hustle Dark Theme & Modal Overrides – BlackBOX Bedrock
+   ═══════════════════════════════════════════════════════ */
+
+html.is-compass-iframe .sui-wrap[class*="hustle"] {
+	padding: 0 !important;
+	margin: 0 !important;
+}
+
+/* Modals & Dialogs */
+[class*="hustle"] .sui-modal,
+[class*="hustle"] .sui-dialog,
+.hustle-modal,
+.hustle-modal-overlay {
+	position: fixed !important;
+	inset: 0 !important;
+	top: 0 !important;
+	left: 0 !important;
+	width: 100vw !important;
+	height: 100vh !important;
+	background: rgba(5, 8, 14, 0.94) !important;
+	backdrop-filter: blur(28px) saturate(200%) !important;
+	-webkit-backdrop-filter: blur(28px) saturate(200%) !important;
+	z-index: 999999 !important;
+}
+
+[class*="hustle"] .sui-modal,
+[class*="hustle"] .sui-dialog,
+[class*="hustle"] .sui-modal-slide {
+	border: none !important;
+	background: transparent !important;
+	box-shadow: none !important;
+}
+
+[class*="hustle"] .sui-modal .sui-box,
+[class*="hustle"] .sui-dialog .sui-box,
+.hustle-modal .sui-box {
+	background: #0d121d !important;
+	border: 1px solid rgba(98, 201, 255, 0.3) !important;
+	border-radius: 16px !important;
+	box-shadow: 0 24px 70px rgba(0, 0, 0, 0.95), 0 0 40px rgba(98, 201, 255, 0.15) !important;
+	margin: auto !important;
+	z-index: 1000000 !important;
+}
+
+/* Primary & Secondary Gold Buttons */
+[class*="hustle"] .sui-button-primary,
+[class*="hustle"] .sui-button-blue {
+	background: var(--gold, #d9be6f) !important;
+	background-color: var(--gold, #d9be6f) !important;
+	border-color: var(--gold, #d9be6f) !important;
+	color: #0d1117 !important;
+	font-weight: 700 !important;
+}
+
+[class*="hustle"] .sui-button-primary:hover,
+[class*="hustle"] .sui-button-blue:hover {
+	background: var(--accent, #62c9ff) !important;
+	background-color: var(--accent, #62c9ff) !important;
+	border-color: var(--accent, #62c9ff) !important;
+	color: #0d1117 !important;
+}
+
+[class*="hustle"] .sui-button,
+[class*="hustle"] .sui-button-ghost {
+	background: rgba(217, 190, 111, 0.08) !important;
+	border: 1px solid var(--gold, #d9be6f) !important;
+	color: var(--gold, #d9be6f) !important;
+	font-weight: 700 !important;
+}
+
+[class*="hustle"] .sui-button:hover,
+[class*="hustle"] .sui-button-ghost:hover {
+	background: rgba(98, 201, 255, 0.15) !important;
+	border-color: var(--accent, #62c9ff) !important;
+	color: var(--accent, #62c9ff) !important;
+}
+
+/* Fix circular graphic behind header title in Create modal */
+[class*="hustle"] .sui-box-header,
+[class*="hustle"] .sui-box-header::before,
+[class*="hustle"] .sui-box-header::after,
+[class*="hustle"] .sui-box-header .sui-box-banner,
+[class*="hustle"] .sui-box-header-image {
+	background-image: none !important;
+	background: transparent !important;
+	box-shadow: none !important;
+}
+
+[class*="hustle"] .sui-box-header::before,
+[class*="hustle"] .sui-box-header::after {
+	display: none !important;
+	content: none !important;
+}
+
+[class*="hustle"] .sui-box-header-image img,
+[class*="hustle"] .sui-modal-slide .sui-box-header img {
+	background: transparent !important;
+	filter: drop-shadow(0 0 12px rgba(98, 201, 255, 0.4)) !important;
+}
+
+/* Fix radio label & description text overlapping */
+[class*="hustle"] .sui-radio {
+	display: flex !important;
+	flex-wrap: wrap !important;
+	align-items: center !important;
+	margin-bottom: 16px !important;
+}
+
+[class*="hustle"] .sui-radio .sui-description {
+	display: block !important;
+	width: 100% !important;
+	margin-left: 28px !important;
+	margin-top: 4px !important;
+	color: rgba(248, 248, 242, 0.75) !important;
+	position: static !important;
+	line-height: 1.4 !important;
+}
+
+[class*="hustle"] .sui-radio .sui-radio-label {
+	color: #ffffff !important;
+	font-weight: 600 !important;
+}

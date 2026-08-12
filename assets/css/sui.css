@@ -370,3 +370,271 @@ hr,
 #dashboard-widgets .sui-notice p {
 	color: var(--text-main) !important;
 }
+
+/* ═══════════════════════════════════════════════════════
+   SUI Modal & Dialog Premium UI Enhancements
+   ═══════════════════════════════════════════════════════ */
+
+/* Modal Backdrop Overlay (Full Viewport Mask) */
+.sui-modal,
+.sui-modal-overlay,
+.sui-dialog-overlay,
+.sui-mask,
+[class*="sui-modal-backdrop"],
+.hustle-modal-overlay,
+.forminator-modal-overlay {
+	position: fixed !important;
+	inset: 0 !important;
+	top: 0 !important;
+	left: 0 !important;
+	width: 100vw !important;
+	height: 100vh !important;
+	background: rgba(5, 8, 14, 0.94) !important;
+	backdrop-filter: blur(28px) saturate(200%) !important;
+	-webkit-backdrop-filter: blur(28px) saturate(200%) !important;
+	z-index: 999999 !important;
+}
+
+/* Outer Modal & Slide Containers - Strip borders & backgrounds to prevent double-box */
+.sui-modal,
+.sui-dialog,
+.sui-modal-slide,
+.sui-modal-overlay,
+.hustle-modal,
+.forminator-modal {
+	border: none !important;
+	background: transparent !important;
+	box-shadow: none !important;
+	backdrop-filter: none !important;
+	-webkit-backdrop-filter: none !important;
+}
+
+/* Single Inner Modal Window Container */
+.sui-modal .sui-box,
+.sui-dialog .sui-box,
+.sui-modal-content,
+.hustle-modal .sui-box,
+.forminator-modal .sui-box {
+	background: #0d121d !important;
+	border: 1px solid rgba(98, 201, 255, 0.3) !important;
+	border-radius: 16px !important;
+	box-shadow: 0 24px 70px rgba(0, 0, 0, 0.95), 0 0 40px rgba(98, 201, 255, 0.15) !important;
+	overflow: hidden !important;
+	margin: auto !important;
+	z-index: 1000000 !important;
+}
+
+/* Remove White Circular Background Blobs & Header Pseudoelements */
+.sui-box-header,
+.sui-box-header::before,
+.sui-box-header::after,
+.sui-box-banner,
+.sui-box-banner::before,
+.sui-box-banner::after,
+.sui-box-header-image,
+.sui-box-header-image::before,
+.sui-box-header-image::after,
+.sui-modal-slide .sui-box-header,
+.sui-modal-slide .sui-box-header::before,
+.sui-modal-slide .sui-box-header::after {
+	background-image: none !important;
+	background: transparent !important;
+	box-shadow: none !important;
+}
+
+.sui-box-header::before,
+.sui-box-header::after,
+.sui-box-banner::before,
+.sui-box-banner::after,
+.sui-box-header-image::before,
+.sui-box-header-image::after,
+.sui-modal-slide .sui-box-header::before,
+.sui-modal-slide .sui-box-header::after {
+	display: none !important;
+	content: none !important;
+}
+
+.sui-box-header .sui-box-banner img,
+.sui-box-header img,
+.sui-box-header-image img {
+	background: transparent !important;
+	filter: drop-shadow(0 0 12px rgba(98, 201, 255, 0.4)) !important;
+}
+
+/* Modal Header */
+.sui-modal .sui-box-header,
+.sui-dialog .sui-box-header,
+.sui-modal-slide .sui-box-header {
+	background: transparent !important;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+	padding: 24px 28px !important;
+	position: relative !important;
+}
+
+.sui-modal .sui-box-header .sui-box-title,
+.sui-modal-slide .sui-box-title,
+.sui-dialog .sui-box-title {
+	color: #ffffff !important;
+	font-weight: 700 !important;
+	font-size: 1.5rem !important;
+	letter-spacing: -0.02em !important;
+}
+
+/* Modal Close Button */
+.sui-modal .sui-button-icon[data-modal-close],
+.sui-dialog .sui-button-icon[data-modal-close],
+.sui-modal .sui-box-header .sui-button-icon,
+.sui-modal-close {
+	position: absolute !important;
+	top: 20px !important;
+	right: 20px !important;
+	width: 36px !important;
+	height: 36px !important;
+	border-radius: 8px !important;
+	background: rgba(255, 255, 255, 0.08) !important;
+	border: 1px solid rgba(255, 255, 255, 0.15) !important;
+	color: #f8f8f2 !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	cursor: pointer !important;
+	transition: all 0.2s ease !important;
+	z-index: 10 !important;
+}
+
+.sui-modal .sui-button-icon[data-modal-close]:hover,
+.sui-dialog .sui-button-icon[data-modal-close]:hover,
+.sui-modal .sui-box-header .sui-button-icon:hover,
+.sui-modal-close:hover {
+	background: rgba(255, 92, 92, 0.25) !important;
+	border-color: #ff5c5c !important;
+	color: #ff5c5c !important;
+	box-shadow: 0 0 12px rgba(255, 92, 92, 0.4) !important;
+}
+
+/* Modal Body & Form Fields */
+.sui-modal .sui-box-body,
+.sui-dialog .sui-box-body,
+.sui-modal-slide .sui-box-body {
+	padding: 24px 28px !important;
+	color: #f8f8f2 !important;
+}
+
+/* Radio Buttons & Labels in Modals - Fix text overlap */
+.sui-modal .sui-radio,
+.sui-dialog .sui-radio,
+.sui-radio {
+	display: flex !important;
+	flex-wrap: wrap !important;
+	align-items: center !important;
+	margin-bottom: 16px !important;
+}
+
+.sui-modal .sui-radio .sui-description,
+.sui-dialog .sui-radio .sui-description,
+.sui-radio .sui-description {
+	display: block !important;
+	width: 100% !important;
+	margin-left: 28px !important;
+	margin-top: 4px !important;
+	color: rgba(248, 248, 242, 0.75) !important;
+	font-size: 0.875rem !important;
+	line-height: 1.4 !important;
+	position: static !important;
+}
+
+.sui-modal .sui-radio .sui-radio-label,
+.sui-dialog .sui-radio .sui-radio-label,
+.sui-radio .sui-radio-label {
+	color: #ffffff !important;
+	font-weight: 600 !important;
+	font-size: 0.95rem !important;
+}
+
+/* Modal Inputs & Form Controls */
+.sui-modal .sui-form-control,
+.sui-modal input[type="text"],
+.sui-dialog .sui-form-control,
+.sui-dialog input[type="text"] {
+	background: rgba(0, 0, 0, 0.5) !important;
+	border: 1px solid rgba(98, 201, 255, 0.3) !important;
+	border-radius: 8px !important;
+	color: #ffffff !important;
+	padding: 12px 16px !important;
+	font-size: 0.95rem !important;
+}
+
+.sui-modal .sui-form-control:focus,
+.sui-modal input[type="text"]:focus {
+	border-color: #62c9ff !important;
+	box-shadow: 0 0 12px rgba(98, 201, 255, 0.4) !important;
+	outline: none !important;
+}
+
+/* Modal Footer & Buttons */
+.sui-modal .sui-box-footer,
+.sui-dialog .sui-box-footer,
+.sui-modal-slide .sui-box-footer {
+	background: transparent !important;
+	border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+	padding: 20px 28px !important;
+	display: flex !important;
+	justify-content: flex-end !important;
+	gap: 12px !important;
+}
+
+/* Primary Solid Gold CTA Buttons */
+.sui-button-primary,
+.sui-button-blue,
+.sui-wrap .sui-button-primary,
+.sui-wrap .sui-button-blue,
+.sui-modal .sui-button-primary,
+.sui-modal .sui-button-blue,
+.sui-dialog .sui-button-primary,
+.sui-dialog .sui-button-blue {
+	background: var(--gold, #d9be6f) !important;
+	background-color: var(--gold, #d9be6f) !important;
+	border-color: var(--gold, #d9be6f) !important;
+	color: #0d1117 !important;
+	font-weight: 700 !important;
+	border-radius: 8px !important;
+	padding: 10px 24px !important;
+	letter-spacing: 0.5px !important;
+	box-shadow: 0 4px 15px rgba(217, 190, 111, 0.3) !important;
+	cursor: pointer !important;
+}
+
+.sui-button-primary:hover,
+.sui-button-blue:hover,
+.sui-wrap .sui-button-primary:hover,
+.sui-wrap .sui-button-blue:hover,
+.sui-modal .sui-button-primary:hover,
+.sui-modal .sui-button-blue:hover {
+	background: var(--accent, #62c9ff) !important;
+	background-color: var(--accent, #62c9ff) !important;
+	border-color: var(--accent, #62c9ff) !important;
+	color: #0d1117 !important;
+	box-shadow: 0 4px 20px rgba(98, 201, 255, 0.5) !important;
+}
+
+/* Secondary / Outlined / Ghost Gold Buttons */
+.sui-button,
+.sui-button-ghost,
+.sui-wrap .sui-button-ghost,
+.sui-modal .sui-button-ghost,
+.sui-dialog .sui-button-ghost {
+	background: rgba(217, 190, 111, 0.08) !important;
+	border: 1px solid var(--gold, #d9be6f) !important;
+	color: var(--gold, #d9be6f) !important;
+	font-weight: 700 !important;
+	border-radius: 8px !important;
+}
+
+.sui-button:hover,
+.sui-button-ghost:hover,
+.sui-wrap .sui-button-ghost:hover,
+.sui-modal .sui-button-ghost:hover {
+	background: rgba(98, 201, 255, 0.15) !important;
+	border-color: var(--accent, #62c9ff) !important;
+	color: var(--accent, #62c9ff) !important;
+}

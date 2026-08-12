@@ -18,6 +18,15 @@ class Error {
 	}
 
 	public function render_error_template( $message, $title = '', $args = [] ) {
+		$code = is_array( $args ) && isset( $args['response'] ) ? (int) $args['response'] : 500;
+		$isAjaxOrJson = ( function_exists( 'wp_doing_ajax' ) && wp_doing_ajax() ) || ( function_exists( 'wp_is_json_request' ) && wp_is_json_request() );
+
+		// If it's a permission denial (403/401) or AJAX request, use standard WP die output instead of maintenance template
+		if ( $code === 403 || $code === 401 || $isAjaxOrJson ) {
+			_default_wp_die_handler( $message, $title, $args );
+			die();
+		}
+
 		if ( empty( $title ) ) {
 			$title = 'Scheduled Maintenance';
 		}
