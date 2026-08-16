@@ -18,27 +18,33 @@ html.is-compass-iframe .sui-wrap[class*="hustle"] {
 	left: 0 !important;
 	width: 100vw !important;
 	height: 100vh !important;
-	background: rgba(5, 8, 14, 0.94) !important;
-	backdrop-filter: blur(28px) saturate(200%) !important;
-	-webkit-backdrop-filter: blur(28px) saturate(200%) !important;
+	background: rgba(5, 8, 14, 0.88) !important;
+	backdrop-filter: blur(16px) saturate(180%) !important;
+	-webkit-backdrop-filter: blur(16px) saturate(180%) !important;
 	z-index: 999999 !important;
 }
 
-[class*="hustle"] .sui-modal,
-[class*="hustle"] .sui-dialog,
-[class*="hustle"] .sui-modal-slide {
+[class*="hustle"] .sui-modal-slide,
+[class*="hustle"] .sui-modal-content,
+[class*="hustle"] .sui-dialog-content {
 	border: none !important;
 	background: transparent !important;
+	background-color: transparent !important;
 	box-shadow: none !important;
+	backdrop-filter: none !important;
+	-webkit-backdrop-filter: none !important;
 }
 
 [class*="hustle"] .sui-modal .sui-box,
 [class*="hustle"] .sui-dialog .sui-box,
 .hustle-modal .sui-box {
-	background: #0d121d !important;
+	background: rgba(13, 18, 29, 0.96) !important;
+	backdrop-filter: blur(20px) !important;
+	-webkit-backdrop-filter: blur(20px) !important;
 	border: 1px solid rgba(98, 201, 255, 0.3) !important;
 	border-radius: 16px !important;
-	box-shadow: 0 24px 70px rgba(0, 0, 0, 0.95), 0 0 40px rgba(98, 201, 255, 0.15) !important;
+	box-shadow: 0 24px 70px rgba(0, 0, 0, 0.95), 0 0 30px rgba(98, 201, 255, 0.12) !important;
+	color: #ffffff !important;
 	margin: auto !important;
 	z-index: 1000000 !important;
 }
@@ -48,8 +54,9 @@ html.is-compass-iframe .sui-wrap[class*="hustle"] {
 [class*="hustle"] .sui-button-blue {
 	background: var(--gold, #d9be6f) !important;
 	background-color: var(--gold, #d9be6f) !important;
-	border-color: var(--gold, #d9be6f) !important;
-	color: #0d1117 !important;
+	border: 1px solid var(--gold, #d9be6f) !important;
+	color: #ffffff !important;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6) !important;
 	font-weight: 700 !important;
 }
 
@@ -58,7 +65,8 @@ html.is-compass-iframe .sui-wrap[class*="hustle"] {
 	background: var(--accent, #62c9ff) !important;
 	background-color: var(--accent, #62c9ff) !important;
 	border-color: var(--accent, #62c9ff) !important;
-	color: #0d1117 !important;
+	color: #ffffff !important;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6) !important;
 }
 
 [class*="hustle"] .sui-button,

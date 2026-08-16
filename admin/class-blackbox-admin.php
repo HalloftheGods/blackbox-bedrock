@@ -65,6 +65,7 @@ class Admin {
 		add_filter( 'style_loader_tag', [ $this, 'inject_into_install_tag' ], 9999, 2 );
 		add_filter( 'script_loader_tag', [ $this, 'inject_into_install_scripts' ], 9999, 2 );
 		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_styles' ], 9999 );
+		add_action( 'admin_head', [ $this, 'early_compass_isolation' ], 0 );
 		add_action( 'admin_head', [ $this, 'inject_iframe_class' ], 1 );
 		add_action( 'admin_head', [ $this, 'prevent_menu_cls' ], 1 );
 		add_filter( 'mce_css', [ $this, 'add_classic_editor_dark_css' ] );
@@ -82,6 +83,67 @@ class Admin {
 		}
 
 		add_action( 'admin_head', [ $this, 'output_theme_colors' ], 15 );
+	}
+
+	public function early_compass_isolation() {
+		$is_compass = ( isset( $_GET['page'] ) && strpos( $_GET['page'], 'xophz-compass' ) === 0 );
+		if ( ! $is_compass ) {
+			$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
+			if ( $screen && strpos( $screen->id, 'xophz-compass' ) !== false ) {
+				$is_compass = true;
+			}
+		}
+
+		if ( $is_compass ) {
+			?>
+			<style id="compass-early-isolation">
+				/* Instant Pre-Render Isolation: Hides WP Chrome & Sidebar before Vue mounts to eliminate FOUC */
+				#wpadminbar,
+				#adminmenuback,
+				#adminmenuwrap,
+				#adminmenumain,
+				#wpfooter,
+				.update-nag,
+				.notice:not(.compass-notice),
+				#wpbody-content > .notice {
+					display: none !important;
+				}
+				html,
+				html.wp-toolbar {
+					padding-top: 0 !important;
+					overflow: hidden !important;
+				}
+				body,
+				body.admin-bar {
+					margin-top: 0 !important;
+				}
+				#wpcontent,
+				#wpbody,
+				#wpbody-content {
+					padding: 0 !important;
+					margin: 0 !important;
+					margin-left: 0 !important;
+				}
+				body > #app {
+					top: 0 !important;
+					left: 0 !important;
+					right: 0 !important;
+					bottom: 0 !important;
+				}
+				body.wp-responsive-open #adminmenuwrap,
+				body.wp-responsive-open #adminmenuback,
+				body.wp-responsive-open #adminmenumain {
+					display: block !important;
+				}
+				body.wp-responsive-open > #app {
+					left: 160px !important;
+				}
+				body.folded.wp-responsive-open > #app {
+					left: 36px !important;
+				}
+			</style>
+			<?php
+		}
 	}
 
 	public function prevent_menu_cls() {
@@ -1769,14 +1831,9 @@ class Admin {
 		?>
 		<style id="blackbox-modal-footer-override">
 			/* Strip ALL outer wrappers of borders, backgrounds, and shadows to fix double-box */
-			.sui-modal,
-			.sui-modal.sui-active,
-			.sui-dialog,
-			.sui-modal-content,
 			.sui-modal-slide,
-			.sui-modal-slide.sui-active,
-			.hustle-modal,
-			.forminator-modal {
+			.sui-modal-content,
+			.sui-dialog-content {
 				border: none !important;
 				background: transparent !important;
 				background-color: transparent !important;
@@ -1785,32 +1842,42 @@ class Admin {
 				-webkit-backdrop-filter: none !important;
 			}
 
-			/* Fixed Viewport Dark Mask for Backdrop Overlay (only target the outermost wrapper) */
+			/* Fixed Viewport Dark Mask for Backdrop Overlay */
 			.sui-modal,
 			.sui-dialog,
+			.sui-modal-overlay,
+			.sui-dialog-overlay,
 			.hustle-modal,
-			.forminator-modal {
+			.hustle-modal-overlay,
+			.forminator-modal,
+			.forminator-modal-overlay {
 				position: fixed !important;
 				inset: 0 !important;
 				top: 0 !important;
 				left: 0 !important;
 				width: 100vw !important;
 				height: 100vh !important;
-				background: rgba(5, 8, 14, 0.95) !important;
-				backdrop-filter: blur(28px) saturate(200%) !important;
-				-webkit-backdrop-filter: blur(28px) saturate(200%) !important;
+				background: rgba(5, 8, 14, 0.88) !important;
+				backdrop-filter: blur(16px) saturate(180%) !important;
+				-webkit-backdrop-filter: blur(16px) saturate(180%) !important;
 				z-index: 999999 !important;
 			}
 
-			/* Single Inner Box Container - Solid dark slate */
+			/* Single Inner Box Container - Solid dark glass */
 			.sui-modal .sui-box,
 			.sui-dialog .sui-box,
+			.sui-modal-content .sui-box,
+			[class*="wds-"] .sui-modal .sui-box,
+			[class*="wds-"] .sui-dialog .sui-box,
 			.hustle-modal .sui-box,
 			.forminator-modal .sui-box {
-				background: #0d121d !important;
-				border: 1px solid rgba(98, 201, 255, 0.35) !important;
+				background: rgba(13, 18, 29, 0.96) !important;
+				backdrop-filter: blur(20px) !important;
+				-webkit-backdrop-filter: blur(20px) !important;
+				border: 1px solid rgba(98, 201, 255, 0.3) !important;
 				border-radius: 16px !important;
-				box-shadow: 0 24px 80px rgba(0, 0, 0, 0.95), 0 0 40px rgba(98, 201, 255, 0.15) !important;
+				box-shadow: 0 24px 70px rgba(0, 0, 0, 0.95), 0 0 30px rgba(98, 201, 255, 0.12) !important;
+				color: #ffffff !important;
 				overflow: hidden !important;
 				margin: auto !important;
 				z-index: 1000000 !important;
@@ -1868,28 +1935,63 @@ class Admin {
 			/* Ghost / Outlined Gold CTA Buttons (Base) */
 			.sui-button,
 			.sui-button-ghost,
+			.sui-wrap .sui-button,
 			.sui-wrap .sui-button-ghost,
-			.sui-modal .sui-button-ghost {
+			.sui-modal .sui-button,
+			.sui-modal .sui-button-ghost,
+			.sui-dialog .sui-button,
+			.sui-dialog .sui-button-ghost {
 				background: rgba(217, 190, 111, 0.08) !important;
 				border: 1px solid var(--gold, #d9be6f) !important;
 				color: var(--gold, #d9be6f) !important;
 				font-weight: 700 !important;
 			}
 
-			/* Solid Gold Primary CTA Buttons (Override Base) */
+			.sui-button:hover,
+			.sui-button-ghost:hover,
+			.sui-wrap .sui-button:hover,
+			.sui-wrap .sui-button-ghost:hover,
+			.sui-modal .sui-button:hover,
+			.sui-modal .sui-button-ghost:hover,
+			.sui-dialog .sui-button:hover,
+			.sui-dialog .sui-button-ghost:hover {
+				background: rgba(98, 201, 255, 0.15) !important;
+				border-color: var(--accent, #62c9ff) !important;
+				color: var(--accent, #62c9ff) !important;
+			}
+
+			/* Solid Gold Primary CTA Buttons */
 			.sui-button.sui-button-primary,
 			.sui-button.sui-button-blue,
-			.sui-wrap .sui-button.sui-button-primary,
-			.sui-wrap .sui-button.sui-button-blue,
-			.sui-modal .sui-button.sui-button-primary,
-			.sui-modal .sui-button.sui-button-blue {
+			.sui-wrap .sui-button-primary,
+			.sui-wrap .sui-button-blue,
+			.sui-modal .sui-button-primary,
+			.sui-modal .sui-button-blue,
+			.sui-dialog .sui-button-primary,
+			.sui-dialog .sui-button-blue {
 				background: var(--gold, #d9be6f) !important;
 				background-color: var(--gold, #d9be6f) !important;
-				border-color: var(--gold, #d9be6f) !important;
-				color: #0d1117 !important;
+				border: 1px solid var(--gold, #d9be6f) !important;
+				color: #ffffff !important;
+				text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6) !important;
 				font-weight: 700 !important;
 				text-transform: uppercase !important;
 				letter-spacing: 0.5px !important;
+			}
+
+			.sui-button.sui-button-primary:hover,
+			.sui-button.sui-button-blue:hover,
+			.sui-wrap .sui-button-primary:hover,
+			.sui-wrap .sui-button-blue:hover,
+			.sui-modal .sui-button-primary:hover,
+			.sui-modal .sui-button-blue:hover,
+			.sui-dialog .sui-button-primary:hover,
+			.sui-dialog .sui-button-blue:hover {
+				background: var(--accent, #62c9ff) !important;
+				background-color: var(--accent, #62c9ff) !important;
+				border-color: var(--accent, #62c9ff) !important;
+				color: #ffffff !important;
+				text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6) !important;
 			}
 		</style>
 		<?php

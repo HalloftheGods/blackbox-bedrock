@@ -88,7 +88,16 @@
 }
 
 /* ── SmartCrawl SUI / WDS Panels & Modals ── */
-[class*="wds-"] .sui-box,
+[class*="wds-"] .sui-box:not(.sui-modal .sui-box):not(.sui-dialog .sui-box) {
+	background: var(--rough-glass-bg, linear-gradient(135deg, rgba(13, 17, 23, 0.6), rgba(13, 17, 23, 0.2))) !important;
+	backdrop-filter: var(--rough-glass-filter, blur(20px) saturate(150%)) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter, blur(20px) saturate(150%)) !important;
+	border: 1px solid var(--rough-glass-border, rgba(90, 105, 172, 0.3)) !important;
+	border-radius: 12px !important;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2) !important;
+	color: var(--text-main, #f8f8f2) !important;
+}
+
 [class*="wds-"] .sui-box-header,
 [class*="wds-"] .sui-box-body,
 [class*="wds-"] .sui-box-footer {
@@ -96,4 +105,15 @@
 	background-color: transparent !important;
 	border-color: rgba(255, 255, 255, 0.08) !important;
 	color: var(--text-main, #f8f8f2) !important;
+}
+
+[class*="wds-"] .sui-modal .sui-box,
+[class*="wds-"] .sui-dialog .sui-box {
+	background: rgba(13, 18, 29, 0.96) !important;
+	backdrop-filter: blur(20px) !important;
+	-webkit-backdrop-filter: blur(20px) !important;
+	border: 1px solid rgba(98, 201, 255, 0.3) !important;
+	border-radius: 16px !important;
+	box-shadow: 0 24px 70px rgba(0, 0, 0, 0.95), 0 0 30px rgba(98, 201, 255, 0.12) !important;
+	color: #ffffff !important;
 }

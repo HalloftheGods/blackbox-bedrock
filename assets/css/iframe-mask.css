@@ -50,8 +50,13 @@ html.is-compass-iframe #wpbody-content>.wrap {
 }
 
 html.is-compass-iframe,
-html.is-compass-iframe body {
-	overflow-x: hidden !important;
+html.is-compass-iframe body,
+html.is-compass-iframe #wpwrap,
+html.is-compass-iframe #wpbody,
+html.is-compass-iframe #wpcontent {
+	overflow: hidden !important;
+	height: 100% !important;
+	max-height: 100% !important;
 }
 
 html.is-compass-iframe .sui-wrap,
@@ -74,8 +79,7 @@ html.is-compass-iframe .sui-header {
 }
 
 html.is-compass-iframe #wpbody-content {
-	padding-bottom: 24px !important;
-	/* Keep bottom padding only for standard wp pages */
+	padding-bottom: 0 !important;
 }
 
 /* Gutenberg Editor: force transparency on skeleton and editor canvas */
