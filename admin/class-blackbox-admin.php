@@ -1680,11 +1680,15 @@ class Admin {
 			array_unshift( $styles, 'install.css' );
 		}
 
+		$assets_url = defined( 'WPMU_PLUGIN_URL' ) ? WPMU_PLUGIN_URL . '/blackbox-bedrock/assets' : content_url( 'mu-plugins/blackbox-bedrock/assets' );
+
 		$global_css = '';
 		foreach ( array_unique($styles) as $style ) {
 			$path = dirname( __DIR__ ) . '/assets/css/' . $style;
 			if ( file_exists( $path ) ) {
-				$global_css .= file_get_contents( $path );
+				$css_content = file_get_contents( $path );
+				$css_content = str_replace( '../images/', $assets_url . '/images/', $css_content );
+				$global_css .= $css_content;
 			}
 		}
 
@@ -1692,7 +1696,9 @@ class Admin {
 		$sections_dir = dirname( __DIR__ ) . '/assets/css/sections/';
 		if ( is_dir( $sections_dir ) ) {
 			foreach ( glob( $sections_dir . '*.css' ) as $file ) {
-				$global_css .= file_get_contents( $file );
+				$css_content = file_get_contents( $file );
+				$css_content = str_replace( '../images/', $assets_url . '/images/', $css_content );
+				$global_css .= $css_content;
 			}
 		}
 
@@ -1712,6 +1718,66 @@ class Admin {
 	public function inject_into_install_tag( $tag, $handle ) {
 		if ( $handle === 'install' ) {
 			$tag .= '<style id="blackbox-global-install">' . $this->enqueue_styles( true ) . '</style>';
+			ob_start();
+			Core::inject_canvas_script();
+			$tag .= ob_get_clean();
+			$tag .= '<script>
+			document.addEventListener("DOMContentLoaded", function() {
+				document.body.classList.add("wp-admin-install", "body-glass");
+				var oldLogo = document.getElementById("logo");
+				if (oldLogo) {
+					oldLogo.remove();
+				}
+
+				if (!document.getElementById("install-layout-wrapper")) {
+					var wrapper = document.createElement("div");
+					wrapper.id = "install-layout-wrapper";
+
+					var logoCol = document.createElement("div");
+					logoCol.id = "install-logo-col";
+					logoCol.innerHTML = \'<div class="brand-hero">\' +
+						\'<div class="brand-duo">\' +
+							\'<div class="logo-omega-mark"></div>\' +
+							\'<div class="brand-plus">+</div>\' +
+							\'<div class="logo-wp-mark">\' +
+								\'<span class="dashicons dashicons-wordpress-alt wp-icon-glyph"></span>\' +
+							\'</div>\' +
+						\'</div>\' +
+						\'<div class="brand-text-block">\' +
+							\'<h2 class="brand-heading">YouMeOS <span class="gold-gradient-text">Microverse</span></h2>\' +
+							\'<p class="brand-caption">Self-Contained Local Web Universe</p>\' +
+						\'</div>\' +
+					\'</div>\';
+					wrapper.appendChild(logoCol);
+
+					var cardCol = document.createElement("div");
+					cardCol.id = "install-card-col";
+					var children = Array.from(document.body.children).filter(function(el) {
+						return el !== wrapper && el.id !== "logo" && el.tagName !== "CANVAS" && el.tagName !== "SCRIPT" && el.tagName !== "STYLE";
+					});
+					children.forEach(function(child) { cardCol.appendChild(child); });
+					wrapper.appendChild(cardCol);
+
+					document.body.appendChild(wrapper);
+
+					// Pre-populate sensible defaults if empty
+					var titleInput = document.getElementById("weblog_title");
+					if (titleInput && !titleInput.value) {
+						titleInput.value = "My Microverse";
+					}
+
+					var userInput = document.getElementById("user_login");
+					if (userInput && !userInput.value) {
+						userInput.value = "";
+					}
+
+					var emailInput = document.getElementById("admin_email");
+					if (emailInput && !emailInput.value) {
+						emailInput.value = "";
+					}
+				}
+			});
+			</script>';
 		}
 		return $tag;
 	}

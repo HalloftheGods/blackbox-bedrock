@@ -1,4 +1,7 @@
 (function () {
+  if (window.__blackboxSmokeInitialized) return;
+  window.__blackboxSmokeInitialized = true;
+
   // Do not inject the smoke canvas if we are inside a Compass sub-app iframe
   if (window.name === "blackbox-sub-app" || window.name === "compass-sub-app") return;
 
@@ -117,8 +120,10 @@
   }
 
   function initCanvas() {
-    // Don't inject if visual editor wrapper isn't present
-    document.documentElement.prepend(canvas);
+    if (document.getElementById("blackbox-smoke-canvas") && document.getElementById("blackbox-smoke-canvas") !== canvas) return;
+    if (!document.documentElement.contains(canvas)) {
+      document.documentElement.prepend(canvas);
+    }
     const ctx = canvas.getContext("2d");
 
     function resize() {

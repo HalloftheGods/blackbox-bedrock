@@ -8,7 +8,7 @@
     background-repeat: no-repeat !important;
     width: 120px !important;
     height: 120px !important;
-    margin: -145px auto 25px !important;
+    margin: 0 auto 25px !important;
     padding: 0 !important;
     border: none !important;
     color: transparent !important;
@@ -17,7 +17,14 @@
     display: block !important;
 }
 
-#logo a {
+#install-logo-col #logo {
+    width: 320px !important;
+    height: 320px !important;
+    margin: 0 auto !important;
+}
+
+#logo a,
+#install-logo-col #logo a {
     background-image: none !important;
     display: block !important;
     width: 100% !important;

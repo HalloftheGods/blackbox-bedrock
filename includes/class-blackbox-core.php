@@ -11,7 +11,14 @@ class BlackBOX_Core {
 		// }
 	}
 
+	private static $canvas_injected = false;
+
 	public static function inject_canvas_script() {
+		if ( self::$canvas_injected ) {
+			return;
+		}
+		self::$canvas_injected = true;
+
 		$js = file_get_contents( plugin_dir_path( dirname( __FILE__ ) ) . 'assets/js/smoke-canvas.js' );
 		echo '<script id="blackbox-smoke-canvas-js">' . $js . '</script>';
 	}
