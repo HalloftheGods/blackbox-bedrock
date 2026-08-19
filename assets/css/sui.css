@@ -655,3 +655,69 @@ hr,
 	border-color: var(--accent, #62c9ff) !important;
 	color: var(--accent, #62c9ff) !important;
 }
+
+/* ═══════════════════════════════════════════════════════
+   SUI Dropdown & Popover Menu Overrides
+   ═══════════════════════════════════════════════════════ */
+.sui-dropdown__popover,
+.sui-dropdown__menu,
+.sui-dropdown-menu,
+.sui-dropdown-list,
+[class*="sui-dropdown__popover"],
+[class*="sui-dropdown__menu"] {
+	background: #0d1117 !important;
+	background-color: #0d1117 !important;
+	backdrop-filter: blur(16px) !important;
+	-webkit-backdrop-filter: blur(16px) !important;
+	border: 1px solid rgba(98, 201, 255, 0.3) !important;
+	border-radius: 8px !important;
+	box-shadow: 0 16px 40px rgba(0, 0, 0, 0.95), 0 0 20px rgba(98, 201, 255, 0.1) !important;
+	z-index: 999999 !important;
+	color: var(--text-main, #e6edf3) !important;
+}
+
+.sui-dropdown__menu-items,
+ul.sui-dropdown__menu-items,
+.sui-dropdown-items {
+	background: transparent !important;
+	list-style: none !important;
+	margin: 0 !important;
+	padding: 4px !important;
+}
+
+.sui-dropdown__menu-item,
+li.sui-dropdown__menu-item,
+.sui-dropdown-item {
+	background: transparent !important;
+	color: var(--text-main, #e6edf3) !important;
+	padding: 10px 14px !important;
+	border-radius: 6px !important;
+	cursor: pointer !important;
+	transition: background-color 0.15s ease, color 0.15s ease !important;
+	font-size: 13px !important;
+	display: flex !important;
+	align-items: center !important;
+}
+
+.sui-dropdown__menu-item:hover,
+.sui-dropdown__menu-item:focus,
+.sui-dropdown__menu-item:focus-visible,
+.sui-dropdown-item:hover,
+.sui-dropdown-item:focus {
+	background: rgba(98, 201, 255, 0.18) !important;
+	color: var(--accent, #62c9ff) !important;
+	outline: none !important;
+}
+
+.sui-dropdown__menu-item--selected,
+.sui-dropdown__menu-item.sui-dropdown__menu-item--selected,
+.sui-dropdown__menu-item[aria-selected="true"] {
+	background: rgba(98, 201, 255, 0.25) !important;
+	color: var(--accent, #62c9ff) !important;
+	font-weight: 700 !important;
+}
+
+.sui-dropdown__menu-item span,
+.sui-dropdown__menu-item * {
+	color: inherit !important;
+}
