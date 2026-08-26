@@ -1662,8 +1662,28 @@ textarea:focus {
 .woocommerce-page span.description,
 .woocommerce p.description,
 .woocommerce-page p.description,
-.form-table p {
-	color: rgba(255, 255, 255, 0.6) !important;
+.description,
+p.description,
+span.description,
+.form-wrap p,
+.form-table p,
+.form-table .description {
+	color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Ensure code tags inside descriptions and form tables pop cleanly */
+.description code,
+p.description code,
+span.description code,
+.form-table code,
+.form-wrap code,
+td code,
+th code {
+	color: var(--accent, #62c9ff) !important;
+	background: rgba(0, 0, 0, 0.35) !important;
+	border: 1px solid rgba(98, 201, 255, 0.25) !important;
+	border-radius: 4px !important;
+	padding: 2px 6px !important;
 }
 
 /* ═══════════════════════════════════════════════════════════════

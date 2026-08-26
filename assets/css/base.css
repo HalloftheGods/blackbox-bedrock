@@ -100,8 +100,55 @@ h6,
 p,
 span,
 li,
-div {
+div,
+label,
+strong,
+em,
+b,
+i,
+small {
 	color: var(--text-main) !important;
+}
+
+/* Descriptions & Form Help Text */
+.description,
+p.description,
+span.description,
+.form-wrap p {
+	color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Monospace & Inline Code Badges */
+code,
+kbd,
+samp,
+tt,
+var {
+	font-family: Consolas, Monaco, "Courier New", monospace !important;
+	color: var(--accent, #62c9ff) !important;
+	background: rgba(0, 0, 0, 0.35) !important;
+	border: 1px solid rgba(98, 201, 255, 0.25) !important;
+	border-radius: 4px !important;
+	padding: 2px 6px !important;
+	font-size: 0.88em !important;
+}
+
+pre {
+	font-family: Consolas, Monaco, "Courier New", monospace !important;
+	color: var(--text-main) !important;
+	background: rgba(0, 0, 0, 0.4) !important;
+	border: 1px solid rgba(255, 255, 255, 0.1) !important;
+	border-radius: 6px !important;
+	padding: 12px !important;
+	overflow-x: auto !important;
+}
+
+pre code {
+	color: inherit !important;
+	background: transparent !important;
+	border: none !important;
+	padding: 0 !important;
+	font-size: inherit !important;
 }
 
 /* Base Inputs & Text Areas - Subtle Dark Transparency */

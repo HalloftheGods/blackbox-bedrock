@@ -86,10 +86,10 @@ class Admin {
 	}
 
 	public function early_compass_isolation() {
-		$is_compass = ( isset( $_GET['page'] ) && strpos( $_GET['page'], 'xophz-compass' ) === 0 );
+		$is_compass = ( isset( $_GET['page'] ) && ( $_GET['page'] === 'xophz-compass' || $_GET['page'] === 'youmeos' ) );
 		if ( ! $is_compass ) {
 			$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
-			if ( $screen && strpos( $screen->id, 'xophz-compass' ) !== false ) {
+			if ( $screen && ( $screen->id === 'toplevel_page_xophz-compass' || $screen->id === 'toplevel_page_youmeos' ) ) {
 				$is_compass = true;
 			}
 		}
