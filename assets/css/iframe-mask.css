@@ -49,14 +49,33 @@ html.is-compass-iframe #wpbody-content>.wrap {
 	color-scheme: none !important;
 }
 
-html.is-compass-iframe,
-html.is-compass-iframe body,
-html.is-compass-iframe #wpwrap,
-html.is-compass-iframe #wpbody,
-html.is-compass-iframe #wpcontent {
+/* Only lock height for Gutenberg editor canvas; allow sub-app iframes to expand naturally */
+html.is-compass-iframe:not(.compass-wpmudev-iframe):not(:has(.compass-wpmudev-iframe)),
+html.is-compass-iframe:not(.compass-wpmudev-iframe):not(:has(.compass-wpmudev-iframe)) body,
+html.is-compass-iframe:not(.compass-wpmudev-iframe):not(:has(.compass-wpmudev-iframe)) #wpwrap,
+html.is-compass-iframe:not(.compass-wpmudev-iframe):not(:has(.compass-wpmudev-iframe)) #wpbody,
+html.is-compass-iframe:not(.compass-wpmudev-iframe):not(:has(.compass-wpmudev-iframe)) #wpcontent {
 	overflow: hidden !important;
 	height: 100% !important;
 	max-height: 100% !important;
+}
+
+html.is-compass-iframe.compass-wpmudev-iframe,
+html.is-compass-iframe body.compass-wpmudev-iframe,
+html.is-compass-iframe.compass-wpmudev-iframe #wpwrap,
+html.is-compass-iframe.compass-wpmudev-iframe #wpbody,
+html.is-compass-iframe.compass-wpmudev-iframe #wpcontent,
+html.is-compass-iframe.compass-wpmudev-iframe #wpbody-content,
+html.is-compass-iframe:has(.compass-wpmudev-iframe) #wpwrap,
+html.is-compass-iframe:has(.compass-wpmudev-iframe) #wpbody,
+html.is-compass-iframe:has(.compass-wpmudev-iframe) #wpcontent,
+html.is-compass-iframe:has(.compass-wpmudev-iframe) #wpbody-content {
+	overflow: hidden !important;
+	overflow-x: hidden !important;
+	overflow-y: hidden !important;
+	height: auto !important;
+	min-height: 0 !important;
+	max-height: none !important;
 }
 
 html.is-compass-iframe .sui-wrap,
