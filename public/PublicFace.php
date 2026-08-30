@@ -5,6 +5,9 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 class PublicFace {
 	public function __construct() {
+		if ( ! empty( get_option( 'blackbox_bedrock_disabled' ) ) ) {
+			return;
+		}
 		add_action( 'login_enqueue_scripts', [ $this, 'enqueue_login_styles' ] );
 		add_filter( 'login_headerurl', [ $this, 'custom_login_headerurl' ] );
 		add_filter( 'login_headertext', [ $this, 'custom_login_headertext' ] );
@@ -12,6 +15,10 @@ class PublicFace {
 	}
 
 	public function enqueue_login_styles() {
+		if ( ! empty( get_option( 'xophz_compass_disable_mu_styles' ) ) ) {
+			return;
+		}
+
 		$logo_path = dirname( __DIR__ ) . '/assets/css/logo.css';
 		$login_path = dirname( __DIR__ ) . '/assets/css/login.css';
 		

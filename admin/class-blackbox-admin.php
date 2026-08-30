@@ -54,9 +54,15 @@ class Admin {
 
 	public function __construct() {
 		add_action( 'admin_menu', [ $this, 'register_w4_protocol_menu' ] );
+		add_action( 'admin_init', [ $this, 'register_settings' ] );
+
+		// If Bedrock is disabled via option, halt all other admin integrations
+		if ( ! empty( get_option( 'blackbox_bedrock_disabled' ) ) ) {
+			return;
+		}
+
 		add_action( 'admin_menu', [ $this, 'register_blackbox_menu' ] );
 		add_action( 'admin_menu', [ $this, 'group_wpmudev_plugins' ], 9999 );
-		add_action( 'admin_init', [ $this, 'register_settings' ] );
 		add_filter( 'wp_theme_json_data_theme', [ $this, 'override_editor_theme_json' ] );
 		add_filter( 'block_editor_settings_all', [ $this, 'force_editor_css_settings' ], 9999, 2 );
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_styles' ], 9999 );
@@ -69,15 +75,16 @@ class Admin {
 		add_action( 'admin_head', [ $this, 'inject_iframe_class' ], 1 );
 		add_action( 'admin_head', [ $this, 'prevent_menu_cls' ], 1 );
 		add_filter( 'mce_css', [ $this, 'add_classic_editor_dark_css' ] );
-		add_action( 'admin_footer', [ Core::class, 'inject_canvas_script' ], 9999 );
+		add_action( 'admin_footer', [ $this, 'inject_admin_canvas' ], 9999 );
 		add_action( 'wp_ajax_blackbox_toggle_plugin', [ $this, 'ajax_toggle_plugin' ] );
 		add_action( 'admin_footer', [ $this, 'output_accordion_js' ], 9999 );
 		add_action( 'admin_footer', [ $this, 'output_modal_footer_overrides' ], 999999 );
 
 		if ( defined( 'WP_INSTALLING' ) && WP_INSTALLING ) {
 			// Force inject on install.php if footer hook doesn't fire early enough
-			add_action( 'admin_head', [ Core::class, 'inject_canvas_script' ], 9999 );
+			add_action( 'admin_head', [ $this, 'inject_admin_canvas' ], 9999 );
 			add_action( 'admin_head', function() {
+				if ( ! empty( get_option( 'xophz_compass_disable_mu_styles' ) ) ) return;
 				echo '<script>document.addEventListener("DOMContentLoaded", function() { document.body.classList.add("body-glass"); });</script>';
 			}, 9999 );
 		}
@@ -1514,9 +1521,15 @@ class Admin {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
+		$is_bedrock_disabled = ! empty( get_option( 'blackbox_bedrock_disabled' ) );
 		?>
 		<div class="wrap" style="position: relative; min-height: 80vh;">
 			<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
+			<?php if ( $is_bedrock_disabled ) : ?>
+				<div class="notice notice-warning inline" style="margin-top: 15px; margin-bottom: 20px; padding: 12px;">
+					<p><strong>BlackBOX Bedrock is currently disabled.</strong> All theme modifications, custom menus, and background scripts are inactive.</p>
+				</div>
+			<?php endif; ?>
 			<form action="options.php" method="post" style="position: relative; z-index: 2;">
 				<?php
 				settings_fields( 'xophz_compass_options_group' );
@@ -1529,10 +1542,84 @@ class Admin {
 				<img src="<?php echo esc_url( content_url( 'mu-plugins/blackbox-bedrock/assets/images/hallofthegodsinc.png' ) ); ?>" alt="Hall of the Gods Logo" style="width: 300px; height: auto;" />
 			</div>
 		</div>
+
+		<style>
+			.bb-toggle-container {
+				display: inline-flex;
+				align-items: center;
+				gap: 12px;
+			}
+			.bb-switch {
+				position: relative;
+				display: inline-block;
+				width: 50px;
+				height: 26px;
+				vertical-align: middle;
+			}
+			.bb-switch input {
+				opacity: 0;
+				width: 0;
+				height: 0;
+				position: absolute;
+			}
+			.bb-slider {
+				position: absolute;
+				cursor: pointer;
+				top: 0; left: 0; right: 0; bottom: 0;
+				background-color: #72777c;
+				border: 1px solid rgba(255, 255, 255, 0.15);
+				transition: all 0.25s ease;
+				border-radius: 26px;
+			}
+			.bb-slider:before {
+				position: absolute;
+				content: "";
+				height: 18px;
+				width: 18px;
+				left: 3px;
+				bottom: 3px;
+				background-color: #ffffff;
+				transition: all 0.25s ease;
+				border-radius: 50%;
+				box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+			}
+			.bb-switch input:checked + .bb-slider {
+				background-color: #2271b1;
+				border-color: #62c9ff;
+			}
+			.bb-switch input:checked + .bb-slider:before {
+				transform: translateX(24px);
+			}
+			.bb-switch input:focus + .bb-slider {
+				outline: 2px solid #62c9ff;
+				outline-offset: 2px;
+			}
+			.bb-status-label {
+				font-weight: 600;
+				font-size: 0.9rem;
+				min-width: 60px;
+				letter-spacing: 0.3px;
+			}
+		</style>
+		<script>
+		document.addEventListener("DOMContentLoaded", function() {
+			var toggles = document.querySelectorAll(".bb-toggle-input");
+			toggles.forEach(function(toggle) {
+				var container = toggle.closest(".bb-toggle-container");
+				var label = container ? container.querySelector(".bb-status-label") : null;
+				if (label) {
+					toggle.addEventListener("change", function() {
+						label.textContent = this.checked ? (label.getAttribute("data-active-text") || "Active") : (label.getAttribute("data-inactive-text") || "Disabled");
+					});
+				}
+			});
+		});
+		</script>
 		<?php
 	}
 
 	public function register_settings() {
+		register_setting( 'xophz_compass_options_group', 'blackbox_bedrock_disabled' );
 		register_setting( 'xophz_compass_options_group', 'xophz_compass_disable_mu_styles' );
 		register_setting( 'xophz_compass_options_group', 'blackbox_bedrock_wp_admin_menu_2030' );
 
@@ -1544,13 +1631,44 @@ class Admin {
 		);
 
 		add_settings_field(
+			'blackbox_bedrock_disabled',
+			'Bedrock Plugin Status',
+			function() {
+				$val = get_option( 'blackbox_bedrock_disabled', '0' );
+				$isActive = empty( $val );
+				?>
+				<div class="bb-toggle-container">
+					<label class="bb-switch">
+						<input type="hidden" name="blackbox_bedrock_disabled" value="1" />
+						<input type="checkbox" name="blackbox_bedrock_disabled" value="0" class="bb-toggle-input" <?php checked( true, $isActive ); ?> />
+						<span class="bb-slider"></span>
+					</label>
+					<span class="bb-status-label" data-active-text="Active" data-inactive-text="Disabled"><?php echo $isActive ? 'Active' : 'Disabled'; ?></span>
+				</div>
+				<p class="description" style="margin-top: 8px;">Master switch for the BlackBOX Bedrock foundation plugin. When disabled, all Bedrock modules and hooks halt. (Override via <code>define('BLACKBOX_BEDROCK_DISABLE', true);</code> in <code>wp-config.php</code>)</p>
+				<?php
+			},
+			'xophz_compass_settings',
+			'xophz_compass_general_section'
+		);
+
+		add_settings_field(
 			'xophz_compass_disable_mu_styles',
 			'2030 Lifestream Interface',
 			function() {
 				$val = get_option( 'xophz_compass_disable_mu_styles', '0' );
-				$isEnabled = empty( $val );
-				echo '<input type="hidden" name="xophz_compass_disable_mu_styles" value="1" />';
-				echo '<label><input type="checkbox" name="xophz_compass_disable_mu_styles" value="0" ' . checked( true, $isEnabled, false ) . ' /> Apply Lifestream styling across all WP Admin pages.</label>';
+				$isActive = empty( $val );
+				?>
+				<div class="bb-toggle-container">
+					<label class="bb-switch">
+						<input type="hidden" name="xophz_compass_disable_mu_styles" value="1" />
+						<input type="checkbox" name="xophz_compass_disable_mu_styles" value="0" class="bb-toggle-input" <?php checked( true, $isActive ); ?> />
+						<span class="bb-slider"></span>
+					</label>
+					<span class="bb-status-label" data-active-text="Active" data-inactive-text="Disabled"><?php echo $isActive ? 'Active' : 'Disabled'; ?></span>
+				</div>
+				<p class="description" style="margin-top: 8px;">Apply Lifestream styling across all WP Admin pages. Disabling this turns off the dark theme, canvas background, color palette variables, and modal styling overrides.</p>
+				<?php
 			},
 			'xophz_compass_settings',
 			'xophz_compass_general_section'
@@ -1561,8 +1679,18 @@ class Admin {
 			'2030 BlackBOX Menu',
 			function() {
 				$val = get_option( 'blackbox_bedrock_wp_admin_menu_2030', '1' );
-				echo '<input type="hidden" name="blackbox_bedrock_wp_admin_menu_2030" value="0" />';
-				echo '<label><input type="checkbox" name="blackbox_bedrock_wp_admin_menu_2030" value="1" ' . checked( 1, $val, false ) . ' /> Enable menu accordion grouping.</label>';
+				$isEnabled = ( $val === '1' || $val === 1 );
+				?>
+				<div class="bb-toggle-container">
+					<label class="bb-switch">
+						<input type="hidden" name="blackbox_bedrock_wp_admin_menu_2030" value="0" />
+						<input type="checkbox" name="blackbox_bedrock_wp_admin_menu_2030" value="1" class="bb-toggle-input" <?php checked( true, $isEnabled ); ?> />
+						<span class="bb-slider"></span>
+					</label>
+					<span class="bb-status-label" data-active-text="Enabled" data-inactive-text="Disabled"><?php echo $isEnabled ? 'Enabled' : 'Disabled'; ?></span>
+				</div>
+				<p class="description" style="margin-top: 8px;">Enable 2030 menu accordion grouping and categorized sections for WPMUDEV and COMPASS plugins.</p>
+				<?php
 			},
 			'xophz_compass_settings',
 			'xophz_compass_general_section'
@@ -1570,6 +1698,9 @@ class Admin {
 	}
 
 	public function output_theme_colors() {
+		if ( ! empty( get_option( 'xophz_compass_disable_mu_styles' ) ) ) {
+			return;
+		}
 
 		global $_wp_admin_css_colors;
 		$user_id = get_current_user_id();
@@ -1893,7 +2024,17 @@ class Admin {
 		return $mce_css;
 	}
 
+	public function inject_admin_canvas() {
+		if ( ! empty( get_option( 'xophz_compass_disable_mu_styles' ) ) ) {
+			return;
+		}
+		Core::inject_canvas_script();
+	}
+
 	public function output_modal_footer_overrides() {
+		if ( ! empty( get_option( 'xophz_compass_disable_mu_styles' ) ) ) {
+			return;
+		}
 		?>
 		<style id="blackbox-modal-footer-override">
 			/* Strip ALL outer wrappers of borders, backgrounds, and shadows to fix double-box */

@@ -21,6 +21,13 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+// Master constant kill-switch via wp-config.php
+if ( ( defined( 'BLACKBOX_BEDROCK_DISABLE' ) && BLACKBOX_BEDROCK_DISABLE ) ||
+     ( defined( 'DISABLE_BLACKBOX_BEDROCK' ) && DISABLE_BLACKBOX_BEDROCK ) ||
+     ( defined( 'BLACKBOX_DISABLE' ) && BLACKBOX_DISABLE ) ) {
+	return;
+}
+
 // Load Core Utilities First
 require_once __DIR__ . '/includes/Core.php';
 

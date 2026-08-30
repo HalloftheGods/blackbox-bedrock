@@ -7,6 +7,9 @@ class Core {
 	private static $canvas_injected = false;
 
 	public static function inject_canvas_script() {
+		if ( ! empty( get_option( 'blackbox_bedrock_disabled' ) ) || ! empty( get_option( 'xophz_compass_disable_mu_styles' ) ) ) {
+			return;
+		}
 		if ( self::$canvas_injected ) {
 			return;
 		}
@@ -18,6 +21,9 @@ class Core {
 	}
 
 	public static function force_woocommerce_theme_support() {
+		if ( ! empty( get_option( 'blackbox_bedrock_disabled' ) ) ) {
+			return;
+		}
 		add_theme_support( 'woocommerce' );
 		add_theme_support( 'wc-product-gallery-zoom' );
 		add_theme_support( 'wc-product-gallery-lightbox' );
