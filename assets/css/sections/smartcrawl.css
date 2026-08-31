@@ -109,9 +109,10 @@
 
 [class*="wds-"] .sui-modal .sui-box,
 [class*="wds-"] .sui-dialog .sui-box {
-	background: rgba(13, 18, 29, 0.96) !important;
-	backdrop-filter: blur(20px) !important;
-	-webkit-backdrop-filter: blur(20px) !important;
+	background: #0d121d !important;
+	background-color: #0d121d !important;
+	backdrop-filter: none !important;
+	-webkit-backdrop-filter: none !important;
 	border: 1px solid rgba(98, 201, 255, 0.3) !important;
 	border-radius: 16px !important;
 	box-shadow: 0 24px 70px rgba(0, 0, 0, 0.95), 0 0 30px rgba(98, 201, 255, 0.12) !important;

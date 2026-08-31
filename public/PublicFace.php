@@ -37,6 +37,6 @@ class PublicFace {
 	}
 
 	public function custom_login_headertext() {
-		return 'COMPASS Suite';
+		return 'My COMPASS';
 	}
 }

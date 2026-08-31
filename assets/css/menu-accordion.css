@@ -1,0 +1,232 @@
+/* Prevent CLS during JS menu grouping */
+#adminmenu { opacity: 0; transition: opacity 0.25s ease-in-out; }
+body.blackbox-menu-grouped #adminmenu { opacity: 1; }
+
+#adminmenu {
+	margin-top: 0 !important;
+	padding-top: 0 !important;
+}
+
+#adminmenu li.blackbox-group-header,
+ul#adminmenu li.blackbox-group-header {
+	transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease !important;
+	box-sizing: border-box !important;
+	border-top: 2px solid transparent !important;
+	border-bottom: 2px solid transparent !important;
+	cursor: pointer;
+}
+#adminmenu li.blackbox-group-header:hover,
+#adminmenu li.blackbox-group-header:hover > a,
+#adminmenu li.blackbox-group-header:focus,
+#adminmenu li.blackbox-group-header:focus > a,
+#adminmenu li.blackbox-group-header:active > a,
+#adminmenu li.blackbox-group-header > a:focus,
+#adminmenu li.blackbox-group-header > a:active {
+	background: transparent !important;
+	color: inherit !important;
+}
+#adminmenu li.blackbox-group-header:hover {
+	border-top-color: var(--wp-theme-secondary, #72aee6) !important;
+	border-bottom-color: var(--wp-theme-secondary, #72aee6) !important;
+	box-shadow: inset 0 8px 10px -8px rgba(0,0,0,0.5), inset 0 -8px 10px -8px rgba(0,0,0,0.5) !important;
+}
+#adminmenu li.blackbox-group-header > a .wp-menu-name,
+#adminmenu li.blackbox-group-header > a .wp-menu-image::before {
+	transition: color 0.25s ease, text-shadow 0.25s ease !important;
+}
+#adminmenu li.blackbox-group-header .bb-arrow {
+	transition: transform 0.2s ease, opacity 0.2s ease !important;
+}
+#adminmenu li.blackbox-group-header.bb-open {
+	border-top: 2px solid var(--wp-theme-secondary, #72aee6) !important;
+	border-bottom-color: transparent !important;
+	box-shadow: inset 0 8px 10px -8px rgba(0,0,0,0.5) !important;
+}
+#adminmenu li.blackbox-group-header.bb-open > a .wp-menu-name,
+#adminmenu li.blackbox-group-header.bb-open > a .wp-menu-image::before {
+	color: inherit !important;
+}
+
+/* Flex Row Alignment for Group Header link */
+#adminmenu li.blackbox-group-header > a,
+ul#adminmenu li.blackbox-group-header > a {
+	display: flex !important;
+	flex-direction: row !important;
+	align-items: center !important;
+	justify-content: flex-start !important;
+	padding: 0 !important;
+	height: 34px !important;
+	min-height: 34px !important;
+	line-height: 34px !important;
+	box-sizing: border-box !important;
+}
+
+#adminmenu li.blackbox-group-header .bb-plus-icon,
+ul#adminmenu li.blackbox-group-header .bb-plus-icon {
+	order: 1 !important;
+	width: 36px !important;
+	min-width: 36px !important;
+	max-width: 36px !important;
+	height: 34px !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	text-align: center !important;
+	font-size: 14px !important;
+	font-weight: bold !important;
+	color: rgba(255, 255, 255, 0.5) !important;
+	flex-shrink: 0 !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+}
+
+#adminmenu li.blackbox-group-header .wp-menu-name,
+ul#adminmenu li.blackbox-group-header .wp-menu-name {
+	order: 2 !important;
+	flex: 1 1 auto !important;
+	position: relative !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	text-align: left !important;
+	line-height: 34px !important;
+	height: 34px !important;
+	display: flex !important;
+	align-items: center !important;
+	white-space: nowrap !important;
+	overflow: visible !important;
+}
+
+#adminmenu li.blackbox-group-header .wp-menu-image,
+ul#adminmenu li.blackbox-group-header .wp-menu-image {
+	order: 3 !important;
+	float: none !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	width: 36px !important;
+	min-width: 36px !important;
+	max-width: 36px !important;
+	height: 34px !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	flex-shrink: 0 !important;
+}
+
+#adminmenu li.blackbox-group-header .wp-menu-image::before {
+	padding: 0 !important;
+	margin: 0 !important;
+}
+
+body:not(.folded) #adminmenu li.blackbox-group-header.has-acronym .wp-menu-image {
+	transition: opacity 0.25s ease, transform 0.25s ease !important;
+}
+body:not(.folded) #adminmenu li.blackbox-group-header.has-acronym .wp-menu-name {
+	transition: padding-left 0.25s ease, color 0.25s ease, text-shadow 0.25s ease !important;
+}
+body:not(.folded) #adminmenu li.blackbox-group-header.has-acronym:hover .wp-menu-image {
+	opacity: 0 !important;
+	transform: scale(0.8) !important;
+}
+body:not(.folded) #adminmenu li.blackbox-group-header.has-acronym:hover .wp-menu-name {
+	padding-left: 14px !important;
+}
+body:not(.folded) #adminmenu li.blackbox-group-header.has-acronym:hover .bb-short-name {
+	opacity: 0 !important;
+}
+body:not(.folded) #adminmenu li.blackbox-group-header.has-acronym:hover .bb-expanded-name {
+	opacity: 1 !important;
+	transform: translateY(-50%) translateX(0) !important;
+}
+
+body.folded #adminmenu li.blackbox-group-header .bb-plus-icon {
+	display: none !important;
+}
+
+/* Standard Menu Items Flex Alignment */
+#adminmenu li.menu-top:not(.blackbox-group-header) > a {
+	display: flex !important;
+	flex-direction: row !important;
+	align-items: center !important;
+	justify-content: flex-start !important;
+	height: 34px !important;
+	min-height: 34px !important;
+	line-height: 34px !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+}
+
+#adminmenu li.menu-top:not(.blackbox-group-header) > a .wp-menu-image {
+	float: none !important;
+	width: 36px !important;
+	min-width: 36px !important;
+	max-width: 36px !important;
+	height: 34px !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	flex-shrink: 0 !important;
+}
+
+#adminmenu li.menu-top:not(.blackbox-group-header) > a .wp-menu-image br {
+	display: none !important;
+}
+
+#adminmenu li.menu-top:not(.blackbox-group-header) > a .wp-menu-image::before {
+	padding: 0 !important;
+	margin: 0 !important;
+	line-height: 1 !important;
+	font-size: 18px !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	width: 20px !important;
+	height: 20px !important;
+}
+
+#adminmenu li.menu-top:not(.blackbox-group-header) > a .wp-menu-image img,
+#adminmenu li.menu-top:not(.blackbox-group-header) > a .wp-menu-image svg {
+	width: 18px !important;
+	height: 18px !important;
+	max-width: 18px !important;
+	max-height: 18px !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	opacity: 1 !important;
+	filter: none !important;
+	object-fit: contain !important;
+	display: block !important;
+}
+
+#adminmenu li.menu-top:not(.blackbox-group-header) > a .wp-menu-name {
+	flex: 1 1 auto !important;
+	height: 34px !important;
+	line-height: 34px !important;
+	padding: 0 10px 0 0 !important;
+	margin: 0 !important;
+	display: flex !important;
+	align-items: center !important;
+	font-size: 13px !important;
+	white-space: nowrap !important;
+	overflow: hidden !important;
+	text-overflow: ellipsis !important;
+}
+
+#adminmenu li.menu-top:not(.blackbox-group-header) > a .wp-menu-arrow {
+	display: none !important;
+}
+
+/* Fallback icon for Code Snippets */
+#toplevel_page_snippets .wp-menu-image::before {
+	content: "\f499" !important;
+	font-family: dashicons !important;
+}
+
+li.bb-open-item {
+	background: rgba(0, 0, 0, 0.15) !important;
+}
+li.bb-open-item.bb-last-item {
+	box-shadow: inset -2px 0 0 0 var(--wp-theme-secondary, #72aee6), inset 0 -2px 0 0 var(--wp-theme-secondary, #72aee6), inset 0 -8px 10px -8px rgba(0,0,0,0.5) !important;
+}

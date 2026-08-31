@@ -1,0 +1,622 @@
+/* ═══════════════════════════════════════════════════════
+   WPMU DEV Videos Dark Theme – BlackBOX Section Override
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Container & Background Reset ── */
+[class*="wpmudev-videos"],
+[class*="wpmudev-videos"] > *,
+.wpmudev-videos-accordion,
+.wpmudev-videos-accordion > *,
+.wpmudev-videos-section--block,
+.wpmudev-videos-section--block > * {
+	box-sizing: border-box;
+}
+
+.wpmudev-videos-accordion,
+.wpmudev-videos-accordion--group,
+.wpmudev-videos-accordion--heading,
+.wpmudev-videos-accordion--region,
+.wpmudev-videos-accordion--actions,
+.wpmudev-videos-accordion--header,
+#wpmudev-videos-videos-list,
+.sui-wrap [class*="wpmudev-videos"] .sui-box,
+.sui-wrap .wpmudev-videos-accordion,
+.wpmudev-videos-section--block,
+.wpmudev-videos-section--menu-group {
+	background: transparent !important;
+	background-color: transparent !important;
+}
+
+/* ── Main Accordion Outer Container ── */
+.wpmudev-videos-accordion {
+	background: var(--rough-glass-bg, linear-gradient(135deg, rgba(13, 17, 23, 0.7), rgba(13, 17, 23, 0.35))) !important;
+	backdrop-filter: var(--rough-glass-filter, blur(20px) saturate(160%)) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter, blur(20px) saturate(160%)) !important;
+	border: 1px solid var(--rough-glass-border, rgba(90, 105, 172, 0.3)) !important;
+	border-radius: 12px !important;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25) !important;
+	overflow: hidden !important;
+	margin-top: 16px !important;
+}
+
+/* ── Accordion Header (Columns: Video title, Duration) ── */
+.wpmudev-videos-accordion--header {
+	background: rgba(255, 255, 255, 0.03) !important;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+	padding: 12px 24px !important;
+}
+
+.wpmudev-videos-accordion--header p,
+.wpmudev-videos-accordion--header .wpmudev-videos-accordion--col-large,
+.wpmudev-videos-accordion--header .wpmudev-videos-accordion--col-small {
+	color: var(--accent, #62c9ff) !important;
+	font-size: 11px !important;
+	font-weight: 700 !important;
+	text-transform: uppercase !important;
+	letter-spacing: 1.2px !important;
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+/* ── Accordion Group / Row Item ── */
+.wpmudev-videos-accordion--group {
+	border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+	transition: background-color 0.2s ease, border-color 0.2s ease !important;
+}
+
+.wpmudev-videos-accordion--group:last-child {
+	border-bottom: none !important;
+}
+
+.wpmudev-videos-accordion--group:hover {
+	background: rgba(98, 201, 255, 0.04) !important;
+}
+
+.wpmudev-videos-accordion--heading {
+	padding: 8px 20px !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: space-between !important;
+}
+
+/* ── Accordion Title Button Reset & Style ── */
+.wpmudev-videos-accordion--title,
+button.wpmudev-videos-accordion--title {
+	background: transparent !important;
+	background-color: transparent !important;
+	border: none !important;
+	box-shadow: none !important;
+	outline: none !important;
+	color: var(--text-main, #f8f8f2) !important;
+	cursor: pointer !important;
+	display: flex !important;
+	align-items: center !important;
+	width: 100% !important;
+	text-align: left !important;
+	padding: 6px 0 !important;
+	margin: 0 !important;
+	font-size: 14px !important;
+	font-weight: 600 !important;
+	letter-spacing: 0.2px !important;
+}
+
+.wpmudev-videos-accordion--title:focus,
+.wpmudev-videos-accordion--title:active {
+	border: none !important;
+	box-shadow: none !important;
+	outline: none !important;
+}
+
+/* ── Thumbnail Icon ── */
+.wpmudev-videos-accordion .video-thumb,
+.wpmudev-videos-accordion .wpmudev-videos-list-thumb {
+	width: 36px !important;
+	height: 36px !important;
+	min-width: 36px !important;
+	border-radius: 8px !important;
+	background-color: rgba(98, 201, 255, 0.12) !important;
+	border: 1px solid rgba(98, 201, 255, 0.25) !important;
+	color: var(--accent, #62c9ff) !important;
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	font-size: 18px !important;
+	line-height: 1 !important;
+	margin-right: 12px !important;
+	flex-shrink: 0 !important;
+	transition: all 0.2s ease !important;
+}
+
+.wpmudev-videos-accordion .video-thumb.dashicons::before {
+	font-size: 18px !important;
+	width: 18px !important;
+	height: 18px !important;
+	line-height: 18px !important;
+}
+
+/* ── Play Icon ── */
+.wpmudev-videos-accordion .video-icon,
+.wpmudev-videos-accordion .sui-icon-play {
+	color: var(--gold, #d9be6f) !important;
+	margin-right: 10px !important;
+	font-size: 13px !important;
+	transition: transform 0.2s ease, color 0.2s ease !important;
+}
+
+/* ── Video Title Text ── */
+.wpmudev-videos-accordion .video-name {
+	color: #ffffff !important;
+	font-size: 14px !important;
+	font-weight: 600 !important;
+	letter-spacing: 0.2px !important;
+	transition: color 0.2s ease !important;
+}
+
+/* ── Hover Micro-interactions ── */
+.wpmudev-videos-accordion--title:hover .video-name {
+	color: var(--accent, #62c9ff) !important;
+	text-shadow: 0 0 10px rgba(98, 201, 255, 0.3) !important;
+}
+
+.wpmudev-videos-accordion--title:hover .video-thumb {
+	background-color: rgba(98, 201, 255, 0.25) !important;
+	border-color: var(--accent, #62c9ff) !important;
+	box-shadow: 0 0 12px rgba(98, 201, 255, 0.35) !important;
+}
+
+.wpmudev-videos-accordion--title:hover .video-icon {
+	transform: scale(1.15) !important;
+	color: var(--accent, #62c9ff) !important;
+}
+
+/* ── Actions Column (Duration, Add to Playlist, Dropdown) ── */
+.wpmudev-videos-accordion--actions {
+	display: flex !important;
+	align-items: center !important;
+	justify-content: flex-end !important;
+	gap: 10px !important;
+}
+
+/* Duration Timestamp */
+.wpmudev-videos-accordion--actions .sui-description,
+.wpmudev-videos-accordion .sui-description {
+	color: rgba(248, 248, 242, 0.7) !important;
+	font-size: 12.5px !important;
+	font-weight: 500 !important;
+	font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace !important;
+	letter-spacing: 0.5px !important;
+	margin: 0 !important;
+	background: rgba(255, 255, 255, 0.04) !important;
+	padding: 3px 8px !important;
+	border-radius: 4px !important;
+	border: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+/* Action Icon Buttons */
+.wpmudev-videos-accordion .sui-button-icon {
+	background: rgba(255, 255, 255, 0.05) !important;
+	border: 1px solid rgba(255, 255, 255, 0.15) !important;
+	color: var(--text-main, #f8f8f2) !important;
+	border-radius: 6px !important;
+	width: 32px !important;
+	height: 32px !important;
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	cursor: pointer !important;
+	transition: all 0.2s ease !important;
+	margin: 0 !important;
+}
+
+.wpmudev-videos-accordion .sui-button-icon:hover {
+	background: rgba(98, 201, 255, 0.18) !important;
+	border-color: var(--accent, #62c9ff) !important;
+	color: var(--accent, #62c9ff) !important;
+	box-shadow: 0 0 10px rgba(98, 201, 255, 0.3) !important;
+}
+
+/* ── Active / Open Accordion Item ── */
+.wpmudev-videos-accordion--group.wpmudev-videos-active {
+	background: rgba(13, 18, 29, 0.75) !important;
+	border-left: 3px solid var(--accent, #62c9ff) !important;
+}
+
+.wpmudev-videos-accordion--group.wpmudev-videos-active .video-name {
+	color: var(--accent, #62c9ff) !important;
+	font-weight: 700 !important;
+	font-size: 15px !important;
+}
+
+.wpmudev-videos-accordion--group.wpmudev-videos-active .video-length {
+	color: rgba(248, 248, 242, 0.6) !important;
+	font-size: 12.5px !important;
+	font-family: monospace !important;
+}
+
+/* ── Video Player Region (Expanded Body) ── */
+.wpmudev-videos-accordion--region {
+	background: rgba(5, 8, 14, 0.8) !important;
+	border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+	padding: 24px !important;
+	position: relative !important;
+}
+
+.wpmudev-videos-accordion--region .wpmudev-videos-iframe,
+.wpmudev-videos-accordion--region iframe {
+	border-radius: 10px !important;
+	overflow: hidden !important;
+	border: 1px solid rgba(98, 201, 255, 0.25) !important;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 20px rgba(98, 201, 255, 0.1) !important;
+}
+
+.wpmudev-videos-accordion--region .sui-button-icon {
+	background: rgba(255, 255, 255, 0.08) !important;
+	border: 1px solid rgba(255, 255, 255, 0.2) !important;
+	color: #ffffff !important;
+}
+
+.wpmudev-videos-accordion--region .sui-button-icon:hover {
+	background: rgba(255, 92, 92, 0.25) !important;
+	border-color: #ff5c5c !important;
+	color: #ff5c5c !important;
+	box-shadow: 0 0 12px rgba(255, 92, 92, 0.4) !important;
+}
+
+/* ── Action Dropdown Menus ── */
+.wpmudev-videos-accordion .sui-dropdown ul {
+	background: #0d1117 !important;
+	background-color: #0d1117 !important;
+	backdrop-filter: blur(16px) !important;
+	-webkit-backdrop-filter: blur(16px) !important;
+	border: 1px solid rgba(98, 201, 255, 0.3) !important;
+	border-radius: 8px !important;
+	box-shadow: 0 16px 40px rgba(0, 0, 0, 0.95), 0 0 20px rgba(98, 201, 255, 0.1) !important;
+	padding: 6px !important;
+	list-style: none !important;
+	margin: 4px 0 0 !important;
+	min-width: 170px !important;
+	z-index: 999999 !important;
+}
+
+.wpmudev-videos-accordion .sui-dropdown ul li {
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+.wpmudev-videos-accordion .sui-dropdown ul li button {
+	background: transparent !important;
+	border: none !important;
+	box-shadow: none !important;
+	color: var(--text-main, #e6edf3) !important;
+	width: 100% !important;
+	text-align: left !important;
+	padding: 8px 12px !important;
+	border-radius: 6px !important;
+	font-size: 13px !important;
+	font-weight: 500 !important;
+	display: flex !important;
+	align-items: center !important;
+	gap: 8px !important;
+	cursor: pointer !important;
+	transition: all 0.15s ease !important;
+}
+
+.wpmudev-videos-accordion .sui-dropdown ul li button:hover {
+	background: rgba(98, 201, 255, 0.18) !important;
+	color: var(--accent, #62c9ff) !important;
+}
+
+.wpmudev-videos-accordion .sui-dropdown ul li button [class*="sui-icon-"] {
+	color: inherit !important;
+	font-size: 14px !important;
+}
+
+/* ── Notice / Upgrade State ── */
+.wpmudev-videos-accordion--notice,
+.wpmudev-videos-accordion--notice .sui-notice {
+	background: rgba(13, 18, 29, 0.8) !important;
+	border: 1px solid var(--gold, #d9be6f) !important;
+	border-radius: 8px !important;
+	color: var(--text-main, #f8f8f2) !important;
+	margin: 16px 20px !important;
+}
+
+/* ── Go To Top Floating Button ── */
+.wpmudev-videos-to-top {
+	padding: 16px 20px !important;
+	text-align: right !important;
+}
+
+.wpmudev-videos-button--to-top {
+	background: rgba(13, 18, 29, 0.9) !important;
+	border: 1px solid var(--accent, #62c9ff) !important;
+	color: var(--accent, #62c9ff) !important;
+	width: 36px !important;
+	height: 36px !important;
+	border-radius: 50% !important;
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6) !important;
+	cursor: pointer !important;
+	transition: all 0.2s ease !important;
+}
+
+.wpmudev-videos-button--to-top:hover {
+	background: var(--accent, #62c9ff) !important;
+	color: #000000 !important;
+	box-shadow: 0 0 16px rgba(98, 201, 255, 0.6) !important;
+	transform: translateY(-2px);
+}
+
+/* ── Playlists Specifics ── */
+.sui-accordion-item.wpmudev-videos-accordion {
+	background: var(--rough-glass-bg) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	border-radius: 10px !important;
+	margin-bottom: 12px !important;
+}
+
+.sui-accordion-item.wpmudev-videos-accordion .sui-accordion-item-header {
+	background: transparent !important;
+	border: none !important;
+}
+
+.sui-accordion-item.wpmudev-videos-accordion .sui-accordion-item-title,
+.sui-accordion-item.wpmudev-videos-accordion .sui-accordion-item-date {
+	color: var(--text-main, #f8f8f2) !important;
+}
+
+.sui-accordion-item.wpmudev-videos-accordion .sui-accordion-item-body {
+	background: rgba(0, 0, 0, 0.25) !important;
+	border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+/* ═══════════════════════════════════════════════════════
+   Video Tutorials Page (page=video-tut) Overrides
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Search Form Bar ── */
+.sui-wrap .sui-form-field .sui-with-button input.sui-form-control,
+.sui-wrap input#wpmudev-videos-search {
+	background: rgba(0, 0, 0, 0.5) !important;
+	border: 1px solid rgba(98, 201, 255, 0.3) !important;
+	border-radius: 8px !important;
+	color: #ffffff !important;
+	font-size: 14px !important;
+	padding: 10px 16px !important;
+}
+
+.sui-wrap .sui-form-field .sui-with-button input.sui-form-control:focus,
+.sui-wrap input#wpmudev-videos-search:focus {
+	border-color: var(--accent, #62c9ff) !important;
+	box-shadow: 0 0 12px rgba(98, 201, 255, 0.4) !important;
+	outline: none !important;
+}
+
+/* ── Tutorials Sticky / Top Category Menu ── */
+.wpmudev-videos-section--menu-group {
+	background: rgba(13, 18, 29, 0.85) !important;
+	backdrop-filter: blur(16px) !important;
+	-webkit-backdrop-filter: blur(16px) !important;
+	border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+	margin-bottom: 30px !important;
+}
+
+.wpmudev-videos-section--menu a {
+	color: rgba(248, 248, 242, 0.65) !important;
+	font-size: 11px !important;
+	font-weight: 700 !important;
+	letter-spacing: 0.8px !important;
+	padding: 14px 16px !important;
+	border-bottom: 2px solid transparent !important;
+	transition: all 0.2s ease !important;
+	text-decoration: none !important;
+}
+
+.wpmudev-videos-section--menu a:hover,
+.wpmudev-videos-section--menu a:focus {
+	color: var(--accent, #62c9ff) !important;
+}
+
+.wpmudev-videos-section--menu a.active,
+.wpmudev-videos-section--menu a[class*="active"] {
+	color: var(--gold, #d9be6f) !important;
+	border-bottom-color: var(--gold, #d9be6f) !important;
+	text-shadow: 0 0 10px rgba(217, 190, 111, 0.4) !important;
+}
+
+.wpmudev-videos-section--menu-nav button {
+	background: rgba(13, 18, 29, 0.9) !important;
+	color: var(--accent, #62c9ff) !important;
+	border: none !important;
+}
+
+/* ── Playlist Section Block (Category Card Container) ── */
+.wpmudev-videos-section--block {
+	background: var(--rough-glass-bg, linear-gradient(135deg, rgba(13, 17, 23, 0.7), rgba(13, 17, 23, 0.35))) !important;
+	backdrop-filter: var(--rough-glass-filter, blur(20px) saturate(160%)) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter, blur(20px) saturate(160%)) !important;
+	border: 1px solid var(--rough-glass-border, rgba(90, 105, 172, 0.3)) !important;
+	border-radius: 12px !important;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25) !important;
+	margin-bottom: 24px !important;
+	padding: 24px !important;
+	overflow: hidden !important;
+}
+
+.wpmudev-videos-section--block-title {
+	color: #ffffff !important;
+	font-weight: 700 !important;
+	font-size: 1.25rem !important;
+	letter-spacing: -0.02em !important;
+	margin-bottom: 4px !important;
+}
+
+.wpmudev-videos-section--block-description {
+	color: rgba(248, 248, 242, 0.7) !important;
+	font-size: 13.5px !important;
+	margin-bottom: 16px !important;
+}
+
+/* Carousel Navigator Buttons (< and >) */
+.wpmudev-videos-section--videos-list-navigator button,
+.wpmudev-videos-section--videos-list-navigator .sui-button-icon {
+	background: var(--gold, #d9be6f) !important;
+	background-color: var(--gold, #d9be6f) !important;
+	border: 1px solid var(--gold, #d9be6f) !important;
+	color: #ffffff !important;
+	border-radius: 6px !important;
+	width: 32px !important;
+	height: 32px !important;
+	margin-left: 6px !important;
+	cursor: pointer !important;
+	transition: all 0.2s ease !important;
+	box-shadow: 0 2px 8px rgba(217, 190, 111, 0.3) !important;
+}
+
+.wpmudev-videos-section--videos-list-navigator button:hover:not([disabled]) {
+	background: var(--accent, #62c9ff) !important;
+	background-color: var(--accent, #62c9ff) !important;
+	border-color: var(--accent, #62c9ff) !important;
+	color: #ffffff !important;
+	box-shadow: 0 0 12px rgba(98, 201, 255, 0.5) !important;
+}
+
+.wpmudev-videos-section--videos-list-navigator button[disabled] {
+	opacity: 0.35 !important;
+	cursor: not-allowed !important;
+}
+
+/* ── Video Slider Card (Inactive) ── */
+.wpmudev-videos-section--block:not(.wpmudev-videos-active) .wpmudev-videos-section--video,
+.wpmudev-videos-section--video {
+	background: rgba(20, 27, 43, 0.8) !important;
+	border: 1px solid rgba(98, 201, 255, 0.2) !important;
+	border-radius: 10px !important;
+	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4) !important;
+	overflow: hidden !important;
+	transition: all 0.25s ease !important;
+	outline: none !important;
+	cursor: pointer !important;
+}
+
+.wpmudev-videos-section--block:not(.wpmudev-videos-active) .wpmudev-videos-section--video:hover {
+	background: rgba(28, 38, 60, 0.95) !important;
+	border-color: var(--accent, #62c9ff) !important;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 16px rgba(98, 201, 255, 0.3) !important;
+	transform: translateY(-3px) !important;
+}
+
+/* Video Card Head & Thumbnail */
+.wpmudev-videos-section--video .wpmudev-videos-section--video-head {
+	background: rgba(10, 14, 23, 0.8) !important;
+	position: relative !important;
+}
+
+.wpmudev-videos-section--video .video-thumbnail {
+	background: rgba(10, 14, 23, 0.8) !important;
+}
+
+.wpmudev-videos-section--video .video-thumb.dashicons {
+	background-color: rgba(98, 201, 255, 0.15) !important;
+	border: 1px solid rgba(98, 201, 255, 0.3) !important;
+	color: var(--accent, #62c9ff) !important;
+}
+
+.wpmudev-videos-section--video .video-thumbnail-name {
+	color: #ffffff !important;
+	font-weight: 600 !important;
+}
+
+/* Video Play Icon Overlay */
+.wpmudev-videos-section--video .wpmudev-videos-section--video-head [class*="sui-icon-"] {
+	background-color: var(--gold, #d9be6f) !important;
+	color: #ffffff !important;
+	border-radius: 4px !important;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5) !important;
+	transition: all 0.2s ease !important;
+}
+
+.wpmudev-videos-section--video:hover .wpmudev-videos-section--video-head [class*="sui-icon-"] {
+	background-color: var(--accent, #62c9ff) !important;
+	box-shadow: 0 0 14px rgba(98, 201, 255, 0.6) !important;
+}
+
+/* Video Card Body (Title & Duration) */
+.wpmudev-videos-section--video .wpmudev-videos-section--video-body {
+	background: transparent !important;
+	border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+	padding: 12px 14px !important;
+}
+
+.wpmudev-videos-section--video .video-title {
+	color: #ffffff !important;
+	font-weight: 600 !important;
+	font-size: 13px !important;
+	transition: color 0.2s ease !important;
+}
+
+.wpmudev-videos-section--video:hover .video-title {
+	color: var(--accent, #62c9ff) !important;
+}
+
+.wpmudev-videos-section--video .video-duration {
+	color: rgba(248, 248, 242, 0.6) !important;
+	font-size: 12px !important;
+	font-family: monospace !important;
+}
+
+/* ── Active Video Layout (Player + Sidebar Video List) ── */
+.wpmudev-videos-section--block.wpmudev-videos-active .wpmudev-videos-section--videos {
+	background: rgba(5, 8, 14, 0.75) !important;
+	border: 1px solid rgba(98, 201, 255, 0.25) !important;
+	border-radius: 12px !important;
+	box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7) !important;
+	overflow: hidden !important;
+}
+
+.wpmudev-videos-section--block.wpmudev-videos-active .wpmudev-videos-section--videos-list {
+	background: rgba(13, 18, 29, 0.95) !important;
+	border-left: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.wpmudev-videos-section--block.wpmudev-videos-active .wpmudev-videos-section--video {
+	background: transparent !important;
+	border: none !important;
+	border-radius: 0 !important;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+	box-shadow: none !important;
+}
+
+.wpmudev-videos-section--block.wpmudev-videos-active .wpmudev-videos-section--video:hover,
+.wpmudev-videos-section--block.wpmudev-videos-active .wpmudev-videos-section--video.wpmudev-videos-active {
+	background: rgba(98, 201, 255, 0.12) !important;
+}
+
+.wpmudev-videos-section--block.wpmudev-videos-active .wpmudev-videos-section--video.wpmudev-videos-active {
+	border-left: 3px solid var(--accent, #62c9ff) !important;
+}
+
+.wpmudev-videos-section--block.wpmudev-videos-active .wpmudev-videos-section--video.wpmudev-videos-active .video-title {
+	color: var(--accent, #62c9ff) !important;
+	font-weight: 700 !important;
+}
+
+/* Video Player Title and Player Body */
+.wpmudev-videos-section--videos-panel .video-title {
+	color: var(--accent, #62c9ff) !important;
+	font-weight: 700 !important;
+	font-size: 1.25rem !important;
+}
+
+.wpmudev-videos-section--videos-panel .video-description {
+	color: rgba(248, 248, 242, 0.8) !important;
+}
+
+.wpmudev-videos-section--videos-panel iframe {
+	border-radius: 10px !important;
+	border: 1px solid rgba(98, 201, 255, 0.3) !important;
+	box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8) !important;
+}

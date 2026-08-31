@@ -1,0 +1,44 @@
+/* Instant Pre-Render Isolation: Hides WP Chrome & Sidebar before Vue mounts to eliminate FOUC */
+.compass-isolated #wpadminbar,
+.compass-isolated #adminmenuback,
+.compass-isolated #adminmenuwrap,
+.compass-isolated #adminmenumain,
+.compass-isolated #wpfooter,
+.compass-isolated .update-nag,
+.compass-isolated .notice:not(.compass-notice),
+.compass-isolated #wpbody-content > .notice {
+	display: none !important;
+}
+.compass-isolated html,
+.compass-isolated html.wp-toolbar {
+	padding-top: 0 !important;
+	overflow: hidden !important;
+}
+.compass-isolated body,
+.compass-isolated body.admin-bar {
+	margin-top: 0 !important;
+}
+.compass-isolated #wpcontent,
+.compass-isolated #wpbody,
+.compass-isolated #wpbody-content {
+	padding: 0 !important;
+	margin: 0 !important;
+	margin-left: 0 !important;
+}
+.compass-isolated body > #app {
+	top: 0 !important;
+	left: 0 !important;
+	right: 0 !important;
+	bottom: 0 !important;
+}
+.compass-isolated body.wp-responsive-open #adminmenuwrap,
+.compass-isolated body.wp-responsive-open #adminmenuback,
+.compass-isolated body.wp-responsive-open #adminmenumain {
+	display: block !important;
+}
+.compass-isolated body.wp-responsive-open > #app {
+	left: 160px !important;
+}
+.compass-isolated body.folded.wp-responsive-open > #app {
+	left: 36px !important;
+}

@@ -265,7 +265,7 @@ hr,
 
 /* Buttons */
 .sui-button,
-.sui-wrap button {
+.sui-wrap .sui-button {
 	background: transparent !important;
 	border: 1px solid var(--gold) !important;
 	color: var(--gold) !important;
@@ -375,21 +375,13 @@ hr,
    SUI Modal & Dialog Premium UI Enhancements
    ═══════════════════════════════════════════════════════ */
 
-/* Modal Backdrop Overlay (Full Viewport Mask) */
-.sui-modal,
+/* Modal Backdrop Overlay (Full Viewport Mask - ONLY overlay) */
 .sui-modal-overlay,
-.sui-dialog,
 .sui-dialog-overlay,
 .sui-mask,
 [class*="sui-modal-backdrop"],
 .hustle-modal-overlay,
-.forminator-modal-overlay,
-.wpmudev-slide-modal,
-.wpmudev-modal,
-.wpmudev-slide-modal__backdrop,
-.wpmudev-modal__backdrop,
-[class*="wpmudev-slide-modal-backdrop"],
-[class*="wpmudev-modal-backdrop"] {
+.forminator-modal-overlay {
 	position: fixed !important;
 	inset: 0 !important;
 	top: 0 !important;
@@ -397,19 +389,19 @@ hr,
 	width: 100vw !important;
 	height: 100vh !important;
 	background: rgba(5, 8, 14, 0.88) !important;
-	backdrop-filter: blur(16px) saturate(180%) !important;
-	-webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+	backdrop-filter: none !important;
+	-webkit-backdrop-filter: none !important;
 	z-index: 999999 !important;
 }
 
-/* Outer Slide & Content Containers - Strip borders & backgrounds to prevent double-box */
+/* Outer Modal & Slide Containers - Strip borders & backgrounds to prevent double-box */
+.sui-modal,
+.sui-dialog,
+.hustle-modal,
+.forminator-modal,
 .sui-modal-slide,
 .sui-modal-content,
-.sui-dialog-content,
-.wpmudev-slide-modal__body,
-.wpmudev-slide-modal__content,
-.wpmudev-modal__body,
-.wpmudev-modal__content {
+.sui-dialog-content {
 	border: none !important;
 	background: transparent !important;
 	background-color: transparent !important;
@@ -427,19 +419,17 @@ hr,
 [class*="wpmudev-forminator"] .sui-modal .sui-box,
 [class*="hustle"] .sui-modal .sui-box,
 .hustle-modal .sui-box,
-.forminator-modal .sui-box,
-.wpmudev-slide-modal__panel,
-.wpmudev-modal__panel,
-[class*="wpmudev-slide-modal__panel"],
-[class*="wpmudev-modal__panel"] {
-	background: rgba(13, 18, 29, 0.96) !important;
-	backdrop-filter: blur(20px) !important;
-	-webkit-backdrop-filter: blur(20px) !important;
+.forminator-modal .sui-box {
+	background: rgba(13, 18, 29, 0.92) !important;
+	background-color: rgba(13, 18, 29, 0.92) !important;
+	backdrop-filter: blur(64px) saturate(200%) !important;
+	-webkit-backdrop-filter: blur(64px) saturate(200%) !important;
 	border: 1px solid rgba(98, 201, 255, 0.3) !important;
 	border-radius: 16px !important;
 	box-shadow: 0 24px 70px rgba(0, 0, 0, 0.95), 0 0 30px rgba(98, 201, 255, 0.12) !important;
 	overflow: hidden !important;
 	margin: auto !important;
+	position: relative !important;
 	z-index: 1000000 !important;
 	color: #ffffff !important;
 }
@@ -460,6 +450,9 @@ hr,
 	background-image: none !important;
 	background: transparent !important;
 	box-shadow: none !important;
+	backdrop-filter: none !important;
+	-webkit-backdrop-filter: none !important;
+	filter: none !important;
 }
 
 .sui-box-header::before,
@@ -478,7 +471,9 @@ hr,
 .sui-box-header img,
 .sui-box-header-image img {
 	background: transparent !important;
-	filter: drop-shadow(0 0 12px rgba(98, 201, 255, 0.4)) !important;
+	filter: none !important;
+	backdrop-filter: none !important;
+	-webkit-backdrop-filter: none !important;
 }
 
 /* Modal Header */
@@ -737,261 +732,15 @@ li.sui-dropdown__menu-item,
 }
 
 /* ═══════════════════════════════════════════════════════
-   WPMUDEV Modern Slide Modal Overrides (Defender 6.0+)
+   Hummingbird & Toggle Enhancements
    ═══════════════════════════════════════════════════════ */
-.wpmudev-slide-modal__panel,
-.wpmudev-modal__panel,
-[class*="wpmudev-slide-modal__panel"] {
-	background: rgba(13, 18, 29, 0.95) !important;
-	background-color: rgba(13, 18, 29, 0.95) !important;
-	backdrop-filter: blur(24px) saturate(180%) !important;
-	-webkit-backdrop-filter: blur(24px) saturate(180%) !important;
-	border: 1px solid rgba(98, 201, 255, 0.3) !important;
-	border-radius: 16px !important;
-	box-shadow: 0 24px 70px rgba(0, 0, 0, 0.95), 0 0 30px rgba(98, 201, 255, 0.12) !important;
-	color: #ffffff !important;
+/* Fix toggle switches missing their track border without breaking layout */
+.sui-toggle-slider {
+	box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2) !important;
+	border: none !important;
 }
 
-.wpmudev-slide-modal__panel .wpmudev-text,
-.wpmudev-slide-modal .wpmudev-text,
-.wpmudev-modal .wpmudev-text,
-[class*="wpmudev-slide-modal"] [class*="wpmudev-text"] {
-	color: var(--text-main, #e6edf3) !important;
-}
-
-.wpmudev-slide-modal__panel .wpmudev-text--heading,
-.wpmudev-slide-modal__panel h1,
-.wpmudev-slide-modal__panel h2,
-.wpmudev-slide-modal__panel h3,
-.wpmudev-slide-modal__panel h4,
-.wpmudev-slide-modal__header h3 {
-	color: #ffffff !important;
-	text-shadow: 0 0 12px rgba(98, 201, 255, 0.25) !important;
-}
-
-.wpmudev-slide-modal__panel p.wpmudev-text,
-.wpmudev-slide-modal__panel .wpmudev-slide-modal__steps p,
-.wpmudev-slide-modal__steps-content p {
-	color: rgba(230, 237, 243, 0.85) !important;
-}
-
-.wpmudev-slide-modal__header-badge,
-.wpmudev-slide-modal__header-icon {
-	background: rgba(98, 201, 255, 0.15) !important;
-	background-color: rgba(98, 201, 255, 0.15) !important;
-	border: 1px solid rgba(98, 201, 255, 0.4) !important;
-	color: var(--accent, #62c9ff) !important;
-	box-shadow: 0 0 15px rgba(98, 201, 255, 0.3) !important;
-}
-
-.wpmudev-slide-modal__close button,
-.wpmudev-modal__close button {
-	background: rgba(255, 255, 255, 0.08) !important;
-	border: 1px solid rgba(255, 255, 255, 0.15) !important;
-	border-radius: 50% !important;
-	cursor: pointer !important;
-	transition: all 0.2s ease !important;
-}
-
-.wpmudev-slide-modal__close button:hover,
-.wpmudev-modal__close button:hover {
-	background: rgba(255, 92, 92, 0.25) !important;
-	border-color: #ff5c5c !important;
-	box-shadow: 0 0 12px rgba(255, 92, 92, 0.4) !important;
-}
-
-.wpmudev-slide-modal__close svg path,
-.wpmudev-icon-close svg path {
-	fill: var(--accent, #62c9ff) !important;
-}
-
-.wpmudev-slide-modal__close button:hover svg path,
-.wpmudev-modal__close button:hover svg path {
-	fill: #ff5c5c !important;
-}
-
-.wpmudev-slide-modal .wpmudev-button,
-.wpmudev-slide-modal__panel .wpmudev-button,
-.wpmudev-modal .wpmudev-button {
-	border-radius: 8px !important;
-	font-weight: 700 !important;
-	letter-spacing: 0.5px !important;
-	transition: all 0.2s ease !important;
-	cursor: pointer !important;
-}
-
-.wpmudev-slide-modal .wpmudev-button--black,
-.wpmudev-slide-modal .wpmudev-button--primary,
-.wpmudev-slide-modal__panel .wpmudev-button--black,
-.wpmudev-slide-modal__panel .wpmudev-button--primary {
-	background: var(--gold, #d9be6f) !important;
-	background-color: var(--gold, #d9be6f) !important;
-	border: 1px solid var(--gold, #d9be6f) !important;
-	color: #ffffff !important;
-	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6) !important;
-	box-shadow: 0 4px 15px rgba(217, 190, 111, 0.3) !important;
-}
-
-.wpmudev-slide-modal .wpmudev-button--black:hover,
-.wpmudev-slide-modal .wpmudev-button--primary:hover,
-.wpmudev-slide-modal__panel .wpmudev-button--black:hover,
-.wpmudev-slide-modal__panel .wpmudev-button--primary:hover {
-	background: var(--accent, #62c9ff) !important;
-	background-color: var(--accent, #62c9ff) !important;
-	border-color: var(--accent, #62c9ff) !important;
-	color: #ffffff !important;
-	box-shadow: 0 4px 20px rgba(98, 201, 255, 0.5) !important;
-}
-
-/* ═══════════════════════════════════════════════════════
-   WPMUDEV Modern Select & Dropdowns (Defender 6.0+)
-   ═══════════════════════════════════════════════════════ */
-.wpmudev-select,
-.wpmudev-select__trigger,
-button.wpmudev-select__trigger,
-[class*="wpmudev-select__trigger"] {
-	background: rgba(13, 18, 29, 0.75) !important;
-	background-color: rgba(13, 18, 29, 0.75) !important;
-	border: 1px solid rgba(98, 201, 255, 0.25) !important;
-	border-radius: 8px !important;
-	color: var(--text-main, #e6edf3) !important;
-	transition: all 0.2s ease !important;
-	cursor: pointer !important;
-}
-
-.wpmudev-select__trigger:hover,
-button.wpmudev-select__trigger:hover,
-.wpmudev-select__trigger:focus,
-button.wpmudev-select__trigger:focus,
-.wpmudev-select__trigger[aria-expanded="true"] {
-	background: rgba(13, 18, 29, 0.95) !important;
-	border-color: var(--accent, #62c9ff) !important;
-	box-shadow: 0 0 12px rgba(98, 201, 255, 0.25) !important;
-	outline: none !important;
-}
-
-.wpmudev-select__main,
-.wpmudev-select__value,
-.wpmudev-select__trigger .wpmudev-text {
-	color: #ffffff !important;
-	font-weight: 500 !important;
-}
-
-.wpmudev-select__placeholder {
-	color: rgba(230, 237, 243, 0.5) !important;
-}
-
-.wpmudev-select__chevron svg path,
-.wpmudev-select__trigger svg path,
-.wpmudev-icon-chevrondown svg path {
-	fill: var(--accent, #62c9ff) !important;
-}
-
-/* WPMUDEV Dropdown Menu / Popover Box */
-.wpmudev-select__menu,
-.wpmudev-select__dropdown,
-.wpmudev-select__list,
-.wpmudev-select__options,
-[class*="wpmudev-select__menu"],
-[class*="wpmudev-select__dropdown"],
-[class*="wpmudev-select__list"],
-[class*="wpmudev-select-menu"],
-[class*="wpmudev-popover"],
-.wpmudev-dropdown,
-.wpmudev-dropdown__menu {
-	background: rgba(13, 18, 29, 0.96) !important;
-	background-color: rgba(13, 18, 29, 0.96) !important;
-	backdrop-filter: blur(24px) saturate(180%) !important;
-	-webkit-backdrop-filter: blur(24px) saturate(180%) !important;
-	border: 1px solid rgba(98, 201, 255, 0.3) !important;
-	border-radius: 10px !important;
-	box-shadow: 0 16px 45px rgba(0, 0, 0, 0.95), 0 0 25px rgba(98, 201, 255, 0.15) !important;
-	padding: 6px !important;
-	z-index: 999999 !important;
-	overflow: hidden !important;
-}
-
-/* Dropdown Option Items */
-.wpmudev-select__option,
-.wpmudev-select__item,
-.wpmudev-select__list-item,
-[class*="wpmudev-select__option"],
-[class*="wpmudev-select__item"],
-.wpmudev-option,
-.wpmudev-dropdown__item {
-	background: transparent !important;
-	background-color: transparent !important;
-	color: var(--text-main, #e6edf3) !important;
-	border-radius: 6px !important;
-	padding: 8px 14px !important;
-	margin: 2px 0 !important;
-	cursor: pointer !important;
-	transition: all 0.15s ease !important;
-	font-size: 13px !important;
-	display: flex !important;
-	align-items: center !important;
-	justify-content: space-between !important;
-}
-
-.wpmudev-select__option:hover,
-.wpmudev-select__option:focus,
-.wpmudev-select__option:focus-visible,
-.wpmudev-select__item:hover,
-.wpmudev-select__item:focus,
-[class*="wpmudev-select__option"]:hover,
-[class*="wpmudev-select__option"]:focus,
-.wpmudev-dropdown__item:hover,
-.wpmudev-dropdown__item:focus {
-	background: rgba(98, 201, 255, 0.18) !important;
-	background-color: rgba(98, 201, 255, 0.18) !important;
-	color: var(--accent, #62c9ff) !important;
-	outline: none !important;
-}
-
-/* Selected Option Item */
-.wpmudev-select__option--selected,
-.wpmudev-select__option[aria-selected="true"],
-.wpmudev-select__item--selected,
-.wpmudev-select__item[aria-selected="true"],
-[class*="wpmudev-select__option"][aria-selected="true"],
-[class*="wpmudev-select__option--selected"] {
-	background: rgba(98, 201, 255, 0.22) !important;
-	background-color: rgba(98, 201, 255, 0.22) !important;
-	border: 1px solid rgba(98, 201, 255, 0.4) !important;
-	color: var(--accent, #62c9ff) !important;
-	font-weight: 700 !important;
-}
-
-.wpmudev-select__option span,
-.wpmudev-select__item span,
-.wpmudev-select__option *,
-.wpmudev-select__item * {
-	color: inherit !important;
-}
-
-.wpmudev-select__option svg path,
-.wpmudev-select__item svg path {
-	fill: var(--accent, #62c9ff) !important;
-}
-
-/* General Modern Inputs & Form Controls */
-.wpmudev-input,
-.wpmudev-input__field,
-.wpmudev-input__wrapper,
-[class*="wpmudev-input"] input,
-.wpmudev-form-control {
-	background: rgba(13, 18, 29, 0.75) !important;
-	background-color: rgba(13, 18, 29, 0.75) !important;
-	border: 1px solid rgba(98, 201, 255, 0.25) !important;
-	border-radius: 8px !important;
-	color: #ffffff !important;
-}
-
-.wpmudev-input:focus,
-.wpmudev-input__field:focus,
-[class*="wpmudev-input"] input:focus,
-.wpmudev-form-control:focus {
-	border-color: var(--accent, #62c9ff) !important;
-	box-shadow: 0 0 12px rgba(98, 201, 255, 0.3) !important;
-	outline: none !important;
+/* Fix Hummingbird icons turning into squares */
+[class^="hum-icon-"], [class*=" hum-icon-"] {
+	font-family: "hummingbird-icons" !important;
 }

@@ -111,9 +111,9 @@ html.is-compass-iframe [class*="wpmudev-forminator"] .sui-header {
 }
 
 /* ── Modals ── */
-[class*="wpmudev-forminator"] .sui-modal,
-[class*="wpmudev-forminator"] .sui-dialog,
-.forminator-modal-overlay {
+/* Forminator Modal Overlay */
+.forminator-modal-overlay,
+.sui-modal-overlay {
 	position: fixed !important;
 	inset: 0 !important;
 	top: 0 !important;
@@ -121,11 +121,14 @@ html.is-compass-iframe [class*="wpmudev-forminator"] .sui-header {
 	width: 100vw !important;
 	height: 100vh !important;
 	background: rgba(5, 8, 14, 0.88) !important;
-	backdrop-filter: blur(16px) saturate(180%) !important;
-	-webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+	backdrop-filter: none !important;
+	-webkit-backdrop-filter: none !important;
 	z-index: 999999 !important;
 }
 
+[class*="wpmudev-forminator"] .sui-modal,
+[class*="wpmudev-forminator"] .sui-dialog,
+.forminator-modal,
 [class*="wpmudev-forminator"] .sui-modal-slide,
 [class*="wpmudev-forminator"] .sui-modal-content,
 [class*="wpmudev-forminator"] .sui-dialog-content {
@@ -140,9 +143,10 @@ html.is-compass-iframe [class*="wpmudev-forminator"] .sui-header {
 [class*="wpmudev-forminator"] .sui-modal .sui-box,
 [class*="wpmudev-forminator"] .sui-dialog .sui-box,
 .forminator-modal .sui-box {
-	background: rgba(13, 18, 29, 0.96) !important;
-	backdrop-filter: blur(20px) !important;
-	-webkit-backdrop-filter: blur(20px) !important;
+	background: #0d121d !important;
+	background-color: #0d121d !important;
+	backdrop-filter: none !important;
+	-webkit-backdrop-filter: none !important;
 	border: 1px solid rgba(98, 201, 255, 0.3) !important;
 	border-radius: 16px !important;
 	box-shadow: 0 24px 70px rgba(0, 0, 0, 0.95), 0 0 30px rgba(98, 201, 255, 0.12) !important;

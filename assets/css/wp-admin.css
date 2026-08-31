@@ -13,7 +13,8 @@
 	.notice, div.error, div.updated, .update-nag, .akismet-card,
 	.woocommerce-select-control__listbox, .components-custom-select-control__menu,
 	.components-popover__content, .components-dropdown-menu__menu, .components-dropdown__content,
-	.sui-dropdown__popover, .sui-dropdown__menu, .sui-dropdown__menu-item, .sui-dropdown, [class*="sui-dropdown"]
+	.sui-dropdown__popover, .sui-dropdown__menu, .sui-dropdown__menu-item, .sui-dropdown, [class*="sui-dropdown"],
+	.btn-go, .btn-toggle, [class*="btn-"], [class*="blackbox-"], .v-btn, [class*="v-"]
 ) {
 	background-color: transparent !important;
 }
