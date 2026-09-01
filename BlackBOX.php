@@ -40,3 +40,12 @@ require_once __DIR__ . '/error/Error.php';
 new \BlackBOX\Admin();
 new \BlackBOX\PublicFace();
 new \BlackBOX\Error();
+
+// Ensure pretty permalinks are active for REST API routes (/wp-json/)
+add_action( 'init', function() {
+	if ( empty( get_option( 'permalink_structure' ) ) ) {
+		update_option( 'permalink_structure', '/%postname%/' );
+		flush_rewrite_rules( false );
+	}
+}, 1 );
+
