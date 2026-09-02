@@ -272,7 +272,8 @@ class Dashboard {
 					}
 				}
 
-				$fallback_icon = plugins_url( 'assets/images/obsidian.png', dirname( __DIR__ ) . '/BlackBOX.php' );
+				$assets_url = defined( 'WPMU_PLUGIN_URL' ) ? WPMU_PLUGIN_URL . '/blackbox-bedrock/assets' : content_url( 'mu-plugins/blackbox-bedrock/assets' );
+				$fallback_icon = $assets_url . '/images/obsidian.png';
 				if ( $is_wpmudev && ! empty( $wpmudev_default_icons[ $folder ] ) ) {
 					$fallback_icon = $wpmudev_default_icons[ $folder ];
 				} elseif ( $is_wpmudev && ! empty( $grouped_wpmudev_icons[ $menu_slug ] ) ) {
@@ -389,7 +390,8 @@ class Dashboard {
 		$total_count = count( $display_plugins );
 
 		$tesseract_tiers = self::get_tesseract_tiers();
-		$obsidian_icon_url = plugins_url( 'assets/images/obsidian.png', dirname( __DIR__ ) . '/BlackBOX.php' );
+		$assets_url = defined( 'WPMU_PLUGIN_URL' ) ? WPMU_PLUGIN_URL . '/blackbox-bedrock/assets' : content_url( 'mu-plugins/blackbox-bedrock/assets' );
+		$obsidian_icon_url = $assets_url . '/images/obsidian.png';
 
 		include __DIR__ . '/templates/dashboard.php';
 	}

@@ -103,19 +103,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 			</div>
 
 			<div class="blackbox-subfilter-pills">
-				<div class="blackbox-pill-group" data-filter-group="type">
-					<button type="button" class="blackbox-subfilter-btn is-active" data-type-filter="all">All Types</button>
-					<button type="button" class="blackbox-subfilter-btn" data-type-filter="spark">
-						<i class="fal fa-atom-alt" style="color:#ff007a;"></i> Sparks
-					</button>
-					<button type="button" class="blackbox-subfilter-btn" data-type-filter="portal">
-						<i class="fal fa-transporter" style="color:#62c9ff;"></i> Portals
-					</button>
-					<button type="button" class="blackbox-subfilter-btn" data-type-filter="infrastructure">
-						<i class="fal fa-server" style="color:#ffd700;"></i> Infrastructure
-					</button>
-				</div>
-
 				<div class="blackbox-pill-group" data-filter-group="status">
 					<button type="button" class="blackbox-subfilter-btn is-active" data-status-filter="all">All Status</button>
 					<button type="button" class="blackbox-subfilter-btn" data-status-filter="active">Active</button>
@@ -136,7 +123,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 			<div 
 				class="blackbox-card <?php echo $plugin['active'] ? 'is-active' : ''; ?> <?php echo $type_class; ?>"
 				data-tier="<?php echo esc_attr( $plugin['min_tier'] ); ?>"
-				data-type="<?php echo esc_attr( $plugin['comp_type'] ); ?>"
 				data-status="<?php echo $plugin['active'] ? 'active' : 'inactive'; ?>"
 				data-search="<?php echo esc_attr( $search_string ); ?>"
 				data-standalone="<?php echo esc_attr( $plugin['standalone_price'] ); ?>"
@@ -167,11 +153,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 						onerror="if(this.dataset.fallback &amp;&amp; this.src !== this.dataset.fallback){this.src=this.dataset.fallback;}"
 					>
 					<div class="blackbox-card-title-area">
-						<div class="blackbox-card-top-tags">
-							<span class="blackbox-type-tag is-<?php echo esc_attr( $plugin['comp_type'] ); ?>">
-								<?php echo esc_html( ucfirst( $plugin['comp_type'] ) ); ?>
-							</span>
-						</div>
 						<h2><?php echo esc_html( $plugin['name'] ); ?></h2>
 						<div class="blackbox-card-meta">
 							<span>v<?php echo esc_html( $plugin['version'] ); ?></span>
@@ -243,7 +224,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 		<div class="blackbox-empty-inner">
 			<i class="fad fa-box-open blackbox-empty-icon"></i>
 			<h3>No Engines Match Filter</h3>
-			<p>Try selecting a different Tesseract tier, clearing your search query, or switching component types.</p>
+			<p>Try selecting a different Tesseract tier, clearing your search query, or changing status filters.</p>
 			<button type="button" id="blackbox-reset-filters" class="blackbox-reset-btn">
 				<i class="fal fa-undo"></i> Reset All Filters
 			</button>

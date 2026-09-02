@@ -55,7 +55,8 @@ class Menu_Manager {
 	}
 
 	public function register_w4_protocol_menu() {
-		$icon_url = plugins_url( 'assets/images/webwork.png', dirname( __DIR__ ) . '/BlackBOX.php' );
+		$assets_url = defined( 'WPMU_PLUGIN_URL' ) ? WPMU_PLUGIN_URL . '/blackbox-bedrock/assets' : content_url( 'mu-plugins/blackbox-bedrock/assets' );
+		$icon_url   = $assets_url . '/images/webwork.png';
 		
 		add_menu_page(
 			'w⁴ Protocol',
@@ -78,7 +79,8 @@ class Menu_Manager {
 	}
 
 	public function register_blackbox_menu() {
-		$icon_url = plugins_url( 'assets/images/obsidian.png', dirname( __DIR__ ) . '/BlackBOX.php' );
+		$assets_url = defined( 'WPMU_PLUGIN_URL' ) ? WPMU_PLUGIN_URL . '/blackbox-bedrock/assets' : content_url( 'mu-plugins/blackbox-bedrock/assets' );
+		$icon_url   = $assets_url . '/images/obsidian.png';
 		
 		add_menu_page(
 			'BlackBOX',
@@ -269,7 +271,7 @@ class Menu_Manager {
 		);
 
 		wp_localize_script( 'blackbox-menu-accordion', 'blackbox_menu_config', [
-			'bbIconUrl'       => plugins_url( 'assets/images/obsidian.png', dirname( __DIR__ ) . '/BlackBOX.php' ),
+			'bbIconUrl'       => $assets_url . '/images/obsidian.png',
 			'compassGroupMap' => $this->build_compass_group_map(),
 			'wpmudevIcons'    => self::$grouped_wpmudev_icons,
 		] );

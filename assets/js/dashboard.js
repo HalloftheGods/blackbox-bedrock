@@ -4,15 +4,13 @@
  */
 document.addEventListener('DOMContentLoaded', () => {
 	// =========================================================================
-	// 1. Tesseract Tier & Component Filter Engine
+	// 1. Tesseract Tier & Status Filter Engine
 	// =========================================================================
 	let currentTierFilter = 'all';
-	let currentTypeFilter = 'all';
 	let currentStatusFilter = 'all';
 	let currentSearchQuery = '';
 
 	const tierButtons = document.querySelectorAll('[data-tier-filter]');
-	const typeButtons = document.querySelectorAll('[data-type-filter]');
 	const statusButtons = document.querySelectorAll('[data-status-filter]');
 	const searchInput = document.getElementById('blackbox-search');
 	const searchClearBtn = document.getElementById('blackbox-search-clear');
@@ -27,17 +25,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		cards.forEach((card) => {
 			const cardTier = card.dataset.tier || '';
-			const cardType = card.dataset.type || '';
 			const cardStatus = card.dataset.status || '';
 			const cardSearchText = card.dataset.search || '';
 
 			// Evaluate filter criteria
 			const matchesTier = (currentTierFilter === 'all') || (cardTier === currentTierFilter);
-			const matchesType = (currentTypeFilter === 'all') || (cardType === currentTypeFilter);
 			const matchesStatus = (currentStatusFilter === 'all') || (cardStatus === currentStatusFilter);
 			const matchesSearch = (!query) || cardSearchText.includes(query);
 
-			const isVisible = matchesTier && matchesType && matchesStatus && matchesSearch;
+			const isVisible = matchesTier && matchesStatus && matchesSearch;
 
 			if (isVisible) {
 				card.style.display = '';
@@ -65,17 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
 			tierButtons.forEach((b) => b.classList.remove('is-active'));
 			btn.classList.add('is-active');
 			currentTierFilter = btn.dataset.tierFilter || 'all';
-			applyFilters();
-		});
-	});
-
-	// Component Type Handler
-	typeButtons.forEach((btn) => {
-		btn.addEventListener('click', (e) => {
-			e.preventDefault();
-			typeButtons.forEach((b) => b.classList.remove('is-active'));
-			btn.classList.add('is-active');
-			currentTypeFilter = btn.dataset.typeFilter || 'all';
 			applyFilters();
 		});
 	});
@@ -118,12 +103,10 @@ document.addEventListener('DOMContentLoaded', () => {
 	if (resetBtn) {
 		resetBtn.addEventListener('click', () => {
 			currentTierFilter = 'all';
-			currentTypeFilter = 'all';
 			currentStatusFilter = 'all';
 			currentSearchQuery = '';
 
 			tierButtons.forEach((b) => b.classList.toggle('is-active', b.dataset.tierFilter === 'all'));
-			typeButtons.forEach((b) => b.classList.toggle('is-active', b.dataset.typeFilter === 'all'));
 			statusButtons.forEach((b) => b.classList.toggle('is-active', b.dataset.statusFilter === 'all'));
 
 			if (searchInput) searchInput.value = '';

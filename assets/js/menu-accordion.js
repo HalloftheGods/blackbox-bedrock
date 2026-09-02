@@ -118,7 +118,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // "dodo_airline",
     // "itinerary",
     // "itinerarys",
-    "wpmudev",
     "polos"
   ];
 
@@ -219,7 +218,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const systemSlugs = [
     // "snippets", "code-snippets",
     "index-wp-mysql-for-speed",
-    "shipper"
+    "shipper",
+    "wpmudev"
   ];
 
   items.forEach((li) => {
@@ -247,6 +247,7 @@ document.addEventListener("DOMContentLoaded", function () {
         iconDiv.style.backgroundSize = "18px";
         iconDiv.style.backgroundPosition = "center";
         iconDiv.style.backgroundRepeat = "no-repeat";
+        iconDiv.innerHTML = "";
       }
       let sub = li.querySelector(".wp-submenu");
       if (sub) sub.style.display = "none";

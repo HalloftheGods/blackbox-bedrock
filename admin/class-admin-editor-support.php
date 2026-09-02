@@ -84,7 +84,8 @@ class Editor_Support {
 			return $mce_css;
 		}
 
-		$css_url = plugins_url( 'assets/css/tinymce-content.css', dirname( __FILE__ ) );
+		$assets_url = defined( 'WPMU_PLUGIN_URL' ) ? WPMU_PLUGIN_URL . '/blackbox-bedrock/assets' : content_url( 'mu-plugins/blackbox-bedrock/assets' );
+		$css_url = $assets_url . '/css/tinymce-content.css';
 		if ( ! empty( $mce_css ) ) {
 			$mce_css .= ',';
 		}
