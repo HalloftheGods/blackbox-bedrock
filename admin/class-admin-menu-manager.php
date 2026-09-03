@@ -7,6 +7,30 @@ class Menu_Manager {
 
 	private static $grouped_wpmudev_icons = [];
 	private static $grouped_wpmudev_names = [];
+	private static $settings_map = [
+		// Classic WordPress Settings Pages
+		'xophz-compass/xophz-compass.php'                               => 'options-general.php?page=w4-my-compass',
+		'xophz-compass-diego-lawfirm/xophz-compass-diego-lawfirm.php'   => 'options-general.php?page=xophz-compass-diego-lawfirm',
+		'xophz-compass-event-horizon/xophz-compass-event-horizon.php'   => 'options-general.php?page=w4-youmeos',
+		'xophz-compass-fresh-mints/xophz-compass-fresh-mints.php'       => 'options-general.php?page=xophz-compass-freshmints',
+		'xophz-compass-phone/xophz-compass-phone.php'                   => 'options-general.php?page=xophz-compass-phone',
+		'xophz-compass-yellow-links/xophz-compass-yellow-links.php'     => 'options-general.php?page=xophz-compass-yellow-links',
+		'xophz-kitchen-synk/xophz-kitchen-synk.php'                     => 'options-general.php?page=xophz-kitchen-synk',
+		'xophz-thoth-reader-wp/xophz-thoth-reader.php'                 => 'options-general.php?page=xophz-thoth-reader',
+		'xophz-compass-card-vault/xophz-compass-card-vault.php'         => 'options-general.php?page=xophz-compass-card-vault',
+		'xophz-compass-bugnet/xophz-compass-bugnet.php'                 => 'edit.php?post_type=compass_bug&page=bugnet-github-settings',
+
+		// COMPASS SPA Settings Routes
+		'xophz-compass-bomb-bag/xophz-compass-bomb-bag.php'             => 'admin.php?page=xophz-compass#/bomb-bag/settings',
+		'xophz-compass-bulletin-board/xophz-compass-bulletin-board.php' => 'admin.php?page=xophz-compass#/bulletin-board/settings',
+		'xophz-compass-glowitheflow/xophz-compass-glowitheflow.php'     => 'admin.php?page=xophz-compass#/glowitheflow/settings',
+		'xophz-compass-lead-magnet/xophz-compass-lead-magnet.php'       => 'admin.php?page=xophz-compass#/lead-magnet/settings',
+		'xophz-compass-magic-formula/xophz-compass-magic-formula.php'   => 'admin.php?page=xophz-compass#/magic-formula/settings',
+		'xophz-compass-pegasus-boots/xophz-compass-pegasus-boots.php'   => 'admin.php?page=xophz-compass#/pegasus-boots/settings',
+		'xophz-compass-phantom-zone/xophz-compass-phantom-zone.php'     => 'admin.php?page=xophz-compass#/phantom-zone/settings',
+		'xophz-compass-quests/xophz-compass-quests.php'                 => 'admin.php?page=xophz-compass#/questbook/settings',
+		'xophz-compass-xp/xophz-compass-xp.php'                         => 'admin.php?page=xophz-compass#/xp/settings',
+	];
 	private $dashboard;
 	private $settings;
 
@@ -15,6 +39,11 @@ class Menu_Manager {
 		$this->settings = $settings;
 
 		add_action( 'admin_menu', [ $this, 'register_w4_protocol_menu' ] );
+		add_action( 'admin_menu', [ $this, 'organize_settings_submenu' ], 99999 );
+
+		foreach ( array_keys( self::$settings_map ) as $plugin_file ) {
+			add_filter( "plugin_action_links_{$plugin_file}", [ $this, 'add_ecosystem_plugin_action_links' ], 9999, 4 );
+		}
 
 		if ( ! empty( get_option( 'blackbox_bedrock_disabled' ) ) ) {
 			return;
@@ -276,6 +305,91 @@ class Menu_Manager {
 			'compassGroupMap' => $this->build_compass_group_map(),
 			'wpmudevIcons'    => self::$grouped_wpmudev_icons,
 		] );
+	}
+
+	/**
+	 * Organize the Settings (options-general.php) submenu.
+	 * Keeps standard WordPress Core settings at the top in canonical order,
+	 * adds a visual separator class, and sorts all ecosystem/plugin settings A-Z.
+	 */
+	public function organize_settings_submenu() {
+		global $submenu;
+
+		if ( empty( $submenu['options-general.php'] ) || ! is_array( $submenu['options-general.php'] ) ) {
+			return;
+		}
+
+		$core_slugs = [
+			'options-general.php',
+			'options-connectors.php',
+			'options-writing.php',
+			'options-reading.php',
+			'options-discussion.php',
+			'options-media.php',
+			'options-permalink.php',
+			'options-privacy.php',
+		];
+
+		$core_items   = [];
+		$plugin_items = [];
+
+		foreach ( $submenu['options-general.php'] as $item ) {
+			$slug = $item[2] ?? '';
+			if ( in_array( $slug, $core_slugs, true ) ) {
+				$core_items[] = $item;
+			} else {
+				$plugin_items[] = $item;
+			}
+		}
+
+		// Sort ecosystem/plugin settings alphabetically (A-Z) by menu title
+		usort( $plugin_items, function( $a, $b ) {
+			$title_a = wp_strip_all_tags( $a[0] ?? '' );
+			$title_b = wp_strip_all_tags( $b[0] ?? '' );
+			return strcasecmp( $title_a, $title_b );
+		} );
+
+		// Add separator class to the first plugin item if plugins exist
+		if ( ! empty( $plugin_items ) ) {
+			$first_class = isset( $plugin_items[0][4] ) ? trim( $plugin_items[0][4] ) : '';
+			$plugin_items[0][4] = trim( $first_class . ' bb-settings-separator' );
+		}
+
+		$submenu['options-general.php'] = array_merge( $core_items, $plugin_items );
+	}
+
+	/**
+	 * Centralized action link injector and deduplicator for ecosystem plugins on plugins.php.
+	 * Runs at high priority (9999) on plugin_action_links_{$plugin_file} after plugin-level hooks.
+	 * Injects a Settings link if missing, or deduplicates if multiple are present.
+	 */
+	public function add_ecosystem_plugin_action_links( $actions, $plugin_file, $plugin_data = [], $context = '' ) {
+		$settings_seen = false;
+		$cleaned_actions = [];
+
+		foreach ( $actions as $key => $action ) {
+			if ( stripos( $action, '>Settings<' ) !== false ) {
+				if ( ! $settings_seen ) {
+					$cleaned_actions['settings'] = $action;
+					$settings_seen = true;
+				}
+				// Skip any duplicate settings links
+				continue;
+			}
+			$cleaned_actions[ $key ] = $action;
+		}
+
+		if ( ! $settings_seen && isset( self::$settings_map[ $plugin_file ] ) ) {
+			$url           = admin_url( self::$settings_map[ $plugin_file ] );
+			$settings_link = '<a href="' . esc_url( $url ) . '">' . __( 'Settings', 'blackbox-bedrock' ) . '</a>';
+			$final_actions = [ 'settings' => $settings_link ];
+			foreach ( $cleaned_actions as $key => $val ) {
+				$final_actions[ $key ] = $val;
+			}
+			return $final_actions;
+		}
+
+		return $cleaned_actions;
 	}
 }
 

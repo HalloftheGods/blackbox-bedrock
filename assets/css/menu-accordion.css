@@ -230,3 +230,10 @@ li.bb-open-item {
 li.bb-open-item.bb-last-item {
 	box-shadow: inset -2px 0 0 0 var(--wp-theme-secondary, #72aee6), inset 0 -2px 0 0 var(--wp-theme-secondary, #72aee6), inset 0 -8px 10px -8px rgba(0,0,0,0.5) !important;
 }
+
+/* Settings Submenu Divider between WordPress Core and Ecosystem Plugins */
+#adminmenu .wp-submenu li.bb-settings-separator {
+	border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+	margin-top: 4px !important;
+	padding-top: 4px !important;
+}
