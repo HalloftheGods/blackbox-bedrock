@@ -204,6 +204,7 @@ class Menu_Manager {
 			'phone'            => 'OS',
 			'polos'            => 'OS',
 			'bulletin-board'   => 'Community',
+			'my-lawfirm'       => 'Ecosystem',
 			'diego-lawfirm'    => 'Ecosystem',
 			'fresh-mints'      => 'Ecosystem',
 			'freshmints'       => 'Ecosystem',
