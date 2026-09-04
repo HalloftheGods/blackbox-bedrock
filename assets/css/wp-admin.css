@@ -14,6 +14,13 @@
 	.woocommerce-select-control__listbox, .components-custom-select-control__menu,
 	.components-popover__content, .components-dropdown-menu__menu, .components-dropdown__content,
 	.sui-dropdown__popover, .sui-dropdown__menu, .sui-dropdown__menu-item, .sui-dropdown, [class*="sui-dropdown"],
+	.ui-autocomplete, .ui-menu, .ui-menu-item, .ui-menu-item-wrapper, [class*="ui-autocomplete"], [class*="ui-menu"], [class*="ui-widget"],
+	.wp-suggest-user, .ac_results, [class*="ac_"], .autocomplete-suggestions, .autocomplete-suggestion,
+	.select2-dropdown, .select2-results, .select2-container, [class*="select2-"],
+	.chosen-container, .chosen-drop, .chosen-results, [class*="chosen-"],
+	.ts-dropdown, [class*="ts-"],
+	.choices__list--dropdown, [class*="choices"],
+	.components-autocomplete__results, .components-autocomplete__result,
 	.btn-go, .btn-toggle, [class*="btn-"], [class*="blackbox-"], .v-btn, [class*="v-"]
 ) {
 	background-color: transparent !important;
@@ -802,31 +809,34 @@ body.woocommerce-setup,
 .components-custom-select-control__menu,
 .components-popover__content,
 .components-dropdown-menu__menu,
-.components-dropdown__content {
+.components-dropdown__content,
+.components-autocomplete__results {
 	background: #0d1117 !important;
 	background-color: #0d1117 !important;
-	backdrop-filter: var(--rough-glass-filter, blur(12px)) !important;
-	-webkit-backdrop-filter: var(--rough-glass-filter, blur(12px)) !important;
-	border: 1px solid var(--rough-glass-border, rgba(255, 255, 255, 0.15)) !important;
+	backdrop-filter: var(--rough-glass-filter, blur(16px)) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter, blur(16px)) !important;
+	border: 1px solid var(--rough-glass-border, rgba(90, 105, 172, 0.4)) !important;
 	border-radius: 8px !important;
-	box-shadow: 0 12px 32px rgba(0, 0, 0, 0.85) !important;
+	box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85), 0 0 1px rgba(255, 255, 255, 0.2) !important;
 	z-index: 999999 !important;
 	overflow-y: auto !important;
 	max-height: 280px !important;
 	padding: 6px !important;
+	color: var(--text-main, #f8f8f2) !important;
 }
 
 .woocommerce-select-control__option,
-.components-custom-select-control__item {
+.components-custom-select-control__item,
+.components-autocomplete__result {
 	background: transparent !important;
-	color: var(--text-main, #e6edf3) !important;
+	color: var(--text-main, #f8f8f2) !important;
 	width: 100% !important;
 	text-align: left !important;
 	padding: 10px 14px !important;
 	border-radius: 6px !important;
 	border: none !important;
 	cursor: pointer !important;
-	font-size: 14px !important;
+	font-size: 13px !important;
 	transition: background-color 0.15s ease, color 0.15s ease !important;
 	display: block !important;
 }
@@ -836,20 +846,159 @@ body.woocommerce-setup,
 .woocommerce-select-control__option[aria-selected="true"],
 .components-custom-select-control__item:hover,
 .components-custom-select-control__item:focus,
-.components-custom-select-control__item[aria-selected="true"] {
+.components-custom-select-control__item[aria-selected="true"],
+.components-autocomplete__result:hover,
+.components-autocomplete__result.is-selected {
 	background: rgba(98, 201, 255, 0.18) !important;
 	color: var(--accent, #62c9ff) !important;
 	outline: none !important;
 }
 
+/* ==========================================================================
+   jQuery UI Autocomplete & WP Suggest Menus (Add User, Taxonomies, Post Link)
+   ========================================================================== */
+ul.ui-autocomplete,
+.ui-autocomplete.ui-menu,
+.ui-autocomplete,
+.ui-menu.ui-widget-content,
+.ui-widget.ui-widget-content.ui-autocomplete,
+.wp-suggest-user,
+.ac_results,
+.autocomplete-suggestions {
+	background: #0d1117 !important;
+	background-color: rgba(13, 17, 23, 0.96) !important;
+	backdrop-filter: blur(16px) saturate(160%) !important;
+	-webkit-backdrop-filter: blur(16px) saturate(160%) !important;
+	border: 1px solid var(--rough-glass-border, rgba(90, 105, 172, 0.4)) !important;
+	border-radius: 8px !important;
+	box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85), 0 0 1px rgba(255, 255, 255, 0.2) !important;
+	padding: 6px !important;
+	margin-top: 4px !important;
+	list-style: none !important;
+	max-height: 320px !important;
+	overflow-y: auto !important;
+	overflow-x: hidden !important;
+	z-index: 999999 !important;
+	box-sizing: border-box !important;
+	color: var(--text-main, #f8f8f2) !important;
+}
+
+ul.ui-autocomplete::-webkit-scrollbar,
+.ui-autocomplete::-webkit-scrollbar,
+.ac_results::-webkit-scrollbar,
+.autocomplete-suggestions::-webkit-scrollbar {
+	width: 6px;
+}
+
+ul.ui-autocomplete::-webkit-scrollbar-thumb,
+.ui-autocomplete::-webkit-scrollbar-thumb,
+.ac_results::-webkit-scrollbar-thumb,
+.autocomplete-suggestions::-webkit-scrollbar-thumb {
+	background: rgba(98, 201, 255, 0.4);
+	border-radius: 4px;
+}
+
+.ui-autocomplete .ui-menu-item,
+.ui-menu .ui-menu-item,
+.ac_results li,
+.autocomplete-suggestion {
+	background: transparent !important;
+	background-color: transparent !important;
+	list-style: none !important;
+	margin: 2px 0 !important;
+	padding: 0 !important;
+	border: none !important;
+	border-radius: 6px !important;
+	color: var(--text-main, #f8f8f2) !important;
+	cursor: pointer !important;
+	transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease !important;
+	box-sizing: border-box !important;
+}
+
+.ui-autocomplete .ui-menu-item-wrapper,
+.ui-autocomplete .ui-menu-item a,
+.ui-menu .ui-menu-item-wrapper,
+.ui-menu .ui-menu-item a,
+.ac_results li,
+.autocomplete-suggestion {
+	display: block !important;
+	padding: 8px 12px !important;
+	border-radius: 6px !important;
+	color: var(--text-main, #f8f8f2) !important;
+	font-size: 13px !important;
+	font-weight: 400 !important;
+	line-height: 1.4 !important;
+	text-decoration: none !important;
+	border: 1px solid transparent !important;
+	background: transparent !important;
+	background-color: transparent !important;
+	box-sizing: border-box !important;
+	cursor: pointer !important;
+}
+
+.ui-autocomplete .ui-menu-item-wrapper.ui-state-active,
+.ui-autocomplete .ui-menu-item-wrapper.ui-state-focus,
+.ui-autocomplete .ui-menu-item-wrapper.ui-state-hover,
+.ui-autocomplete .ui-menu-item:hover .ui-menu-item-wrapper,
+.ui-autocomplete .ui-menu-item:focus .ui-menu-item-wrapper,
+.ui-autocomplete .ui-menu-item a.ui-state-active,
+.ui-autocomplete .ui-menu-item a.ui-state-focus,
+.ui-autocomplete .ui-menu-item a:hover,
+.ui-menu .ui-menu-item-wrapper.ui-state-active,
+.ui-menu .ui-menu-item-wrapper.ui-state-focus,
+.ui-menu .ui-menu-item-wrapper.ui-state-hover,
+.ui-menu .ui-menu-item:hover > .ui-menu-item-wrapper,
+.ui-menu .ui-state-active,
+.ui-menu .ui-state-focus,
+.ui-menu .ui-state-hover,
+.ac_results li:hover,
+.ac_results li.ac_over,
+.autocomplete-suggestion:hover,
+.autocomplete-suggestion.autocomplete-selected {
+	background: rgba(98, 201, 255, 0.18) !important;
+	background-color: rgba(98, 201, 255, 0.18) !important;
+	color: var(--accent, #62c9ff) !important;
+	border-color: rgba(98, 201, 255, 0.3) !important;
+	outline: none !important;
+}
+
+.ac_results .ac_match,
+.autocomplete-suggestion .ac_match,
+.ui-autocomplete .ui-menu-item-wrapper strong {
+	color: var(--accent, #62c9ff) !important;
+	font-weight: 600 !important;
+}
+
+/* Native Select & Option Elements Dark Theme Overrides */
+select {
+	color-scheme: dark !important;
+}
+
+select option,
+select optgroup {
+	background-color: #0d1117 !important;
+	color: var(--text-main, #f8f8f2) !important;
+	padding: 8px 12px !important;
+}
+
+select option:hover,
+select option:focus,
+select option:checked {
+	background-color: #1a2332 !important;
+	color: var(--accent, #62c9ff) !important;
+}
+
 /* Select2 Dropdowns */
 .select2-dropdown {
-	background: rgba(13, 17, 23, 0.95) !important;
-	backdrop-filter: var(--rough-glass-filter) !important;
-	-webkit-backdrop-filter: var(--rough-glass-filter) !important;
-	border: 1px solid var(--rough-glass-border) !important;
-	border-radius: 4px !important;
-	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
+	background: #0d1117 !important;
+	background-color: rgba(13, 17, 23, 0.96) !important;
+	backdrop-filter: var(--rough-glass-filter, blur(16px)) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter, blur(16px)) !important;
+	border: 1px solid var(--rough-glass-border, rgba(90, 105, 172, 0.4)) !important;
+	border-radius: 8px !important;
+	box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85) !important;
+	padding: 6px !important;
+	z-index: 999999 !important;
 }
 
 .select2-results__options {
@@ -857,43 +1006,173 @@ body.woocommerce-setup,
 }
 
 .select2-results__option {
-	color: var(--text-main) !important;
+	color: var(--text-main, #f8f8f2) !important;
 	background: transparent !important;
+	padding: 8px 12px !important;
+	border-radius: 6px !important;
+	margin: 2px 0 !important;
+	transition: background 0.15s ease, color 0.15s ease !important;
 }
 
 .select2-results__option--highlighted,
-.select2-results__option[aria-selected="true"] {
-	background: rgba(98, 201, 255, 0.15) !important;
-	color: var(--accent) !important;
+.select2-results__option--highlighted[aria-selected] {
+	background: rgba(98, 201, 255, 0.18) !important;
+	color: var(--accent, #62c9ff) !important;
 }
 
 .select2-results__option[aria-selected="true"] {
 	background: rgba(217, 190, 111, 0.15) !important;
-	color: var(--gold) !important;
+	color: var(--gold, #d9be6f) !important;
 }
 
 .select2-search--dropdown .select2-search__field {
-	background: rgba(0, 0, 0, 0.3) !important;
-	border: 1px solid rgba(255, 255, 255, 0.1) !important;
-	color: var(--text-main) !important;
-	border-radius: 4px !important;
+	background: rgba(0, 0, 0, 0.4) !important;
+	border: 1px solid rgba(255, 255, 255, 0.15) !important;
+	color: var(--text-main, #f8f8f2) !important;
+	border-radius: 6px !important;
+	padding: 6px 10px !important;
 }
 
 .select2-container--default .select2-selection--single,
 .select2-container--default .select2-selection--multiple {
-	background: rgba(0, 0, 0, 0.3) !important;
-	border: 1px solid rgba(255, 255, 255, 0.1) !important;
-	color: var(--text-main) !important;
-	border-radius: 4px !important;
+	background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%) !important;
+	background-color: rgba(13, 17, 23, 0.65) !important;
+	backdrop-filter: blur(12px) !important;
+	-webkit-backdrop-filter: blur(12px) !important;
+	border: 1px solid var(--rough-glass-border, rgba(255, 255, 255, 0.15)) !important;
+	color: var(--text-main, #f8f8f2) !important;
+	border-radius: 8px !important;
+	min-height: 36px !important;
 }
 
 .select2-container--default .select2-selection--single .select2-selection__rendered,
 .select2-container--default .select2-selection--multiple .select2-selection__rendered {
-	color: var(--text-main) !important;
+	color: var(--text-main, #f8f8f2) !important;
+	line-height: 34px !important;
+	padding-left: 10px !important;
 }
 
 .select2-container--default .select2-selection--single .select2-selection__arrow b {
-	border-color: var(--text-main) transparent transparent transparent !important;
+	border-color: var(--text-main, #f8f8f2) transparent transparent transparent !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+	background: rgba(98, 201, 255, 0.15) !important;
+	border: 1px solid rgba(98, 201, 255, 0.3) !important;
+	border-radius: 4px !important;
+	color: var(--accent, #62c9ff) !important;
+	padding: 2px 8px !important;
+	margin-top: 4px !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+	color: var(--accent, #62c9ff) !important;
+	margin-right: 6px !important;
+}
+
+/* Chosen.js Dropdowns */
+.chosen-container {
+	font-size: 13px !important;
+}
+
+.chosen-container-single .chosen-single {
+	background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%) !important;
+	background-color: rgba(13, 17, 23, 0.65) !important;
+	backdrop-filter: blur(12px) !important;
+	-webkit-backdrop-filter: blur(12px) !important;
+	border: 1px solid var(--rough-glass-border, rgba(255, 255, 255, 0.15)) !important;
+	border-radius: 8px !important;
+	color: var(--text-main, #f8f8f2) !important;
+	box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.1), 0 4px 16px rgba(0, 0, 0, 0.35) !important;
+	height: auto !important;
+	padding: 8px 12px !important;
+	line-height: 1.4 !important;
+}
+
+.chosen-container-multi .chosen-choices {
+	background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%) !important;
+	background-color: rgba(13, 17, 23, 0.65) !important;
+	backdrop-filter: blur(12px) !important;
+	-webkit-backdrop-filter: blur(12px) !important;
+	border: 1px solid var(--rough-glass-border, rgba(255, 255, 255, 0.15)) !important;
+	border-radius: 8px !important;
+	padding: 4px 8px !important;
+}
+
+.chosen-container-multi .chosen-choices li.search-choice {
+	background: rgba(98, 201, 255, 0.15) !important;
+	border: 1px solid rgba(98, 201, 255, 0.3) !important;
+	border-radius: 4px !important;
+	color: var(--accent, #62c9ff) !important;
+	box-shadow: none !important;
+}
+
+.chosen-container .chosen-drop {
+	background: rgba(13, 17, 23, 0.96) !important;
+	background-color: rgba(13, 17, 23, 0.96) !important;
+	backdrop-filter: blur(16px) !important;
+	-webkit-backdrop-filter: blur(16px) !important;
+	border: 1px solid var(--rough-glass-border, rgba(90, 105, 172, 0.4)) !important;
+	border-radius: 8px !important;
+	box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85) !important;
+	color: var(--text-main, #f8f8f2) !important;
+	padding: 6px !important;
+	z-index: 999999 !important;
+}
+
+.chosen-container .chosen-search input[type="text"] {
+	background: rgba(0, 0, 0, 0.4) !important;
+	border: 1px solid rgba(255, 255, 255, 0.15) !important;
+	border-radius: 4px !important;
+	color: var(--text-main, #f8f8f2) !important;
+	padding: 6px 10px !important;
+}
+
+.chosen-container .chosen-results {
+	color: var(--text-main, #f8f8f2) !important;
+	margin: 4px 0 0 0 !important;
+	padding: 0 !important;
+}
+
+.chosen-container .chosen-results li {
+	color: var(--text-main, #f8f8f2) !important;
+	padding: 8px 12px !important;
+	border-radius: 6px !important;
+	margin: 2px 0 !important;
+}
+
+.chosen-container .chosen-results li.highlighted {
+	background: rgba(98, 201, 255, 0.18) !important;
+	color: var(--accent, #62c9ff) !important;
+}
+
+/* Modern Select Libraries (TomSelect / Choices.js) */
+.ts-dropdown,
+.choices__list--dropdown {
+	background: #0d1117 !important;
+	background-color: rgba(13, 17, 23, 0.96) !important;
+	backdrop-filter: blur(16px) !important;
+	-webkit-backdrop-filter: blur(16px) !important;
+	border: 1px solid var(--rough-glass-border, rgba(90, 105, 172, 0.4)) !important;
+	border-radius: 8px !important;
+	box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85) !important;
+	color: var(--text-main, #f8f8f2) !important;
+	padding: 6px !important;
+	z-index: 999999 !important;
+}
+
+.ts-dropdown .option,
+.choices__list--dropdown .choices__item {
+	color: var(--text-main, #f8f8f2) !important;
+	padding: 8px 12px !important;
+	border-radius: 6px !important;
+}
+
+.ts-dropdown .active,
+.ts-dropdown .option:hover,
+.choices__list--dropdown .choices__item--selectable.is-highlighted {
+	background: rgba(98, 201, 255, 0.18) !important;
+	color: var(--accent, #62c9ff) !important;
 }
 
 /* ═══════════════════════════════════════════════════════════════
