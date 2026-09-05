@@ -421,17 +421,29 @@ document.addEventListener("DOMContentLoaded", function () {
       : "";
     const subItems = Array.from(compassMenu.querySelectorAll(".wp-submenu li"));
 
+    const seenRoutes = new Set();
     subItems.forEach((li, idx) => {
-      if (idx < 2) return;
+      if (idx === 0) return;
 
       const link = li.querySelector("a");
       if (!link) return;
 
       const href = link.getAttribute("href") || "";
-      const routeMatch = href.match(/#\/([a-z0-9-]+)/);
+      const routeMatch = href.match(/#\/(?:plugin\/)?([a-z0-9-]+)/);
       if (!routeMatch) return;
 
       const routeSlug = routeMatch[1];
+      if (seenRoutes.has(routeSlug)) {
+        li.style.display = "none";
+        return;
+      }
+      seenRoutes.add(routeSlug);
+
+      if (adminMenu.querySelector(`li[data-compass-route="${routeSlug}"]`)) {
+        li.style.display = "none";
+        return;
+      }
+
       const mapData = compassGroupMap[routeSlug];
       if (!mapData) return;
 
