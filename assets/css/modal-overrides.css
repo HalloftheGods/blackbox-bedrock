@@ -339,15 +339,28 @@
    Applies BlackBOX Bedrock dark modal styling to core WP Theme Details dialog
    ========================================================================== */
 
-/* Outer overlay wrapper */
+/* Inactive overlay state: completely hidden, zero footprint, no pointer events */
 .theme-overlay,
 div.theme-overlay {
+	display: none !important;
+	pointer-events: none !important;
+	visibility: hidden !important;
 	border: none !important;
 	background: transparent !important;
 	background-color: transparent !important;
 	box-shadow: none !important;
 	backdrop-filter: none !important;
 	-webkit-backdrop-filter: none !important;
+}
+
+/* Active overlay state: only active when modal is open */
+body.modal-open .theme-overlay,
+.theme-overlay.active,
+.theme-overlay:has(.active),
+.theme-overlay:has(.theme-wrap) {
+	display: block !important;
+	pointer-events: auto !important;
+	visibility: visible !important;
 	position: fixed !important;
 	inset: 0 !important;
 	top: 0 !important;
@@ -359,14 +372,10 @@ div.theme-overlay {
 	z-index: 999998 !important;
 }
 
-body.modal-open .theme-overlay,
-.theme-overlay.active {
-	display: block !important;
-}
-
-/* Backdrop dark mask with blur */
-.theme-overlay .theme-backdrop,
-.theme-backdrop {
+/* Backdrop dark mask with blur (scoped to theme-overlay) */
+body.modal-open .theme-overlay .theme-backdrop,
+.theme-overlay.active .theme-backdrop,
+.theme-overlay .theme-backdrop {
 	position: fixed !important;
 	inset: 0 !important;
 	top: 0 !important;
@@ -379,6 +388,7 @@ body.modal-open .theme-overlay,
 	backdrop-filter: blur(16px) !important;
 	-webkit-backdrop-filter: blur(16px) !important;
 	z-index: 999999 !important;
+	pointer-events: auto !important;
 }
 
 /* Modal Inner Box / Card Container */
