@@ -88,7 +88,7 @@
 }
 
 /* ── SmartCrawl SUI / WDS Panels & Modals ── */
-[class*="wds-"] .sui-box:not(.sui-modal .sui-box):not(.sui-dialog .sui-box) {
+[class*="wds-"] .sui-box:not(.sui-modal .sui-box):not(.sui-modal__container):not(.sui-dialog .sui-box) {
 	background: var(--rough-glass-bg, linear-gradient(135deg, rgba(13, 17, 23, 0.6), rgba(13, 17, 23, 0.2))) !important;
 	backdrop-filter: var(--rough-glass-filter, blur(20px) saturate(150%)) !important;
 	-webkit-backdrop-filter: var(--rough-glass-filter, blur(20px) saturate(150%)) !important;
@@ -108,6 +108,7 @@
 }
 
 [class*="wds-"] .sui-modal .sui-box,
+[class*="wds-"] .sui-modal__container,
 [class*="wds-"] .sui-dialog .sui-box {
 	background: #0d121d !important;
 	background-color: #0d121d !important;

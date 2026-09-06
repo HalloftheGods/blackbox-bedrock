@@ -113,7 +113,8 @@ html.is-compass-iframe [class*="wpmudev-forminator"] .sui-header {
 /* ── Modals ── */
 /* Forminator Modal Overlay */
 .forminator-modal-overlay,
-.sui-modal-overlay {
+.sui-modal-overlay,
+.sui-modal__overlay {
 	position: fixed !important;
 	inset: 0 !important;
 	top: 0 !important;
@@ -141,8 +142,10 @@ html.is-compass-iframe [class*="wpmudev-forminator"] .sui-header {
 }
 
 [class*="wpmudev-forminator"] .sui-modal .sui-box,
+[class*="wpmudev-forminator"] .sui-modal__container,
 [class*="wpmudev-forminator"] .sui-dialog .sui-box,
-.forminator-modal .sui-box {
+.forminator-modal .sui-box,
+.forminator-modal .sui-modal__container {
 	background: #0d121d !important;
 	background-color: #0d121d !important;
 	backdrop-filter: none !important;

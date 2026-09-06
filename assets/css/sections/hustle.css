@@ -10,6 +10,7 @@ html.is-compass-iframe .sui-wrap[class*="hustle"] {
 /* Modals & Dialogs */
 .hustle-modal-overlay,
 .sui-modal-overlay,
+.sui-modal__overlay,
 .sui-dialog-overlay {
 	position: fixed !important;
 	inset: 0 !important;
@@ -38,8 +39,10 @@ html.is-compass-iframe .sui-wrap[class*="hustle"] {
 }
 
 [class*="hustle"] .sui-modal .sui-box,
+[class*="hustle"] .sui-modal__container,
 [class*="hustle"] .sui-dialog .sui-box,
-.hustle-modal .sui-box {
+.hustle-modal .sui-box,
+.hustle-modal .sui-modal__container {
 	background: #0d121d !important;
 	background-color: #0d121d !important;
 	backdrop-filter: none !important;
