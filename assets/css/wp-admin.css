@@ -22,6 +22,7 @@
 	.choices__list--dropdown, [class*="choices"],
 	.components-autocomplete__results, .components-autocomplete__result,
 	.sui-modal__container, .sui-modal__overlay, .sui-modal-overlay, [class*="sui-modal"], [class*="sui-dialog"],
+	.theme-overlay, .theme-backdrop, .theme-wrap, [class*="theme-"],
 	.sui-box, [class*="sui-box"], .dash-sui-plugin-icon,
 	.sui-tag, [class*="sui-tag"], .sui-badge, [class*="sui-badge"],
 	.btn-go, .btn-toggle, [class*="btn-"], [class*="blackbox-"], .v-btn, [class*="v-"]
