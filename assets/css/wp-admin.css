@@ -9,7 +9,7 @@
 	img, picture, video, canvas, svg, iframe, 
 	input, select, textarea, button, 
 	.button, .button-primary, .button-secondary, .components-button, 
-	.postbox, .components-card, .components-surface, 
+	.postbox, .components-card, .components-surface, .connectors-page .components-item, 
 	.notice, div.error, div.updated, .update-nag, .akismet-card,
 	.woocommerce-select-control__listbox, .components-custom-select-control__menu,
 	.components-popover__content, .components-dropdown-menu__menu, .components-dropdown__content,
@@ -686,6 +686,7 @@ table.woocommerce_order_items tfoot td,
 /* WooCommerce React Settings / Payments UI */
 .components-surface,
 .components-card,
+.connectors-page .components-item,
 .woocommerce-list__item,
 .woocommerce-task-list__item,
 .woocommerce-experimental-list,
@@ -734,8 +735,10 @@ table.woocommerce_order_items tfoot td,
 .woocommerce-list__item:hover,
 .woocommerce-task-list__item:hover,
 .woocommerce-experimental-list__item:hover,
-.woocommerce-summary__item:hover {
+.woocommerce-summary__item:hover,
+.connectors-page .components-item:hover {
 	background: rgba(98, 201, 255, 0.05) !important;
+	border-color: rgba(98, 201, 255, 0.4) !important;
 }
 
 .woocommerce-experimental-list__item.is-active,

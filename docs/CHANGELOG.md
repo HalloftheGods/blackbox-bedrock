@@ -15,3 +15,4 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Fixed
 - Enforced complete `display: none !important`, `pointer-events: none !important`, and `visibility: hidden !important` on `.theme-overlay` when inactive, preventing the overlay from capturing clicks across WP Admin pages when no modal is open.
+- Restored hard blur glass effect to WordPress Settings Connectors list cards (`.connectors-page .components-item`) and excluded them from universal background stripping in `assets/css/wp-admin.css`.
