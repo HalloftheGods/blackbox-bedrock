@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 class Editor_Support {
 
 	public function __construct() {
-		if ( ! empty( get_option( 'blackbox_bedrock_disabled' ) ) ) {
+		if ( ! empty( get_option( 'blackbox_bedrock_disabled' ) ) || ( defined( 'BLACKBOX_BEDROCK_DISABLE' ) && BLACKBOX_BEDROCK_DISABLE ) ) {
 			return;
 		}
 
@@ -16,18 +16,18 @@ class Editor_Support {
 	}
 
 	public function override_editor_theme_json( $theme_json ) {
-		if ( ! empty( get_option( 'xophz_compass_disable_mu_styles' ) ) ) {
+		if ( ! empty( get_option( 'xophz_compass_disable_mu_styles' ) ) || ( defined( 'BLACKBOX_BEDROCK_DISABLE' ) && BLACKBOX_BEDROCK_DISABLE ) ) {
 			return $theme_json;
 		}
 
 		global $pagenow;
-		if ( $pagenow === 'customize.php' || ( function_exists( 'is_customize_preview' ) && is_customize_preview() ) ) {
+		if ( $pagenow === 'customize.php' || $pagenow === 'site-editor.php' || ( function_exists( 'is_customize_preview' ) && is_customize_preview() ) ) {
 			return $theme_json;
 		}
 
 		if ( function_exists( 'get_current_screen' ) ) {
 			$screen = get_current_screen();
-			if ( ! $screen || ! $screen->is_block_editor() ) {
+			if ( ! $screen || ! $screen->is_block_editor() || $screen->id === 'site-editor' || $screen->base === 'site-editor' ) {
 				return $theme_json;
 			}
 		}
@@ -46,18 +46,18 @@ class Editor_Support {
 	}
 
 	public function force_editor_css_settings( $settings, $context ) {
-		if ( ! empty( get_option( 'xophz_compass_disable_mu_styles' ) ) ) {
+		if ( ! empty( get_option( 'xophz_compass_disable_mu_styles' ) ) || ( defined( 'BLACKBOX_BEDROCK_DISABLE' ) && BLACKBOX_BEDROCK_DISABLE ) ) {
 			return $settings;
 		}
 
 		global $pagenow;
-		if ( $pagenow === 'customize.php' || ( function_exists( 'is_customize_preview' ) && is_customize_preview() ) ) {
+		if ( $pagenow === 'customize.php' || $pagenow === 'site-editor.php' || ( function_exists( 'is_customize_preview' ) && is_customize_preview() ) ) {
 			return $settings;
 		}
 
 		if ( function_exists( 'get_current_screen' ) ) {
 			$screen = get_current_screen();
-			if ( ! $screen || ! $screen->is_block_editor() ) {
+			if ( ! $screen || ! $screen->is_block_editor() || $screen->id === 'site-editor' || $screen->base === 'site-editor' ) {
 				return $settings;
 			}
 		}
@@ -80,7 +80,7 @@ class Editor_Support {
 	}
 
 	public function add_classic_editor_dark_css( $mce_css ) {
-		if ( ! empty( get_option( 'xophz_compass_disable_mu_styles' ) ) ) {
+		if ( ! empty( get_option( 'xophz_compass_disable_mu_styles' ) ) || ( defined( 'BLACKBOX_BEDROCK_DISABLE' ) && BLACKBOX_BEDROCK_DISABLE ) ) {
 			return $mce_css;
 		}
 

@@ -45,7 +45,7 @@ class Menu_Manager {
 			add_filter( "plugin_action_links_{$plugin_file}", [ $this, 'add_ecosystem_plugin_action_links' ], 9999, 4 );
 		}
 
-		if ( ! empty( get_option( 'blackbox_bedrock_disabled' ) ) ) {
+		if ( ! empty( get_option( 'blackbox_bedrock_disabled' ) ) || ( defined( 'BLACKBOX_BEDROCK_DISABLE' ) && BLACKBOX_BEDROCK_DISABLE ) ) {
 			return;
 		}
 

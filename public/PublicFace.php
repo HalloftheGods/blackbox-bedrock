@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 class PublicFace {
 	public function __construct() {
-		if ( ! empty( get_option( 'blackbox_bedrock_disabled' ) ) ) {
+		if ( ! empty( get_option( 'blackbox_bedrock_disabled' ) ) || ( defined( 'BLACKBOX_BEDROCK_DISABLE' ) && BLACKBOX_BEDROCK_DISABLE ) ) {
 			return;
 		}
 		add_action( 'login_enqueue_scripts', [ $this, 'enqueue_login_styles' ] );

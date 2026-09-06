@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 class Error {
 	public function __construct() {
-		if ( ! empty( get_option( 'blackbox_bedrock_disabled' ) ) ) {
+		if ( ! empty( get_option( 'blackbox_bedrock_disabled' ) ) || ( defined( 'BLACKBOX_BEDROCK_DISABLE' ) && BLACKBOX_BEDROCK_DISABLE ) ) {
 			return;
 		}
 		add_filter( 'wp_die_handler', [ $this, 'blackbox_die_handler' ], 999 );

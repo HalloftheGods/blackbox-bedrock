@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 class Theme_Styler {
 
 	public function __construct() {
-		if ( ! empty( get_option( 'blackbox_bedrock_disabled' ) ) ) {
+		if ( ! empty( get_option( 'blackbox_bedrock_disabled' ) ) || ( defined( 'BLACKBOX_BEDROCK_DISABLE' ) && BLACKBOX_BEDROCK_DISABLE ) ) {
 			return;
 		}
 
@@ -96,8 +96,20 @@ class Theme_Styler {
 	}
 
 	public function output_theme_colors() {
-		if ( ! empty( get_option( 'xophz_compass_disable_mu_styles' ) ) ) {
+		if ( ! empty( get_option( 'xophz_compass_disable_mu_styles' ) ) || ( defined( 'BLACKBOX_BEDROCK_DISABLE' ) && BLACKBOX_BEDROCK_DISABLE ) ) {
 			return;
+		}
+
+		global $pagenow;
+		if ( $pagenow === 'customize.php' || $pagenow === 'site-editor.php' || ( function_exists( 'is_customize_preview' ) && is_customize_preview() ) ) {
+			return;
+		}
+
+		if ( function_exists( 'get_current_screen' ) ) {
+			$screen = get_current_screen();
+			if ( $screen && ( $screen->id === 'site-editor' || $screen->base === 'site-editor' ) ) {
+				return;
+			}
 		}
 
 		global $_wp_admin_css_colors;
@@ -171,13 +183,20 @@ class Theme_Styler {
 			return;
 		}
 
-		if ( ! empty( get_option( 'xophz_compass_disable_mu_styles' ) ) ) {
+		if ( ! empty( get_option( 'xophz_compass_disable_mu_styles' ) ) || ( defined( 'BLACKBOX_BEDROCK_DISABLE' ) && BLACKBOX_BEDROCK_DISABLE ) ) {
 			return $return ? '' : null;
 		}
 
 		global $pagenow;
-		if ( $pagenow === 'customize.php' || ( function_exists( 'is_customize_preview' ) && is_customize_preview() ) ) {
+		if ( $pagenow === 'customize.php' || $pagenow === 'site-editor.php' || ( function_exists( 'is_customize_preview' ) && is_customize_preview() ) ) {
 			return $return ? '' : null;
+		}
+
+		if ( function_exists( 'get_current_screen' ) ) {
+			$screen = get_current_screen();
+			if ( $screen && ( $screen->id === 'site-editor' || $screen->base === 'site-editor' ) ) {
+				return $return ? '' : null;
+			}
 		}
 
 		static $done = false;
@@ -310,13 +329,20 @@ class Theme_Styler {
 			return;
 		}
 
-		if ( ! empty( get_option( 'xophz_compass_disable_mu_styles' ) ) ) {
+		if ( ! empty( get_option( 'xophz_compass_disable_mu_styles' ) ) || ( defined( 'BLACKBOX_BEDROCK_DISABLE' ) && BLACKBOX_BEDROCK_DISABLE ) ) {
 			return;
 		}
 
 		global $pagenow;
-		if ( $pagenow === 'customize.php' || ( function_exists( 'is_customize_preview' ) && is_customize_preview() ) ) {
+		if ( $pagenow === 'customize.php' || $pagenow === 'site-editor.php' || ( function_exists( 'is_customize_preview' ) && is_customize_preview() ) ) {
 			return;
+		}
+
+		if ( function_exists( 'get_current_screen' ) ) {
+			$screen = get_current_screen();
+			if ( $screen && ( $screen->id === 'site-editor' || $screen->base === 'site-editor' ) ) {
+				return;
+			}
 		}
 
 		$isIframe = (isset( $_GET['compass_iframe'] ) && $_GET['compass_iframe'] === '1') || 
@@ -330,15 +356,40 @@ class Theme_Styler {
 	}
 
 	public function inject_admin_canvas() {
-		if ( ! empty( get_option( 'xophz_compass_disable_mu_styles' ) ) ) {
+		if ( ! empty( get_option( 'xophz_compass_disable_mu_styles' ) ) || ( defined( 'BLACKBOX_BEDROCK_DISABLE' ) && BLACKBOX_BEDROCK_DISABLE ) ) {
 			return;
 		}
+
+		global $pagenow;
+		if ( $pagenow === 'customize.php' || $pagenow === 'site-editor.php' || ( function_exists( 'is_customize_preview' ) && is_customize_preview() ) ) {
+			return;
+		}
+
+		if ( function_exists( 'get_current_screen' ) ) {
+			$screen = get_current_screen();
+			if ( $screen && ( $screen->id === 'site-editor' || $screen->base === 'site-editor' ) ) {
+				return;
+			}
+		}
+
 		Core::inject_canvas_script();
 	}
 
 	public function output_modal_footer_overrides() {
-		if ( ! empty( get_option( 'xophz_compass_disable_mu_styles' ) ) ) {
+		if ( ! empty( get_option( 'xophz_compass_disable_mu_styles' ) ) || ( defined( 'BLACKBOX_BEDROCK_DISABLE' ) && BLACKBOX_BEDROCK_DISABLE ) ) {
 			return;
+		}
+
+		global $pagenow;
+		if ( $pagenow === 'customize.php' || $pagenow === 'site-editor.php' || ( function_exists( 'is_customize_preview' ) && is_customize_preview() ) ) {
+			return;
+		}
+
+		if ( function_exists( 'get_current_screen' ) ) {
+			$screen = get_current_screen();
+			if ( $screen && ( $screen->id === 'site-editor' || $screen->base === 'site-editor' ) ) {
+				return;
+			}
 		}
 
 		$assets_url = defined( 'WPMU_PLUGIN_URL' ) ? WPMU_PLUGIN_URL . '/blackbox-bedrock/assets' : content_url( 'mu-plugins/blackbox-bedrock/assets' );

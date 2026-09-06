@@ -7,7 +7,7 @@ class Core {
 	private static $canvas_injected = false;
 
 	public static function inject_canvas_script() {
-		if ( ! empty( get_option( 'blackbox_bedrock_disabled' ) ) || ! empty( get_option( 'xophz_compass_disable_mu_styles' ) ) ) {
+		if ( ! empty( get_option( 'blackbox_bedrock_disabled' ) ) || ! empty( get_option( 'xophz_compass_disable_mu_styles' ) ) || ( defined( 'BLACKBOX_BEDROCK_DISABLE' ) && BLACKBOX_BEDROCK_DISABLE ) ) {
 			return;
 		}
 		if ( self::$canvas_injected ) {
@@ -21,7 +21,7 @@ class Core {
 	}
 
 	public static function force_woocommerce_theme_support() {
-		if ( ! empty( get_option( 'blackbox_bedrock_disabled' ) ) ) {
+		if ( ! empty( get_option( 'blackbox_bedrock_disabled' ) ) || ( defined( 'BLACKBOX_BEDROCK_DISABLE' ) && BLACKBOX_BEDROCK_DISABLE ) ) {
 			return;
 		}
 		add_theme_support( 'woocommerce' );
