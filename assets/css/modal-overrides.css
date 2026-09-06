@@ -333,3 +333,457 @@
 	color: #ffffff !important;
 	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6) !important;
 }
+
+/* ==========================================================================
+   WORDPRESS THEME DETAILS MODAL OVERRIDES (themes.php)
+   Applies BlackBOX Bedrock dark modal styling to core WP Theme Details dialog
+   ========================================================================== */
+
+/* Outer overlay wrapper */
+.theme-overlay,
+div.theme-overlay {
+	border: none !important;
+	background: transparent !important;
+	background-color: transparent !important;
+	box-shadow: none !important;
+	backdrop-filter: none !important;
+	-webkit-backdrop-filter: none !important;
+	position: fixed !important;
+	inset: 0 !important;
+	top: 0 !important;
+	left: 0 !important;
+	right: 0 !important;
+	bottom: 0 !important;
+	width: 100vw !important;
+	height: 100vh !important;
+	z-index: 999998 !important;
+}
+
+body.modal-open .theme-overlay,
+.theme-overlay.active {
+	display: block !important;
+}
+
+/* Backdrop dark mask with blur */
+.theme-overlay .theme-backdrop,
+.theme-backdrop {
+	position: fixed !important;
+	inset: 0 !important;
+	top: 0 !important;
+	left: 0 !important;
+	right: 0 !important;
+	bottom: 0 !important;
+	width: 100vw !important;
+	height: 100vh !important;
+	background: rgba(5, 8, 14, 0.88) !important;
+	backdrop-filter: blur(16px) !important;
+	-webkit-backdrop-filter: blur(16px) !important;
+	z-index: 999999 !important;
+}
+
+/* Modal Inner Box / Card Container */
+.theme-overlay .theme-wrap {
+	position: fixed !important;
+	top: 50% !important;
+	left: 50% !important;
+	right: auto !important;
+	bottom: auto !important;
+	transform: translate(-50%, -50%) !important;
+	width: 90vw !important;
+	max-width: 1120px !important;
+	height: 85vh !important;
+	max-height: 820px !important;
+	background: rgba(13, 18, 29, 0.96) !important;
+	background-color: rgba(13, 18, 29, 0.96) !important;
+	backdrop-filter: blur(64px) saturate(200%) !important;
+	-webkit-backdrop-filter: blur(64px) saturate(200%) !important;
+	border: 1px solid rgba(98, 201, 255, 0.3) !important;
+	border-radius: 16px !important;
+	box-shadow: 0 24px 70px rgba(0, 0, 0, 0.95), 0 0 30px rgba(98, 201, 255, 0.12) !important;
+	color: #ffffff !important;
+	overflow: hidden !important;
+	z-index: 1000001 !important;
+	box-sizing: border-box !important;
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+/* Header bar */
+.theme-overlay .theme-header {
+	position: absolute !important;
+	top: 0 !important;
+	left: 0 !important;
+	right: 0 !important;
+	height: 56px !important;
+	background: rgba(255, 255, 255, 0.02) !important;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: flex-end !important;
+	padding: 0 18px !important;
+	gap: 8px !important;
+	z-index: 10 !important;
+	box-sizing: border-box !important;
+}
+
+/* Navigation & Close action buttons */
+.theme-overlay .theme-header button {
+	position: static !important;
+	width: 34px !important;
+	height: 34px !important;
+	min-width: 34px !important;
+	min-height: 34px !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	background: rgba(255, 255, 255, 0.06) !important;
+	border: 1px solid rgba(255, 255, 255, 0.12) !important;
+	border-radius: 8px !important;
+	color: #f8f8f2 !important;
+	cursor: pointer !important;
+	transition: all 0.2s ease !important;
+	outline: none !important;
+	box-shadow: none !important;
+}
+
+.theme-overlay .theme-header button::before {
+	font-size: 18px !important;
+	line-height: 1 !important;
+	color: inherit !important;
+}
+
+.theme-overlay .theme-header button:hover:not(:disabled) {
+	background: rgba(98, 201, 255, 0.15) !important;
+	border-color: var(--accent, #62c9ff) !important;
+	color: var(--accent, #62c9ff) !important;
+	box-shadow: 0 0 12px rgba(98, 201, 255, 0.3) !important;
+}
+
+.theme-overlay .theme-header button:disabled,
+.theme-overlay .theme-header button.disabled {
+	opacity: 0.25 !important;
+	cursor: not-allowed !important;
+	pointer-events: none !important;
+	background: rgba(255, 255, 255, 0.02) !important;
+	border-color: rgba(255, 255, 255, 0.05) !important;
+	color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.theme-overlay .theme-header .close {
+	margin-left: 6px !important;
+}
+
+.theme-overlay .theme-header .close:hover {
+	background: rgba(255, 92, 92, 0.25) !important;
+	border-color: #ff5c5c !important;
+	color: #ff5c5c !important;
+	box-shadow: 0 0 12px rgba(255, 92, 92, 0.4) !important;
+}
+
+/* Modal Content Body */
+.theme-overlay .theme-about {
+	position: absolute !important;
+	top: 56px !important;
+	bottom: 64px !important;
+	left: 0 !important;
+	right: 0 !important;
+	overflow-y: auto !important;
+	overflow-x: hidden !important;
+	padding: 28px 32px !important;
+	display: flex !important;
+	gap: 36px !important;
+	box-sizing: border-box !important;
+	background: transparent !important;
+}
+
+/* Screenshot Preview */
+.theme-overlay .theme-screenshots {
+	flex: 0 0 46% !important;
+	max-width: 520px !important;
+	width: 46% !important;
+	margin: 0 !important;
+	float: none !important;
+}
+
+.theme-overlay .screenshot {
+	border: 1px solid rgba(98, 201, 255, 0.25) !important;
+	border-radius: 12px !important;
+	overflow: hidden !important;
+	background: rgba(0, 0, 0, 0.4) !important;
+	box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6) !important;
+	transition: border-color 0.2s ease !important;
+}
+
+.theme-overlay .screenshot:hover {
+	border-color: rgba(98, 201, 255, 0.45) !important;
+}
+
+.theme-overlay .screenshot img {
+	width: 100% !important;
+	height: auto !important;
+	display: block !important;
+	border-radius: 11px !important;
+}
+
+/* Theme Metadata & Description */
+.theme-overlay .theme-info {
+	flex: 1 1 auto !important;
+	min-width: 0 !important;
+	margin: 0 !important;
+	float: none !important;
+	color: var(--text-main, #f8f8f2) !important;
+	display: flex !important;
+	flex-direction: column !important;
+}
+
+.theme-overlay .theme-info .current-label {
+	display: inline-flex !important;
+	align-self: flex-start !important;
+	align-items: center !important;
+	padding: 3px 10px !important;
+	font-size: 11px !important;
+	font-weight: 700 !important;
+	text-transform: uppercase !important;
+	letter-spacing: 0.6px !important;
+	border-radius: 20px !important;
+	background: rgba(98, 201, 255, 0.12) !important;
+	border: 1px solid var(--accent, #62c9ff) !important;
+	color: var(--accent, #62c9ff) !important;
+	box-shadow: 0 0 10px rgba(98, 201, 255, 0.18) !important;
+	margin-bottom: 12px !important;
+}
+
+.theme-overlay .theme-info .theme-name {
+	font-size: 1.6rem !important;
+	font-weight: 700 !important;
+	color: #ffffff !important;
+	margin: 0 0 8px 0 !important;
+	line-height: 1.3 !important;
+	display: flex !important;
+	align-items: baseline !important;
+	gap: 10px !important;
+	flex-wrap: wrap !important;
+}
+
+.theme-overlay .theme-info .theme-version {
+	font-size: 0.85rem !important;
+	font-weight: 500 !important;
+	color: var(--gold, #d9be6f) !important;
+	opacity: 0.9 !important;
+}
+
+.theme-overlay .theme-info .theme-author {
+	font-size: 13px !important;
+	color: rgba(248, 248, 242, 0.65) !important;
+	margin: 0 0 16px 0 !important;
+}
+
+.theme-overlay .theme-info .theme-author a {
+	color: var(--gold, #d9be6f) !important;
+	text-decoration: none !important;
+	font-weight: 600 !important;
+	transition: color 0.2s ease, text-shadow 0.2s ease !important;
+}
+
+.theme-overlay .theme-info .theme-author a:hover {
+	color: var(--accent, #62c9ff) !important;
+	text-shadow: 0 0 8px rgba(98, 201, 255, 0.4) !important;
+}
+
+.theme-overlay .theme-info .theme-autoupdate {
+	margin-bottom: 16px !important;
+}
+
+.theme-overlay .theme-info .theme-autoupdate .toggle-auto-update {
+	color: var(--accent, #62c9ff) !important;
+	font-size: 13px !important;
+	text-decoration: none !important;
+	display: inline-flex !important;
+	align-items: center !important;
+	gap: 6px !important;
+	cursor: pointer !important;
+	transition: all 0.2s ease !important;
+	background: transparent !important;
+	border: none !important;
+	padding: 0 !important;
+}
+
+.theme-overlay .theme-info .theme-autoupdate .toggle-auto-update:hover {
+	color: #ffffff !important;
+	text-shadow: 0 0 8px rgba(98, 201, 255, 0.4) !important;
+}
+
+.theme-overlay .theme-info .theme-description {
+	font-size: 14px !important;
+	line-height: 1.65 !important;
+	color: var(--text-main, #f8f8f2) !important;
+	margin: 0 0 16px 0 !important;
+}
+
+.theme-overlay .theme-info .theme-tags {
+	font-size: 12px !important;
+	line-height: 1.6 !important;
+	color: rgba(248, 248, 242, 0.6) !important;
+	margin: 0 0 16px 0 !important;
+}
+
+.theme-overlay .theme-info .theme-tags span {
+	color: var(--gold, #d9be6f) !important;
+	font-weight: 600 !important;
+	margin-right: 4px !important;
+}
+
+.theme-overlay .theme-update-message {
+	background: rgba(217, 190, 111, 0.12) !important;
+	border: 1px solid var(--gold, #d9be6f) !important;
+	border-radius: 8px !important;
+	padding: 12px 16px !important;
+	margin: 16px 0 !important;
+	color: var(--text-main, #f8f8f2) !important;
+}
+
+.theme-overlay .theme-update-message .update-message {
+	color: var(--text-main, #f8f8f2) !important;
+}
+
+.theme-overlay .theme-update-message a {
+	color: var(--accent, #62c9ff) !important;
+	font-weight: 600 !important;
+}
+
+/* Footer Action Bar */
+.theme-overlay .theme-actions {
+	position: absolute !important;
+	bottom: 0 !important;
+	left: 0 !important;
+	right: 0 !important;
+	height: 64px !important;
+	background: rgba(0, 0, 0, 0.35) !important;
+	border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+	padding: 14px 28px !important;
+	box-sizing: border-box !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: flex-end !important;
+	gap: 12px !important;
+	z-index: 10 !important;
+}
+
+.theme-overlay .theme-actions .active-theme,
+.theme-overlay .theme-actions .inactive-theme {
+	display: flex !important;
+	align-items: center !important;
+	gap: 10px !important;
+}
+
+/* Action Buttons */
+.theme-overlay .theme-actions .button,
+.theme-overlay .theme-actions a.button {
+	border-radius: 8px !important;
+	padding: 7px 18px !important;
+	font-size: 13px !important;
+	font-weight: 700 !important;
+	line-height: 1.4 !important;
+	height: auto !important;
+	transition: all 0.2s ease !important;
+	text-decoration: none !important;
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	cursor: pointer !important;
+	background: rgba(217, 190, 111, 0.08) !important;
+	border: 1px solid var(--gold, #d9be6f) !important;
+	color: var(--gold, #d9be6f) !important;
+	box-shadow: none !important;
+	text-shadow: none !important;
+}
+
+.theme-overlay .theme-actions .button:hover,
+.theme-overlay .theme-actions a.button:hover {
+	background: rgba(98, 201, 255, 0.15) !important;
+	border-color: var(--accent, #62c9ff) !important;
+	color: var(--accent, #62c9ff) !important;
+	box-shadow: 0 0 12px rgba(98, 201, 255, 0.25) !important;
+}
+
+/* Primary CTA Button (Customize, Live Preview) */
+.theme-overlay .theme-actions .button.button-primary,
+.theme-overlay .theme-actions a.button.button-primary {
+	background: var(--gold, #d9be6f) !important;
+	background-color: var(--gold, #d9be6f) !important;
+	border: 1px solid var(--gold, #d9be6f) !important;
+	color: #ffffff !important;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6) !important;
+	font-weight: 700 !important;
+	text-transform: uppercase !important;
+	letter-spacing: 0.5px !important;
+}
+
+.theme-overlay .theme-actions .button.button-primary:hover,
+.theme-overlay .theme-actions a.button.button-primary:hover {
+	background: var(--accent, #62c9ff) !important;
+	background-color: var(--accent, #62c9ff) !important;
+	border-color: var(--accent, #62c9ff) !important;
+	color: #ffffff !important;
+	box-shadow: 0 0 16px rgba(98, 201, 255, 0.4) !important;
+}
+
+/* Activate Button */
+.theme-overlay .theme-actions a.button.activate {
+	background: rgba(77, 250, 123, 0.12) !important;
+	border-color: #4dfa7b !important;
+	color: #4dfa7b !important;
+}
+
+.theme-overlay .theme-actions a.button.activate:hover {
+	background: #4dfa7b !important;
+	border-color: #4dfa7b !important;
+	color: #0d121d !important;
+	box-shadow: 0 0 16px rgba(77, 250, 123, 0.4) !important;
+}
+
+/* Delete Theme Link */
+.theme-overlay .theme-actions .delete-theme {
+	color: #ff5c5c !important;
+	text-decoration: none !important;
+	font-size: 13px !important;
+	font-weight: 600 !important;
+	margin-right: auto !important;
+	transition: all 0.2s ease !important;
+}
+
+.theme-overlay .theme-actions .delete-theme:hover {
+	color: #ff8080 !important;
+	text-shadow: 0 0 8px rgba(255, 92, 92, 0.4) !important;
+}
+
+/* Responsive Overrides */
+@media (max-width: 850px) {
+	.theme-overlay .theme-wrap {
+		width: calc(100vw - 32px) !important;
+		height: calc(100vh - 32px) !important;
+		max-height: none !important;
+		border-radius: 12px !important;
+	}
+
+	.theme-overlay .theme-about {
+		flex-direction: column !important;
+		padding: 20px !important;
+		gap: 20px !important;
+	}
+
+	.theme-overlay .theme-screenshots {
+		flex: 1 1 100% !important;
+		max-width: 100% !important;
+		width: 100% !important;
+	}
+
+	.theme-overlay .theme-actions {
+		padding: 10px 16px !important;
+		height: auto !important;
+		flex-wrap: wrap !important;
+	}
+}
+
