@@ -5,11 +5,10 @@ All notable changes to the BlackBOX Bedrock submodule will be documented in this
 ## [2026-09-08]
 
 ### Added
-- Created `Admin\Bar_Toggle` module (`admin/class-admin-bar-toggle.php`) and registered it in `Admin` (`admin/class-blackbox-admin.php`). Adds an interactive theme switch directly to `#wp-admin-bar-top-secondary` adjacent to `#wp-admin-bar-my-account`, enabling users to toggle between BlackBOX Bedrock and Classic WordPress admin themes with instant tactile feedback, authenticated AJAX synchronization (`wp_ajax_blackbox_toggle_theme`), and clean page reload.
+- Created `Admin\Bar_Toggle` module (`admin/class-admin-bar-toggle.php`) and registered it in `Admin` (`admin/class-blackbox-admin.php`). Implements a native WordPress Admin Bar menu item in `#wp-admin-bar-top-secondary` adjacent to `#wp-admin-bar-my-account`, featuring native Dashicon (`dashicons-admin-appearance`), standard typography, hover styling, and dropdown submenu options (`BlackBOX Bedrock`, `Classic WordPress`, and `Bedrock Dashboard`) with instant 1-click toggle and authenticated AJAX synchronization (`wp_ajax_blackbox_toggle_theme`).
 - Comprehensive root design token takeover in `assets/css/sui.css` overriding `--wpmudev-*` and `--sui-*` CSS custom properties on `:root`, `html`, `body`, `.sui-wrap`, `.wpmudev-core-ui`, and `.wpmudev-ui-root`. Maps surface foundations, typography contrast, grays, and borders into the Starship glass aesthetic.
 - Component surface rules in `assets/css/sui.css` for modern WPMU DEV Core UI and WP Defender cards, panels, lists, inputs, and toggles (`[class*="wpmudev-card"]`, `.wpmudev-setting-card`, `[class*="defender-ar-"]`, `.defender-schedule-scan-pill`, `.defender-pill-toggle-group`), preventing blinding white backgrounds across Defender alerts and reports.
 - Added exclusions for `.wpmudev-core-ui`, `.wpmudev-ui-root`, `[class*="wpmudev-"]`, `[class*="defender-"]`, `.defender-schedule-scan-pill`, and `.defender-pill-toggle-group` to the Universal Background Stripper in `assets/css/wp-admin.css`.
-- Added Admin Bar theme toggle layout rules in `assets/css/wp-admin.css` to exempt the toggle from mobile and compact icon hiding rules.
 
 ## [2026-09-07]
 

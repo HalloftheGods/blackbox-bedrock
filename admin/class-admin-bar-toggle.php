@@ -6,7 +6,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 class Bar_Toggle {
 
 	public function __construct() {
-		// Do not load if master constant kill-switch is active
 		if ( defined( 'BLACKBOX_BEDROCK_DISABLE' ) && BLACKBOX_BEDROCK_DISABLE ) {
 			return;
 		}
@@ -28,7 +27,7 @@ class Bar_Toggle {
 	}
 
 	/**
-	 * Register the toggle node in the WordPress Admin Bar.
+	 * Register the toggle node in the WordPress Admin Bar as a native menu item.
 	 *
 	 * Placed inside top-secondary, adjacent to the user profile area (#wp-admin-bar-my-account).
 	 *
@@ -39,36 +38,67 @@ class Bar_Toggle {
 			return;
 		}
 
-		$is_active = $this->is_theme_active();
-		$state_class = $is_active ? 'bb-theme-active' : 'bb-theme-inactive';
-		$tooltip = $is_active
-			? __( 'BlackBOX Bedrock: Active (Click to switch to Classic WordPress Theme)', 'blackbox-bedrock' )
-			: __( 'BlackBOX Bedrock: Disabled (Click to activate BlackBOX Bedrock Theme)', 'blackbox-bedrock' );
+		$is_active    = $this->is_theme_active();
+		$state_class  = $is_active ? 'bb-theme-active' : 'bb-theme-inactive';
+		$status_label = $is_active ? 'ON' : 'OFF';
+		$status_color = $is_active ? '#62c9ff' : '#dba617';
+		$tooltip      = $is_active
+			? __( 'BlackBOX Bedrock is Active. Click to switch to Classic WordPress theme.', 'blackbox-bedrock' )
+			: __( 'BlackBOX Bedrock is Disabled. Click to activate BlackBOX Bedrock theme.', 'blackbox-bedrock' );
 
-		$title = sprintf(
-			'<span class="bb-ab-toggle %s" data-active="%s" title="%s">' .
-				'<span class="bb-ab-toggle-track">' .
-					'<span class="bb-ab-toggle-thumb">' .
-						'<span class="bb-ab-toggle-glow"></span>' .
-					'</span>' .
-				'</span>' .
-				'<span class="bb-ab-toggle-label">%s</span>' .
-			'</span>',
-			esc_attr( $state_class ),
-			$is_active ? '1' : '0',
-			esc_attr( $tooltip ),
-			$is_active ? 'BlackBOX' : 'Classic'
-		);
-
+		// Top-level native admin bar node
 		$wp_admin_bar->add_node( [
-			'id'     => 'blackbox-bedrock-toggle',
+			'id'     => 'blackbox-theme-toggle',
 			'parent' => 'top-secondary',
-			'title'  => $title,
+			'title'  => sprintf(
+				'<span class="ab-icon dashicons dashicons-admin-appearance" aria-hidden="true"></span>' .
+				'<span class="ab-label">%s: <strong class="bb-theme-status-text" style="color:%s;">%s</strong></span>',
+				esc_html__( 'BlackBOX', 'blackbox-bedrock' ),
+				esc_attr( $status_color ),
+				esc_html( $status_label )
+			),
 			'href'   => '#',
 			'meta'   => [
-				'class'    => 'blackbox-bedrock-toggle-node ' . $state_class,
+				'class'    => 'blackbox-theme-toggle-node ' . $state_class,
 				'title'    => $tooltip,
 				'tabindex' => 0,
+			],
+		] );
+
+		// Submenu Option 1: Activate BlackBOX
+		$wp_admin_bar->add_node( [
+			'id'     => 'blackbox-theme-opt-dark',
+			'parent' => 'blackbox-theme-toggle',
+			'title'  => ( $is_active ? '&#10003; ' : '&nbsp;&nbsp;&nbsp;' ) . __( 'BlackBOX Bedrock (Dark Glass)', 'blackbox-bedrock' ),
+			'href'   => '#',
+			'meta'   => [
+				'class' => 'bb-menu-opt bb-opt-dark' . ( $is_active ? ' is-active' : '' ),
+			],
+		] );
+
+		// Submenu Option 2: Classic WordPress
+		$wp_admin_bar->add_node( [
+			'id'     => 'blackbox-theme-opt-classic',
+			'parent' => 'blackbox-theme-toggle',
+			'title'  => ( ! $is_active ? '&#10003; ' : '&nbsp;&nbsp;&nbsp;' ) . __( 'Classic WordPress Theme', 'blackbox-bedrock' ),
+			'href'   => '#',
+			'meta'   => [
+				'class' => 'bb-menu-opt bb-opt-classic' . ( ! $is_active ? ' is-active' : '' ),
+			],
+		] );
+
+		// Submenu Option 3: Bedrock Dashboard link
+		$dashboard_url = is_multisite() && is_network_admin()
+			? network_admin_url( 'admin.php?page=blackbox' )
+			: admin_url( 'admin.php?page=blackbox' );
+
+		$wp_admin_bar->add_node( [
+			'id'     => 'blackbox-theme-opt-dashboard',
+			'parent' => 'blackbox-theme-toggle',
+			'title'  => __( 'Bedrock Dashboard', 'blackbox-bedrock' ),
+			'href'   => $dashboard_url,
+			'meta'   => [
+				'class' => 'bb-menu-opt bb-opt-dashboard',
 			],
 		] );
 	}
@@ -85,173 +115,102 @@ class Bar_Toggle {
 		$ajaxurl = admin_url( 'admin-ajax.php' );
 		?>
 		<style id="blackbox-admin-bar-toggle-css">
-			/* Admin Bar Node Layout */
-			#wpadminbar #wp-admin-bar-blackbox-bedrock-toggle {
-				display: inline-flex !important;
-				align-items: center !important;
+			/* Ensure proper order in top-secondary */
+			#wpadminbar #wp-admin-bar-blackbox-theme-toggle {
 				order: -1 !important;
-				margin: 0 4px !important;
 			}
 
-			#wpadminbar #wp-admin-bar-blackbox-bedrock-toggle .ab-item {
-				display: inline-flex !important;
-				align-items: center !important;
-				justify-content: center !important;
-				height: 100% !important;
-				padding: 0 6px !important;
-				max-width: none !important;
-				font-size: 11px !important;
-				line-height: normal !important;
-				text-indent: 0 !important;
-				background: transparent !important;
-				cursor: pointer !important;
-			}
-
-			#wpadminbar #wp-admin-bar-blackbox-bedrock-toggle .ab-item * {
-				display: inline-flex !important;
-				visibility: visible !important;
-				opacity: 1 !important;
-				font-size: inherit !important;
-				line-height: inherit !important;
-			}
-
-			/* Toggle Component */
-			.bb-ab-toggle {
-				display: inline-flex;
-				align-items: center;
-				gap: 7px;
-				cursor: pointer;
-				user-select: none;
-			}
-
-			.bb-ab-toggle-track {
-				position: relative;
-				display: inline-flex;
-				align-items: center;
-				width: 34px;
-				height: 18px;
-				border-radius: 10px;
-				background: rgba(255, 255, 255, 0.15);
-				border: 1px solid rgba(255, 255, 255, 0.25);
-				transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-				box-sizing: border-box;
-			}
-
-			.bb-theme-active .bb-ab-toggle-track {
-				background: rgba(14, 28, 48, 0.85);
-				border-color: #62c9ff;
-				box-shadow: 0 0 8px rgba(98, 201, 255, 0.35);
-			}
-
-			.bb-theme-inactive .bb-ab-toggle-track {
-				background: rgba(0, 0, 0, 0.2);
-				border-color: rgba(255, 255, 255, 0.3);
-			}
-
-			.bb-ab-toggle-thumb {
-				position: absolute;
-				top: 1px;
-				left: 1px;
-				width: 14px;
-				height: 14px;
-				border-radius: 50%;
-				background: #999;
-				transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), background 0.25s ease, box-shadow 0.25s ease;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-			}
-
-			.bb-theme-active .bb-ab-toggle-thumb {
-				transform: translateX(16px);
-				background: #62c9ff;
-				box-shadow: 0 0 6px #62c9ff, 0 0 12px rgba(98, 201, 255, 0.8);
-			}
-
-			.bb-theme-inactive .bb-ab-toggle-thumb {
-				transform: translateX(1px);
-				background: #bbb;
-				box-shadow: none;
-			}
-
-			.bb-ab-toggle-label {
-				font-size: 11px !important;
-				font-weight: 600 !important;
-				letter-spacing: 0.3px !important;
-				color: rgba(255, 255, 255, 0.85) !important;
-				text-transform: uppercase !important;
-			}
-
-			.bb-theme-active .bb-ab-toggle-label {
+			#wpadminbar #wp-admin-bar-blackbox-theme-toggle.bb-theme-active > .ab-item .ab-icon {
 				color: #62c9ff !important;
-				text-shadow: 0 0 8px rgba(98, 201, 255, 0.4) !important;
 			}
 
-			.bb-ab-toggle.bb-is-loading {
-				opacity: 0.6;
-				pointer-events: none;
+			#wpadminbar #wp-admin-bar-blackbox-theme-toggle.bb-is-loading {
+				opacity: 0.6 !important;
+				pointer-events: none !important;
+			}
+
+			#wpadminbar #wp-admin-bar-blackbox-theme-toggle .bb-menu-opt.is-active > .ab-item {
+				font-weight: 600 !important;
+				color: #62c9ff !important;
 			}
 		</style>
 		<script id="blackbox-admin-bar-toggle-js">
 			(function() {
+				function triggerThemeToggle(targetState) {
+					var node = document.getElementById('wp-admin-bar-blackbox-theme-toggle');
+					if (node) {
+						node.classList.add('bb-is-loading');
+					}
+
+					var data = new URLSearchParams();
+					data.append('action', 'blackbox_toggle_theme');
+					data.append('nonce', '<?php echo esc_js( $nonce ); ?>');
+					if (typeof targetState !== 'undefined' && targetState !== null) {
+						data.append('target_state', targetState);
+					}
+
+					fetch('<?php echo esc_url( $ajaxurl ); ?>', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/x-www-form-urlencoded; credentials=same-origin'
+						},
+						body: data.toString()
+					})
+					.then(function(res) { return res.json(); })
+					.then(function(result) {
+						if (result && result.success) {
+							window.location.reload();
+						} else {
+							if (node) node.classList.remove('bb-is-loading');
+							alert('Could not switch theme: ' + (result.data || 'Unknown error'));
+						}
+					})
+					.catch(function(err) {
+						if (node) node.classList.remove('bb-is-loading');
+						console.error('BlackBOX Bedrock toggle error:', err);
+					});
+				}
+
 				function initBlackBoxToggle() {
-					var node = document.getElementById('wp-admin-bar-blackbox-bedrock-toggle');
+					var node = document.getElementById('wp-admin-bar-blackbox-theme-toggle');
 					if (!node || node.dataset.bbBound) return;
 					node.dataset.bbBound = '1';
 
-					var link = node.querySelector('.ab-item');
-					if (!link) return;
-
-					link.addEventListener('click', function(e) {
-						e.preventDefault();
-						e.stopPropagation();
-
-						var toggle = node.querySelector('.bb-ab-toggle');
-						if (!toggle || toggle.classList.contains('bb-is-loading')) return;
-
-						toggle.classList.add('bb-is-loading');
-
-						// Tactile optimistic visual feedback
-						var isActive = toggle.getAttribute('data-active') === '1';
-						if (isActive) {
-							toggle.classList.remove('bb-theme-active');
-							toggle.classList.add('bb-theme-inactive');
-							node.classList.remove('bb-theme-active');
-							node.classList.add('bb-theme-inactive');
-							toggle.setAttribute('data-active', '0');
-						} else {
-							toggle.classList.remove('bb-theme-inactive');
-							toggle.classList.add('bb-theme-active');
-							node.classList.remove('bb-theme-inactive');
-							node.classList.add('bb-theme-active');
-							toggle.setAttribute('data-active', '1');
-						}
-
-						var data = new URLSearchParams();
-						data.append('action', 'blackbox_toggle_theme');
-						data.append('nonce', '<?php echo esc_js( $nonce ); ?>');
-
-						fetch('<?php echo esc_url( $ajaxurl ); ?>', {
-							method: 'POST',
-							headers: {
-								'Content-Type': 'application/x-www-form-urlencoded; credentials=same-origin'
-							},
-							body: data.toString()
-						})
-						.then(function(res) { return res.json(); })
-						.then(function(result) {
-							if (result && result.success) {
-								window.location.reload();
-							} else {
-								toggle.classList.remove('bb-is-loading');
-								alert('Could not toggle theme: ' + (result.data || 'Unknown error'));
-							}
-						})
-						.catch(function(err) {
-							toggle.classList.remove('bb-is-loading');
-							console.error('BlackBOX Bedrock toggle error:', err);
+					// Top-level item direct click: toggle
+					var topLink = node.querySelector(':scope > .ab-item');
+					if (topLink) {
+						topLink.addEventListener('click', function(e) {
+							e.preventDefault();
+							e.stopPropagation();
+							triggerThemeToggle(null);
 						});
-					});
+					}
+
+					// Submenu option: Dark mode
+					var optDark = document.getElementById('wp-admin-bar-blackbox-theme-opt-dark');
+					if (optDark) {
+						var darkLink = optDark.querySelector('.ab-item');
+						if (darkLink) {
+							darkLink.addEventListener('click', function(e) {
+								e.preventDefault();
+								e.stopPropagation();
+								triggerThemeToggle('0');
+							});
+						}
+					}
+
+					// Submenu option: Classic mode
+					var optClassic = document.getElementById('wp-admin-bar-blackbox-theme-opt-classic');
+					if (optClassic) {
+						var classicLink = optClassic.querySelector('.ab-item');
+						if (classicLink) {
+							classicLink.addEventListener('click', function(e) {
+								e.preventDefault();
+								e.stopPropagation();
+								triggerThemeToggle('1');
+							});
+						}
+					}
 				}
 
 				if (document.readyState === 'loading') {
@@ -265,7 +224,7 @@ class Bar_Toggle {
 	}
 
 	/**
-	 * AJAX endpoint to flip the BlackBOX Bedrock theme enabled/disabled state.
+	 * AJAX endpoint to flip or set the BlackBOX Bedrock theme state.
 	 */
 	public function ajax_toggle_theme() {
 		check_ajax_referer( 'blackbox_toggle_theme_nonce', 'nonce' );
@@ -274,9 +233,14 @@ class Bar_Toggle {
 			wp_send_json_error( __( 'Unauthorized', 'blackbox-bedrock' ), 403 );
 		}
 
-		$current = get_option( 'xophz_compass_disable_mu_styles', '0' );
-		$is_disabled = ( ! empty( $current ) && $current !== '0' );
-		$new_val = $is_disabled ? '0' : '1';
+		if ( isset( $_POST['target_state'] ) ) {
+			$target = sanitize_text_field( wp_unslash( $_POST['target_state'] ) );
+			$new_val = ( $target === '0' || $target === 'active' ) ? '0' : '1';
+		} else {
+			$current = get_option( 'xophz_compass_disable_mu_styles', '0' );
+			$is_disabled = ( ! empty( $current ) && $current !== '0' );
+			$new_val = $is_disabled ? '0' : '1';
+		}
 
 		update_option( 'xophz_compass_disable_mu_styles', $new_val );
 
