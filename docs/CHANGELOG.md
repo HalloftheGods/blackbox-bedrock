@@ -2,7 +2,20 @@
 
 All notable changes to the BlackBOX Bedrock submodule will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
+## [2026-09-08]
+
+### Added
+- Created `Admin\Bar_Toggle` module (`admin/class-admin-bar-toggle.php`) and registered it in `Admin` (`admin/class-blackbox-admin.php`). Adds an interactive theme switch directly to `#wp-admin-bar-top-secondary` adjacent to `#wp-admin-bar-my-account`, enabling users to toggle between BlackBOX Bedrock and Classic WordPress admin themes with instant tactile feedback, authenticated AJAX synchronization (`wp_ajax_blackbox_toggle_theme`), and clean page reload.
+- Comprehensive root design token takeover in `assets/css/sui.css` overriding `--wpmudev-*` and `--sui-*` CSS custom properties on `:root`, `html`, `body`, `.sui-wrap`, `.wpmudev-core-ui`, and `.wpmudev-ui-root`. Maps surface foundations, typography contrast, grays, and borders into the Starship glass aesthetic.
+- Component surface rules in `assets/css/sui.css` for modern WPMU DEV Core UI and WP Defender cards, panels, lists, inputs, and toggles (`[class*="wpmudev-card"]`, `.wpmudev-setting-card`, `[class*="defender-ar-"]`, `.defender-schedule-scan-pill`, `.defender-pill-toggle-group`), preventing blinding white backgrounds across Defender alerts and reports.
+- Added exclusions for `.wpmudev-core-ui`, `.wpmudev-ui-root`, `[class*="wpmudev-"]`, `[class*="defender-"]`, `.defender-schedule-scan-pill`, and `.defender-pill-toggle-group` to the Universal Background Stripper in `assets/css/wp-admin.css`.
+- Added Admin Bar theme toggle layout rules in `assets/css/wp-admin.css` to exempt the toggle from mobile and compact icon hiding rules.
+
+## [2026-09-07]
+
+### Fixed
+- Fixed stacking context and z-index ordering for SUI modals (`.sui-modal`, `.sui-dialog`) in `modal-overrides.css` and `sui.css`, ensuring `.sui-modal-overlay` sits behind `.sui-modal-content` and preventing the blurred backdrop mask from rendering over the modal window.
+- Added `.sui-modal.sui-active` and `.sui-dialog.sui-active` to the fixed viewport centering layout rules so SUI modals properly expand full screen and vertically center in WPMU DEV plugins (Branda, Forminator, Hustle).
 
 ## [2026-09-06]
 

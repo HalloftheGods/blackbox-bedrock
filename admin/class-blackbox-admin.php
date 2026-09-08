@@ -8,6 +8,7 @@ require_once __DIR__ . '/class-admin-dashboard.php';
 require_once __DIR__ . '/class-admin-theme-styler.php';
 require_once __DIR__ . '/class-admin-editor-support.php';
 require_once __DIR__ . '/class-admin-menu-manager.php';
+require_once __DIR__ . '/class-admin-bar-toggle.php';
 
 class Admin {
 
@@ -36,12 +37,18 @@ class Admin {
 	 */
 	public $menu_manager;
 
+	/**
+	 * @var Admin\Bar_Toggle
+	 */
+	public $bar_toggle;
+
 	public function __construct() {
 		$this->settings       = new Admin\Settings();
 		$this->dashboard      = new Admin\Dashboard();
 		$this->theme_styler   = new Admin\Theme_Styler();
 		$this->editor_support = new Admin\Editor_Support();
 		$this->menu_manager   = new Admin\Menu_Manager( $this->dashboard, $this->settings );
+		$this->bar_toggle     = new Admin\Bar_Toggle();
 	}
 
 	// ----------------------------------------------------------------------

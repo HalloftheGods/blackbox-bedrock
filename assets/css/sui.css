@@ -1,3 +1,218 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   WPMU DEV CORE UI & SUI ARCHITECTURAL DESIGN TOKEN TAKEOVER
+   Transforms modern WPMU DEV (Defender, Smush, Beehive, SmartCrawl, etc.)
+   and Shared UI (SUI) into the Starship glassmorphism design system.
+   ═══════════════════════════════════════════════════════════════════════════ */
+:root,
+html,
+body,
+.sui-wrap,
+.wpmudev-core-ui,
+.wpmudev-ui-root {
+	/* Surface Foundations */
+	--wpmudev-white: var(--rough-glass-bg, rgba(16, 22, 34, 0.65)) !important;
+	--wpmudev-black: #000000 !important;
+	--wpmudev-bg-primary: var(--rough-glass-bg, rgba(16, 22, 34, 0.65)) !important;
+	--wpmudev-bg-secondary: rgba(26, 36, 54, 0.75) !important;
+	--wpmudev-bg-tertiary: rgba(32, 44, 66, 0.5) !important;
+	--wpmudev-surface-muted: rgba(255, 255, 255, 0.05) !important;
+	--wpmudev-sidebar-background: rgba(10, 15, 24, 0.5) !important;
+	--wpmudev-dropdown-bg: #0d1117 !important;
+	--wpmudev-progress-pill-bg: rgba(255, 255, 255, 0.08) !important;
+
+	/* Typography & Content Contrast */
+	--wpmudev-text-primary: var(--text-main, #e6edf3) !important;
+	--wpmudev-text-secondary: rgba(255, 255, 255, 0.7) !important;
+	--wpmudev-text-tertiary: rgba(255, 255, 255, 0.45) !important;
+	--wpmudev-text-inverse: #ffffff !important;
+	--wpmudev-form-control-color: rgba(255, 255, 255, 0.65) !important;
+	--wpmudev-link-color: var(--accent, #62c9ff) !important;
+
+	/* Subtle Dark Scale Grays & Borders */
+	--wpmudev-gray-50: rgba(255, 255, 255, 0.03) !important;
+	--wpmudev-gray-75: rgba(255, 255, 255, 0.05) !important;
+	--wpmudev-gray-100: rgba(255, 255, 255, 0.07) !important;
+	--wpmudev-gray-150: rgba(255, 255, 255, 0.09) !important;
+	--wpmudev-gray-200: rgba(255, 255, 255, 0.12) !important;
+	--wpmudev-gray-250: rgba(255, 255, 255, 0.15) !important;
+	--wpmudev-gray-275: rgba(255, 255, 255, 0.18) !important;
+	--wpmudev-gray-300: rgba(255, 255, 255, 0.22) !important;
+	--wpmudev-gray-350: rgba(255, 255, 255, 0.28) !important;
+	--wpmudev-gray-400: rgba(255, 255, 255, 0.35) !important;
+	--wpmudev-gray-500: rgba(255, 255, 255, 0.45) !important;
+	--wpmudev-gray-600: rgba(255, 255, 255, 0.6) !important;
+	--wpmudev-gray-700: rgba(255, 255, 255, 0.75) !important;
+	--wpmudev-gray-750: rgba(255, 255, 255, 0.8) !important;
+	--wpmudev-gray-775: rgba(255, 255, 255, 0.85) !important;
+	--wpmudev-gray-800: #e6edf3 !important;
+	--wpmudev-gray-850: #ffffff !important;
+	--wpmudev-gray-900: #ffffff !important;
+	--wpmudev-gray-925: #ffffff !important;
+	--wpmudev-gray-dark: rgba(255, 255, 255, 0.65) !important;
+	--wpmudev-gray-disabled: rgba(255, 255, 255, 0.25) !important;
+
+	/* Borders */
+	--wpmudev-border-light: rgba(255, 255, 255, 0.08) !important;
+	--wpmudev-border-medium: rgba(255, 255, 255, 0.12) !important;
+	--wpmudev-border-dark: rgba(255, 255, 255, 0.2) !important;
+	--wpmudev-border-primary: var(--rough-glass-border, rgba(255, 255, 255, 0.12)) !important;
+	--wpmudev-border-secondary: rgba(255, 255, 255, 0.08) !important;
+	--wpmudev-border-tertiary: rgba(255, 255, 255, 0.05) !important;
+	--wpmudev-border-selection: var(--accent, #62c9ff) !important;
+
+	/* Alphas */
+	--wpmudev-black-05: rgba(0, 0, 0, 0.05) !important;
+	--wpmudev-black-10: rgba(0, 0, 0, 0.1) !important;
+	--wpmudev-black-15: rgba(0, 0, 0, 0.15) !important;
+	--wpmudev-black-20: rgba(0, 0, 0, 0.2) !important;
+	--wpmudev-black-25: rgba(0, 0, 0, 0.25) !important;
+	--wpmudev-black-30: rgba(0, 0, 0, 0.3) !important;
+	--wpmudev-black-35: rgba(0, 0, 0, 0.35) !important;
+	--wpmudev-black-alpha-04: rgba(255, 255, 255, 0.04) !important;
+	--wpmudev-black-alpha-05: rgba(255, 255, 255, 0.05) !important;
+	--wpmudev-black-alpha-06: rgba(255, 255, 255, 0.06) !important;
+	--wpmudev-black-alpha-08: rgba(255, 255, 255, 0.08) !important;
+	--wpmudev-black-alpha-10: rgba(255, 255, 255, 0.1) !important;
+	--wpmudev-black-alpha-15: rgba(255, 255, 255, 0.12) !important;
+	--wpmudev-black-alpha-20: rgba(255, 255, 255, 0.16) !important;
+	--wpmudev-black-alpha-25: rgba(255, 255, 255, 0.2) !important;
+	--wpmudev-white-10: rgba(255, 255, 255, 0.1) !important;
+	--wpmudev-white-30: rgba(255, 255, 255, 0.3) !important;
+	--wpmudev-white-40: rgba(255, 255, 255, 0.4) !important;
+	--wpmudev-white-70: rgba(255, 255, 255, 0.7) !important;
+	--wpmudev-white-alpha-30: rgba(255, 255, 255, 0.3) !important;
+
+	/* Warning & Status Overrides */
+	--wpmudev-blue-neutral: rgba(98, 201, 255, 0.1) !important;
+	--wpmudev-green-on-bg: rgba(77, 250, 123, 0.1) !important;
+	--wpmudev-red-warning-bg: rgba(255, 92, 92, 0.15) !important;
+	--defender-warning-background: rgba(255, 92, 92, 0.15) !important;
+	--defender-warning-color: #ff7878 !important;
+
+	/* Legacy SUI tokens */
+	--sui-white: var(--rough-glass-bg, rgba(16, 22, 34, 0.65)) !important;
+	--sui-box-bg: var(--rough-glass-bg, rgba(16, 22, 34, 0.65)) !important;
+	--sui-background: transparent !important;
+	--sui-text-primary: var(--text-main, #e6edf3) !important;
+}
+
+/* Card Archetypes: Defender, Smush, Beehive, and Core UI */
+.wpmudev-core-ui [class*="-card"],
+.wpmudev-core-ui [class*="__card"],
+.wpmudev-core-ui [class*="-box"],
+.wpmudev-core-ui [class*="-panel"],
+.wpmudev-core-ui [class*="-section-card"],
+.wpmudev-core-ui [class*="-settings-card"],
+.wpmudev-core-ui [class*="defender-schedule-scan-pill"],
+.wpmudev-core-ui [class*="defender-pill-toggle-group"],
+.wpmudev-core-ui [class*="defender-ar-"],
+.wpmudev-core-ui .wpmudev-list,
+.wpmudev-core-ui .wpmudev-roles-list-card__list,
+.wpmudev-core-ui .wpmudev-defender-tree-group,
+[class*="sui-2-"] .sui-box,
+[class*="sui-2-"] .sui-wrap .sui-box {
+	background: var(--rough-glass-bg) !important;
+	backdrop-filter: var(--rough-glass-filter) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25) !important;
+	color: var(--text-main, #e6edf3) !important;
+}
+
+/* Defender Alerts & Reports Panels */
+.defender-ar-recipient-panel,
+.defender-ar-edit-recipient-panel__profile,
+.defender-ar-edit-recipient-panel__section,
+.defender-ar-recipient-panel__body,
+.defender-accessibility-setting,
+.defender-pill-toggle-group,
+.defender-pill-toggle-group__item {
+	background: rgba(16, 22, 34, 0.6) !important;
+	border-color: rgba(255, 255, 255, 0.08) !important;
+	color: var(--text-main, #e6edf3) !important;
+}
+
+.defender-pill-toggle-group__item:hover {
+	background: rgba(98, 201, 255, 0.1) !important;
+	border-color: var(--accent, #62c9ff) !important;
+}
+
+.defender-pill-toggle-group__item--active {
+	background: rgba(77, 250, 123, 0.12) !important;
+	border-color: #4dfa7b !important;
+}
+
+/* WPMU DEV Inputs, Selects, and Textareas */
+.wpmudev-core-ui input[type="text"],
+.wpmudev-core-ui input[type="search"],
+.wpmudev-core-ui input[type="password"],
+.wpmudev-core-ui input[type="email"],
+.wpmudev-core-ui select,
+.wpmudev-core-ui textarea,
+.wpmudev-core-ui .wpmudev-form-control,
+.wpmudev-core-ui [class*="wpmudev-input"] {
+	background: rgba(0, 0, 0, 0.4) !important;
+	border: 1px solid rgba(255, 255, 255, 0.12) !important;
+	border-radius: 6px !important;
+	color: #ffffff !important;
+}
+
+.wpmudev-core-ui input:focus,
+.wpmudev-core-ui select:focus,
+.wpmudev-core-ui textarea:focus {
+	border-color: var(--accent, #62c9ff) !important;
+	box-shadow: 0 0 10px rgba(98, 201, 255, 0.35) !important;
+	outline: none !important;
+}
+
+/* Typography, Headings, and Labels */
+.wpmudev-core-ui h1,
+.wpmudev-core-ui h2,
+.wpmudev-core-ui h3,
+.wpmudev-core-ui h4,
+.wpmudev-core-ui h5,
+.wpmudev-core-ui h6,
+.wpmudev-core-ui p,
+.wpmudev-core-ui span,
+.wpmudev-core-ui label,
+.wpmudev-core-ui div {
+	color: var(--text-main, #e6edf3);
+}
+
+.wpmudev-core-ui .wpmudev-description,
+.wpmudev-core-ui [class*="-description"],
+.wpmudev-core-ui [class*="__description"],
+.wpmudev-core-ui [class*="-caption"],
+.wpmudev-core-ui [class*="__caption"],
+.wpmudev-core-ui [class*="-sub-title"],
+.wpmudev-core-ui [class*="__subtitle"] {
+	color: rgba(255, 255, 255, 0.65) !important;
+}
+
+/* Dividers & Lines */
+.wpmudev-core-ui hr,
+.wpmudev-core-ui .wpmudev-line,
+.wpmudev-core-ui [class*="-divider"],
+.wpmudev-core-ui [class*="__divider"] {
+	background: rgba(255, 255, 255, 0.08) !important;
+	border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Modern Modals in Core UI */
+.wpmudev-core-ui .wpmudev-info-modal__info-modal {
+	background: var(--rough-glass-bg) !important;
+	backdrop-filter: var(--rough-glass-filter) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7) !important;
+}
+
+.wpmudev-core-ui .wpmudev-info-modal__info-modal-overlay {
+	background: rgba(0, 0, 0, 0.75) !important;
+	backdrop-filter: blur(8px) !important;
+	-webkit-backdrop-filter: blur(8px) !important;
+}
+
 /* SmartCrawl SUI Base Overrides */
 .sui-wrap,
 .sui-wrap p,
@@ -441,6 +656,14 @@ hr,
 	z-index: 999999 !important;
 }
 
+/* Scoped Overlay - ensure overlay sits behind modal content inside modal container */
+.sui-modal .sui-modal-overlay,
+.sui-dialog .sui-dialog-overlay,
+.hustle-modal .hustle-modal-overlay,
+.forminator-modal .forminator-modal-overlay {
+	z-index: 1 !important;
+}
+
 /* Outer Modal & Slide Containers - Strip borders & backgrounds to prevent double-box */
 .sui-modal,
 .sui-dialog,
@@ -458,8 +681,11 @@ hr,
 }
 
 /* Modal Open State Layering & Centering */
+.sui-modal.sui-active,
 .sui-modal.sui-modal--is-open,
-.sui-modal.sui-wp-overlay {
+.sui-modal.sui-wp-overlay,
+.sui-dialog.sui-active,
+.sui-dialog.sui-dialog--is-open {
 	position: fixed !important;
 	inset: 0 !important;
 	top: 0 !important;
@@ -469,12 +695,37 @@ hr,
 	width: 100vw !important;
 	height: 100vh !important;
 	display: flex !important;
+	flex-direction: column !important;
 	align-items: center !important;
 	justify-content: center !important;
+	overflow-y: auto !important;
+	overflow-x: hidden !important;
+	padding: 30px 0 !important;
+	box-sizing: border-box !important;
 	z-index: 1000000 !important;
 	background: transparent !important;
 	border: none !important;
 	box-shadow: none !important;
+}
+
+/* Modal Content Container - strictly elevated above backdrop overlay */
+.sui-modal-content,
+.sui-dialog-content,
+.sui-modal-slide {
+	position: relative !important;
+	z-index: 1000001 !important;
+	pointer-events: auto !important;
+	margin: auto !important;
+}
+
+.sui-modal .sui-modal-content,
+.sui-dialog .sui-dialog-content,
+.hustle-modal .sui-modal-content,
+.forminator-modal .sui-modal-content {
+	position: relative !important;
+	z-index: 2 !important;
+	pointer-events: auto !important;
+	margin: auto !important;
 }
 
 /* Single Inner Modal Window Container */
@@ -499,7 +750,8 @@ hr,
 	overflow: hidden !important;
 	margin: auto !important;
 	position: relative !important;
-	z-index: 1000001 !important;
+	z-index: 3 !important;
+	pointer-events: auto !important;
 	color: #ffffff !important;
 }
 

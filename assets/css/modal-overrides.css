@@ -35,9 +35,20 @@
 	z-index: 999999 !important;
 }
 
+/* Scoped Overlay - ensure overlay sits behind modal content inside modal container */
+.sui-modal .sui-modal-overlay,
+.sui-dialog .sui-dialog-overlay,
+.hustle-modal .hustle-modal-overlay,
+.forminator-modal .forminator-modal-overlay {
+	z-index: 1 !important;
+}
+
 /* Modal Open State Layering & Centering */
+.sui-modal.sui-active,
 .sui-modal.sui-modal--is-open,
-.sui-modal.sui-wp-overlay {
+.sui-modal.sui-wp-overlay,
+.sui-dialog.sui-active,
+.sui-dialog.sui-dialog--is-open {
 	position: fixed !important;
 	inset: 0 !important;
 	top: 0 !important;
@@ -47,12 +58,37 @@
 	width: 100vw !important;
 	height: 100vh !important;
 	display: flex !important;
+	flex-direction: column !important;
 	align-items: center !important;
 	justify-content: center !important;
+	overflow-y: auto !important;
+	overflow-x: hidden !important;
+	padding: 30px 0 !important;
+	box-sizing: border-box !important;
 	z-index: 1000000 !important;
 	background: transparent !important;
 	border: none !important;
 	box-shadow: none !important;
+}
+
+/* Modal Content Container - strictly elevated above backdrop overlay */
+.sui-modal-content,
+.sui-dialog-content,
+.sui-modal-slide {
+	position: relative !important;
+	z-index: 1000001 !important;
+	pointer-events: auto !important;
+	margin: auto !important;
+}
+
+.sui-modal .sui-modal-content,
+.sui-dialog .sui-dialog-content,
+.hustle-modal .sui-modal-content,
+.forminator-modal .sui-modal-content {
+	position: relative !important;
+	z-index: 2 !important;
+	pointer-events: auto !important;
+	margin: auto !important;
 }
 
 /* Single Inner Box Container - Solid dark card without backdrop blur */
@@ -76,7 +112,8 @@
 	overflow: hidden !important;
 	margin: auto !important;
 	position: relative !important;
-	z-index: 1000001 !important;
+	z-index: 3 !important;
+	pointer-events: auto !important;
 }
 
 /* Remove White Circular Blob / Pseudoelements in Modal Headers */
