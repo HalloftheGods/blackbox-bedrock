@@ -47,6 +47,7 @@ class Dashboard {
 		'xophz-compass-treasure-map'     => [1188, 'Databox Pro', 'Executive dashboarding and KPI visualization engine.', 'uranium', 99, 'portal'],
 		'xophz-compass-treasure-trove'   => [1188, 'WooCommerce Ext.', 'Advanced eCommerce enhancements and payment gateways.', 'silver', 149, 'portal'],
 		'xophz-compass-xp'               => [708,  'GamiPress Pro', 'Comprehensive gamification, achievements, and user reward system.', 'quantum', 79, 'portal'],
+		'xophz-magic-hat'                => [480,  'OnePageExpress Pro', 'Circadian rhythm theme engine with astronomical daylight cycles and OKLCH tokens.', 'quantum', 79, 'spark'],
 	];
 
 	public static function get_tesseract_tiers() {
@@ -174,7 +175,14 @@ class Dashboard {
 	}
 
 	public static function get_valuations() {
-		return self::$valuations;
+		$custom = get_option( 'blackbox_engine_valuations', [] );
+		$merged = self::$valuations;
+		if ( is_array( $custom ) && ! empty( $custom ) ) {
+			foreach ( $custom as $slug => $data ) {
+				$merged[ $slug ] = $data;
+			}
+		}
+		return apply_filters( 'blackbox_engine_valuations', $merged );
 	}
 
 	public function render_blackbox_page() {
@@ -416,6 +424,70 @@ class Dashboard {
 					'sanitize_callback' => 'sanitize_text_field',
 				],
 			],
+		] );
+
+		register_rest_route( 'blackbox/v1', '/valuations', [
+			[
+				'methods'             => 'GET',
+				'callback'            => [ $this, 'rest_get_valuations' ],
+				'permission_callback' => function() {
+					return current_user_can( 'manage_options' );
+				},
+			],
+			[
+				'methods'             => 'POST',
+				'callback'            => [ $this, 'rest_update_valuations' ],
+				'permission_callback' => function() {
+					return current_user_can( 'manage_options' );
+				},
+			],
+		] );
+	}
+
+	public function rest_get_valuations() {
+		return rest_ensure_response( [
+			'success'    => true,
+			'valuations' => self::get_valuations(),
+			'tiers'      => self::get_tesseract_tiers(),
+		] );
+	}
+
+	public function rest_update_valuations( \WP_REST_Request $request ) {
+		$params = $request->get_json_params();
+		if ( empty( $params ) ) {
+			return new \WP_Error( 'invalid_data', 'No valuation data provided.', [ 'status' => 400 ] );
+		}
+
+		$current = (array) get_option( 'blackbox_engine_valuations', [] );
+
+		// Single plugin update: { slug: '...', tier: '...', price: 79, ... }
+		if ( ! empty( $params['slug'] ) ) {
+			$slug = sanitize_key( $params['slug'] );
+			$existing = self::get_valuations()[ $slug ] ?? [ 480, 'SaaS Pro', '', 'quantum', 79, 'portal' ];
+			
+			$market_val = isset( $params['market_value'] ) ? (float) $params['market_value'] : (float) $existing[0];
+			$competitor = isset( $params['competitor'] ) ? sanitize_text_field( $params['competitor'] ) : (string) $existing[1];
+			$desc       = isset( $params['description'] ) ? sanitize_text_field( $params['description'] ) : (string) $existing[2];
+			$tier       = isset( $params['tier'] ) ? sanitize_key( $params['tier'] ) : (string) $existing[3];
+			$price      = isset( $params['price'] ) ? (float) $params['price'] : (float) $existing[4];
+			$type       = isset( $params['type'] ) ? sanitize_key( $params['type'] ) : (string) ( $existing[5] ?? 'portal' );
+
+			$current[ $slug ] = [ $market_val, $competitor, $desc, $tier, $price, $type ];
+		} elseif ( isset( $params['valuations'] ) && is_array( $params['valuations'] ) ) {
+			// Bulk update
+			foreach ( $params['valuations'] as $slug => $entry ) {
+				if ( is_array( $entry ) && count( $entry ) >= 5 ) {
+					$current[ sanitize_key( $slug ) ] = $entry;
+				}
+			}
+		}
+
+		update_option( 'blackbox_engine_valuations', $current );
+
+		return rest_ensure_response( [
+			'success'    => true,
+			'message'    => 'Valuations updated successfully.',
+			'valuations' => self::get_valuations(),
 		] );
 	}
 

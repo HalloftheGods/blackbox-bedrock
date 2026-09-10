@@ -24,15 +24,20 @@ class Error {
 		$code = is_array( $args ) && isset( $args['response'] ) ? (int) $args['response'] : 500;
 		$isAjaxOrJson = ( function_exists( 'wp_doing_ajax' ) && wp_doing_ajax() ) || ( function_exists( 'wp_is_json_request' ) && wp_is_json_request() );
 
-		// If it's a permission denial (403/401) or AJAX request, use standard WP die output instead of maintenance template
+		// If it's a permission denial (403/401) or AJAX request, use standard WP die output
 		if ( $code === 403 || $code === 401 || $isAjaxOrJson ) {
 			_default_wp_die_handler( $message, $title, $args );
 			die();
 		}
 
-		if ( empty( $title ) ) {
+		$is_maintenance = ( $code === 503 || empty( $title ) || $title === 'Scheduled Maintenance' );
+		if ( $is_maintenance && empty( $title ) ) {
 			$title = 'Scheduled Maintenance';
 		}
+
+		$badge = ( $code === 404 ) ? '404 - Not Found' : ( ( $code >= 400 && $code < 500 ) ? 'Notice' : 'System Notice' );
+		$status_text = ( $code === 404 ) ? 'Resource not found' : ( ( $code >= 400 && $code < 500 ) ? 'Action halted' : 'Maintenance in progress' );
+
 		include __DIR__ . '/error-template.php';
 		die();
 	}
