@@ -1,0 +1,196 @@
+/* ═══════════════════════════════════════════════════════
+   Defender Dark Theme & Glassmorphism: BlackBOX Section Override
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Nuclear Container Transparency: Expose cosmic starfield background ── */
+#wpmudev-defender-main,
+#wpmudev-defender-main > *,
+.wpmudev-core-ui,
+.wpmudev-ui-root,
+.defender-page,
+[class*="defender-page"],
+.defender-dashboard-page,
+.defender-settings-page,
+.defender-firewalls-page,
+.defender-hardening-page,
+.defender-scan-page,
+.defender-logging-page,
+.defender-main-container,
+.defender-main-content-wrapper,
+.defender-main-content-container,
+.defender-main-content-inner,
+.defender-row--main,
+.wpmudev-setting-container,
+.wpmudev-settings-container,
+.showcase-page {
+	background: transparent !important;
+	background-color: transparent !important;
+}
+
+/* ── Sticky Top Header: Frosted Glass Bar ── */
+.wpmudev-core-ui .wpmudev-ui-root .defender-row--header,
+.wpmudev-core-ui .wpmudev-ui-root .defender-header {
+	background: var(--rough-glass-bg, rgba(16, 22, 34, 0.75)) !important;
+	backdrop-filter: var(--rough-glass-filter, blur(20px) saturate(150%)) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter, blur(20px) saturate(150%)) !important;
+	border-bottom: 1px solid var(--rough-glass-border, rgba(255, 255, 255, 0.12)) !important;
+}
+
+.wpmudev-core-ui .wpmudev-ui-root .defender-header__name-row {
+	color: var(--text-main, #f8f8f2) !important;
+}
+
+.wpmudev-core-ui .wpmudev-ui-root .defender-header__made-by {
+	color: rgba(255, 255, 255, 0.65) !important;
+}
+
+.wpmudev-core-ui .wpmudev-ui-root .defender-header .wpmudev-nav__item.defender-header__all-wpmudev {
+	background-color: rgba(255, 255, 255, 0.05) !important;
+	border: 1px solid var(--rough-glass-border, rgba(255, 255, 255, 0.15)) !important;
+	border-radius: 100px !important;
+	color: var(--accent, #62c9ff) !important;
+	transition: all 0.2s ease !important;
+}
+
+.wpmudev-core-ui .wpmudev-ui-root .defender-header .wpmudev-nav__item.defender-header__all-wpmudev:hover {
+	background-color: rgba(98, 201, 255, 0.12) !important;
+	border-color: var(--accent, #62c9ff) !important;
+}
+
+.wpmudev-core-ui .wpmudev-ui-root .defender-header__open-new-window-icon,
+.wpmudev-core-ui .wpmudev-ui-root .defender-header__hub-dashboard-icon {
+	--wpmudev-icon-color: var(--text-main, #f8f8f2) !important;
+}
+
+/* ── Right Sidebar: Frosted Glass Activity Log Panel ── */
+.wpmudev-core-ui .defender-page .defender-side-content-wrapper {
+	background: var(--rough-glass-bg, rgba(16, 22, 34, 0.65)) !important;
+	backdrop-filter: var(--rough-glass-filter, blur(20px) saturate(150%)) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter, blur(20px) saturate(150%)) !important;
+	border-left: 1px solid var(--rough-glass-border, rgba(255, 255, 255, 0.12)) !important;
+}
+
+.wpmudev-core-ui .wpmudev-ui-root .wpmudev-activity-log {
+	--wpmudev-drawer-background: rgba(255, 255, 255, 0.04) !important;
+	background: transparent !important;
+}
+
+.wpmudev-core-ui .wpmudev-ui-root .wpmudev-activity-log__header {
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.wpmudev-core-ui .wpmudev-ui-root .wpmudev-activity-log__header .wpmudev-activity-log__title {
+	color: var(--text-main, #f8f8f2) !important;
+}
+
+.wpmudev-core-ui .wpmudev-ui-root .wpmudev-activity-log__item {
+	background: rgba(255, 255, 255, 0.04) !important;
+	border: 1px solid rgba(255, 255, 255, 0.08) !important;
+	border-radius: 12px !important;
+	color: var(--text-main, #f8f8f2) !important;
+	transition: all 0.2s ease !important;
+}
+
+.wpmudev-core-ui .wpmudev-ui-root .wpmudev-activity-log__item:hover {
+	background: rgba(255, 255, 255, 0.08) !important;
+	border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* ── Defender Dashboard Cards & Summary Surfaces ── */
+.wpmudev-core-ui .wpmudev-ui-root .defender-dashboard-card,
+.wpmudev-core-ui .wpmudev-ui-root .defender-summary-dashboard,
+.wpmudev-core-ui .wpmudev-ui-root .defender-main-content-inner [class*="-card"],
+.wpmudev-core-ui .wpmudev-ui-root .wpmudev-settings-section-card,
+.wpmudev-core-ui .wpmudev-ui-root .wpmudev-settings-card {
+	background: var(--rough-glass-bg, rgba(16, 22, 34, 0.65)) !important;
+	backdrop-filter: var(--rough-glass-filter, blur(20px) saturate(150%)) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter, blur(20px) saturate(150%)) !important;
+	border: 1px solid var(--rough-glass-border, rgba(255, 255, 255, 0.12)) !important;
+	border-radius: 16px !important;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25) !important;
+	color: var(--text-main, #e6edf3) !important;
+}
+
+/* ── Feature Status Pill ("Monitoring your site") ── */
+.wpmudev-core-ui .wpmudev-ui-root .defender-feature-status {
+	background: rgba(77, 250, 123, 0.12) !important;
+	border: 1px solid rgba(77, 250, 123, 0.3) !important;
+	border-radius: 50px !important;
+	color: #4dfa7b !important;
+}
+
+.wpmudev-core-ui .wpmudev-ui-root .defender-feature-status--disabled {
+	background: rgba(255, 92, 92, 0.12) !important;
+	border: 1px solid rgba(255, 92, 92, 0.3) !important;
+	color: #ff7878 !important;
+}
+
+.wpmudev-core-ui .wpmudev-ui-root .defender-feature-status * {
+	color: inherit !important;
+}
+
+/* ── Antibot & Firewall Metric Visuals ── */
+.wpmudev-core-ui .wpmudev-ui-root .defender-antibot-stats {
+	background: rgba(255, 126, 65, 0.08) !important;
+	border: 1px solid rgba(255, 126, 65, 0.2) !important;
+	border-radius: 12px !important;
+}
+
+/* ── Defender Buttons & Controls ── */
+.wpmudev-core-ui .wpmudev-ui-root .wpmudev-defender-button--glass {
+	background-image: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.15) 0, rgba(0, 0, 0, 0.5) 100%) !important;
+	border: 1px solid rgba(255, 255, 255, 0.2) !important;
+	color: #ffffff !important;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+.wpmudev-core-ui .wpmudev-ui-root .wpmudev-defender-button--glass:hover:not(:disabled) {
+	background-image: radial-gradient(ellipse at center, rgba(98, 201, 255, 0.25) 0, rgba(0, 0, 0, 0.6) 100%) !important;
+	border-color: var(--accent, #62c9ff) !important;
+}
+
+.wpmudev-core-ui .wpmudev-ui-root .wpmudev-defender-button--glass-hardening {
+	background-image: radial-gradient(ellipse at center, rgba(255, 126, 65, 0.2) 0, rgba(0, 0, 0, 0.4) 100%) !important;
+	border-color: rgba(255, 126, 65, 0.3) !important;
+	color: var(--text-main, #e6edf3) !important;
+}
+
+.wpmudev-core-ui .wpmudev-ui-root .wpmudev-defender-button--glass-error {
+	background-image: radial-gradient(ellipse at center, rgba(255, 92, 92, 0.2) 0, rgba(0, 0, 0, 0.4) 100%) !important;
+	border-color: rgba(255, 92, 92, 0.3) !important;
+	color: #ff7878 !important;
+}
+
+/* ── Defender Slide Panels & Config Drawers ── */
+.wpmudev-core-ui .wpmudev-ui-root .defender-config-panel__surface,
+.wpmudev-core-ui .wpmudev-ui-root .defender-settings-slide-panel__surface {
+	background: var(--rough-glass-bg, #0d121d) !important;
+	backdrop-filter: var(--rough-glass-filter, blur(20px) saturate(150%)) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter, blur(20px) saturate(150%)) !important;
+	border-left: 1px solid var(--rough-glass-border, rgba(255, 255, 255, 0.12)) !important;
+	box-shadow: -10px 0 40px rgba(0, 0, 0, 0.6) !important;
+	color: var(--text-main, #e6edf3) !important;
+}
+
+.wpmudev-core-ui .wpmudev-ui-root .defender-config-panel__close button,
+.wpmudev-core-ui .wpmudev-ui-root .defender-settings-slide-panel__close button {
+	background: rgba(255, 255, 255, 0.08) !important;
+	border: 1px solid rgba(255, 255, 255, 0.12) !important;
+	color: var(--text-main, #f8f8f2) !important;
+}
+
+.wpmudev-core-ui .wpmudev-ui-root .defender-config-panel__close button:hover,
+.wpmudev-core-ui .wpmudev-ui-root .defender-settings-slide-panel__close button:hover {
+	background: rgba(255, 255, 255, 0.15) !important;
+	border-color: var(--accent, #62c9ff) !important;
+}
+
+/* ── Preloaders & Shimmer Skeletons ── */
+.wpmudev-core-ui .wpmudev-ui-root .defender-preloader {
+	background: linear-gradient(90deg, rgba(255, 255, 255, 0.04) 0, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.04) 100%) !important;
+}
+
+.wpmudev-core-ui .wpmudev-ui-root .defender-preloader-card__avatar,
+.wpmudev-core-ui .wpmudev-ui-root .defender-preloader-card__line {
+	background-color: rgba(255, 255, 255, 0.08) !important;
+}

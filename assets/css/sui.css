@@ -51,6 +51,40 @@ body,
 	--wpmudev-gray-dark: rgba(255, 255, 255, 0.65) !important;
 	--wpmudev-gray-disabled: rgba(255, 255, 255, 0.25) !important;
 
+	/* Color variants used by modern Defender core-ui */
+	--wpmudev-color-white: var(--rough-glass-bg, rgba(16, 22, 34, 0.65)) !important;
+	--wpmudev-color-gray-50: rgba(255, 255, 255, 0.03) !important;
+	--wpmudev-color-gray-75: rgba(255, 255, 255, 0.05) !important;
+	--wpmudev-color-gray-100: rgba(255, 255, 255, 0.07) !important;
+	--wpmudev-color-gray-150: transparent !important;
+	--wpmudev-color-gray-175: rgba(255, 255, 255, 0.10) !important;
+	--wpmudev-color-gray-200: rgba(255, 255, 255, 0.12) !important;
+	--wpmudev-color-gray-250: rgba(255, 255, 255, 0.15) !important;
+	--wpmudev-color-gray-300: var(--text-main, #e6edf3) !important;
+	--wpmudev-color-gray-450: rgba(255, 255, 255, 0.30) !important;
+	--wpmudev-color-gray-475: rgba(255, 255, 255, 0.35) !important;
+	--wpmudev-color-gray-500: rgba(255, 255, 255, 0.45) !important;
+	--wpmudev-color-gray-525: rgba(255, 255, 255, 0.50) !important;
+	--wpmudev-color-gray-550: rgba(255, 255, 255, 0.55) !important;
+	--wpmudev-color-gray-600: rgba(255, 255, 255, 0.65) !important;
+	--wpmudev-color-gray-650: rgba(255, 255, 255, 0.70) !important;
+	--wpmudev-color-gray-700: rgba(255, 255, 255, 0.75) !important;
+	--wpmudev-color-gray-850: var(--text-main, #e6edf3) !important;
+	--wpmudev-color-gray-900: #ffffff !important;
+	--wpmudev-color-gray-disabled: rgba(255, 255, 255, 0.25) !important;
+	--wpmudev-color-blue-100: rgba(98, 201, 255, 0.1) !important;
+	--wpmudev-color-alice-blue: rgba(98, 201, 255, 0.1) !important;
+	--wpmudev-color-green-25: rgba(77, 250, 123, 0.12) !important;
+	--wpmudev-color-green-50: rgba(77, 250, 123, 0.18) !important;
+	--wpmudev-onboarding-admin-bg: transparent !important;
+	--wpmudev-bg-gradient-end: transparent !important;
+	--wpmudev-surface-hover: rgba(255, 255, 255, 0.06) !important;
+	--wpmudev-surface-hover-light: rgba(255, 255, 255, 0.04) !important;
+	--wpmudev-surface-hover-bright: rgba(255, 255, 255, 0.08) !important;
+	--wpmudev-danger-surface: rgba(255, 92, 92, 0.15) !important;
+	--defender-antibot-stats-bg: rgba(255, 126, 65, 0.12) !important;
+	--defender-antibot-stats-outline: rgba(255, 126, 65, 0.3) !important;
+
 	/* Borders */
 	--wpmudev-border-light: rgba(255, 255, 255, 0.08) !important;
 	--wpmudev-border-medium: rgba(255, 255, 255, 0.12) !important;
@@ -84,7 +118,7 @@ body,
 
 	/* Warning & Status Overrides */
 	--wpmudev-blue-neutral: rgba(98, 201, 255, 0.1) !important;
-	--wpmudev-green-on-bg: rgba(77, 250, 123, 0.1) !important;
+	--wpmudev-green-on-bg: rgba(77, 250, 123, 0.12) !important;
 	--wpmudev-red-warning-bg: rgba(255, 92, 92, 0.15) !important;
 	--defender-warning-background: rgba(255, 92, 92, 0.15) !important;
 	--defender-warning-color: #ff7878 !important;
@@ -94,6 +128,41 @@ body,
 	--sui-box-bg: var(--rough-glass-bg, rgba(16, 22, 34, 0.65)) !important;
 	--sui-background: transparent !important;
 	--sui-text-primary: var(--text-main, #e6edf3) !important;
+}
+
+/* High Contrast Mono Theme Overrides */
+.wpmudev-core-ui.wpmudev-core-ui__mono .wpmudev-ui-root {
+	--wpmudev-bg-secondary: var(--rough-glass-bg, rgba(16, 22, 34, 0.65)) !important;
+	--wpmudev-text-primary: var(--text-main, #e6edf3) !important;
+	--wpmudev-selector-item-active-color: var(--accent, #62c9ff) !important;
+	--wpmudev-dropdown-item-selected-color: var(--accent, #62c9ff) !important;
+	--wpmudev-color-green-25: rgba(77, 250, 123, 0.12) !important;
+	--wpmudev-color-green-50: rgba(77, 250, 123, 0.18) !important;
+	--wpmudev-green-on-bg: rgba(77, 250, 123, 0.12) !important;
+	--wpmudev-selector-item-active-bg: rgba(77, 250, 123, 0.12) !important;
+	--wpmudev-selector-item-active-hover-bg: rgba(77, 250, 123, 0.18) !important;
+	--wpmudev-dropdown-item-selected-bg: rgba(77, 250, 123, 0.12) !important;
+	--wpmudev-dropdown-item-highlight-bg: rgba(77, 250, 123, 0.18) !important;
+	--wpmudev-danger-surface: rgba(255, 92, 92, 0.15) !important;
+	--wpmudev-red-warning-bg: rgba(255, 92, 92, 0.15) !important;
+	--wpmudev-surface-muted: rgba(255, 255, 255, 0.05) !important;
+	--wpmudev-hide-login-border-muted: rgba(255, 255, 255, 0.08) !important;
+	--wpmudev-border-secondary: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Invert & Recolor Dark SVG Icons across WPMU DEV Core UI */
+.wpmudev-core-ui svg [fill="#1A1A1A"],
+.wpmudev-core-ui svg [fill="#1a1a1a"],
+.wpmudev-core-ui svg [fill="#000000"],
+.wpmudev-core-ui svg [fill="#000"] {
+	fill: var(--text-main, #f8f8f2) !important;
+}
+
+.wpmudev-core-ui svg [stroke="#1A1A1A"],
+.wpmudev-core-ui svg [stroke="#1a1a1a"],
+.wpmudev-core-ui svg [stroke="#000000"],
+.wpmudev-core-ui svg [stroke="#000"] {
+	stroke: var(--text-main, #f8f8f2) !important;
 }
 
 /* Card Archetypes: Defender, Smush, Beehive, and Core UI */

@@ -25,11 +25,26 @@
 	.theme-overlay, .theme-backdrop, .theme-wrap, [class*="theme-"],
 	.sui-box, [class*="sui-box"], .dash-sui-plugin-icon,
 	.sui-tag, [class*="sui-tag"], .sui-badge, [class*="sui-badge"],
-	.wpmudev-core-ui, .wpmudev-ui-root, [class*="wpmudev-"], [class*="defender-"],
 	.wpmudev-card, [class*="-card"], [class*="__card"],
-	.defender-schedule-scan-pill, .defender-pill-toggle-group,
+	.defender-schedule-scan-pill, .defender-pill-toggle-group, .defender-feature-status,
+	.wpmudev-activity-log__item, .defender-ar-recipient-panel,
 	.btn-go, .btn-toggle, [class*="btn-"], [class*="blackbox-"], .v-btn, [class*="v-"]
 ) {
+	background-color: transparent !important;
+}
+
+/* WPMU DEV & Defender root layout transparency */
+#wpmudev-defender-main,
+.wpmudev-core-ui,
+.wpmudev-ui-root,
+.defender-page,
+[class*="defender-page"],
+.defender-main-container,
+.defender-main-content-wrapper,
+.defender-main-content-container,
+.defender-main-content-inner,
+.defender-row--main {
+	background: transparent !important;
 	background-color: transparent !important;
 }
 

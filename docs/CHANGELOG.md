@@ -4,7 +4,13 @@ All notable changes to the BlackBOX Bedrock submodule will be documented in this
 
 ## [2026-09-18]
 
+### Added
+- Created dedicated WP Defender section stylesheet `assets/css/sections/defender.css`, applying Starship frosted glass styling to sticky headers (`.defender-row--header`, `.defender-header`), sidebar activity log (`.defender-side-content-wrapper`), dashboard cards, slide panels, and feature status indicators.
+
 ### Fixed
+- Fixed solid white background on WP Defender and WPMU DEV Core UI pages (`admin.php?page=wp-defender`, `wdf-hardening`, `wdf-scan`, etc.). Narrowed universal background stripper exclusions in `assets/css/wp-admin.css` to prevent blanket bypass on `.wpmudev-core-ui`, `.wpmudev-ui-root`, and `.defender-page` wrappers, adding explicit container transparency rules.
+- Expanded WPMU DEV design token mappings in `assets/css/sui.css` to cover `--wpmudev-color-*` variants (`--wpmudev-color-gray-150`, `--wpmudev-color-green-25`, `--wpmudev-color-white`, etc.) and high-contrast `.wpmudev-core-ui__mono` scopes.
+- Inverted and recolored hardcoded `#1A1A1A` and `#000000` SVG fills and strokes across WPMU DEV Core UI elements in `assets/css/sui.css` to guarantee contrast against dark glass surfaces.
 - Fixed WP Admin spark iframe background stripping in `admin/class-admin-theme-styler.php`. Replaced blanket `HTTP_SEC_FETCH_DEST === 'iframe'` check with selective window name detection, assigning `is-wp-admin-frame` to `window.name === 'wp-admin-frame'` and reserving `is-compass-iframe` transparency masking strictly for Compass sub-apps.
 - Added `is-wp-admin-frame` selector rules to `assets/css/iframe-mask.css` to hide native WordPress admin bar and menu without removing dark theme background or resetting `color-scheme`.
 - Guarded `assets/js/smoke-canvas.js` to ensure the smoke canvas animation and dark theme are not disabled when running inside `window.name === 'wp-admin-frame'`.
