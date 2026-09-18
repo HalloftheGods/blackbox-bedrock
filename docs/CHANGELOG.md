@@ -5,6 +5,9 @@ All notable changes to the BlackBOX Bedrock submodule will be documented in this
 ## [2026-09-18]
 
 ### Fixed
+- Fixed WP Admin spark iframe background stripping in `admin/class-admin-theme-styler.php`. Replaced blanket `HTTP_SEC_FETCH_DEST === 'iframe'` check with selective window name detection, assigning `is-wp-admin-frame` to `window.name === 'wp-admin-frame'` and reserving `is-compass-iframe` transparency masking strictly for Compass sub-apps.
+- Added `is-wp-admin-frame` selector rules to `assets/css/iframe-mask.css` to hide native WordPress admin bar and menu without removing dark theme background or resetting `color-scheme`.
+- Guarded `assets/js/smoke-canvas.js` to ensure the smoke canvas animation and dark theme are not disabled when running inside `window.name === 'wp-admin-frame'`.
 - Fixed fatal `TypeError` in `render_error_template` (`error/Error.php`) where WordPress core fatal handlers passed a `WP_Error` instance to `wp_die()`. Extracted and joined error messages to guarantee string input before passing to `error-template.php` and `wp_kses_post()`.
 - Added defensive `is_string` type check in `error/error-template.php` before `wp_kses_post()` execution to prevent `preg_replace` parameter type errors on PHP 8+.
 

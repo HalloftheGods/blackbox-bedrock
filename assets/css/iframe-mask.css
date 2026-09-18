@@ -2,28 +2,35 @@
 
 html.is-compass-iframe #adminmenumain,
 html.is-compass-iframe #wpadminbar,
-html.is-compass-iframe #wpfooter {
+html.is-compass-iframe #wpfooter,
+html.is-wp-admin-frame #adminmenumain,
+html.is-wp-admin-frame #wpadminbar,
+html.is-wp-admin-frame #wpfooter {
 	display: none !important;
 }
 
-html.is-compass-iframe #wpcontent {
+html.is-compass-iframe #wpcontent,
+html.is-wp-admin-frame #wpcontent {
 	margin-left: 0 !important;
 	padding: 0 32px !important;
 	box-sizing: border-box !important;
 }
 
-html.is-compass-iframe #wpbody-content {
+html.is-compass-iframe #wpbody-content,
+html.is-wp-admin-frame #wpbody-content {
 	margin-left: 0 !important;
 	padding: 0 !important;
 }
 
-html.is-compass-iframe #wpbody-content > .wrap {
+html.is-compass-iframe #wpbody-content > .wrap,
+html.is-wp-admin-frame #wpbody-content > .wrap {
 	margin-top: 0 !important;
 	margin-left: 0 !important;
 	margin-right: 0 !important;
 }
 
-html.is-compass-iframe.wp-toolbar {
+html.is-compass-iframe.wp-toolbar,
+html.is-wp-admin-frame.wp-toolbar {
 	padding-top: 0 !important;
 }
 

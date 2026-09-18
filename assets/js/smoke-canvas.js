@@ -5,7 +5,7 @@
   // Do not inject the smoke canvas if we are inside a Compass sub-app iframe
   if (window.name === "blackbox-sub-app" || window.name === "compass-sub-app") return;
 
-  if (window !== window.top && window.location.search.includes("theme=transparent")) {
+  if (window !== window.top && window.name !== "wp-admin-frame" && window.location.search.includes("theme=transparent")) {
     // We are in an iframe, and transparent!
     document.documentElement.style.setProperty("background", "transparent", "important");
     document.body.style.setProperty("background", "transparent", "important");

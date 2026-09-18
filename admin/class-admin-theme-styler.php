@@ -203,8 +203,6 @@ class Theme_Styler {
 		if ( $done && ! $return && current_action() !== 'enqueue_block_editor_assets' ) return;
 		if ( ! $return ) $done = true;
 
-		$isIframe = (isset( $_GET['compass_iframe'] ) && $_GET['compass_iframe'] === '1') || 
-		            (isset( $_SERVER['HTTP_SEC_FETCH_DEST'] ) && $_SERVER['HTTP_SEC_FETCH_DEST'] === 'iframe');
 		$isInstalling = defined( 'WP_INSTALLING' ) && WP_INSTALLING;
 
 		$styles = [ 'logo.css', 'sui.css', 'base.css', 'wp-admin.css', 'iframe-mask.css', 'menu-accordion.css' ];
@@ -345,14 +343,15 @@ class Theme_Styler {
 			}
 		}
 
-		$isIframe = (isset( $_GET['compass_iframe'] ) && $_GET['compass_iframe'] === '1') || 
-		            (isset( $_SERVER['HTTP_SEC_FETCH_DEST'] ) && $_SERVER['HTTP_SEC_FETCH_DEST'] === 'iframe');
+		$isCompassSubApp = isset( $_GET['compass_iframe'] ) && $_GET['compass_iframe'] === '1';
 
-		if ( $isIframe ) {
-			echo '<script>document.documentElement.classList.add("is-blackbox-iframe", "is-compass-iframe");</script>';
-		} else {
-			echo '<script>if (window.name === "blackbox-sub-app" || window.name === "compass-sub-app") { document.documentElement.classList.add("is-blackbox-iframe", "is-compass-iframe"); }</script>';
-		}
+		echo '<script>
+			if (window.name === "wp-admin-frame") {
+				document.documentElement.classList.add("is-blackbox-iframe", "is-wp-admin-frame");
+			} else if (window.name === "blackbox-sub-app" || window.name === "compass-sub-app" || ' . ($isCompassSubApp ? 'true' : 'false') . ') {
+				document.documentElement.classList.add("is-blackbox-iframe", "is-compass-iframe");
+			}
+		</script>';
 	}
 
 	public function inject_admin_canvas() {
