@@ -30,6 +30,19 @@ class Error {
 			die();
 		}
 
+		if ( is_wp_error( $message ) ) {
+			if ( empty( $title ) ) {
+				$error_data = $message->get_error_data();
+				if ( is_array( $error_data ) && isset( $error_data['title'] ) ) {
+					$title = (string) $error_data['title'];
+				}
+			}
+			$errors = $message->get_error_messages();
+			$message = ! empty( $errors ) ? implode( '<br>', $errors ) : '';
+		} elseif ( ! is_string( $message ) ) {
+			$message = '';
+		}
+
 		$is_maintenance = ( $code === 503 || empty( $title ) || $title === 'Scheduled Maintenance' );
 		if ( $is_maintenance && empty( $title ) ) {
 			$title = 'Scheduled Maintenance';

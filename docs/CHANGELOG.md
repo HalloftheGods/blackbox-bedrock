@@ -2,6 +2,12 @@
 
 All notable changes to the BlackBOX Bedrock submodule will be documented in this file.
 
+## [2026-09-18]
+
+### Fixed
+- Fixed fatal `TypeError` in `render_error_template` (`error/Error.php`) where WordPress core fatal handlers passed a `WP_Error` instance to `wp_die()`. Extracted and joined error messages to guarantee string input before passing to `error-template.php` and `wp_kses_post()`.
+- Added defensive `is_string` type check in `error/error-template.php` before `wp_kses_post()` execution to prevent `preg_replace` parameter type errors on PHP 8+.
+
 ## [2026-09-08]
 
 ### Added

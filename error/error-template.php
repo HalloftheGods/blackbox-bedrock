@@ -140,7 +140,7 @@ $logo_url = function_exists( 'content_url' ) ? content_url( 'mu-plugins/blackbox
         <div class="maintenance-badge"><?php echo ! empty( $badge ) ? esc_html( $badge ) : 'System Notice'; ?></div>
         <h1 class="maintenance-title"><?php echo ! empty( $title ) ? esc_html( $title ) : 'Scheduled Maintenance'; ?></h1>
         <div class="maintenance-message">
-            <?php echo ! empty( $message ) ? wp_kses_post( $message ) : 'We are performing scheduled system updates to optimize performance and security. We will be back online shortly.'; ?>
+            <?php echo ( ! empty( $message ) && is_string( $message ) ) ? wp_kses_post( $message ) : 'We are performing scheduled system updates to optimize performance and security. We will be back online shortly.'; ?>
         </div>
         <div class="status-box">
             <span class="status-dot"></span>
