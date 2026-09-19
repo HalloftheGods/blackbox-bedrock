@@ -343,12 +343,14 @@ class Theme_Styler {
 			}
 		}
 
-		$isCompassSubApp = isset( $_GET['compass_iframe'] ) && $_GET['compass_iframe'] === '1';
+		$isWpAdminFrame  = ( isset( $_GET['wp_admin_frame'] ) && $_GET['wp_admin_frame'] === '1' ) ||
+		                   ( isset( $_GET['compass_iframe'] ) && ( $_GET['compass_iframe'] === 'wp-admin' || $_GET['compass_iframe'] === 'admin' ) );
+		$isCompassSubApp = isset( $_GET['compass_iframe'] ) && ( $_GET['compass_iframe'] === '1' || $_GET['compass_iframe'] === 'sub-app' );
 
 		echo '<script>
-			if (window.name === "wp-admin-frame") {
+			if ( ' . ( $isWpAdminFrame ? 'true' : 'false' ) . ' || window.name === "wp-admin-frame" ) {
 				document.documentElement.classList.add("is-blackbox-iframe", "is-wp-admin-frame");
-			} else if (window.name === "blackbox-sub-app" || window.name === "compass-sub-app" || ' . ($isCompassSubApp ? 'true' : 'false') . ') {
+			} else if ( ' . ( $isCompassSubApp ? 'true' : 'false' ) . ' || window.name === "blackbox-sub-app" || window.name === "compass-sub-app" ) {
 				document.documentElement.classList.add("is-blackbox-iframe", "is-compass-iframe");
 			}
 		</script>';

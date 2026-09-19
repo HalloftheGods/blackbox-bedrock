@@ -1,0 +1,174 @@
+/* ==========================================================================
+   WordPress Core Command Palette (@wordpress/commands / cmdk) Glassmorphism
+   ========================================================================== */
+
+/* Screen Backdrop Overlay */
+.components-modal__screen-overlay:has(.commands-command-menu) {
+	background: rgba(5, 8, 14, 0.75) !important;
+	backdrop-filter: blur(8px) !important;
+	-webkit-backdrop-filter: blur(8px) !important;
+	z-index: 1000000 !important;
+}
+
+/* Modal Frame (Command Palette Window) */
+.components-modal__frame.commands-command-menu {
+	background: linear-gradient(135deg, rgba(16, 24, 40, 0.95) 0%, rgba(10, 14, 24, 0.92) 100%) !important;
+	backdrop-filter: var(--rough-glass-filter, blur(20px) saturate(150%)) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter, blur(20px) saturate(150%)) !important;
+	border: 1px solid var(--rough-glass-border, rgba(98, 201, 255, 0.25)) !important;
+	border-radius: 12px !important;
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 30px rgba(98, 201, 255, 0.12) !important;
+	overflow: hidden !important;
+	color: var(--text-main, #f8f8f2) !important;
+}
+
+@media (min-width: 600px) {
+	.components-modal__frame.commands-command-menu {
+		max-width: 640px !important;
+		width: 90vw !important;
+		top: 60px !important;
+	}
+}
+
+/* Modal Inner Container Reset */
+.commands-command-menu .components-modal__content,
+.commands-command-menu .components-modal__children-container,
+.commands-command-menu .commands-command-menu__container,
+.commands-command-menu [cmdk-root] {
+	background: transparent !important;
+	border: none !important;
+	box-shadow: none !important;
+	color: var(--text-main, #f8f8f2) !important;
+}
+
+/* Search Header Bar */
+.commands-command-menu .commands-command-menu__header {
+	background: rgba(0, 0, 0, 0.3) !important;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+	display: flex !important;
+	align-items: center !important;
+	padding: 0 16px !important;
+	height: 56px !important;
+	min-height: 56px !important;
+	box-sizing: border-box !important;
+}
+
+/* Search Icon */
+.commands-command-menu .commands-command-menu__header-search-icon,
+.commands-command-menu .commands-command-menu__header-search-icon svg {
+	background: transparent !important;
+	color: var(--accent, #62c9ff) !important;
+	fill: var(--accent, #62c9ff) !important;
+	filter: drop-shadow(0 0 6px rgba(98, 201, 255, 0.4)) !important;
+	width: 20px !important;
+	height: 20px !important;
+	flex-shrink: 0 !important;
+}
+
+/* Search Input Field */
+.commands-command-menu input[cmdk-input],
+.commands-command-menu .commands-command-menu__container input[cmdk-input] {
+	background: transparent !important;
+	background-color: transparent !important;
+	color: #ffffff !important;
+	font-size: 1rem !important;
+	font-weight: 500 !important;
+	border: none !important;
+	outline: none !important;
+	box-shadow: none !important;
+	padding: 12px 14px !important;
+	width: 100% !important;
+	margin: 0 !important;
+	box-sizing: border-box !important;
+}
+
+.commands-command-menu input[cmdk-input]::placeholder {
+	color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.commands-command-menu input[cmdk-input]:focus {
+	outline: none !important;
+	box-shadow: none !important;
+}
+
+/* Command Suggestions List */
+.commands-command-menu [cmdk-list] {
+	background: transparent !important;
+	padding: 8px !important;
+	max-height: 380px !important;
+	overflow-y: auto !important;
+	scrollbar-width: thin;
+	scrollbar-color: var(--accent, #62c9ff) transparent;
+}
+
+.commands-command-menu [cmdk-list]::-webkit-scrollbar {
+	width: 6px;
+}
+
+.commands-command-menu [cmdk-list]::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.commands-command-menu [cmdk-list]::-webkit-scrollbar-thumb {
+	background: rgba(98, 201, 255, 0.3);
+	border-radius: 4px;
+}
+
+.commands-command-menu [cmdk-list]::-webkit-scrollbar-thumb:hover {
+	background: rgba(98, 201, 255, 0.6);
+}
+
+/* Group Headings */
+.commands-command-menu [cmdk-group-heading] {
+	color: var(--gold, #d9be6f) !important;
+	font-size: 0.68rem !important;
+	font-weight: 700 !important;
+	text-transform: uppercase !important;
+	letter-spacing: 1.2px !important;
+	padding: 8px 12px 4px 12px !important;
+	opacity: 0.85 !important;
+}
+
+/* Suggestion Items */
+.commands-command-menu [cmdk-item] {
+	background: transparent !important;
+	color: rgba(255, 255, 255, 0.85) !important;
+	border-radius: 6px !important;
+	padding: 10px 14px !important;
+	display: flex !important;
+	align-items: center !important;
+	gap: 12px !important;
+	cursor: pointer !important;
+	transition: background 0.15s ease, color 0.15s ease, border-left-color 0.15s ease !important;
+	border-left: 2px solid transparent !important;
+}
+
+.commands-command-menu [cmdk-item]:hover,
+.commands-command-menu [cmdk-item]:active,
+.commands-command-menu [cmdk-item][aria-selected="true"],
+.commands-command-menu [cmdk-item][data-selected="true"] {
+	background: linear-gradient(90deg, rgba(98, 201, 255, 0.18) 0%, rgba(98, 201, 255, 0.05) 70%, transparent 100%) !important;
+	color: #ffffff !important;
+	border-left-color: var(--accent, #62c9ff) !important;
+}
+
+.commands-command-menu [cmdk-item] svg {
+	color: var(--gold, #d9be6f) !important;
+	fill: var(--gold, #d9be6f) !important;
+	flex-shrink: 0 !important;
+}
+
+.commands-command-menu [cmdk-item][aria-selected="true"] svg,
+.commands-command-menu [cmdk-item][data-selected="true"] svg {
+	color: var(--accent, #62c9ff) !important;
+	fill: var(--accent, #62c9ff) !important;
+	filter: drop-shadow(0 0 5px rgba(98, 201, 255, 0.5)) !important;
+}
+
+/* Empty Results State */
+.commands-command-menu [cmdk-empty] {
+	color: rgba(255, 255, 255, 0.5) !important;
+	text-align: center !important;
+	padding: 24px 16px !important;
+	font-size: 0.85rem !important;
+}
