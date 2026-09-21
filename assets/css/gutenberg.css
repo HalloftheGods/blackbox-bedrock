@@ -145,7 +145,7 @@ iframe[name="editor-canvas"] {
 }
 
 
-/* Gutenberg Editor general panels & tools */
+/* Gutenberg Editor general panels & layout containers (Zero-Border Passthroughs) */
 .components-panel__body-title,
 .components-panel__row,
 .components-base-control,
@@ -153,16 +153,38 @@ iframe[name="editor-canvas"] {
 .components-grid,
 .components-tools-panel,
 .color-block-support-panel,
-.block-editor-block-inspector__card,
-.components-card,
 .block-editor-block-inspector__no-blocks,
 .components-toggle-group-control,
-.block-editor-tools-panel-color-gradient-settings__item,
-.components-input-control__container,
-.components-form-token-field__token {
+.block-editor-tools-panel-color-gradient-settings__item {
 	background: transparent !important;
 	background-color: transparent !important;
-	border: 1px solid rgba(255, 255, 255, 0.05) !important;
+	border: none !important;
+	box-shadow: none !important;
+}
+
+/* Sidebar Accordion Panels */
+.components-panel__body {
+	background: transparent !important;
+	border: none !important;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.components-panel__body:last-child {
+	border-bottom: none !important;
+}
+
+/* Discrete Card Containers & Inputs */
+.block-editor-block-inspector__card,
+.components-card {
+	background: rgba(0, 0, 0, 0.2) !important;
+	border: 1px solid rgba(255, 255, 255, 0.08) !important;
+	border-radius: 6px !important;
+}
+
+.components-input-control__container {
+	background: rgba(0, 0, 0, 0.3) !important;
+	border: 1px solid rgba(255, 255, 255, 0.1) !important;
+	border-radius: 4px !important;
 }
 
 .edit-post-layout__metaboxes,
@@ -410,18 +432,166 @@ iframe[name="editor-canvas"] {
 	color: var(--text-main) !important;
 }
 
-/* Block Toolbars and Popovers - Restored Gradient Glass */
-.components-popover__content,
+/* ==========================================================================
+   GUTENBERG POPOVERS, MENUS & SURFACES (SINGLE SURFACE & SCROLL AUTHORITY)
+   Enforces single outer glass surface and eliminates nested scrollbars/borders
+   ========================================================================== */
+
+/* 1. Single Surface Authority: Outermost Popover Frame */
+.components-popover__content {
+	background: rgba(13, 18, 29, 0.96) !important;
+	background-color: rgba(13, 18, 29, 0.96) !important;
+	backdrop-filter: blur(24px) saturate(180%) !important;
+	-webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+	border: 1px solid rgba(98, 201, 255, 0.25) !important;
+	border-radius: 8px !important;
+	box-shadow: 0 16px 48px rgba(0, 0, 0, 0.85), 0 0 1px rgba(255, 255, 255, 0.15) !important;
+	color: var(--text-main, #f8f8f2) !important;
+	margin: 0 !important;
+	padding: 4px 0 !important;
+	max-height: calc(100vh - 80px) !important;
+	overflow-y: auto !important;
+	overflow-x: hidden !important;
+	scrollbar-width: thin;
+	scrollbar-color: rgba(98, 201, 255, 0.4) transparent;
+}
+
+.components-popover__content::-webkit-scrollbar {
+	width: 6px;
+}
+
+.components-popover__content::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.components-popover__content::-webkit-scrollbar-thumb {
+	background: rgba(98, 201, 255, 0.35);
+	border-radius: 4px;
+}
+
+.components-popover__content::-webkit-scrollbar-thumb:hover {
+	background: rgba(98, 201, 255, 0.65);
+}
+
+/* 2. Zero-Box Passthroughs: Strip all inner wrappers of borders, backgrounds, shadows, and redundant scrollbars */
+.components-popover__content > div,
+.components-dropdown__content,
+.components-dropdown-menu__menu,
+.components-dropdown-menu,
+.components-dropdown-menu__menu [role="menu"] {
+	background: transparent !important;
+	background-color: transparent !important;
+	border: none !important;
+	box-shadow: none !important;
+	backdrop-filter: none !important;
+	-webkit-backdrop-filter: none !important;
+	border-radius: 0 !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	max-height: none !important;
+	overflow: visible !important;
+}
+
+/* 3. Block Contextual Toolbars */
 .components-accessible-toolbar,
 .block-editor-block-contextual-toolbar {
-	background: var(--rough-glass-bg) !important;
-	backdrop-filter: var(--rough-glass-filter) !important;
-	-webkit-backdrop-filter: var(--rough-glass-filter) !important;
-	border: 1px solid var(--rough-glass-border) !important;
-	color: var(--text-main) !important;
-	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
-	border-radius: 4px !important;
+	background: rgba(13, 18, 29, 0.94) !important;
+	backdrop-filter: blur(20px) saturate(160%) !important;
+	-webkit-backdrop-filter: blur(20px) saturate(160%) !important;
+	border: 1px solid rgba(98, 201, 255, 0.25) !important;
+	border-radius: 6px !important;
+	box-shadow: 0 8px 28px rgba(0, 0, 0, 0.6) !important;
+	color: var(--text-main, #f8f8f2) !important;
 	margin: 0 !important;
+	padding: 2px !important;
+}
+
+/* 4. Menu Groups & Dividers */
+.components-menu-group {
+	background: transparent !important;
+	border: none !important;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+	padding: 6px 0 !important;
+	margin: 0 !important;
+}
+
+.components-menu-group:last-child {
+	border-bottom: none !important;
+}
+
+.components-menu-group__label {
+	color: var(--gold, #d9be6f) !important;
+	font-size: 11px !important;
+	font-weight: 700 !important;
+	text-transform: uppercase !important;
+	letter-spacing: 0.8px !important;
+	padding: 8px 16px 4px !important;
+	margin: 0 !important;
+}
+
+/* 5. Menu Items, Buttons & Choices */
+.components-menu-item__button,
+.components-menu-items__choice,
+.components-dropdown-menu__menu button.components-button {
+	width: 100% !important;
+	padding: 8px 16px !important;
+	margin: 0 !important;
+	border: none !important;
+	border-radius: 0 !important;
+	background: transparent !important;
+	color: var(--text-main, #f8f8f2) !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: space-between !important;
+	text-align: left !important;
+	font-size: 13px !important;
+	line-height: 1.4 !important;
+	transition: background-color 0.15s ease, color 0.15s ease !important;
+}
+
+.components-menu-item__button:hover,
+.components-menu-item__button:focus,
+.components-menu-items__choice:hover,
+.components-menu-items__choice:focus,
+.components-dropdown-menu__menu button.components-button:hover,
+.components-dropdown-menu__menu button.components-button:focus {
+	background: rgba(98, 201, 255, 0.12) !important;
+	color: var(--accent, #62c9ff) !important;
+	outline: none !important;
+}
+
+.components-menu-item__item {
+	display: flex !important;
+	flex-direction: column !important;
+	gap: 2px !important;
+	flex: 1 1 auto !important;
+	min-width: 0 !important;
+}
+
+.components-menu-item__info,
+.components-menu-items__choice-description {
+	color: rgba(248, 248, 242, 0.55) !important;
+	font-size: 12px !important;
+	font-weight: 400 !important;
+	line-height: 1.35 !important;
+	margin-top: 2px !important;
+}
+
+.components-menu-item__shortcut {
+	color: rgba(248, 248, 242, 0.4) !important;
+	font-size: 11px !important;
+	font-family: inherit !important;
+	margin-left: auto !important;
+	padding-left: 16px !important;
+	white-space: nowrap !important;
+}
+
+.components-menu-item__button svg,
+.components-menu-items__choice svg,
+.components-menu-item__item svg {
+	fill: var(--accent, #62c9ff) !important;
+	color: var(--accent, #62c9ff) !important;
+	flex-shrink: 0 !important;
 }
 
 /* Publish Panel - Full Glassmorphic Override */

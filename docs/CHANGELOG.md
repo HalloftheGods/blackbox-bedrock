@@ -2,6 +2,19 @@
 
 All notable changes to the BlackBOX Bedrock submodule will be documented in this file.
 
+## [2026-09-21]
+
+### Fixed
+- Fixed triple-nested scrollbars, concentric borders, and hardcoded 280px viewport cutoffs in Gutenberg popovers and dropdown menus (such as the header 3-dots "More options" menu). Disentangled `.components-popover__content`, `.components-dropdown-menu__menu`, and `.components-dropdown__content` from the WooCommerce listbox selector in `assets/css/wp-admin.css`.
+- Removed `.components-dropdown-menu__menu` and `.components-dropdown__content` from the universal background stripper whitelist in `assets/css/wp-admin.css`, ensuring intermediate dropdown containers render as transparent zero-box passthroughs.
+- Eliminated panel border soup in `assets/css/gutenberg.css` by stripping blanket 1px borders from intermediate sidebar elements (`.components-panel__body-title`, `.components-panel__row`, `.components-base-control`, `.components-button-group`, `.components-grid`, `.components-tools-panel`, `.color-block-support-panel`), enforcing clean accordion bottom dividers and reserving borders strictly for genuine input controls and discrete cards.
+
+### Added
+- Established the Single Surface Authority and Single Scroll Authority architecture for Gutenberg popovers and dropdown menus in `assets/css/gutenberg.css`:
+  - Single surface: `.components-popover__content` rendered with dark glass (`rgba(13, 18, 29, 0.96)`), 24px blur, subtle cyan border (`rgba(98, 201, 255, 0.25)`), dynamic viewport constraint (`max-height: calc(100vh - 80px)`), and a dedicated 6px slender scrollbar.
+  - Zero-box passthroughs: Inner wrappers (`.components-dropdown__content`, `.components-dropdown-menu__menu`, `.components-dropdown-menu`) stripped of borders, shadows, backgrounds, and redundant scrollbars.
+  - Menu group hierarchy: Clean 1px dividers between groups, uppercase gold headers (`.components-menu-group__label`), full-width item buttons with cyan hover states, checkmark icon styling, and muted secondary description and shortcut text.
+
 ## [2026-09-18]
 
 ### Added

@@ -12,7 +12,7 @@
 	.postbox, .components-card, .components-surface, .connectors-page .components-item, 
 	.notice, div.error, div.updated, .update-nag, .akismet-card,
 	.woocommerce-select-control__listbox, .components-custom-select-control__menu,
-	.components-popover__content, .components-dropdown-menu__menu, .components-dropdown__content,
+	.components-popover__content,
 	.sui-dropdown__popover, .sui-dropdown__menu, .sui-dropdown__menu-item, .sui-dropdown, [class*="sui-dropdown"],
 	.ui-autocomplete, .ui-menu, .ui-menu-item, .ui-menu-item-wrapper, [class*="ui-autocomplete"], [class*="ui-menu"], [class*="ui-widget"],
 	.wp-suggest-user, .ac_results, [class*="ac_"], .autocomplete-suggestions, .autocomplete-suggestion,
@@ -832,9 +832,6 @@ body.woocommerce-setup,
 /* WooCommerce Select Controls & Listbox Dropdowns */
 .woocommerce-select-control__listbox,
 .components-custom-select-control__menu,
-.components-popover__content,
-.components-dropdown-menu__menu,
-.components-dropdown__content,
 .components-autocomplete__results {
 	background: #0d1117 !important;
 	background-color: #0d1117 !important;
