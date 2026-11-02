@@ -2,6 +2,21 @@
 
 All notable changes to the BlackBOX Bedrock submodule will be documented in this file.
 
+## [2026-11-02]
+
+### Fixed
+- Fixed mobile layout for WordPress Core Command Palette (`.commands-command-menu`) in `assets/css/sections/commands.css` and `assets/css/modal-overrides.css`:
+  - Enforced responsive floating card layout on screens under 600px (`width: calc(100vw - 24px)`), eliminating full-width edge collisions and enabling tap-to-dismiss on surrounding backdrop.
+  - Calculated top positioning relative to mobile admin bar height (`top: calc(var(--wp-admin--admin-bar--height, 46px) + 12px)`).
+  - Set 16px search input font size to eliminate iOS Safari auto-zoom on field focus.
+  - Constrained command list height to `calc(100dvh - 180px)` to avoid overflow when mobile virtual keyboards activate.
+- Removed conflicting `margin: 1rem 0 1rem 1rem !important;` on `[cmdk-input]` in `assets/css/gutenberg.css` that pushed search input off screen boundaries.
+- Fixed glass transparency bleed-through on Command Palette across WordPress admin and block editor:
+  - Deepened backdrop overlay to 88% dark with 16px blur (`rgba(3, 6, 12, 0.88)`).
+  - Hardened modal frame with solid `#0b1120` fallback and 98% dense obsidian glass (`linear-gradient(180deg, rgba(14, 21, 37, 0.98), rgba(8, 12, 22, 0.98))`) with 28px blur.
+  - Added dedicated header surface background (`rgba(18, 28, 48, 0.8)`) and suggestion list backdrop (`rgba(8, 12, 22, 0.45)`).
+  - Exempted `.commands-command-menu` from lower-opacity generic modal frame rules in `assets/css/gutenberg.css`.
+
 ## [2026-09-21]
 
 ### Fixed
