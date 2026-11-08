@@ -37,15 +37,23 @@ body.login {
 }
 
 /* Modal Sizing */
-body.login-action-logout #login {
-	width: 460px !important;
+body.login-action-logout #login,
+body.login-action-confirm_admin_email #login,
+body.login-action-confirm-admin-email #login {
+	width: 480px !important;
 	max-width: 95% !important;
 }
 
 /* Glass Options */
-.login #loginform, .login #registerform, .login #lostpasswordform {
+.login form:not(#language-switcher),
+.login #loginform,
+.login #registerform,
+.login #lostpasswordform,
+.login #resetpassform,
+.login #admin_email_confirm_form {
 	background: var(--rough-glass-bg) !important;
 	backdrop-filter: var(--rough-glass-filter) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter) !important;
 	border: 1px solid var(--rough-glass-border) !important;
 	box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3) !important;
 	border-radius: 8px !important;
@@ -65,8 +73,21 @@ body.login-action-logout #login {
 }
 
 /* Typography */
-.login label, .login .privacy-policy-page-link > a, .login p {
+.login label,
+.login .privacy-policy-page-link > a,
+.login p,
+.login .admin-email__heading,
+.login form h1,
+.login form h2 {
 	color: var(--text-main) !important;
+}
+
+.login code {
+	background: rgba(0, 0, 0, 0.4) !important;
+	color: var(--hog-gold) !important;
+	padding: 3px 6px !important;
+	border-radius: 4px !important;
+	border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
 .login a {
@@ -154,6 +175,45 @@ body.login-action-logout #login {
 	background: linear-gradient(135deg, rgba(217, 190, 111, 0.4), rgba(192, 164, 85, 0.25)) !important;
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), inset 0 1px 2px rgba(0, 0, 0, 0.2) !important;
 	transform: translateY(0) !important;
+}
+
+/* Secondary & Default Buttons - Glassmorphic */
+.wp-core-ui .button:not(.button-primary) {
+	background: rgba(255, 255, 255, 0.08) !important;
+	backdrop-filter: blur(12px) !important;
+	-webkit-backdrop-filter: blur(12px) !important;
+	border: 1px solid rgba(255, 255, 255, 0.2) !important;
+	color: var(--text-main) !important;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+	border-radius: 6px !important;
+	font-weight: 500 !important;
+	transition: all 0.2s ease !important;
+}
+
+.wp-core-ui .button:not(.button-primary):hover,
+.wp-core-ui .button:not(.button-primary):focus {
+	background: rgba(255, 255, 255, 0.16) !important;
+	border-color: var(--hog-gold) !important;
+	color: #ffffff !important;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+.wp-core-ui .button:not(.button-primary):active {
+	background: rgba(255, 255, 255, 0.1) !important;
+	transform: translateY(0) !important;
+}
+
+/* Admin Email Verification Layout */
+.login .admin-email__actions-primary {
+	display: flex !important;
+	justify-content: space-between !important;
+	align-items: center !important;
+	margin-top: 24px !important;
+}
+
+.login .admin-email__actions-secondary {
+	margin-top: 16px !important;
+	text-align: center !important;
 }
 
 /* Links */

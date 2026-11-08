@@ -2,6 +2,17 @@
 
 All notable changes to the BlackBOX Bedrock submodule will be documented in this file.
 
+## [2026-11-07]
+
+### Fixed
+- Fixed white-on-white text collision on WordPress administration email verification screen (`wp-login.php?action=confirm_admin_email`):
+  - Expanded glass container selector in `assets/css/login.css` to `.login form:not(#language-switcher)` and `#admin_email_confirm_form`, eliminating solid white WordPress core background fallback.
+  - Added responsive modal sizing for `body.login-action-confirm_admin_email #login` (480px width).
+  - Explicitly styled `.login .admin-email__heading`, `.login form h1`, and `.login form h2` with `var(--text-main)` for clear contrast on dark glass.
+  - Added dark glass container and gold text styling for inline `<code>` email addresses.
+  - Added glassmorphic styling for secondary buttons (`.wp-core-ui .button:not(.button-primary)`), matching primary gold button design.
+  - Styled `.admin-email__actions-primary` and `.admin-email__actions-secondary` layout blocks.
+
 ## [2026-11-02]
 
 ### Fixed
