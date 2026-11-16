@@ -2,6 +2,17 @@
 
 All notable changes to the BlackBOX Bedrock submodule will be documented in this file.
 
+## [2026-11-16]
+
+### Fixed
+- Fixed mobile layout and interaction regressions for the WordPress admin bar and menu on screens under 782px:
+  - Re-anchored `#wp-admin-bar-menu-toggle` to the far left with `order: -10 !important;` and restored the `\f228` Dashicon with proper font size (24px) and zero text indent.
+  - Aligned mobile sidebar `#adminmenuwrap`, `#adminmenuback`, and `.auto-fold #adminmenu` `top` offset to 38px beneath the fixed mobile admin bar.
+  - Fixed responsive drawer selectors to target `.wp-responsive-open` and `#wpwrap.wp-responsive-open` instead of `body.wp-responsive-open`, aligning with WordPress core markup.
+  - Corrected drawer offset from 160px to standard 190px in `class-admin-theme-styler.php` and `compass-isolation.css`.
+  - Added mobile responsive media queries to `menu-accordion.css` providing 44px tap targets for group headers, menu items, plus/minus indicators, and icon containers.
+  - Disabled erratic acronym hover transformations on mobile touch screens to prevent stuck hover states.
+
 ## [2026-11-07]
 
 ### Fixed

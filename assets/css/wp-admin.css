@@ -2166,4 +2166,85 @@ th code {
 		opacity: 1 !important;
 		color: rgba(255, 255, 255, 0.85) !important;
 	}
+
+	/* Toolbar Menu Toggle (Hamburger) - Ensure always visible, primary position on left */
+	#wpadminbar #wp-admin-bar-menu-toggle,
+	html #wpwrap #wpadminbar #wp-admin-bar-menu-toggle {
+		display: inline-flex !important;
+		align-items: center !important;
+		justify-content: center !important;
+		order: -10 !important;
+		margin: 0 !important;
+		padding: 0 !important;
+		width: 38px !important;
+		min-width: 38px !important;
+		max-width: 38px !important;
+		height: 38px !important;
+		min-height: 38px !important;
+	}
+
+	#wpadminbar #wp-admin-bar-menu-toggle a.ab-item,
+	html #wpwrap #wpadminbar #wp-admin-bar-menu-toggle a.ab-item {
+		display: inline-flex !important;
+		align-items: center !important;
+		justify-content: center !important;
+		width: 38px !important;
+		min-width: 38px !important;
+		max-width: 38px !important;
+		height: 38px !important;
+		padding: 0 !important;
+		margin: 0 !important;
+		text-indent: 0 !important;
+		overflow: visible !important;
+	}
+
+	#wpadminbar #wp-admin-bar-menu-toggle .ab-icon,
+	html #wpwrap #wpadminbar #wp-admin-bar-menu-toggle .ab-icon {
+		display: flex !important;
+		align-items: center !important;
+		justify-content: center !important;
+		width: 38px !important;
+		height: 38px !important;
+		text-indent: 0 !important;
+		visibility: visible !important;
+		opacity: 1 !important;
+	}
+
+	#wpadminbar #wp-admin-bar-menu-toggle .ab-icon:before,
+	html #wpwrap #wpadminbar #wp-admin-bar-menu-toggle .ab-icon:before {
+		content: "\f228" !important;
+		font-family: dashicons !important;
+		font-size: 24px !important;
+		line-height: 38px !important;
+		display: inline-block !important;
+		visibility: visible !important;
+		opacity: 1 !important;
+		color: rgba(255, 255, 255, 0.85) !important;
+		text-indent: 0 !important;
+		float: none !important;
+		width: auto !important;
+		height: auto !important;
+	}
+
+	.wp-responsive-open #wpadminbar #wp-admin-bar-menu-toggle .ab-icon:before,
+	#wpwrap.wp-responsive-open #wpadminbar #wp-admin-bar-menu-toggle .ab-icon:before {
+		color: #62c9ff !important;
+	}
+
+	/* Align mobile sidebar directly beneath 38px fixed adminbar */
+	#adminmenuwrap,
+	#adminmenuback,
+	.auto-fold #adminmenu {
+		top: 38px !important;
+	}
+
+	/* Show mobile sidebar when responsive menu is open */
+	.wp-responsive-open #adminmenuwrap,
+	.wp-responsive-open #adminmenuback,
+	.wp-responsive-open #adminmenumain,
+	#wpwrap.wp-responsive-open #adminmenuwrap,
+	#wpwrap.wp-responsive-open #adminmenuback,
+	#wpwrap.wp-responsive-open #adminmenumain {
+		display: block !important;
+	}
 }

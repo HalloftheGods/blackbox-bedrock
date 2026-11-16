@@ -79,15 +79,20 @@ class Theme_Styler {
 					right: 0 !important;
 					bottom: 0 !important;
 				}
-				body.wp-responsive-open #adminmenuwrap,
-				body.wp-responsive-open #adminmenuback,
-				body.wp-responsive-open #adminmenumain {
+				.wp-responsive-open #adminmenuwrap,
+				.wp-responsive-open #adminmenuback,
+				.wp-responsive-open #adminmenumain,
+				#wpwrap.wp-responsive-open #adminmenuwrap,
+				#wpwrap.wp-responsive-open #adminmenuback,
+				#wpwrap.wp-responsive-open #adminmenumain {
 					display: block !important;
 				}
-				body.wp-responsive-open > #app {
-					left: 160px !important;
+				.wp-responsive-open > #app,
+				#wpwrap.wp-responsive-open > #app {
+					left: 190px !important;
 				}
-				body.folded.wp-responsive-open > #app {
+				body.folded.wp-responsive-open > #app,
+				.folded #wpwrap.wp-responsive-open > #app {
 					left: 36px !important;
 				}
 			</style>

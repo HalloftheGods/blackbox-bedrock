@@ -237,3 +237,63 @@ li.bb-open-item.bb-last-item {
 	margin-top: 4px !important;
 	padding-top: 4px !important;
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE RESPONSIVE ACCORDION: Touch-Friendly Tap Targets (44px)
+   ═══════════════════════════════════════════════════════════════ */
+@media screen and (max-width: 782px) {
+	#adminmenu li.blackbox-group-header > a,
+	ul#adminmenu li.blackbox-group-header > a,
+	#adminmenu li.menu-top:not(.blackbox-group-header) > a {
+		height: 44px !important;
+		min-height: 44px !important;
+		line-height: 44px !important;
+	}
+
+	#adminmenu li.blackbox-group-header .bb-plus-icon,
+	ul#adminmenu li.blackbox-group-header .bb-plus-icon {
+		width: 44px !important;
+		min-width: 44px !important;
+		max-width: 44px !important;
+		height: 44px !important;
+		font-size: 16px !important;
+	}
+
+	#adminmenu li.blackbox-group-header .wp-menu-name,
+	ul#adminmenu li.blackbox-group-header .wp-menu-name {
+		height: 44px !important;
+		line-height: 44px !important;
+		font-size: 14px !important;
+	}
+
+	#adminmenu li.blackbox-group-header .wp-menu-image,
+	ul#adminmenu li.blackbox-group-header .wp-menu-image,
+	#adminmenu li.menu-top:not(.blackbox-group-header) > a .wp-menu-image {
+		width: 44px !important;
+		min-width: 44px !important;
+		max-width: 44px !important;
+		height: 44px !important;
+	}
+
+	#adminmenu li.menu-top:not(.blackbox-group-header) > a .wp-menu-name {
+		height: 44px !important;
+		line-height: 44px !important;
+		font-size: 14px !important;
+		padding: 0 12px 0 0 !important;
+	}
+
+	/* Prevent stuck hover transforms on touch screens */
+	#adminmenu li.blackbox-group-header.has-acronym:hover .wp-menu-image {
+		opacity: 1 !important;
+		transform: none !important;
+	}
+	#adminmenu li.blackbox-group-header.has-acronym:hover .wp-menu-name {
+		padding-left: 0 !important;
+	}
+	#adminmenu li.blackbox-group-header.has-acronym:hover .bb-short-name {
+		opacity: 1 !important;
+	}
+	#adminmenu li.blackbox-group-header.has-acronym:hover .bb-expanded-name {
+		display: none !important;
+	}
+}

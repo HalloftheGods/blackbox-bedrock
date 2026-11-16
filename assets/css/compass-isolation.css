@@ -31,14 +31,19 @@
 	right: 0 !important;
 	bottom: 0 !important;
 }
-.compass-isolated body.wp-responsive-open #adminmenuwrap,
-.compass-isolated body.wp-responsive-open #adminmenuback,
-.compass-isolated body.wp-responsive-open #adminmenumain {
+.compass-isolated .wp-responsive-open #adminmenuwrap,
+.compass-isolated .wp-responsive-open #adminmenuback,
+.compass-isolated .wp-responsive-open #adminmenumain,
+.compass-isolated #wpwrap.wp-responsive-open #adminmenuwrap,
+.compass-isolated #wpwrap.wp-responsive-open #adminmenuback,
+.compass-isolated #wpwrap.wp-responsive-open #adminmenumain {
 	display: block !important;
 }
-.compass-isolated body.wp-responsive-open > #app {
-	left: 160px !important;
+.compass-isolated .wp-responsive-open > #app,
+.compass-isolated #wpwrap.wp-responsive-open > #app {
+	left: 190px !important;
 }
-.compass-isolated body.folded.wp-responsive-open > #app {
+.compass-isolated body.folded.wp-responsive-open > #app,
+.compass-isolated .folded #wpwrap.wp-responsive-open > #app {
 	left: 36px !important;
 }
