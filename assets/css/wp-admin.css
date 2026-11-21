@@ -12,8 +12,13 @@
 	.postbox, .components-card, .components-surface, .connectors-page .components-item, 
 	.notice, div.error, div.updated, .update-nag, .akismet-card,
 	.woocommerce-select-control__listbox, .components-custom-select-control__menu,
-	.components-popover__content,
+	.components-popover__content, [class*="popover"],
 	.sui-dropdown__popover, .sui-dropdown__menu, .sui-dropdown__menu-item, .sui-dropdown, [class*="sui-dropdown"],
+	.wpai-split-button__dropdown, .wpai-dropdown-item, .wpai-split-button, [class*="split-button"],
+	.dropdown-menu, .dropdown-content, [class*="dropdown-menu"], [class*="dropdown-item"], [class*="context-menu"],
+	.inline-edit-row, .bulk-edit-row, tr.inline-edit-row, tr.bulk-edit-row, #replyrow, #replycontainer,
+	.quicktags-toolbar, #qt_replycontent_toolbar, input.ed_button,
+	.cat-checklist, ul.cat-checklist, [class*="cat-checklist"],
 	.ui-autocomplete, .ui-menu, .ui-menu-item, .ui-menu-item-wrapper, [class*="ui-autocomplete"], [class*="ui-menu"], [class*="ui-widget"],
 	.wp-suggest-user, .ac_results, [class*="ac_"], .autocomplete-suggestions, .autocomplete-suggestion,
 	.select2-dropdown, .select2-results, .select2-container, [class*="select2-"],
@@ -111,6 +116,351 @@ ul.children li:nth-child(odd),
 	}
 }
 
+.subsubsub {
+	color: rgba(255, 255, 255, 0.4) !important;
+
+	& .count {
+		color: rgba(255, 255, 255, 0.5) !important;
+	}
+}
+
+/* Unapproved & Pending Comments */
+.widefat tr.unapproved,
+.wp-list-table tr.unapproved {
+	background-color: rgba(217, 190, 111, 0.08) !important;
+	border-left: 3px solid var(--gold, #d9be6f) !important;
+
+	&:hover {
+		background-color: rgba(217, 190, 111, 0.14) !important;
+	}
+
+	& td {
+		border-bottom-color: rgba(217, 190, 111, 0.15) !important;
+	}
+}
+
+/* Comment Author & Content Metadata */
+.column-author strong,
+.column-author b {
+	color: #ffffff !important;
+}
+
+.column-author a {
+	color: var(--accent, #62c9ff) !important;
+}
+
+.column-author .submitted-on,
+.column-author .submitted-on a,
+.column-date,
+.column-date a {
+	color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.column-response a {
+	color: var(--gold, #d9be6f) !important;
+	font-weight: 500 !important;
+}
+
+/* Table Row Actions */
+.row-actions {
+	color: rgba(255, 255, 255, 0.4) !important;
+
+	& span a,
+	& span .button-link {
+		color: rgba(255, 255, 255, 0.75) !important;
+		transition: color 0.15s ease !important;
+
+		&:hover {
+			color: var(--accent, #62c9ff) !important;
+			text-decoration: underline !important;
+		}
+	}
+
+	& span.approve a,
+	& span.approve .button-link {
+		color: #4ade80 !important;
+
+		&:hover {
+			color: #86efac !important;
+		}
+	}
+
+	& span.unapprove a,
+	& span.unapprove .button-link {
+		color: #fbbf24 !important;
+
+		&:hover {
+			color: #fde68a !important;
+		}
+	}
+
+	& span.reply a,
+	& span.reply .button-link,
+	& span.reply button {
+		color: var(--accent, #62c9ff) !important;
+
+		&:hover {
+			color: #bae6fd !important;
+		}
+	}
+
+	& span.quickedit a,
+	& span.editinline {
+		color: #60a5fa !important;
+
+		&:hover {
+			color: #93c5fd !important;
+		}
+	}
+
+	& span.spam a {
+		color: #f87171 !important;
+
+		&:hover {
+			color: #fca5a5 !important;
+		}
+	}
+
+	& span.trash a,
+	& span.delete a {
+		color: #ef4444 !important;
+
+		&:hover {
+			color: #f87171 !important;
+		}
+	}
+}
+
+/* Comment Post Bubble Badges */
+.post-com-count {
+	background: transparent !important;
+}
+
+.post-com-count .post-com-count-approved,
+.post-com-count .post-com-count-no-comments {
+	background: rgba(255, 255, 255, 0.1) !important;
+	color: var(--text-main, #f8f8f2) !important;
+	border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+.post-com-count .post-com-count-pending {
+	background: rgba(217, 190, 111, 0.25) !important;
+	color: var(--gold, #d9be6f) !important;
+	border: 1px solid rgba(217, 190, 111, 0.5) !important;
+}
+
+/* Inline Comment Reply & Inline Edit Rows (edit-comments.php & Lists) */
+#replyrow,
+tr#replyrow,
+#replyrow.inline-edit-row,
+tr.inline-edit-row,
+tr.bulk-edit-row {
+	background: transparent !important;
+}
+
+#replyrow td,
+tr#replyrow td,
+#replyrow.inline-edit-row td,
+tr.inline-edit-row td,
+tr.bulk-edit-row td {
+	background: rgba(13, 17, 23, 0.85) !important;
+	backdrop-filter: var(--rough-glass-filter) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	border-radius: 8px !important;
+	padding: 18px 20px !important;
+	color: var(--text-main, #f8f8f2) !important;
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 8px 24px rgba(0, 0, 0, 0.5) !important;
+}
+
+#replyrow fieldset.comment-reply legend,
+#replyrow legend span,
+.inline-edit-row .inline-edit-legend,
+.inline-edit-row span.title,
+.bulk-edit-row span.title {
+	color: var(--text-main, #f8f8f2) !important;
+	font-size: 14px !important;
+	font-weight: 600 !important;
+	letter-spacing: 0.3px !important;
+	margin-bottom: 8px !important;
+	display: inline-block !important;
+}
+
+.inline-edit-row span.title,
+.bulk-edit-row span.title {
+	color: var(--accent, #62c9ff) !important;
+	font-size: 12px !important;
+	text-transform: uppercase !important;
+	letter-spacing: 0.5px !important;
+}
+
+#replycontainer {
+	margin-bottom: 12px !important;
+}
+
+#replycontainer #qt_replycontent_toolbar,
+#replycontainer .quicktags-toolbar {
+	background: rgba(13, 17, 23, 0.6) !important;
+	border: 1px solid rgba(255, 255, 255, 0.12) !important;
+	border-bottom: none !important;
+	border-radius: 6px 6px 0 0 !important;
+	padding: 8px 10px !important;
+}
+
+#replycontainer .quicktags-toolbar input.button,
+#replycontainer .quicktags-toolbar input.ed_button {
+	background: rgba(255, 255, 255, 0.06) !important;
+	border: 1px solid rgba(255, 255, 255, 0.15) !important;
+	color: var(--text-main, #f8f8f2) !important;
+	border-radius: 4px !important;
+	font-size: 12px !important;
+	padding: 2px 8px !important;
+	margin: 2px 3px !important;
+	box-shadow: none !important;
+	text-shadow: none !important;
+	cursor: pointer !important;
+	min-height: 26px !important;
+	line-height: 20px !important;
+	transition: all 0.15s ease !important;
+}
+
+#replycontainer .quicktags-toolbar input.button:hover,
+#replycontainer .quicktags-toolbar input.ed_button:hover {
+	background: rgba(98, 201, 255, 0.15) !important;
+	border-color: var(--accent, #62c9ff) !important;
+	color: var(--accent, #62c9ff) !important;
+}
+
+#replycontainer textarea#replycontent {
+	background: rgba(0, 0, 0, 0.5) !important;
+	border: 1px solid rgba(255, 255, 255, 0.12) !important;
+	border-radius: 0 0 6px 6px !important;
+	color: var(--text-main, #f8f8f2) !important;
+	font-size: 14px !important;
+	line-height: 1.6 !important;
+	padding: 12px 14px !important;
+	box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4) !important;
+	width: 100% !important;
+	box-sizing: border-box !important;
+	min-height: 120px !important;
+}
+
+#replycontainer textarea#replycontent:focus {
+	border-color: var(--accent, #62c9ff) !important;
+	box-shadow: 0 0 0 1px var(--accent, #62c9ff), inset 0 2px 4px rgba(0, 0, 0, 0.4) !important;
+	outline: none !important;
+}
+
+#edithead .inside {
+	margin-bottom: 10px !important;
+}
+
+#edithead label {
+	color: var(--text-main, #f8f8f2) !important;
+	font-weight: 500 !important;
+	margin-bottom: 4px !important;
+	display: inline-block !important;
+}
+
+#replysubmit {
+	margin-top: 14px !important;
+	padding: 0 !important;
+	overflow: visible !important;
+}
+
+#replysubmit .reply-submit-buttons {
+	display: flex !important;
+	flex-wrap: wrap !important;
+	align-items: center !important;
+	gap: 10px !important;
+	margin: 0 !important;
+}
+
+#replysubmit .save.button.button-primary,
+.inline-edit-save .save.button.button-primary {
+	background: transparent !important;
+	border: 1px solid var(--gold, #d9be6f) !important;
+	color: var(--gold, #d9be6f) !important;
+	box-shadow: 0 0 10px rgba(217, 190, 111, 0.2) !important;
+}
+
+#replysubmit .save.button.button-primary:hover,
+.inline-edit-save .save.button.button-primary:hover {
+	background: rgba(217, 190, 111, 0.12) !important;
+	border-color: var(--gold, #d9be6f) !important;
+	color: #ffe394 !important;
+}
+
+#replysubmit .cancel.button,
+.inline-edit-save .cancel.button {
+	background: transparent !important;
+	border: 1px solid rgba(255, 255, 255, 0.2) !important;
+	color: var(--text-main, #f8f8f2) !important;
+}
+
+#replysubmit .cancel.button:hover,
+.inline-edit-save .cancel.button:hover {
+	background: rgba(255, 255, 255, 0.08) !important;
+	border-color: var(--accent, #62c9ff) !important;
+	color: var(--accent, #62c9ff) !important;
+}
+
+#replysubmit .waiting.spinner,
+.inline-edit-save .spinner {
+	float: none !important;
+	margin: 0 !important;
+	filter: brightness(0) invert(1) !important;
+	opacity: 0.8 !important;
+}
+
+#replysubmit .error {
+	color: #fecaca !important;
+	background: rgba(220, 38, 38, 0.15) !important;
+	border: 1px solid rgba(248, 113, 113, 0.3) !important;
+	border-left: 4px solid #f87171 !important;
+	border-radius: 4px !important;
+	padding: 8px 12px !important;
+	margin: 8px 0 0 0 !important;
+	width: 100% !important;
+}
+
+.inline-edit-row fieldset,
+.bulk-edit-row fieldset {
+	border: none !important;
+	padding: 0 !important;
+	margin: 0 !important;
+}
+
+.inline-edit-row label,
+.bulk-edit-row label {
+	color: var(--text-main, #f8f8f2) !important;
+}
+
+.inline-edit-row .cat-checklist,
+.bulk-edit-row .cat-checklist {
+	background: rgba(0, 0, 0, 0.35) !important;
+	border: 1px solid rgba(255, 255, 255, 0.12) !important;
+	border-radius: 6px !important;
+	padding: 8px 12px !important;
+	max-height: 160px !important;
+	overflow-y: auto !important;
+}
+
+.inline-edit-row .cat-checklist li,
+.bulk-edit-row .cat-checklist li {
+	color: var(--text-main, #f8f8f2) !important;
+	margin-bottom: 4px !important;
+}
+
+.inline-edit-row .inline-edit-save {
+	margin-top: 14px !important;
+	padding-top: 12px !important;
+	border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+	display: flex !important;
+	align-items: center !important;
+	gap: 10px !important;
+}
+
 /* Password Strength Indicator */
 #pass-strength-result {
 	background-color: rgba(0, 0, 0, 0.3) !important;
@@ -167,19 +517,25 @@ h2 {
 div.error,
 div.updated,
 .update-nag,
+.notice-error,
+.notice-warning,
+.notice-success,
+.notice-info,
+.notice-alt,
 .akismet-activate,
 .akismet-card,
 .akismet-alert,
 .woocommerce-message,
 .woocommerce-error,
 .woocommerce-info {
-	background: rgba(0, 0, 0, 0.6) !important;
+	background: rgba(13, 17, 23, 0.8) !important;
 	backdrop-filter: var(--rough-glass-filter) !important;
 	-webkit-backdrop-filter: var(--rough-glass-filter) !important;
 	border: 1px solid var(--rough-glass-border) !important;
 	color: var(--text-main) !important;
 	border-left: 4px solid var(--accent) !important;
 	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+	border-radius: 4px !important;
 
 	& p,
 	& .notice-title,
@@ -196,25 +552,62 @@ div.updated,
 }
 
 div.error,
+.notice-error,
 .woocommerce-error {
-	border-color: rgba(255, 92, 92, 0.2) !important;
-	border-left-color: #ff5c5c !important;
+	background: rgba(220, 38, 38, 0.12) !important;
+	border-color: rgba(248, 113, 113, 0.25) !important;
+	border-left: 4px solid #f87171 !important;
+
+	& p {
+		color: #fecaca !important;
+	}
+}
+
+.notice-warning,
+.update-nag {
+	background: rgba(217, 119, 6, 0.12) !important;
+	border-color: rgba(251, 191, 36, 0.25) !important;
+	border-left: 4px solid #fbbf24 !important;
+
+	& p {
+		color: #fef3c7 !important;
+	}
 }
 
 div.updated,
-.woocommerce-message,
+.notice-success,
+.woocommerce-message {
+	background: rgba(22, 163, 74, 0.12) !important;
+	border-color: rgba(74, 222, 128, 0.25) !important;
+	border-left: 4px solid #4ade80 !important;
+
+	& p {
+		color: #dcfce7 !important;
+	}
+}
+
+.notice-info,
 .woocommerce-info {
-	border-color: rgba(77, 250, 123, 0.2) !important;
-	border-left-color: #4dfa7b !important;
+	background: rgba(14, 165, 233, 0.12) !important;
+	border-color: rgba(98, 201, 255, 0.25) !important;
+	border-left: 4px solid var(--accent, #62c9ff) !important;
+
+	& p {
+		color: #e0f2fe !important;
+	}
 }
 
-.update-nag {
-	border-color: rgba(217, 190, 111, 0.2) !important;
-	border-left-color: var(--gold) !important;
-}
+.notice-dismiss {
+	padding: 9px !important;
 
-.notice-dismiss:before {
-	color: var(--text-main) !important;
+	&:before {
+		color: var(--text-main) !important;
+	}
+
+	&:hover:before,
+	&:focus:before {
+		color: var(--accent, #62c9ff) !important;
+	}
 }
 
 /* Classic Buttons */
@@ -244,6 +637,34 @@ div.updated,
 		background: rgba(217, 190, 111, 0.1) !important;
 		color: var(--gold) !important;
 	}
+}
+
+/* Disabled Button States */
+.button:disabled,
+.button.disabled,
+.button[disabled],
+.button-secondary:disabled,
+.button-secondary.disabled,
+.button-secondary[disabled] {
+	background: rgba(255, 255, 255, 0.03) !important;
+	border-color: rgba(255, 255, 255, 0.08) !important;
+	color: rgba(255, 255, 255, 0.3) !important;
+	box-shadow: none !important;
+	text-shadow: none !important;
+	cursor: not-allowed !important;
+	opacity: 0.6 !important;
+}
+
+.button-primary:disabled,
+.button-primary.disabled,
+.button-primary[disabled] {
+	background: rgba(217, 190, 111, 0.05) !important;
+	border-color: rgba(217, 190, 111, 0.15) !important;
+	color: rgba(217, 190, 111, 0.35) !important;
+	box-shadow: none !important;
+	text-shadow: none !important;
+	cursor: not-allowed !important;
+	opacity: 0.6 !important;
 }
 
 /* Misc Classic Elements & Dashboard Widgets */
@@ -1197,6 +1618,151 @@ select option:checked {
 	color: var(--accent, #62c9ff) !important;
 }
 
+/* Split Buttons, Dropdowns & Popovers (AI Suggest Reply, Plugin Menus, Core Popovers) */
+.wpai-split-button,
+.split-button,
+[class*="split-button"] {
+	display: inline-flex !important;
+	position: relative !important;
+	vertical-align: middle !important;
+}
+
+.wpai-split-button .wpai-split-button__action,
+.split-button .split-button__action,
+.wpai-split-button button:first-child {
+	border-top-right-radius: 0 !important;
+	border-bottom-right-radius: 0 !important;
+	border-right: none !important;
+	margin-right: 0 !important;
+}
+
+.wpai-split-button .wpai-split-button__toggle,
+.split-button .split-button__toggle,
+.wpai-split-button button:last-child {
+	border-top-left-radius: 0 !important;
+	border-bottom-left-radius: 0 !important;
+	border-left: 1px solid rgba(255, 255, 255, 0.15) !important;
+	margin-left: 0 !important;
+	padding: 0 8px !important;
+	min-width: 28px !important;
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+}
+
+.wpai-split-button .wpai-split-button__toggle:hover,
+.split-button .split-button__toggle:hover,
+.wpai-split-button .wpai-split-button__action:hover,
+.split-button .split-button__action:hover {
+	border-color: var(--accent, #62c9ff) !important;
+	color: var(--accent, #62c9ff) !important;
+}
+
+.wpai-split-button__dropdown,
+.wpai-split-button .wpai-split-button__dropdown,
+.split-button__dropdown,
+.split-button-dropdown,
+.dropdown-menu,
+.dropdown-content,
+[class*="split-button__dropdown"],
+[class*="split-button-dropdown"] {
+	background: #0d1117 !important;
+	background-color: rgba(13, 17, 23, 0.98) !important;
+	backdrop-filter: blur(16px) saturate(160%) !important;
+	-webkit-backdrop-filter: blur(16px) saturate(160%) !important;
+	border: 1px solid rgba(98, 201, 255, 0.25) !important;
+	border-radius: 6px !important;
+	box-shadow: 0 12px 32px rgba(0, 0, 0, 0.8), 0 0 1px rgba(255, 255, 255, 0.2) !important;
+	margin-top: 4px !important;
+	min-width: 160px !important;
+	padding: 4px !important;
+	position: absolute !important;
+	right: 0 !important;
+	top: 100% !important;
+	z-index: 999999 !important;
+	box-sizing: border-box !important;
+}
+
+.wpai-dropdown-item,
+.wpai-split-button .wpai-dropdown-item,
+.split-button__dropdown-item,
+.dropdown-menu-item,
+[class*="dropdown-item"] {
+	display: flex !important;
+	align-items: center !important;
+	width: 100% !important;
+	padding: 8px 12px !important;
+	background: transparent !important;
+	border: none !important;
+	border-radius: 4px !important;
+	color: var(--text-main, #f8f8f2) !important;
+	font-size: 13px !important;
+	font-weight: 400 !important;
+	text-align: left !important;
+	cursor: pointer !important;
+	transition: background-color 0.15s ease, color 0.15s ease !important;
+	box-shadow: none !important;
+	box-sizing: border-box !important;
+}
+
+.wpai-dropdown-item:hover,
+.wpai-dropdown-item:focus,
+.wpai-split-button .wpai-dropdown-item:hover,
+.wpai-split-button .wpai-dropdown-item:focus,
+.split-button__dropdown-item:hover,
+.split-button__dropdown-item:focus,
+.dropdown-menu-item:hover,
+.dropdown-menu-item:focus {
+	background: rgba(98, 201, 255, 0.15) !important;
+	color: var(--accent, #62c9ff) !important;
+	outline: none !important;
+}
+
+.wpai-dropdown-item.is-selected,
+.wpai-dropdown-item[aria-selected="true"],
+.dropdown-menu-item.is-selected {
+	color: var(--accent, #62c9ff) !important;
+	font-weight: 600 !important;
+}
+
+.wpai-dropdown-item .wpai-selected-icon,
+.wpai-selected-icon {
+	color: var(--accent, #62c9ff) !important;
+	margin-right: 8px !important;
+	font-size: 16px !important;
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+}
+
+.wpai-suggest-reply-controls {
+	display: inline-flex !important;
+	align-items: center !important;
+}
+
+.wpai-suggest-reply-error,
+#replysubmit .wpai-suggest-reply-error {
+	width: 100% !important;
+	margin: 10px 0 0 0 !important;
+	padding: 10px 14px !important;
+	background: rgba(220, 38, 38, 0.15) !important;
+	border-left: 4px solid #f87171 !important;
+	border-top: 1px solid rgba(248, 113, 113, 0.25) !important;
+	border-right: 1px solid rgba(248, 113, 113, 0.25) !important;
+	border-bottom: 1px solid rgba(248, 113, 113, 0.25) !important;
+	border-radius: 6px !important;
+	color: #fecaca !important;
+	box-sizing: border-box !important;
+}
+
+.wpai-suggest-reply-error p,
+#replysubmit .wpai-suggest-reply-error p {
+	color: #fecaca !important;
+	font-size: 13px !important;
+	line-height: 1.5 !important;
+	margin: 0 !important;
+}
+
 /* ═══════════════════════════════════════════════════════════════
    MEDIUM PRIORITY — Visible but less jarring
    ═══════════════════════════════════════════════════════════════ */
@@ -1299,21 +1865,68 @@ select option:checked {
 /* Checkboxes & Radio Buttons */
 input[type="checkbox"]:not(.components-form-toggle__input),
 input[type="radio"] {
-	background: rgba(0, 0, 0, 0.4) !important;
-	border: 1px solid rgba(255, 255, 255, 0.2) !important;
-	box-shadow: none !important;
+	background: rgba(13, 17, 23, 0.8) !important;
+	border: 1.5px solid rgba(255, 255, 255, 0.35) !important;
+	border-radius: 4px !important;
+	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4) !important;
+	transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease !important;
+}
+
+input[type="radio"] {
+	border-radius: 50% !important;
+}
+
+input[type="checkbox"]:not(.components-form-toggle__input):hover,
+input[type="radio"]:hover {
+	border-color: var(--accent, #62c9ff) !important;
+	box-shadow: 0 0 6px rgba(98, 201, 255, 0.3) !important;
 }
 
 input[type="checkbox"]:not(.components-form-toggle__input):checked,
 input[type="radio"]:checked {
-	background: var(--accent) !important;
-	border-color: var(--accent) !important;
+	background: var(--accent, #62c9ff) !important;
+	border-color: var(--accent, #62c9ff) !important;
+	box-shadow: 0 0 8px rgba(98, 201, 255, 0.4) !important;
+}
+
+input[type="checkbox"]:not(.components-form-toggle__input):checked::before {
+	color: #0d1117 !important;
+	font-weight: 900 !important;
+	filter: none !important;
+	margin: -1px 0 0 -1px !important;
+	float: none !important;
+	display: inline-block !important;
+}
+
+input[type="radio"]:checked::before {
+	background-color: #0d1117 !important;
+	margin: 2px !important;
+}
+
+input[type="checkbox"]:not(.components-form-toggle__input):indeterminate {
+	background: var(--accent, #62c9ff) !important;
+	border-color: var(--accent, #62c9ff) !important;
+}
+
+input[type="checkbox"]:not(.components-form-toggle__input):indeterminate::before {
+	color: #0d1117 !important;
+	font-weight: 900 !important;
+	content: "\f460" !important;
+	margin: -1px 0 0 -1px !important;
 }
 
 input[type="checkbox"]:not(.components-form-toggle__input):focus,
 input[type="radio"]:focus {
-	border-color: var(--accent) !important;
-	box-shadow: 0 0 0 1px var(--accent) !important;
+	border-color: var(--accent, #62c9ff) !important;
+	box-shadow: 0 0 0 2px rgba(98, 201, 255, 0.4) !important;
+	outline: none !important;
+}
+
+input[type="checkbox"]:disabled,
+input[type="radio"]:disabled {
+	opacity: 0.35 !important;
+	cursor: not-allowed !important;
+	border-color: rgba(255, 255, 255, 0.15) !important;
 }
 
 /* WordPress / Gutenberg Component Toggles */

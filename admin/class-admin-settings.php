@@ -39,6 +39,7 @@ class Settings {
 		register_setting( 'xophz_compass_options_group', 'blackbox_bedrock_disabled' );
 		register_setting( 'xophz_compass_options_group', 'xophz_compass_disable_mu_styles' );
 		register_setting( 'xophz_compass_options_group', 'blackbox_bedrock_wp_admin_menu_2030' );
+		register_setting( 'xophz_compass_options_group', 'blackbox_bedrock_frontend_compass_bar' );
 
 		add_settings_section(
 			'xophz_compass_general_section',
@@ -107,6 +108,28 @@ class Settings {
 					<span class="bb-status-label" data-active-text="Enabled" data-inactive-text="Disabled"><?php echo $isEnabled ? 'Enabled' : 'Disabled'; ?></span>
 				</div>
 				<p class="description" style="margin-top: 8px;">Enable 2030 menu accordion grouping and categorized sections for WPMUDEV and COMPASS plugins.</p>
+				<?php
+			},
+			'xophz_compass_settings',
+			'xophz_compass_general_section'
+		);
+
+		add_settings_field(
+			'blackbox_bedrock_frontend_compass_bar',
+			'Frontend Compass Bar',
+			function() {
+				$val = get_option( 'blackbox_bedrock_frontend_compass_bar', '1' );
+				$isEnabled = ( $val === '1' || $val === 1 );
+				?>
+				<div class="bb-toggle-container">
+					<label class="bb-switch">
+						<input type="hidden" name="blackbox_bedrock_frontend_compass_bar" value="0" />
+						<input type="checkbox" name="blackbox_bedrock_frontend_compass_bar" value="1" class="bb-toggle-input" <?php checked( true, $isEnabled ); ?> />
+						<span class="bb-slider"></span>
+					</label>
+					<span class="bb-status-label" data-active-text="Enabled" data-inactive-text="Disabled"><?php echo $isEnabled ? 'Enabled' : 'Disabled'; ?></span>
+				</div>
+				<p class="description" style="margin-top: 8px;">Replace the native frontend WordPress admin bar with the My Compass bottom dock and My Menu flyout. Append <code>?native_bar=1</code> to any frontend URL to view the native bar temporarily.</p>
 				<?php
 			},
 			'xophz_compass_settings',

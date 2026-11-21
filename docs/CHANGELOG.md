@@ -2,9 +2,24 @@
 
 All notable changes to the BlackBOX Bedrock submodule will be documented in this file.
 
-## [2026-11-16]
+## [2026-11-18]
+
+### Changed
+- Hardened `error/error-template.php` for pre-boot WordPress drop-in environments:
+  - Added `status_header()` existence guard and direct HTTP 503 fallback header emission.
+  - Implemented `$escape_text`, `$escape_attr`, and `$escape_url` closure helpers with native `htmlspecialchars()` fallbacks when core formatting functions are uninitialized.
+  - Resolved dynamic assets path via `WPMU_PLUGIN_URL` and `content_url()` with relative fallback, ensuring reliable logo rendering across deep admin sub-paths.
+  - Synchronized `--compass-bg` radial slate gradient with `assets/css/login.css`.
+
 
 ### Fixed
+- Fixed admin element coverage and legibility across WordPress core and plugins:
+  - Exempted split-button menus, dropdowns, popovers, and inline edit panels from the universal background stripper in `assets/css/wp-admin.css`.
+  - Added dark glass styling for split buttons, dropdown menus, and item controls (`.wpai-split-button`, `.wpai-split-button__dropdown`, `.wpai-dropdown-item`) with cyan borders, high-contrast light typography, and glowing hover states.
+  - Implemented high-contrast glass containers for inline comment replies (`#replyrow`, `#replycontainer`, `#replycontent`) and quick/bulk edit rows (`.inline-edit-row`, `.bulk-edit-row`) with styled quicktags buttons, fieldsets, category checklists, and aligned action buttons.
+  - Elevated contrast for table checkboxes and radio buttons with 1.5px visible borders, dark backgrounds, cyan checked states, and high-contrast dark checkmark icons (`#0d1117`).
+  - Added semantic color coding for table row actions (Approve in green, Unapprove in amber, Reply in cyan, Quick Edit in blue, Spam/Trash in red) and highlighted unapproved comment rows (`tr.unapproved`) with gold borders.
+  - Added tinted glass styling across all notice variants (`.notice-error`, `.notice-warning`, `.notice-success`, `.notice-info`, `.notice-alt`) and styled disabled buttons to prevent white flashes.
 - Fixed mobile layout and interaction regressions for the WordPress admin bar and menu on screens under 782px:
   - Re-anchored `#wp-admin-bar-menu-toggle` to the far left with `order: -10 !important;` and restored the `\f228` Dashicon with proper font size (24px) and zero text indent.
   - Aligned mobile sidebar `#adminmenuwrap`, `#adminmenuback`, and `.auto-fold #adminmenu` `top` offset to 38px beneath the fixed mobile admin bar.

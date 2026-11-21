@@ -3,26 +3,46 @@
  * BlackBOX Custom Error & Maintenance Template
  */
 if ( ! headers_sent() ) {
-	status_header( 503 );
+	if ( function_exists( 'status_header' ) ) {
+		status_header( 503 );
+	} else {
+		$protocol = isset( $_SERVER['SERVER_PROTOCOL'] ) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.1';
+		header( "$protocol 503 Service Temporarily Unavailable", true, 503 );
+	}
 	header( 'Retry-After: 3600' );
 }
 
+$assets_url = defined( 'WPMU_PLUGIN_URL' )
+	? WPMU_PLUGIN_URL . '/blackbox-bedrock/assets'
+	: ( function_exists( 'content_url' ) ? content_url( 'mu-plugins/blackbox-bedrock/assets' ) : '/wp-content/mu-plugins/blackbox-bedrock/assets' );
+
 $logo_css = file_exists( dirname( __DIR__ ) . '/assets/css/logo.css' ) ? file_get_contents( dirname( __DIR__ ) . '/assets/css/logo.css' ) : '';
+$logo_css = str_replace( '../images/', $assets_url . '/images/', $logo_css );
 $smoke_js = file_exists( dirname( __DIR__ ) . '/assets/js/smoke-canvas.js' ) ? file_get_contents( dirname( __DIR__ ) . '/assets/js/smoke-canvas.js' ) : '';
-$logo_url = function_exists( 'content_url' ) ? content_url( 'mu-plugins/blackbox-bedrock/assets/images/hallofthegodsinc.png' ) : '/wp-content/mu-plugins/blackbox-bedrock/assets/images/hallofthegodsinc.png';
+$logo_url = $assets_url . '/images/hallofthegodsinc.png';
+
+$escape_text = function( $val ) {
+	return function_exists( 'esc_html' ) ? esc_html( $val ) : htmlspecialchars( (string) $val, ENT_QUOTES, 'UTF-8' );
+};
+$escape_attr = function( $val ) {
+	return function_exists( 'esc_attr' ) ? esc_attr( $val ) : htmlspecialchars( (string) $val, ENT_QUOTES, 'UTF-8' );
+};
+$escape_url = function( $val ) {
+	return function_exists( 'esc_url' ) ? esc_url( $val ) : htmlspecialchars( (string) $val, ENT_QUOTES, 'UTF-8' );
+};
 ?>
 <!DOCTYPE html>
 <html <?php if ( function_exists( 'language_attributes' ) ) language_attributes(); ?>>
 <head>
-    <meta charset="<?php echo function_exists( 'bloginfo' ) ? esc_attr( get_bloginfo( 'charset' ) ) : 'UTF-8'; ?>">
+    <meta charset="<?php echo function_exists( 'bloginfo' ) ? $escape_attr( get_bloginfo( 'charset' ) ) : 'UTF-8'; ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?php echo ! empty( $title ) ? esc_html( $title ) : 'Scheduled Maintenance | Hall of the Gods'; ?></title>
+    <title><?php echo ! empty( $title ) ? $escape_text( $title ) : 'Scheduled Maintenance | Hall of the Gods'; ?></title>
     <style type="text/css">
         <?php echo $logo_css; ?>
         :root {
             --hog-gold: #d9be6f;
             --hog-cyan: #62c9ff;
-            --compass-bg: radial-gradient(farthest-corner circle at 0% 0%, #0d1117 0%, #05070a 100%);
+            --compass-bg: radial-gradient(farthest-corner circle at 0% 0%, #2271b1 0%, #1a1e22 100%);
             --rough-glass-bg: linear-gradient(135deg, rgba(13, 17, 23, 0.85), rgba(20, 26, 38, 0.65));
             --rough-glass-border: rgba(90, 105, 172, 0.3);
             --rough-glass-filter: blur(20px) saturate(150%);
@@ -62,7 +82,7 @@ $logo_url = function_exists( 'content_url' ) ? content_url( 'mu-plugins/blackbox
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
         #error-container #logo {
-            background-image: url('<?php echo esc_url( $logo_url ); ?>') !important;
+            background-image: url('<?php echo $escape_url( $logo_url ); ?>') !important;
             background-size: contain !important;
             background-position: center !important;
             background-repeat: no-repeat !important;
@@ -137,14 +157,14 @@ $logo_url = function_exists( 'content_url' ) ? content_url( 'mu-plugins/blackbox
 <body id="error-page">
     <div id="error-container">
         <div id="logo"></div>
-        <div class="maintenance-badge"><?php echo ! empty( $badge ) ? esc_html( $badge ) : 'System Notice'; ?></div>
-        <h1 class="maintenance-title"><?php echo ! empty( $title ) ? esc_html( $title ) : 'Scheduled Maintenance'; ?></h1>
+        <div class="maintenance-badge"><?php echo ! empty( $badge ) ? $escape_text( $badge ) : 'System Notice'; ?></div>
+        <h1 class="maintenance-title"><?php echo ! empty( $title ) ? $escape_text( $title ) : 'Scheduled Maintenance'; ?></h1>
         <div class="maintenance-message">
-            <?php echo ( ! empty( $message ) && is_string( $message ) ) ? wp_kses_post( $message ) : 'We are performing scheduled system updates to optimize performance and security. We will be back online shortly.'; ?>
+            <?php echo ( ! empty( $message ) && is_string( $message ) ) ? ( function_exists( 'wp_kses_post' ) ? wp_kses_post( $message ) : strip_tags( $message, '<br><p><strong><b><em><i><a><code>' ) ) : 'We are performing scheduled system updates to optimize performance and security. We will be back online shortly.'; ?>
         </div>
         <div class="status-box">
             <span class="status-dot"></span>
-            <span><?php echo ! empty( $status_text ) ? esc_html( $status_text ) : 'Maintenance in progress'; ?></span>
+            <span><?php echo ! empty( $status_text ) ? $escape_text( $status_text ) : 'Maintenance in progress'; ?></span>
         </div>
     </div>
     <script><?php echo $smoke_js; ?></script>

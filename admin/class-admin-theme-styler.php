@@ -34,7 +34,7 @@ class Theme_Styler {
 		}
 	}
 
-	public function early_compass_isolation() {
+	private function is_compass_page() {
 		$is_compass = ( isset( $_GET['page'] ) && ( $_GET['page'] === 'xophz-compass' || $_GET['page'] === 'youmeos' ) );
 		if ( ! $is_compass ) {
 			$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
@@ -42,6 +42,11 @@ class Theme_Styler {
 				$is_compass = true;
 			}
 		}
+		return $is_compass;
+	}
+
+	public function early_compass_isolation() {
+		$is_compass = $this->is_compass_page();
 
 		if ( $is_compass ) {
 			?>
@@ -209,8 +214,11 @@ class Theme_Styler {
 		if ( ! $return ) $done = true;
 
 		$isInstalling = defined( 'WP_INSTALLING' ) && WP_INSTALLING;
+		$isCompassPage = ! $isInstalling && ! $return && $this->is_compass_page();
 
-		$styles = [ 'logo.css', 'sui.css', 'base.css', 'wp-admin.css', 'iframe-mask.css', 'menu-accordion.css' ];
+		$styles = $isCompassPage
+			? [ 'base.css', 'menu-accordion.css' ]
+			: [ 'logo.css', 'sui.css', 'base.css', 'wp-admin.css', 'iframe-mask.css', 'menu-accordion.css' ];
 		if ( $isInstalling || $return ) {
 			array_unshift( $styles, 'install.css' );
 		}
@@ -227,9 +235,9 @@ class Theme_Styler {
 			}
 		}
 
-		// Auto-load section-specific styles for code splitting
+		// Auto-load section-specific styles for classic WP Admin pages only
 		$sections_dir = dirname( __DIR__ ) . '/assets/css/sections/';
-		if ( is_dir( $sections_dir ) ) {
+		if ( ! $isCompassPage && is_dir( $sections_dir ) ) {
 			foreach ( glob( $sections_dir . '*.css' ) as $file ) {
 				$css_content = file_get_contents( $file );
 				$css_content = str_replace( '../images/', $assets_url . '/images/', $css_content );
@@ -382,7 +390,7 @@ class Theme_Styler {
 	}
 
 	public function output_modal_footer_overrides() {
-		if ( ! empty( get_option( 'xophz_compass_disable_mu_styles' ) ) || ( defined( 'BLACKBOX_BEDROCK_DISABLE' ) && BLACKBOX_BEDROCK_DISABLE ) ) {
+		if ( ! empty( get_option( 'xophz_compass_disable_mu_styles' ) ) || ( defined( 'BLACKBOX_BEDROCK_DISABLE' ) && BLACKBOX_BEDROCK_DISABLE ) || $this->is_compass_page() ) {
 			return;
 		}
 

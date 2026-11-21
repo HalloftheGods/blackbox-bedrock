@@ -91,40 +91,49 @@ body::-webkit-scrollbar-thumb {
 	scrollbar-color: var(--wp-theme-color, rgba(98, 201, 255, 0.5)) var(--wp-theme-base, rgba(0, 0, 0, 0.2));
 }
 
-/* Typography, Icons and Labels */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-span,
-li,
-div,
-label,
-strong,
-em,
-b,
-i,
-small {
+/* Typography, Icons and Labels (Scoped to Classic WP Admin #wpwrap, excluding body > #app) */
+:where(#wpwrap) :is(
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	p,
+	span,
+	li,
+	div,
+	label,
+	legend,
+	dt,
+	dd,
+	strong,
+	em,
+	b,
+	i,
+	small
+) {
 	color: var(--text-main) !important;
 }
 
 /* Descriptions & Form Help Text */
-.description,
-p.description,
-span.description,
-.form-wrap p {
+:where(#wpwrap) :is(
+	.description,
+	p.description,
+	span.description,
+	.form-wrap p
+) {
 	color: rgba(255, 255, 255, 0.7) !important;
 }
 
 /* Monospace & Inline Code Badges */
-code,
-kbd,
-samp,
-tt,
-var {
+:where(#wpwrap) :is(
+	code,
+	kbd,
+	samp,
+	tt,
+	var
+) {
 	font-family: Consolas, Monaco, "Courier New", monospace !important;
 	color: var(--accent, #62c9ff) !important;
 	background: rgba(0, 0, 0, 0.35) !important;
@@ -134,7 +143,7 @@ var {
 	font-size: 0.88em !important;
 }
 
-pre {
+:where(#wpwrap) pre {
 	font-family: Consolas, Monaco, "Courier New", monospace !important;
 	color: var(--text-main) !important;
 	background: rgba(0, 0, 0, 0.4) !important;
@@ -144,7 +153,7 @@ pre {
 	overflow-x: auto !important;
 }
 
-pre code {
+:where(#wpwrap) pre code {
 	color: inherit !important;
 	background: transparent !important;
 	border: none !important;
@@ -153,38 +162,46 @@ pre code {
 }
 
 /* Base Inputs & Text Areas - Subtle Dark Transparency */
-input[type="text"],
-input[type="number"],
-input[type="search"],
-input[type="email"],
-input[type="url"],
-input[type="password"],
-select,
-textarea {
+:where(#wpwrap) :is(
+	input[type="text"],
+	input[type="number"],
+	input[type="search"],
+	input[type="email"],
+	input[type="url"],
+	input[type="password"],
+	select,
+	textarea
+) {
 	background: rgba(0, 0, 0, 0.3) !important;
 	color: var(--text-main) !important;
 	border: 1px solid rgba(255, 255, 255, 0.1) !important;
 	border-radius: 4px !important;
 }
 
-input:focus,
-select:focus,
-textarea:focus {
+:where(#wpwrap) :is(
+	input:focus,
+	select:focus,
+	textarea:focus
+) {
 	border-color: var(--accent) !important;
 	background: rgba(0, 0, 0, 0.5) !important;
 	box-shadow: 0 0 0 1px var(--accent) !important;
 }
 
 /* General Links */
-a,
-.wrap a {
+:where(#wpwrap) :is(
+	a,
+	.wrap a
+) {
 	color: var(--gold) !important;
 	transition: color 0.2s ease !important;
 }
 
-a:hover,
-.wrap a:hover,
-a:active,
-a:focus {
+:where(#wpwrap) :is(
+	a:hover,
+	.wrap a:hover,
+	a:active,
+	a:focus
+) {
 	color: var(--accent) !important;
 }

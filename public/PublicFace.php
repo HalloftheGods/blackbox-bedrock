@@ -3,11 +3,19 @@ namespace BlackBOX;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+require_once __DIR__ . '/class-frontend-compass-bar.php';
+
 class PublicFace {
+	/**
+	 * @var PublicFace\Frontend_Compass_Bar
+	 */
+	public $frontend_compass_bar;
+
 	public function __construct() {
 		if ( ! empty( get_option( 'blackbox_bedrock_disabled' ) ) || ( defined( 'BLACKBOX_BEDROCK_DISABLE' ) && BLACKBOX_BEDROCK_DISABLE ) ) {
 			return;
 		}
+		$this->frontend_compass_bar = new PublicFace\Frontend_Compass_Bar();
 		add_action( 'login_enqueue_scripts', [ $this, 'enqueue_login_styles' ] );
 		add_filter( 'login_headerurl', [ $this, 'custom_login_headerurl' ] );
 		add_filter( 'login_headertext', [ $this, 'custom_login_headertext' ] );
