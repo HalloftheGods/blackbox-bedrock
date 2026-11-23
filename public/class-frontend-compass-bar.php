@@ -71,6 +71,7 @@ class Frontend_Compass_Bar {
 	public function output_native_bar_suppression() {
 		echo '<style id="blackbox-compass-bar-reset">'
 			. '#wpadminbar{display:none!important;}'
+			. '#youmeos-pi-trigger{display:none!important;}'
 			. 'html{margin-top:0!important;}'
 			. '* html body{margin-top:0!important;}'
 			. 'body{padding-bottom:calc(64px + env(safe-area-inset-bottom,0px))!important;}'
@@ -249,6 +250,12 @@ class Frontend_Compass_Bar {
 			$href     = ! empty( $node->href ) ? esc_url_raw( $node->href ) : '';
 			$children = $this->serialize_branch( (string) $node->id, $children_by_parent, $depth + 1 );
 
+			if ( $node->id === 'comments' ) {
+				$title = 'Comments' . ( $title !== '' ? " ({$title})" : '' );
+			} elseif ( $node->id === 'updates' ) {
+				$title = 'Updates' . ( $title !== '' ? " ({$title})" : '' );
+			}
+
 			if ( $title === '' && empty( $children ) ) {
 				continue;
 			}
@@ -272,6 +279,122 @@ class Frontend_Compass_Bar {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Build YouMeOS portal URL for admin trigger registration.
+	 *
+	 * @return string
+	 */
+	private function get_youmeos_url() {
+		$load_mode    = get_option( 'youmeos_load_mode', 'custom_slug' );
+		$custom_slug  = get_option( 'youmeos_custom_slug', '' );
+		$default_path = ( $load_mode === 'custom_slug' && ! empty( $custom_slug ) ) ? '/' . $custom_slug . '/' : '/youmeos/';
+		$base_url     = home_url( $default_path );
+
+		if ( $load_mode === 'homepage' ) {
+			$base_url = home_url( '/' );
+		} elseif ( $load_mode === 'specific_page' ) {
+			$page_id = get_option( 'youmeos_load_page_id', 0 );
+			if ( $page_id ) {
+				$base_url = trailingslashit( get_permalink( $page_id ) );
+			}
+		}
+
+		$current_url = home_url( $_SERVER['REQUEST_URI'] ?? '' );
+		$base_url    = rtrim( $base_url, '/' );
+		$separator   = ( parse_url( $base_url, PHP_URL_QUERY ) === null ) ? '?' : '&';
+
+		return $base_url . $separator . 'sparks=u-logos&skip_restore=true&fullscreen=true&logos_target=' . urlencode( $current_url );
+	}
+
+	/**
+	 * Categorize harvested top-level nodes into semantic groups for My Menu.
+	 *
+	 * @param array $nodes
+	 * @param array $new_items
+	 * @return array
+	 */
+	private function categorize_nodes( $nodes, $new_items ) {
+		$categories = [
+			'create' => [
+				'id'    => 'create',
+				'title' => __( 'Create', 'blackbox-bedrock' ),
+				'icon'  => 'plus',
+				'nodes' => [],
+			],
+			'compass' => [
+				'id'    => 'compass',
+				'title' => __( 'Compass & Apps', 'blackbox-bedrock' ),
+				'icon'  => 'compass',
+				'nodes' => [],
+			],
+			'site' => [
+				'id'    => 'site',
+				'title' => __( 'Site & Customizer', 'blackbox-bedrock' ),
+				'icon'  => 'edit',
+				'nodes' => [],
+			],
+			'tools' => [
+				'id'    => 'tools',
+				'title' => __( 'Tools & Settings', 'blackbox-bedrock' ),
+				'icon'  => 'tools',
+				'nodes' => [],
+			],
+			'notifications' => [
+				'id'    => 'notifications',
+				'title' => __( 'Notifications & Alerts', 'blackbox-bedrock' ),
+				'icon'  => 'bell',
+				'nodes' => [],
+			],
+			'wordpress' => [
+				'id'    => 'wordpress',
+				'title' => __( 'WordPress Core', 'blackbox-bedrock' ),
+				'icon'  => 'wp',
+				'nodes' => [],
+			],
+			'other' => [
+				'id'    => 'other',
+				'title' => __( 'General', 'blackbox-bedrock' ),
+				'icon'  => 'chevron',
+				'nodes' => [],
+			],
+		];
+
+		if ( ! empty( $new_items ) ) {
+			foreach ( $new_items as $item ) {
+				$categories['create']['nodes'][] = [
+					'id'       => $item['id'],
+					'title'    => $item['title'],
+					'href'     => $item['href'],
+					'children' => [],
+				];
+			}
+		}
+
+		foreach ( $nodes as $node ) {
+			$id = $node['id'];
+			if ( $id === 'new-content' ) {
+				continue;
+			}
+			if ( strpos( $id, 'compass' ) !== false || strpos( $id, 'youmeos' ) !== false ) {
+				$categories['compass']['nodes'][] = $node;
+			} elseif ( in_array( $id, [ 'site-name', 'customize', 'edit', 'edit-site' ], true ) ) {
+				$categories['site']['nodes'][] = $node;
+			} elseif ( in_array( $id, [ 'comments', 'updates' ], true ) || strpos( $id, 'woocommerce' ) !== false ) {
+				$categories['notifications']['nodes'][] = $node;
+			} elseif ( strpos( $id, 'snippets' ) !== false || strpos( $id, 'blackbox' ) !== false || strpos( $id, 'kitchen' ) !== false ) {
+				$categories['tools']['nodes'][] = $node;
+			} elseif ( $id === 'wp-logo' ) {
+				$categories['wordpress']['nodes'][] = $node;
+			} else {
+				$categories['other']['nodes'][] = $node;
+			}
+		}
+
+		return array_values( array_filter( $categories, function( $cat ) {
+			return ! empty( $cat['nodes'] );
+		} ) );
 	}
 
 	/**
@@ -325,6 +448,17 @@ class Frontend_Compass_Bar {
 		$role     = ! empty( $roles ) ? ucfirst( str_replace( '_', ' ', $roles[0] ) ) : $user->user_login;
 		$subtitle = is_super_admin( $user->ID ) ? 'Super Admin' : $role;
 
+		$is_admin = current_user_can( 'manage_options' );
+		$is_youmeos_enabled = get_option( 'youmeos_enable_pi_trigger', true );
+		$youmeos_url = ( $is_admin && $is_youmeos_enabled ) ? $this->get_youmeos_url() : '';
+
+		$active_apps = [];
+		if ( class_exists( '\Xophz_Compass' ) && method_exists( '\Xophz_Compass', 'get_active_compass_plugins' ) ) {
+			$active_apps = \Xophz_Compass::get_active_compass_plugins();
+		}
+
+		$categories = $this->categorize_nodes( $this->harvested_nodes, $this->quick_links['newItems'] ?? [] );
+
 		$payload = [
 			'user'             => [
 				'displayName' => $user->display_name ?: $user->user_login,
@@ -336,15 +470,19 @@ class Frontend_Compass_Bar {
 			'siteName'         => get_bloginfo( 'name' ) ?: 'My Site',
 			'urls'             => [
 				'compass'      => admin_url( 'admin.php?page=xophz-compass#/' ),
+				'apps'         => admin_url( 'admin.php?page=xophz-compass#/apps' ),
 				'wpAdmin'      => admin_url(),
 				'editUrl'      => $this->quick_links['editUrl'] ?? '',
 				'editLabel'    => $this->quick_links['editLabel'] ?? __( 'Edit', 'blackbox-bedrock' ),
 				'customizeUrl' => $this->quick_links['customizeUrl'] ?? '',
 				'nativeBarUrl' => add_query_arg( 'native_bar', '1' ),
+				'youmeosUrl'   => $youmeos_url,
 			],
+			'apps'             => $active_apps,
+			'categories'       => $categories,
 			'newItems'         => $this->quick_links['newItems'] ?? [],
 			'nodes'            => $this->harvested_nodes,
-			'canManageOptions' => current_user_can( 'manage_options' ),
+			'canManageOptions' => $is_admin,
 			'ajaxUrl'          => admin_url( 'admin-ajax.php' ),
 			'nonce'            => wp_create_nonce( self::NONCE_ACTION ),
 		];

@@ -1,0 +1,141 @@
+/* Themes & Add Themes Pages (themes.php, theme-install.php, network/themes.php) */
+
+.theme-browser .theme {
+	background: var(--rough-glass-bg) !important;
+	backdrop-filter: var(--rough-glass-filter) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	border-radius: 12px !important;
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35) !important;
+	overflow: hidden;
+	color: var(--text-main) !important;
+}
+
+.theme-browser .theme:hover,
+.theme-browser .theme:focus {
+	border-color: rgba(98, 201, 255, 0.5) !important;
+}
+
+.theme-browser .theme.active {
+	border-color: var(--accent) !important;
+	box-shadow: 0 0 18px rgba(98, 201, 255, 0.25) !important;
+}
+
+.theme-browser .theme .theme-id-container {
+	background: rgba(0, 0, 0, 0.35) !important;
+	border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.theme-browser .theme .theme-name {
+	background: transparent !important;
+	color: var(--text-main) !important;
+	box-shadow: none !important;
+	border: none !important;
+}
+
+.theme-browser .theme.active .theme-name {
+	background: rgba(98, 201, 255, 0.15) !important;
+	color: var(--accent) !important;
+}
+
+.theme-browser .theme .theme-actions {
+	background: rgba(13, 17, 23, 0.85) !important;
+	border-left: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.theme-browser .theme.add-new-theme a {
+	background: rgba(13, 17, 23, 0.35) !important;
+	border: 2px dashed var(--rough-glass-border) !important;
+	border-radius: 12px !important;
+	color: var(--text-main) !important;
+}
+
+.theme-browser .theme.add-new-theme a:hover,
+.theme-browser .theme.add-new-theme a:focus {
+	border-color: var(--accent) !important;
+	background: rgba(98, 201, 255, 0.1) !important;
+}
+
+.theme-browser .theme.add-new-theme a:hover:after,
+.theme-browser .theme.add-new-theme a:focus:after {
+	background: rgba(98, 201, 255, 0.2) !important;
+	color: var(--accent) !important;
+}
+
+/* Theme Details Overlay Modal */
+.theme-overlay .theme-backdrop {
+	background: rgba(5, 8, 14, 0.78) !important;
+	backdrop-filter: blur(8px) !important;
+	-webkit-backdrop-filter: blur(8px) !important;
+}
+
+.theme-overlay .theme-wrap {
+	background: rgba(13, 18, 29, 0.96) !important;
+	backdrop-filter: blur(24px) saturate(180%) !important;
+	-webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	border-radius: 12px !important;
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85) !important;
+	color: var(--text-main) !important;
+}
+
+.theme-overlay .theme-header {
+	background: rgba(0, 0, 0, 0.3) !important;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.theme-overlay .theme-header .left,
+.theme-overlay .theme-header .right,
+.theme-overlay .theme-header .close {
+	color: var(--text-main) !important;
+	border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.theme-overlay .theme-header .left:hover,
+.theme-overlay .theme-header .right:hover,
+.theme-overlay .theme-header .close:hover {
+	background: rgba(98, 201, 255, 0.15) !important;
+	color: var(--accent) !important;
+}
+
+.theme-overlay .theme-about {
+	background: transparent !important;
+	color: var(--text-main) !important;
+}
+
+.theme-overlay .theme-name {
+	color: var(--accent) !important;
+}
+
+.theme-overlay .theme-version,
+.theme-overlay .theme-author,
+.theme-overlay .theme-description,
+.theme-overlay .theme-tags {
+	color: var(--text-main) !important;
+}
+
+.theme-overlay .theme-actions {
+	background: rgba(0, 0, 0, 0.35) !important;
+	border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Upload Theme Form & Feature Filter Drawer */
+.upload-theme .wp-upload-form,
+.filter-drawer,
+.filter-group {
+	background: var(--rough-glass-bg) !important;
+	backdrop-filter: var(--rough-glass-filter) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	border-radius: 12px !important;
+	color: var(--text-main) !important;
+}
+
+.filter-drawer .filter-group {
+	background: rgba(0, 0, 0, 0.2) !important;
+	border-radius: 8px !important;
+}
+
+.filter-drawer .filter-group-feature label {
+	color: var(--text-main) !important;
+}

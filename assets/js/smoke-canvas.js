@@ -23,6 +23,34 @@
   canvas.style.zIndex = "0";
   canvas.style.opacity = "0.8";
 
+  const isSimpleSmoke = window.__blackboxSmokeTheme === "simple_smoke";
+
+  const waveColors = isSimpleSmoke
+    ? {
+        w1: "rgba(44, 51, 56, 0.16)",
+        w2: "rgba(56, 64, 70, 0.13)",
+        ribbon: "rgba(44, 51, 56, 0.26)",
+        w4: "rgba(70, 78, 86, 0.13)",
+        gradEdge: "rgba(44, 51, 56, 0.03)",
+        gradMid1: "rgba(56, 64, 70, 0.08)",
+        gradMid2: "rgba(56, 64, 70, 0.14)",
+        particleRgb: "44, 51, 56",
+        particleShadow: "rgba(44, 51, 56, 0.35)",
+        particleAlphaScale: 0.45
+      }
+    : {
+        w1: "rgba(220, 230, 240, 0.20)",
+        w2: "rgba(200, 210, 220, 0.17)",
+        ribbon: "rgba(255, 255, 255, 0.55)",
+        w4: "rgba(180, 190, 200, 0.17)",
+        gradEdge: "rgba(200, 210, 220, 0.05)",
+        gradMid1: "rgba(215, 225, 235, 0.10)",
+        gradMid2: "rgba(215, 225, 235, 0.18)",
+        particleRgb: "255, 255, 255",
+        particleShadow: "white",
+        particleAlphaScale: 1
+      };
+
   const waves = [
     {
       y: 0.48,
@@ -30,7 +58,7 @@
       wavelength: 700,
       speed: 0.0002,
       offset: 0,
-      color: "rgba(220, 230, 240, 0.20)",
+      color: waveColors.w1,
       blur: 5,
       thickness: 100,
       scales: [1.0, 2.3, 0.7, 0.2],
@@ -44,7 +72,7 @@
       wavelength: 900,
       speed: -0.0004,
       offset: Math.PI,
-      color: "rgba(200, 210, 220, 0.17)",
+      color: waveColors.w2,
       blur: 5,
       thickness: 175,
       scales: [1.2, 1.8, 0.5, 0.3],
@@ -58,7 +86,7 @@
       wavelength: 1200,
       speed: 0.0004,
       offset: Math.PI / 2,
-      color: "rgba(255, 255, 255, 0.55)",
+      color: waveColors.ribbon,
       blur: 3,
       thickness: 15,
       scales: [0.8, 2.7, 1.1, 0.1],
@@ -73,7 +101,7 @@
       wavelength: 800,
       speed: -0.0003,
       offset: Math.PI * 1.5,
-      color: "rgba(180, 190, 200, 0.17)",
+      color: waveColors.w4,
       blur: 5,
       thickness: 250,
       scales: [1.5, 1.2, 0.9, 0.4],
@@ -169,11 +197,11 @@
         ctx.closePath();
 
         const grad = ctx.createLinearGradient(0, 0, canvas.width, 0);
-        grad.addColorStop(0, "rgba(200, 210, 220, 0.05)");
-        grad.addColorStop(0.2, "rgba(215, 225, 235, 0.10)");
-        grad.addColorStop(0.4, "rgba(215, 225, 235, 0.18)");
+        grad.addColorStop(0, waveColors.gradEdge);
+        grad.addColorStop(0.2, waveColors.gradMid1);
+        grad.addColorStop(0.4, waveColors.gradMid2);
         grad.addColorStop(0.75, wave.color);
-        grad.addColorStop(1, "rgba(200, 210, 220, 0.05)");
+        grad.addColorStop(1, waveColors.gradEdge);
         ctx.fillStyle = grad;
         if (wave.blur > 0) ctx.filter = `blur(${wave.blur}px)`;
         ctx.fill();
@@ -184,7 +212,7 @@
       if (ribbonWave) {
         ctx.save();
         ctx.shadowBlur = 1;
-        ctx.shadowColor = "white";
+        ctx.shadowColor = waveColors.particleShadow;
         for (let i = 0; i < particles.length; i++) {
           const p = particles[i];
           p.x += p.speedX;
@@ -197,9 +225,10 @@
             centerY + Math.sin(finalAngle) * (volThick / 2 + 55 + p.orbitRadiusOffset);
           const depthFactor = (Math.cos(finalAngle) + 1) / 2;
           const flicker = 0.5 + Math.sin(time * p.flickerSpeed + p.flickerPhase) * 0.5;
+          const alpha = (depthFactor * 0.7 + 0.3) * (0.8 + flicker * 0.2) * waveColors.particleAlphaScale;
           ctx.beginPath();
           ctx.arc(p.x, currentY, p.size * (0.7 + depthFactor * 0.6), 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(255, 255, 255, ${(depthFactor * 0.7 + 0.3) * (0.8 + flicker * 0.2)})`;
+          ctx.fillStyle = `rgba(${waveColors.particleRgb}, ${alpha})`;
           ctx.fill();
         }
         ctx.restore();

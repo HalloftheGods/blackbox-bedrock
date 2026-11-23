@@ -34,6 +34,10 @@ class Theme_Styler {
 		}
 	}
 
+	private function is_compass_theme() {
+		return get_option( 'blackbox_bedrock_admin_theme', 'simple_smoke' ) === 'compass';
+	}
+
 	private function is_compass_page() {
 		$is_compass = ( isset( $_GET['page'] ) && ( $_GET['page'] === 'xophz-compass' || $_GET['page'] === 'youmeos' ) );
 		if ( ! $is_compass ) {
@@ -107,6 +111,9 @@ class Theme_Styler {
 
 	public function output_theme_colors() {
 		if ( ! empty( get_option( 'xophz_compass_disable_mu_styles' ) ) || ( defined( 'BLACKBOX_BEDROCK_DISABLE' ) && BLACKBOX_BEDROCK_DISABLE ) ) {
+			return;
+		}
+		if ( ! $this->is_compass_theme() && ! $this->is_compass_page() ) {
 			return;
 		}
 
@@ -213,14 +220,19 @@ class Theme_Styler {
 		if ( $done && ! $return && current_action() !== 'enqueue_block_editor_assets' ) return;
 		if ( ! $return ) $done = true;
 
-		$isInstalling = defined( 'WP_INSTALLING' ) && WP_INSTALLING;
-		$isCompassPage = ! $isInstalling && ! $return && $this->is_compass_page();
+		$isInstalling   = defined( 'WP_INSTALLING' ) && WP_INSTALLING;
+		$isCompassPage  = ! $isInstalling && ! $return && $this->is_compass_page();
+		$isCompassTheme = $this->is_compass_theme();
 
-		$styles = $isCompassPage
-			? [ 'base.css', 'menu-accordion.css' ]
-			: [ 'logo.css', 'sui.css', 'base.css', 'wp-admin.css', 'iframe-mask.css', 'menu-accordion.css' ];
 		if ( $isInstalling || $return ) {
-			array_unshift( $styles, 'install.css' );
+			$styles = [ 'install.css', 'logo.css', 'sui.css', 'base.css', 'wp-admin.css', 'iframe-mask.css', 'menu-accordion.css' ];
+		} elseif ( $isCompassPage ) {
+			$styles = [ 'base.css', 'menu-accordion.css' ];
+		} elseif ( $isCompassTheme ) {
+			$styles = [ 'logo.css', 'sui.css', 'base.css', 'wp-admin.css', 'iframe-mask.css', 'menu-accordion.css' ];
+		} else {
+			// Default Simple Smoke mode: preserve native WP Admin theme; only keep iframe mask & menu accordion.
+			$styles = [ 'iframe-mask.css', 'menu-accordion.css' ];
 		}
 
 		$assets_url = defined( 'WPMU_PLUGIN_URL' ) ? WPMU_PLUGIN_URL . '/blackbox-bedrock/assets' : content_url( 'mu-plugins/blackbox-bedrock/assets' );
@@ -235,9 +247,9 @@ class Theme_Styler {
 			}
 		}
 
-		// Auto-load section-specific styles for classic WP Admin pages only
+		// Auto-load section-specific styles only when Compass Theme is active on classic WP Admin pages
 		$sections_dir = dirname( __DIR__ ) . '/assets/css/sections/';
-		if ( ! $isCompassPage && is_dir( $sections_dir ) ) {
+		if ( ! $isCompassPage && ( $isCompassTheme || $isInstalling || $return ) && is_dir( $sections_dir ) ) {
 			foreach ( glob( $sections_dir . '*.css' ) as $file ) {
 				$css_content = file_get_contents( $file );
 				$css_content = str_replace( '../images/', $assets_url . '/images/', $css_content );
@@ -386,11 +398,13 @@ class Theme_Styler {
 			}
 		}
 
-		Core::inject_canvas_script();
+		$isInstalling = defined( 'WP_INSTALLING' ) && WP_INSTALLING;
+		$smoke_theme  = ( ! $isInstalling && ! $this->is_compass_page() && ! $this->is_compass_theme() ) ? 'simple_smoke' : 'compass';
+		Core::inject_canvas_script( $smoke_theme );
 	}
 
 	public function output_modal_footer_overrides() {
-		if ( ! empty( get_option( 'xophz_compass_disable_mu_styles' ) ) || ( defined( 'BLACKBOX_BEDROCK_DISABLE' ) && BLACKBOX_BEDROCK_DISABLE ) || $this->is_compass_page() ) {
+		if ( ! empty( get_option( 'xophz_compass_disable_mu_styles' ) ) || ( defined( 'BLACKBOX_BEDROCK_DISABLE' ) && BLACKBOX_BEDROCK_DISABLE ) || $this->is_compass_page() || ! $this->is_compass_theme() ) {
 			return;
 		}
 

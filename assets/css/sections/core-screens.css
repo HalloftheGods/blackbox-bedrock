@@ -1,0 +1,156 @@
+/* Core WP Admin Screens: Privacy, About, Nav Tabs, Multisite, Classic Editor, Media */
+
+/* Standard WordPress Nav Tabs (Network Site Edit, Settings, Tools, etc.) */
+.nav-tab-wrapper,
+.wrap h2.nav-tab-wrapper,
+h1.nav-tab-wrapper {
+	border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+.nav-tab {
+	background: rgba(13, 17, 23, 0.45) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	border-bottom: none !important;
+	border-radius: 8px 8px 0 0 !important;
+	color: var(--text-main) !important;
+	opacity: 0.8;
+	transition: all 0.2s ease;
+}
+
+.nav-tab:hover,
+.nav-tab:focus {
+	background: rgba(98, 201, 255, 0.12) !important;
+	color: var(--accent) !important;
+	opacity: 1;
+}
+
+.nav-tab-active,
+.nav-tab-active:hover,
+.nav-tab-active:focus {
+	background: rgba(13, 17, 23, 0.85) !important;
+	border-color: var(--accent) !important;
+	border-bottom: 1px solid transparent !important;
+	color: var(--accent) !important;
+	opacity: 1;
+}
+
+/* Privacy Settings & Policy Guide */
+.privacy-settings-header {
+	background: var(--rough-glass-bg) !important;
+	backdrop-filter: var(--rough-glass-filter) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter) !important;
+	border-bottom: 1px solid var(--rough-glass-border) !important;
+}
+
+.privacy-settings-tab.active {
+	color: var(--accent) !important;
+	border-bottom-color: var(--accent) !important;
+}
+
+.privacy-settings-body,
+.privacy-settings-accordion,
+.privacy-text-box {
+	color: var(--text-main) !important;
+}
+
+.privacy-settings-accordion {
+	border: 1px solid var(--rough-glass-border) !important;
+	border-radius: 12px !important;
+	overflow: hidden;
+}
+
+.privacy-settings-accordion-trigger {
+	background: rgba(13, 17, 23, 0.65) !important;
+	color: var(--text-main) !important;
+	border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.privacy-settings-accordion-trigger:hover {
+	background: rgba(98, 201, 255, 0.12) !important;
+	color: var(--accent) !important;
+}
+
+.privacy-settings-accordion-panel {
+	background: rgba(13, 17, 23, 0.4) !important;
+	color: var(--text-main) !important;
+}
+
+/* About, Credits & Freedoms Pages */
+.about__container {
+	background: var(--rough-glass-bg) !important;
+	backdrop-filter: var(--rough-glass-filter) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	border-radius: 12px !important;
+	color: var(--text-main) !important;
+}
+
+.about__header,
+.about__header-navigation {
+	background: rgba(0, 0, 0, 0.3) !important;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.about__section {
+	background: transparent !important;
+	color: var(--text-main) !important;
+}
+
+/* Multisite: My Sites Cards */
+.my-sites li {
+	background: var(--rough-glass-bg) !important;
+	backdrop-filter: var(--rough-glass-filter) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	border-radius: 12px !important;
+	padding: 16px !important;
+	color: var(--text-main) !important;
+}
+
+/* Classic Post Editor: Title, Slug, Publish & Taxonomy Boxes */
+#titlediv #title {
+	background: rgba(13, 17, 23, 0.7) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	border-radius: 8px !important;
+	color: var(--text-main) !important;
+}
+
+#major-publishing-actions {
+	background: rgba(0, 0, 0, 0.3) !important;
+	border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.categorydiv div.tabs-panel,
+.customlinkdiv div.tabs-panel,
+.posttypediv div.tabs-panel,
+.taxonomydiv div.tabs-panel,
+.wp-tab-panel {
+	background: rgba(0, 0, 0, 0.3) !important;
+	border: 1px solid rgba(255, 255, 255, 0.1) !important;
+	color: var(--text-main) !important;
+}
+
+ul.category-tabs li.tabs,
+ul.wp-tab-bar li.wp-tab-active {
+	background: rgba(0, 0, 0, 0.3) !important;
+	border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Media Library Page (upload.php) */
+.upload-php .media-toolbar,
+.upload-php .media-frame-content,
+.upload-php .attachments-browser .media-toolbar {
+	background: var(--rough-glass-bg) !important;
+	backdrop-filter: var(--rough-glass-filter) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	border-radius: 10px !important;
+	color: var(--text-main) !important;
+}
+
+.upload-php .uploader-inline {
+	background: rgba(13, 17, 23, 0.6) !important;
+	border: 2px dashed var(--rough-glass-border) !important;
+	border-radius: 12px !important;
+	color: var(--text-main) !important;
+}

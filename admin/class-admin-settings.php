@@ -38,6 +38,13 @@ class Settings {
 	public function register_settings() {
 		register_setting( 'xophz_compass_options_group', 'blackbox_bedrock_disabled' );
 		register_setting( 'xophz_compass_options_group', 'xophz_compass_disable_mu_styles' );
+		register_setting( 'xophz_compass_options_group', 'blackbox_bedrock_admin_theme', [
+			'type'              => 'string',
+			'default'           => 'simple_smoke',
+			'sanitize_callback' => function( $val ) {
+				return in_array( $val, [ 'simple_smoke', 'compass' ], true ) ? $val : 'simple_smoke';
+			},
+		] );
 		register_setting( 'xophz_compass_options_group', 'blackbox_bedrock_wp_admin_menu_2030' );
 		register_setting( 'xophz_compass_options_group', 'blackbox_bedrock_frontend_compass_bar' );
 
@@ -86,6 +93,23 @@ class Settings {
 					<span class="bb-status-label" data-active-text="Active" data-inactive-text="Disabled"><?php echo $isActive ? 'Active' : 'Disabled'; ?></span>
 				</div>
 				<p class="description" style="margin-top: 8px;">Apply Lifestream styling across all WP Admin pages. Disabling this turns off the dark theme, canvas background, color palette variables, and modal styling overrides.</p>
+				<?php
+			},
+			'xophz_compass_settings',
+			'xophz_compass_general_section'
+		);
+
+		add_settings_field(
+			'blackbox_bedrock_admin_theme',
+			'WP Admin Theme',
+			function() {
+				$theme = get_option( 'blackbox_bedrock_admin_theme', 'simple_smoke' );
+				?>
+				<select name="blackbox_bedrock_admin_theme" id="blackbox_bedrock_admin_theme">
+					<option value="simple_smoke" <?php selected( $theme, 'simple_smoke' ); ?>>Simple Smoke (Default WP Admin + Dark Grey Smoke)</option>
+					<option value="compass" <?php selected( $theme, 'compass' ); ?>>Compass Theme (2030 Lifestream Dark Glass)</option>
+				</select>
+				<p class="description" style="margin-top: 8px;">Choose the default WP Admin appearance. Simple Smoke preserves the native WordPress admin theme with subtle dark-grey smoke; Compass Theme applies the full dark glass styling. Login and error pages always keep the branded Compass look.</p>
 				<?php
 			},
 			'xophz_compass_settings',

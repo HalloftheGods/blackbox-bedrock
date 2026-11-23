@@ -1,0 +1,114 @@
+/* Appearance -> Menus (nav-menus.php) & Widgets (widgets.php) */
+
+/* Nav Menus */
+.nav-menus-php .manage-menus,
+.nav-menus-php .menu-edit,
+.nav-menus-php .accordion-container {
+	background: var(--rough-glass-bg) !important;
+	backdrop-filter: var(--rough-glass-filter) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	border-radius: 12px !important;
+	color: var(--text-main) !important;
+	overflow: hidden;
+}
+
+.nav-menus-php #nav-menu-header,
+.nav-menus-php #nav-menu-footer {
+	background: rgba(0, 0, 0, 0.3) !important;
+	border-color: rgba(255, 255, 255, 0.08) !important;
+	color: var(--text-main) !important;
+}
+
+.nav-menus-php #post-body {
+	background: transparent !important;
+	border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.nav-menus-php .accordion-section-title,
+.nav-menus-php .accordion-section-title button {
+	background: rgba(0, 0, 0, 0.25) !important;
+	color: var(--text-main) !important;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.nav-menus-php .accordion-section-title:hover,
+.nav-menus-php .open .accordion-section-title {
+	background: rgba(98, 201, 255, 0.12) !important;
+	color: var(--accent) !important;
+}
+
+.nav-menus-php .accordion-section-content {
+	background: rgba(13, 17, 23, 0.4) !important;
+	color: var(--text-main) !important;
+}
+
+.nav-menus-php .menu-item-bar .menu-item-handle {
+	background: rgba(13, 17, 23, 0.7) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	border-radius: 8px !important;
+	color: var(--text-main) !important;
+	box-shadow: none !important;
+}
+
+.nav-menus-php .menu-item-bar .menu-item-handle:hover {
+	border-color: var(--accent) !important;
+}
+
+.nav-menus-php .menu-item-settings {
+	background: rgba(13, 17, 23, 0.85) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	border-top: none !important;
+	border-radius: 0 0 8px 8px !important;
+	color: var(--text-main) !important;
+	box-shadow: none !important;
+}
+
+.nav-menus-php .tabs-panel,
+.nav-menus-php .wp-tab-panel {
+	background: rgba(0, 0, 0, 0.3) !important;
+	border: 1px solid rgba(255, 255, 255, 0.1) !important;
+	color: var(--text-main) !important;
+}
+
+.nav-menus-php ul.add-menu-item-tabs li.tabs {
+	background: rgba(0, 0, 0, 0.3) !important;
+	border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Classic Widgets */
+.widgets-php .widgets-holder-wrap,
+.widgets-php .widget,
+.widgets-php #available-widgets .widget-tpl {
+	background: var(--rough-glass-bg) !important;
+	backdrop-filter: var(--rough-glass-filter) !important;
+	-webkit-backdrop-filter: var(--rough-glass-filter) !important;
+	border: 1px solid var(--rough-glass-border) !important;
+	border-radius: 10px !important;
+	color: var(--text-main) !important;
+}
+
+.widgets-php .widget-top {
+	background: rgba(0, 0, 0, 0.3) !important;
+	border: none !important;
+	color: var(--text-main) !important;
+}
+
+.widgets-php .widget-inside {
+	background: rgba(13, 17, 23, 0.75) !important;
+	border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+	color: var(--text-main) !important;
+}
+
+.widgets-php .sidebar-name h2,
+.widgets-php .sidebar-name h3,
+.widgets-php .widget-title h3,
+.widgets-php .widget-title h4 {
+	color: var(--accent) !important;
+}
+
+.widgets-php .sidebar-description,
+.widgets-php .widget-description {
+	color: var(--text-main) !important;
+	opacity: 0.8;
+}

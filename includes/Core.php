@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 class Core {
 	private static $canvas_injected = false;
 
-	public static function inject_canvas_script() {
+	public static function inject_canvas_script( $theme = 'compass' ) {
 		if ( ! empty( get_option( 'blackbox_bedrock_disabled' ) ) || ! empty( get_option( 'xophz_compass_disable_mu_styles' ) ) || ( defined( 'BLACKBOX_BEDROCK_DISABLE' ) && BLACKBOX_BEDROCK_DISABLE ) ) {
 			return;
 		}
@@ -15,9 +15,10 @@ class Core {
 		}
 		self::$canvas_injected = true;
 
-		$js_path = dirname( __DIR__ ) . '/assets/js/smoke-canvas.js';
-		$js = file_exists( $js_path ) ? file_get_contents( $js_path ) : '';
-		echo '<script id="blackbox-smoke-canvas-js">' . $js . '</script>';
+		$smoke_theme = ( $theme === 'simple_smoke' ) ? 'simple_smoke' : 'compass';
+		$js_path     = dirname( __DIR__ ) . '/assets/js/smoke-canvas.js';
+		$js          = file_exists( $js_path ) ? file_get_contents( $js_path ) : '';
+		echo '<script id="blackbox-smoke-canvas-js">window.__blackboxSmokeTheme=' . wp_json_encode( $smoke_theme ) . ';' . $js . '</script>';
 	}
 
 	public static function force_woocommerce_theme_support() {

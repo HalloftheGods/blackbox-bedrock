@@ -2,6 +2,17 @@
 
 All notable changes to the BlackBOX Bedrock submodule will be documented in this file.
 
+## [2026-11-22]
+
+### Added
+- Frontend Compass Bar parity with admin bottom navigation:
+  - Added YouMeOS registration slot for administrators using the rotating pi symbol and gradient text hover effect.
+  - Added center Apps button and launch pad flyout displaying active Compass ecosystem applications with direct links.
+  - Added categorized navigation structure in My Menu (`Create`, `Compass & Apps`, `Site & Customizer`, `Tools & Settings`, `Notifications & Alerts`, `WordPress Core`).
+  - Added quick creation action pills inside My Menu, moving `+ New` off the primary dock into the flyout.
+  - Formatted notifications with explicit labels (`Comments (N)`, `Updates (N)`) preventing raw numeric placeholders.
+  - Added standalone floating pi trigger suppression when frontend Compass bar is active.
+
 ## [2026-11-18]
 
 ### Changed
